@@ -1,0 +1,17 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: swift-actions/setup-swift@v2
+        with: { swift-version: "6.0" }
+      - name: Motor + golden testler
+        run: swift test
+      - name: Token pipeline senkron kontrolu
+        run: |
+          node tools/gen-tokens.mjs
+          git diff --exit-code apps/web/styles/tokens.css

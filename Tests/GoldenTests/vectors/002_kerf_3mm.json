@@ -1,0 +1,13 @@
+{
+  "name": "002 kerf=3mm komsuluk (E1-S2 AC-1)",
+  "pending": true,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "trim": 1000, "objective": "waste", "seed": 7,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 2, "isOffcut": false }],
+    "parts": [
+      { "id": "p1", "name": "raf", "materialId": "m1", "w": 80000, "h": 30000, "qty": 6, "rotation": "fixed" },
+      { "id": "p2", "name": "yan", "materialId": "m1", "w": 70000, "h": 45000, "qty": 2, "rotation": "allowed" }
+    ]
+  },
+  "expected": null
+}
