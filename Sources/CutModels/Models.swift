@@ -78,4 +78,7 @@ public struct ValidationIssue: Codable, Sendable, Equatable {
     public var kind: Kind
     public var subjectId: String
     public var message: String
+    public init(kind: Kind, subjectId: String, message: String) {
+        self.kind = kind; self.subjectId = subjectId; self.message = message
+    }
 }
