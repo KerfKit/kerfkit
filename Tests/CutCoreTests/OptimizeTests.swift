@@ -51,6 +51,20 @@ final class OptimizeTests: XCTestCase {
         XCTAssertTrue(res.unplaced.isEmpty)
     }
 
+    // İnceleme bulgusu (R-3): yeni levha açarken havuz seçimi malzemeye bakmalı —
+    // aksi halde yanlış malzemeden boş levha tüketilip parça sahte "unplaced" döner.
+    func testMultiMaterial_opensSheetFromMatchingStock() throws {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1),
+                     .init(id: "s2", materialId: "m2", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "raf", materialId: "m2", w: 60_000, h: 40_000, qty: 1)])
+        let res = try optimize(r)
+        XCTAssertTrue(res.unplaced.isEmpty, "m2 stoğu varken parça yerleşmeli")
+        XCTAssertEqual(res.placements.count, 1)
+        XCTAssertEqual(res.stats.sheetCount, 1, "yalnız m2'den tek levha açılmalı; m1 tüketilmemeli")
+    }
+
     // AC-4 (hata): negatif/0 boyut → doğrulama katmanında yakalanır, optimize kontrollü fırlatır.
     func testAC4_negativeDimension_caughtByValidation() {
         let r = req(parts: [.init(id: "p1", name: "eksi", materialId: "m1", w: -100, h: 40_000, qty: 1)])

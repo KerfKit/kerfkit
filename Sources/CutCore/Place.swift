@@ -166,8 +166,10 @@ func placeAll(_ req: OptimizeRequest) throws -> OptimizeResult {
             continue
         }
         // Açık levhalara sığmadı → istek sırasındaki ilk uygun stoktan yeni levha (docs/04 §3 4d).
-        // validate() geçtiği için normalde stok bulunur; havuz tükendiyse unplaced.
-        guard let pi = pools.firstIndex(where: { $0.remaining > 0 && canHold($0.stock, part) }) else {
+        // "Uygun" = malzeme eşleşmesi + boyut; havuz tükendiyse unplaced.
+        guard let pi = pools.firstIndex(where: {
+            $0.remaining > 0 && $0.stock.materialId == part.materialId && canHold($0.stock, part)
+        }) else {
             unplaced.append(part.id)
             continue
         }
