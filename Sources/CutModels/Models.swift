@@ -56,12 +56,18 @@ public struct Placement: Codable, Sendable, Equatable {
     public var w: Units
     public var h: Units
     public var rotated: Bool
+    public init(partId: String, sheetIndex: Int, x: Units, y: Units, w: Units, h: Units, rotated: Bool) {
+        self.partId = partId; self.sheetIndex = sheetIndex; self.x = x; self.y = y; self.w = w; self.h = h; self.rotated = rotated
+    }
 }
 
 public struct PlanStats: Codable, Sendable, Equatable {
     public var sheetCount: Int
     public var wasteBps: Int   // 1/100 % — Int, platform paritesi için
     public var cutCount: Int
+    public init(sheetCount: Int, wasteBps: Int, cutCount: Int) {
+        self.sheetCount = sheetCount; self.wasteBps = wasteBps; self.cutCount = cutCount
+    }
 }
 
 public struct OptimizeResult: Codable, Sendable, Equatable {
@@ -69,6 +75,9 @@ public struct OptimizeResult: Codable, Sendable, Equatable {
     public var stats: PlanStats
     public var unplaced: [String]
     public var engineVersion: String
+    public init(placements: [Placement], stats: PlanStats, unplaced: [String], engineVersion: String) {
+        self.placements = placements; self.stats = stats; self.unplaced = unplaced; self.engineVersion = engineVersion
+    }
 }
 
 public struct ValidationIssue: Codable, Sendable, Equatable {
