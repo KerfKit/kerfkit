@@ -31,6 +31,8 @@ dosyayı/bölümü ver, tamamını değil ("curse of instructions"tan kaçın).
 | 13 | MOBIL_TASARIM_BRIEF.md | iOS ekran-ekran tasarım brief'leri + mockup odakları | Mobil UI mockup oturumlarında (ekran başına bölüm) |
 | 14 | WEB_TASARIM_BRIEF.md | Landing, lite hesaplayıcı, SEO şablonu, karşılaştırma sayfası | Web oturumlarında |
 | 15 | FABLE5_TASARIM_IS_AKISI.md | Mockup→kod döngüsü, ikon hattı, tasarım QA, Figma kararı | Tasarım sürecinin kendisi |
+| 16 | EL_KITABI.md | Ahmet'in okuma kılavuzu: roller, iki çalışma alanı, ilk hafta, haftalık ritim | İnsan içindir — oturumlara verilmez |
+| 17 | PROMPT_KITABI.md | Baştan sona oturum promptları (K/D/W/P/R/A numaralı) | İnsan içindir — promptlar oturumlara tek tek yapıştırılır |
 
 ## Haftalık ritim (10 numaralı dosyada detay)
 
