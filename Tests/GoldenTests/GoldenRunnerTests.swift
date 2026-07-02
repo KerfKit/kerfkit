@@ -12,9 +12,15 @@ struct GoldenVector: Codable {
 
 final class GoldenRunnerTests: XCTestCase {
     func testAllVectors() throws {
-        let urls = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: "vectors") ?? []
+        // Bundle.urls(...) Linux'ta [NSURL] dondurdugu icin FileManager ile geziyoruz (iki platformda da [URL]).
+        guard let dir = Bundle.module.resourceURL?.appendingPathComponent("vectors") else {
+            XCTFail("vectors klasoru bulunamadi"); return
+        }
+        let urls = try FileManager.default.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil)
+            .filter { $0.pathExtension == "json" }
+            .sorted { $0.absoluteString < $1.absoluteString }
         XCTAssertFalse(urls.isEmpty, "vectors klasoru bos olmamali")
-        for url in urls.sorted(by: { $0.absoluteString < $1.absoluteString }) {
+        for url in urls {
             let data = try Data(contentsOf: url)
             let vector = try JSONDecoder().decode(GoldenVector.self, from: data)
             XCTAssertTrue(validate(vector.request).isEmpty, "\(vector.name): istek gecerli olmali")
