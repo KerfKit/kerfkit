@@ -14,7 +14,7 @@ final class GoldenRunnerTests: XCTestCase {
     func testAllVectors() throws {
         let urls = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: "vectors") ?? []
         XCTAssertFalse(urls.isEmpty, "vectors klasoru bos olmamali")
-        for url in urls.sorted(by: { $0.lastPathComponent < $1.lastPathComponent }) {
+        for url in urls.sorted(by: { $0.absoluteString < $1.absoluteString }) {
             let data = try Data(contentsOf: url)
             let vector = try JSONDecoder().decode(GoldenVector.self, from: data)
             XCTAssertTrue(validate(vector.request).isEmpty, "\(vector.name): istek gecerli olmali")
@@ -22,7 +22,10 @@ final class GoldenRunnerTests: XCTestCase {
                 continue // motor implementasyonu (E1) gelince expected doldurulur, pending false yapilir
             }
             let result = try optimize(vector.request)
-            let exp = try XCTUnwrap(vector.expected, "\(vector.name): pending=false ise expected zorunlu")
+            guard let exp = vector.expected else {
+                XCTFail("\(vector.name): pending=false ise expected zorunlu")
+                continue
+            }
             XCTAssertEqual(result.stats.sheetCount, exp.sheetCount, vector.name)
             XCTAssertEqual(result.stats.wasteBps, exp.wasteBps, vector.name)
         }
