@@ -60,7 +60,8 @@ değiştiyse true (UI "Yeniden hesapla" bandı); `workshopProgress` atölye modu
 
 1. Round-trip: decode→encode bit-eşit (bilinmeyen alan kaybı yok).
 2. Her Part.materialId geçerli bir Material'ı gösterir; her Stock.materialId de öyle.
-3. unitMode proje içinde tekil; kerf/trim/boyutlar ≥0; qty ≥1.
+3. unitMode proje içinde tekil; kerf/trim/boyutlar ≥0; qty ≥1; boyut ≤ 10⁸ birim ve toplam
+   stok alanı ≤ 5×10¹⁴ birim² (04 §2 motor sınırları → dimensionTooLarge / totalStockAreaTooLarge).
 4. Plan.request, üretildiği andaki parça/stok kümesiyle tutarlı hash taşır → stale tespiti hash farkıyla.
 5. schemaVersion > uygulamanın bildiği sürüm → salt-okunur aç + güncelleme uyarısı (asla sessiz bozma).
 

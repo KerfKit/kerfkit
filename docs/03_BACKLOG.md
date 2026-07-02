@@ -23,7 +23,7 @@
 - **AC-3 (edge):** 0 parça → boş plan, 0 levha, hata yok.
 - **AC-4 (hata):** Negatif/0 boyutlu parça → `ValidationError` doğrulama katmanında yakalanır.
 - Görevler: E1-S1a serbest-dikdörtgen ağacı + yerleştirme (1 oturum) · E1-S1b guillotine
-  doğrulayıcı + 5 golden vektör (1 oturum).
+  doğrulayıcı + 5 golden vektör (1 oturum) · E1-S1c motor girdi sınırları — taşma guard'ı (04 §2).
 
 ### E1-S2: Kerf + trim
 - **AC-1:** kerf=3mm iken iki komşu parça arasında tam 3mm boşluk; levha kenarında kerf düşülmez.
