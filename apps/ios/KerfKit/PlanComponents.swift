@@ -28,6 +28,9 @@ struct SheetDiagram: View {
     let names: [String: String]
     let sheetW: Units
     let sheetH: Units
+    // M-5: vurgulu yerleşim — dolu verilirse yalnız o amber, kalanlar soluk çizilir.
+    var highlight: Placement? = nil
+    var muted = false // Tezgâh Modu: soluk zemin açık tema tonlarıyla
 
     var body: some View {
         // Sıfır/eksi levha ölçüsü aspectRatio ve ölçekte NaN üretir — çizme.
@@ -45,7 +48,7 @@ struct SheetDiagram: View {
             let ox = (size.width - w) / 2, oy = (size.height - h) / 2
 
             ctx.fill(Path(CGRect(x: ox, y: oy, width: w, height: h)),
-                     with: .color(DesignTokens.colorTimber800))
+                     with: .color(muted ? DesignTokens.colorTimber100 : DesignTokens.colorTimber800))
 
             for p in placements {
                 let rect = CGRect(
@@ -53,13 +56,20 @@ struct SheetDiagram: View {
                     y: oy + h - CGFloat(p.y + p.h) * scale,
                     width: CGFloat(p.w) * scale,
                     height: CGFloat(p.h) * scale)
+                let isActive = highlight == nil || p == highlight
+                let fill = isActive ? DesignTokens.colorAmber500
+                    : (muted ? DesignTokens.colorTimber300 : DesignTokens.colorTimber700)
                 ctx.fill(Path(roundedRect: rect.insetBy(dx: 0.5, dy: 0.5), cornerRadius: 2),
-                         with: .color(DesignTokens.colorAmber500))
+                         with: .color(fill))
+                if highlight != nil && p == highlight {
+                    ctx.stroke(Path(roundedRect: rect.insetBy(dx: 0.5, dy: 0.5), cornerRadius: 2),
+                               with: .color(DesignTokens.colorAmber700), lineWidth: 3)
+                }
                 let name = names[p.partId] ?? p.partId
                 let label = Text("\(name)\(p.rotated ? " ⤾" : "")")
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundStyle(DesignTokens.colorTimber950)
-                if rect.width > 40 && rect.height > 16 {
+                if isActive && rect.width > 40 && rect.height > 16 {
                     ctx.draw(label, at: CGPoint(x: rect.midX, y: rect.midY))
                 }
             }

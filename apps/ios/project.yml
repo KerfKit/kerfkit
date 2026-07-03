@@ -1,4 +1,7 @@
 # xcodegen ile üretilir: cd apps/ios && xcodegen generate (docs/06 §3 apps/ios)
+# DİKKAT: xcodebuild, kök Package.resolved'a SnapshotTesting pinleri yazar; kanonik
+# sürüm swift CLI'ninkidir (CI bunu kullanır) — Xcode kirlenmesini commit'leme,
+# `git restore Package.resolved` ile geri al (swift test de otomatik kırpar).
 name: KerfKit
 options:
   bundleIdPrefix: app.kerfkit
@@ -47,7 +50,10 @@ targets:
   KerfKitTests:
     type: bundle.unit-test
     platform: iOS
-    sources: [KerfKitTests]
+    sources:
+      # __Snapshots__ referansları pakete kopyalanmaz — SnapshotTesting diskten okur.
+      - path: KerfKitTests
+        excludes: ["**/__Snapshots__/**"]
     dependencies:
       - target: KerfKit
       - package: SnapshotTesting

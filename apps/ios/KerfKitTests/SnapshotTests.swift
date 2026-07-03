@@ -9,10 +9,12 @@ import SnapshotTesting
 @MainActor
 final class SnapshotTests: XCTestCase {
 
-    private func host(_ view: some View, sizeCategory: UIContentSizeCategory) -> UIViewController {
+    private func host(_ view: some View, sizeCategory: UIContentSizeCategory,
+                      configure: (ProjectStore) -> Void = { _ in }) -> UIViewController {
         let store = ProjectStore(inMemory: true)
         store.createProject(sample: true)
         store.optimizePlan()
+        configure(store)
         let vc = UIHostingController(rootView: NavigationStack { view }
             .environment(store)
             .tint(DesignTokens.colorAmber500))
@@ -44,5 +46,16 @@ final class SnapshotTests: XCTestCase {
     func testStockTab_darkMedium() {
         assertSnapshot(of: host(StockTabView(), sizeCategory: .medium),
                        as: .image(on: .iPhone13), named: "stok-M")
+    }
+
+    func testWorkshop_dark() {
+        assertSnapshot(of: host(WorkshopView(), sizeCategory: .medium),
+                       as: .image(on: .iPhone13), named: "atolye-koyu")
+    }
+
+    func testWorkshop_bench() {
+        assertSnapshot(of: host(WorkshopView(), sizeCategory: .medium,
+                                configure: { $0.benchMode = true }),
+                       as: .image(on: .iPhone13), named: "atolye-tezgah")
     }
 }
