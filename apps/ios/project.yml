@@ -1,0 +1,29 @@
+# xcodegen ile üretilir: cd apps/ios && xcodegen generate (docs/06 §3 apps/ios)
+name: Kerf
+options:
+  bundleIdPrefix: app.kerf
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  kerf:
+    path: ../..
+targets:
+  Kerf:
+    type: application
+    platform: iOS
+    sources: [Kerf]
+    dependencies:
+      - package: kerf
+        product: CutCore
+      - package: kerf
+        product: CutModels
+    info:
+      path: Kerf/Info.plist
+      properties:
+        UILaunchScreen: {}
+        CFBundleDisplayName: Kerf
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+    settings:
+      base:
+        SWIFT_VERSION: "6.0"
+        INFOPLIST_KEY_UIUserInterfaceStyle: Dark

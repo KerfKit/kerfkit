@@ -6,3 +6,4 @@ node_modules/
 *.xcworkspace/xcuserdata
 apps/web/dist/
 apps/web/.astro/
+apps/ios/Kerf.xcodeproj/
