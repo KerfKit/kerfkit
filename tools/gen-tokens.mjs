@@ -44,3 +44,45 @@ ${fmt(dark, "  ")}
 mkdirSync(new URL("../apps/web/styles/", import.meta.url), { recursive: true });
 writeFileSync(new URL("../apps/web/styles/tokens.css", import.meta.url), css);
 console.log(`tokens.css uretildi: ${light.length} token, ${dark.length} dark override`);
+
+// — Swift çıktısı (docs/12: tokens.json → CSS + Swift; tek kaynak) —
+const camel = (name) => name.slice(2).split("-")
+  .map((p, i) => (i === 0 ? p : p[0].toUpperCase() + p.slice(1))).join("");
+function swiftValue(v) {
+  const s = String(v);
+  const hex = s.match(/^#([0-9A-Fa-f]{6})$/);
+  if (hex) return { type: "Color", code: `Color(hex: 0x${hex[1].toUpperCase()})` };
+  const px = s.match(/^(-?[\d.]+)(px|pt)?$/);
+  if (px) return { type: "CGFloat", code: px[1] };
+  return null; // font yığını vb. — Swift tarafında gereksiz
+}
+const emit = (rows, indent) => rows
+  .map(([name, v]) => ({ name: camel(name), sv: swiftValue(v) }))
+  .filter((r) => r.sv)
+  .map((r) => `${indent}public static let ${r.name}: ${r.sv.type} = ${r.sv.code}`)
+  .join("\n");
+const swift = `// uretildi: node tools/gen-tokens.mjs — elle duzenleme, tokens/tokens.json'u degistir
+import SwiftUI
+
+public enum DesignTokens {
+${emit(light, "    ")}
+
+    // Dark mod override'ları (koyu-öncelikli marka: uygulama kabuğu bunları kullanır)
+    public enum Dark {
+${emit(dark, "        ")}
+    }
+}
+
+extension Color {
+    init(hex: UInt32) {
+        self.init(.sRGB,
+                  red: Double((hex >> 16) & 0xFF) / 255,
+                  green: Double((hex >> 8) & 0xFF) / 255,
+                  blue: Double(hex & 0xFF) / 255,
+                  opacity: 1)
+    }
+}
+`;
+mkdirSync(new URL("../apps/ios/Kerf/Generated/", import.meta.url), { recursive: true });
+writeFileSync(new URL("../apps/ios/Kerf/Generated/DesignTokens.swift", import.meta.url), swift);
+console.log("DesignTokens.swift uretildi");
