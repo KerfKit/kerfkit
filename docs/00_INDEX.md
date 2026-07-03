@@ -4,7 +4,7 @@
 > **Platformlar:** iOS (önce) → Android (Skip) → Web (lite → tam)
 > **Model:** Solo geliştirici; tüm geliştirme Claude Fable 5 ile yürütülür.
 > **Hedef:** Pazar liderliği — hiçbir rakip iOS+Android+Web üçlüsünü tek üründe sunmuyor (bkz. 02).
-> **Çalışma adı:** "CutWise" — kesinleşmeden önce marka/ticari-marka kontrolü yapılacak (Backlog G-0.3).
+> **Ürün adı:** **KerfKit** (G-0.3 kararı, docs/NAME.md — "Kerf" App Store'da alınmıştı).
 
 ## Bu paket nasıl kullanılır
 

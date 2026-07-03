@@ -1,31 +1,31 @@
 # xcodegen ile üretilir: cd apps/ios && xcodegen generate (docs/06 §3 apps/ios)
-name: Kerf
+name: KerfKit
 options:
-  bundleIdPrefix: app.kerf
+  bundleIdPrefix: app.kerfkit
   deploymentTarget:
     iOS: "17.0"
 packages:
-  kerf:
+  kerfkit:
     path: ../..
 targets:
-  Kerf:
+  KerfKit:
     type: application
     platform: iOS
-    sources: [Kerf]
+    sources: [KerfKit]
     dependencies:
-      - package: kerf
+      - package: kerfkit
         product: CutCore
-      - package: kerf
+      - package: kerfkit
         product: CutModels
-      - package: kerf
+      - package: kerfkit
         product: CutProj
-      - package: kerf
+      - package: kerfkit
         product: CutPersist
     info:
-      path: Kerf/Info.plist
+      path: KerfKit/Info.plist
       properties:
         UILaunchScreen: {}
-        CFBundleDisplayName: Kerf
+        CFBundleDisplayName: KerfKit
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
     settings:
       base:

@@ -1,4 +1,4 @@
-# Kerf — Ajan Anayasası
+# KerfKit — Ajan Anayasası
 
 ## Komutlar
 - Test: `swift test` (motor+model+golden) — Linux'ta Swift yoksa Mac'te koş

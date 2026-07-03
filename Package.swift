@@ -54,7 +54,7 @@ packageProducts.append(.library(name: "CutPersist", targets: ["CutPersist"]))
 #endif
 
 let package = Package(
-    name: "kerf",
+    name: "kerfkit",
     platforms: [.iOS(.v17), .macOS(.v14)],
     products: packageProducts,
     dependencies: packageDependencies,
