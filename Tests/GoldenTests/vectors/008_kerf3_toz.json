@@ -1,0 +1,10 @@
+{
+  "name": "008 kerf=3mm, artik kerf'e esit — toz durumu (E1-S2)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
+    "parts": [{ "id": "p1", "name": "yarim", "materialId": "m1", "w": 121700, "h": 122000, "qty": 2, "rotation": "fixed" }]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 24, "cutCount": 2, "placementsHash": "0bcbc714ca2ee892"}
+}

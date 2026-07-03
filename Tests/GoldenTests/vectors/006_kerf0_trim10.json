@@ -1,0 +1,10 @@
+{
+  "name": "006 kerf=0 ucu + trim=10mm (E1-S2 AC-2/AC-3)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "trim": 1000, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
+    "parts": [{ "id": "p1", "name": "panel", "materialId": "m1", "w": 60000, "h": 40000, "qty": 4, "rotation": "allowed" }]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 6775, "cutCount": 4, "placementsHash": "deb8f68220853257"}
+}

@@ -1,0 +1,10 @@
+{
+  "name": "007 kerf=12mm ucu (E1-S2 AC-3)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 1200, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
+    "parts": [{ "id": "p1", "name": "panel", "materialId": "m1", "w": 60000, "h": 40000, "qty": 4, "rotation": "allowed" }]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 6775, "cutCount": 6, "placementsHash": "ccf10a986116f8cf"}
+}
