@@ -5,7 +5,7 @@ import CutPersist
 import CutCore
 
 struct PartInput: Identifiable, Hashable {
-    let id = UUID()
+    var id = UUID()
     var name: String
     var widthMM: Int
     var heightMM: Int
@@ -19,11 +19,22 @@ enum DetailTab: String, CaseIterable {
     case plan = "Plan"
 }
 
+extension PlanStats {
+    var wastePercentText: String { String(format: "%%%.1f", Double(wasteBps) / 100) }
+}
+
 // Çok-projeli durum + kalıcılık (K-11): M-1 liste kartları depo özetlerinden; aktif proje
 // alanları her değişiklikte touch() ile 500ms debounce'lu kayda düşer. Son plan .cutproj'a
 // gömülür (liste özeti + docs/05 Plan kaydı).
+@MainActor
 @Observable
 final class ProjectStore {
+    private enum Defaults {
+        static let sheetWidthMM = 2440, sheetHeightMM = 1220, sheetQty = 5
+        static let kerfMM = 3, trimMM = 0
+        static let objective: Objective = .sheets
+    }
+
     // M-1 liste
     var summaries: [ProjectRepository.Summary] = []
     var planSummaries: [String: String] = [:]
@@ -33,12 +44,12 @@ final class ProjectStore {
     // aktif proje
     var projectName = "Yeni Proje"
     var parts: [PartInput] = []
-    var sheetWidthMM = 2440
-    var sheetHeightMM = 1220
-    var sheetQty = 5
-    var kerfMM = 3
-    var trimMM = 0
-    var objective: Objective = .sheets
+    var sheetWidthMM = Defaults.sheetWidthMM
+    var sheetHeightMM = Defaults.sheetHeightMM
+    var sheetQty = Defaults.sheetQty
+    var kerfMM = Defaults.kerfMM
+    var trimMM = Defaults.trimMM
+    var objective: Objective = Defaults.objective
 
     var result: OptimizeResult?
     var lastRequest: OptimizeRequest?
@@ -48,6 +59,8 @@ final class ProjectStore {
 
     private var projectId = UUID().uuidString
     private var createdAt = ProjectStore.nowISO()
+    // Aktif proje listeden silindiyse touch/flush onu geri yazmasın (diriltme yasağı).
+    private var activeDeleted = false
     private let repository: ProjectRepository?
     private let autosaver: Autosaver?
 
@@ -58,6 +71,15 @@ final class ProjectStore {
         do {
             let dir = try FileManager.default.url(for: .applicationSupportDirectory,
                                                   in: .userDomainMask, appropriateFor: nil, create: true)
+            // İsim geçişi (G-0.3b): kerf.sqlite'tan kalan veriyi bir kez taşı (wal/shm dahil).
+            let fm = FileManager.default
+            if !fm.fileExists(atPath: dir.appendingPathComponent("kerfkit.sqlite").path) {
+                for suffix in ["", "-wal", "-shm"] {
+                    let old = dir.appendingPathComponent("kerf.sqlite\(suffix)")
+                    let new = dir.appendingPathComponent("kerfkit.sqlite\(suffix)")
+                    if fm.fileExists(atPath: old.path) { try? fm.moveItem(at: old, to: new) }
+                }
+            }
             let repo = try ProjectRepository(path: dir.appendingPathComponent("kerfkit.sqlite").path)
             repository = repo
             autosaver = Autosaver(repository: repo)
@@ -74,26 +96,41 @@ final class ProjectStore {
 
     // — M-1 liste işlemleri —
 
+    // Not (bilinçli borç): özetler için her doküman tam yükleniyor (N+1). Ucuz özet sorgusu
+    // CutPersist public API'sine alan eklemek ister — "önce sor" sınıfı, ayrı karar.
     func loadSummaries() {
         summaries = (try? repository?.list()) ?? []
         var infos: [String: String] = [:]
         for s in summaries {
-            if let doc = try? repository?.load(id: s.id), let plan = doc.plans.last {
-                let waste = Double(plan.result.stats.wasteBps) / 100
-                infos[s.id] = "\(plan.result.stats.sheetCount) levha · %\(String(format: "%.1f", waste)) fire · \(doc.parts.count) parça"
-            } else if let doc = try? repository?.load(id: s.id) {
+            guard let doc = try? repository?.load(id: s.id) else { continue }
+            if let plan = doc.plans.last {
+                infos[s.id] = "\(plan.result.stats.sheetCount) levha · \(plan.result.stats.wastePercentText) fire · \(doc.parts.count) parça"
+            } else {
                 infos[s.id] = "\(doc.parts.count) parça · henüz plan yok"
             }
         }
         planSummaries = infos
     }
 
+    // Detaydan dönüşte: bekleyen debounce'u bitir, listeyi ancak yazım tamamlanınca tazele
+    // (yoksa 500ms'lik kayıtla yarışıp bayat özet gösterir).
+    func flushThenReload() {
+        guard let autosaver, !activeDeleted else { loadSummaries(); return }
+        let doc = currentDoc()
+        Task {
+            await autosaver.flush(doc)
+            loadSummaries()
+        }
+    }
+
     func createProject(sample: Bool) {
         projectId = UUID().uuidString
         createdAt = ProjectStore.nowISO()
+        activeDeleted = false
         result = nil; lastRequest = nil; errorMessage = nil; stale = false
-        sheetWidthMM = 2440; sheetHeightMM = 1220; sheetQty = 5; kerfMM = 3; trimMM = 0
-        objective = .sheets
+        sheetWidthMM = Defaults.sheetWidthMM; sheetHeightMM = Defaults.sheetHeightMM
+        sheetQty = Defaults.sheetQty; kerfMM = Defaults.kerfMM; trimMM = Defaults.trimMM
+        objective = Defaults.objective
         if sample {
             projectName = "Mutfak Dolabı"
             parts = [
@@ -114,6 +151,7 @@ final class ProjectStore {
     func open(id: String) {
         guard let doc = try? repository?.load(id: id) else { return }
         apply(doc)
+        activeDeleted = false
         selectedTab = .parts
         detailOpen = true
     }
@@ -122,6 +160,7 @@ final class ProjectStore {
         for index in offsets {
             let id = summaries[index].id
             try? repository?.delete(id: id)
+            if id == projectId { activeDeleted = true }
         }
         loadSummaries()
     }
@@ -137,8 +176,9 @@ final class ProjectStore {
         doc.materials = [MaterialDoc(id: "panel", name: "Panel", kind: "sheet")]
         doc.stocks = [StockDoc(id: "levha", materialId: "panel",
                                w: sheetW, h: sheetH, qty: sheetQty)]
+        // Parça id'si UUID — dizin-tabanlı id silmede kayar, gömülü plan referansları kırılırdı.
         doc.parts = parts.enumerated().map { i, p in
-            PartDoc(id: "p\(i)", name: p.name.isEmpty ? "Parça \(i + 1)" : p.name,
+            PartDoc(id: p.id.uuidString, name: p.name.isEmpty ? "Parça \(i + 1)" : p.name,
                     materialId: "panel", w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
                     qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed)
         }
@@ -163,7 +203,8 @@ final class ProjectStore {
             sheetQty = stock.qty
         }
         parts = doc.parts.map {
-            PartInput(name: $0.name, widthMM: Int($0.w / 100), heightMM: Int($0.h / 100),
+            PartInput(id: UUID(uuidString: $0.id) ?? UUID(),
+                      name: $0.name, widthMM: Int($0.w / 100), heightMM: Int($0.h / 100),
                       qty: $0.qty, rotationAllowed: $0.rotation == .allowed)
         }
         if let plan = doc.plans.last {
@@ -182,24 +223,24 @@ final class ProjectStore {
     // Her kullanıcı değişikliğinden sonra: bayat işareti + 500ms debounce'lu kayıt.
     func touch(markStale: Bool = true) {
         if markStale && result != nil { stale = true }
-        guard let autosaver else { return }
+        guard let autosaver, !activeDeleted else { return }
         let doc = currentDoc()
         Task { await autosaver.scheduleSave(doc) }
     }
 
     // Arka plana geçişte bekleyen kaydı hemen tamamla (veri asla kaybolmaz — docs/02 §4).
     func flush() {
-        guard let autosaver else { return }
+        guard let autosaver, !activeDeleted else { return }
         let doc = currentDoc()
         Task { await autosaver.flush(doc) }
     }
 
     func optimizePlan() {
         var names: [String: String] = [:]
-        let specs = parts.enumerated().compactMap { i, p -> PartSpec? in
+        let specs = parts.compactMap { p -> PartSpec? in
             guard p.widthMM > 0, p.heightMM > 0, p.qty > 0 else { return nil }
-            let pid = "p\(i)"
-            names[pid] = p.name.isEmpty ? "Parça \(i + 1)" : p.name
+            let pid = p.id.uuidString
+            names[pid] = p.name.isEmpty ? "Parça" : p.name
             return PartSpec(id: pid, name: names[pid] ?? "", materialId: "panel",
                             w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
                             qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed)
@@ -219,12 +260,11 @@ final class ProjectStore {
             errorMessage = nil
             stale = false
         } catch let error as PlacementError {
-            result = nil
+            // Son geçerli plan korunur (bayat kalır) — nil'lemek diske de plansız yazardı.
             if case .partExceedsStock(let pid) = error {
                 errorMessage = "\(names[pid] ?? pid) levhaya sığmıyor — boyutları ya da damar kilidini kontrol et."
             }
         } catch {
-            result = nil
             errorMessage = "Girdi doğrulamadan geçmedi — boyut ve adetleri kontrol et."
         }
         touch(markStale: false)

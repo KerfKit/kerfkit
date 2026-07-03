@@ -167,26 +167,26 @@ struct StockTabView: View {
         @Bindable var store = store
         Form {
             Section("Levha") {
-                numberRow("En (mm)", value: $store.sheetWidthMM)
-                numberRow("Boy (mm)", value: $store.sheetHeightMM)
-                numberRow("Adet", value: $store.sheetQty)
+                numberRow("En (mm)", value: $store.sheetWidthMM, floor: 1)
+                numberRow("Boy (mm)", value: $store.sheetHeightMM, floor: 1)
+                numberRow("Adet", value: $store.sheetQty, floor: 1)
             }
             Section("Kesim varsayılanları") {
-                numberRow("Testere payı — kerf (mm)", value: $store.kerfMM)
-                numberRow("Kenar tıraşı — trim (mm)", value: $store.trimMM)
+                numberRow("Testere payı — kerf (mm)", value: $store.kerfMM, floor: 0)
+                numberRow("Kenar tıraşı — trim (mm)", value: $store.trimMM, floor: 0)
             }
         }
         .scrollContentBackground(.hidden)
-        .onChange(of: store.sheetWidthMM) { store.touch() }
-        .onChange(of: store.sheetHeightMM) { store.touch() }
-        .onChange(of: store.sheetQty) { store.touch() }
-        .onChange(of: store.kerfMM) { store.touch() }
-        .onChange(of: store.trimMM) { store.touch() }
+        .onChange(of: [store.sheetWidthMM, store.sheetHeightMM, store.sheetQty,
+                       store.kerfMM, store.trimMM]) { store.touch() }
     }
 
-    private func numberRow(_ label: String, value: Binding<Int>) -> some View {
-        LabeledContent(label) {
-            TextField("", value: value, format: .number)
+    // floor: 0/eksi girilirse diyagramda sıfıra bölme ve motora geçersiz stok gitmesin.
+    private func numberRow(_ label: String, value: Binding<Int>, floor: Int) -> some View {
+        let clamped = Binding(get: { value.wrappedValue },
+                              set: { value.wrappedValue = max(floor, $0) })
+        return LabeledContent(label) {
+            TextField("", value: clamped, format: .number)
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 80)
@@ -206,8 +206,7 @@ struct PlanTabView: View {
                 if let result = store.result {
                     HStack(spacing: 8) {
                         StatCard(title: "levha", value: "\(result.stats.sheetCount)")
-                        StatCard(title: "fire",
-                                 value: String(format: "%%%.1f", Double(result.stats.wasteBps) / 100))
+                        StatCard(title: "fire", value: result.stats.wastePercentText)
                         StatCard(title: "kesim", value: "\(result.stats.cutCount)")
                     }
 
@@ -245,7 +244,8 @@ struct PlanTabView: View {
         }
         .pickerStyle(.segmented)
         .onChange(of: store.objective) {
-            if store.result != nil { store.optimizePlan() }
+            // Parça kalmadıysa yeniden hesaplama son geçerli planı silmesin.
+            if store.result != nil && !store.parts.isEmpty { store.optimizePlan() }
         }
     }
 

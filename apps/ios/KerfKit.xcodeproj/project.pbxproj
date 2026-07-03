@@ -14,7 +14,7 @@
 		3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF971337B8801EAD765A85 /* KerfApp.swift */; };
 		6A7F52DE163FD0F28B15F835 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */; };
 		6EDCFC9E8FCD7906516AEC3C /* CutProj in Frameworks */ = {isa = PBXBuildFile; productRef = 1149728F6F25D8F98455569F /* CutProj */; };
-		7683D0AC9EB09CFF6A16262D /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE9AE105085223AA8594CC8 /* PlanView.swift */; };
+		79D5E2CEF61270BDCCD55B3E /* PlanComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */; };
 		7F00E1FE372F23BCC804F381 /* QuickAddFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */; };
 		BC3F8209F20310CC0F53A62E /* CutModels in Frameworks */ = {isa = PBXBuildFile; productRef = BD4A2986EE6DF8CB09EEA377 /* CutModels */; };
 		E9AB3D0715EC467D01D15088 /* ProjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */; };
@@ -32,12 +32,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0FE9AE105085223AA8594CC8 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		33840CB323684E85D6D4AACA /* KerfKitUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KerfKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3947A1970267BE3B58930826 /* kerfkit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerfkit; path = ../..; sourceTree = SOURCE_ROOT; };
 		9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddFlowTests.swift; sourceTree = "<group>"; };
 		ADD3D46FC9C1AAB9D2219A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanComponents.swift; sourceTree = "<group>"; };
 		C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStore.swift; sourceTree = "<group>"; };
 		C8EB0AF15F7926D1C3280C63 /* KerfKit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = KerfKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F09EA5D64444B73147FEECBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 				F09EA5D64444B73147FEECBF /* ContentView.swift */,
 				ADD3D46FC9C1AAB9D2219A95 /* Info.plist */,
 				F5AF971337B8801EAD765A85 /* KerfApp.swift */,
-				0FE9AE105085223AA8594CC8 /* PlanView.swift */,
+				B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */,
 				9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */,
 				C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */,
 				7DBD3D9EC5895C1F14EE0113 /* Generated */,
@@ -227,7 +227,7 @@
 				1401DF423D8E49F68FA98BEA /* ContentView.swift in Sources */,
 				22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */,
 				3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */,
-				7683D0AC9EB09CFF6A16262D /* PlanView.swift in Sources */,
+				79D5E2CEF61270BDCCD55B3E /* PlanComponents.swift in Sources */,
 				6A7F52DE163FD0F28B15F835 /* ProjectDetailView.swift in Sources */,
 				E9AB3D0715EC467D01D15088 /* ProjectStore.swift in Sources */,
 			);

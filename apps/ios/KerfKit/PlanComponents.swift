@@ -1,8 +1,7 @@
 import SwiftUI
 import CutModels
 
-// Plan sekmesinin çizim bileşenleri (M-4). Eski modal PlanView, D-2 sonrası
-// ProjectDetailView içindeki PlanTabView'a taşındı.
+// Plan sekmesinin (PlanTabView, M-4) çizim bileşenleri: StatCard + SheetDiagram.
 struct StatCard: View {
     let title: String
     let value: String
@@ -31,6 +30,15 @@ struct SheetDiagram: View {
     let sheetH: Units
 
     var body: some View {
+        // Sıfır/eksi levha ölçüsü aspectRatio ve ölçekte NaN üretir — çizme.
+        if sheetW <= 0 || sheetH <= 0 {
+            Color.clear
+        } else {
+            diagram
+        }
+    }
+
+    private var diagram: some View {
         Canvas { ctx, size in
             let scale = min(size.width / CGFloat(sheetW), size.height / CGFloat(sheetH))
             let w = CGFloat(sheetW) * scale, h = CGFloat(sheetH) * scale

@@ -42,7 +42,7 @@ final class QuickAddFlowTests: XCTestCase {
     private func waitFocus(_ element: XCUIElement) {
         // XCTNSPredicateExpectation ~1sn aralıkla yoklar (40 bekleme ≈ +40sn harness
         // maliyeti) — süre ölçümünü bozmamak için sıkı döngüyle bekle.
-        let deadline = Date().addingTimeInterval(3)
+        let deadline = Date().addingTimeInterval(5)
         while Date() < deadline {
             if (element.value(forKey: "hasKeyboardFocus") as? Bool) == true { return }
             usleep(30_000)

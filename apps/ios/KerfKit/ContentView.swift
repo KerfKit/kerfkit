@@ -4,6 +4,7 @@ import CutModels
 // M-1 Projeler Listesi (docs/07 E-1) — kartlar + boş durumda "Örnek projeyi dene".
 struct ContentView: View {
     @Environment(ProjectStore.self) private var store
+    @State private var autoOptimizeRan = false
 
     var body: some View {
         @Bindable var store = store
@@ -29,10 +30,15 @@ struct ContentView: View {
             .navigationDestination(isPresented: $store.detailOpen) {
                 ProjectDetailView()
             }
+            .onChange(of: store.detailOpen) {
+                // Detaydan dönüş: bekleyen otomatik kaydı bitirip özetleri tazele.
+                if !store.detailOpen { store.flushThenReload() }
+            }
             .onAppear {
-                store.loadSummaries()
-                // UI smoke testi kancası (K-17): -autoOptimize örnek projeyle planı açar
-                if CommandLine.arguments.contains("-autoOptimize") {
+                // UI smoke testi kancası (K-17): -autoOptimize örnek projeyle planı açar.
+                // Tek sefer — onAppear her pop-back'te tetiklenir, kanca tekrarlamamalı.
+                if !autoOptimizeRan, CommandLine.arguments.contains("-autoOptimize") {
+                    autoOptimizeRan = true
                     store.createProject(sample: true)
                     store.optimizePlan()
                     store.selectedTab = .plan
