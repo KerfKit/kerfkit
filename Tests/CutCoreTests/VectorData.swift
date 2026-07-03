@@ -273,5 +273,70 @@ enum VectorData {
 }
 
 """#,
+        "1d_101_ffd_temel.json": #"""
+{
+  "name": "1d 101 FFD temel: 2400x3 + [800x5, 600x3] kerf 3mm (E2-S1 AC-1)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "length": 240000, "qty": 3, "isOffcut": false }],
+    "parts": [
+      { "id": "p800", "name": "boy", "materialId": "m1", "length": 80000, "qty": 5 },
+      { "id": "p600", "name": "kisa", "materialId": "m1", "length": 60000, "qty": 3 }
+    ]
+  },
+  "expected": {"sheetCount": 3, "wasteBps": 1944, "cutCount": 8, "placementsHash": "0f929055cf0aa57b"}
+}
+
+"""#,
+        "1d_102_bnb_kazanci.json": #"""
+{
+  "name": "1d 102 B&B kazanci: FFD 4 stok, tam cozum 3 (E2-S1 AC-2)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "length": 100000, "qty": 10, "isOffcut": false }],
+    "parts": [
+      { "id": "a", "name": "a", "materialId": "m1", "length": 50000, "qty": 2 },
+      { "id": "b", "name": "b", "materialId": "m1", "length": 40000, "qty": 2 },
+      { "id": "c", "name": "c", "materialId": "m1", "length": 30000, "qty": 4 }
+    ]
+  },
+  "expected": {"sheetCount": 3, "wasteBps": 0, "cutCount": 5, "placementsHash": "b9f5102a045bb2ef"}
+}
+
+"""#,
+        "1d_103_tam_dolum.json": #"""
+{
+  "name": "1d 103 tam dolum: uca oturan parcada kesim yok",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "length": 240000, "qty": 2, "isOffcut": false }],
+    "parts": [{ "id": "yarim", "name": "y", "materialId": "m1", "length": 120000, "qty": 2 }]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 0, "cutCount": 1, "placementsHash": "772db350b8d31bac"}
+}
+
+"""#,
+        "1d_104_karisik_boy_tukenme.json": #"""
+{
+  "name": "1d 104 karisik stok boyu (FFD yolu) + tukenme: 2 parca unplaced",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "objective": "sheets", "seed": 1,
+    "stocks": [
+      { "id": "uzun", "materialId": "m1", "length": 300000, "qty": 1, "isOffcut": false },
+      { "id": "kisa", "materialId": "m1", "length": 240000, "qty": 1, "isOffcut": false }
+    ],
+    "parts": [
+      { "id": "p90", "name": "boy", "materialId": "m1", "length": 90000, "qty": 5 },
+      { "id": "p60", "name": "kisa", "materialId": "m1", "length": 60000, "qty": 2 }
+    ]
+  },
+  "expected": {"sheetCount": 2, "wasteBps": 1666, "cutCount": 5, "placementsHash": "b1a845dce926a74b"}
+}
+
+"""#,
     ]
 }
