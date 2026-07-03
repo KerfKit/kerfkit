@@ -42,4 +42,6 @@
 ## Web bileşen notları
 - Buton/kart/input: 12 §6 spec'lerinin CSS eşleniği (aynı token'lar; hover: accent.bright).
 - Performans bütçesi: LCP <2s (hero görseli optimize), Wasm lazy-load (hesaplayıcı sayfasında).
-- Analitik: gizlilik-dostu (Plausible/TelemetryDeck-web); e-posta: Buttondown/Loops.
+- Analitik: gizlilik-dostu (Plausible/TelemetryDeck-web); e-posta: **Buttondown (KARAR — Tem 2026:**
+  indie-dostu, <100 abone ücretsiz, embed form, gizlilik-uyumlu; hesap açılınca form
+  `buttondown.com/api/emails/embed-subscribe/<hesap>` action'ına bağlanır**)**.
