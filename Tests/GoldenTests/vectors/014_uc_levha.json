@@ -1,0 +1,10 @@
+{
+  "name": "014 uc levhaya tasan bes yarim (coklu levha)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 3, "isOffcut": false }],
+    "parts": [{ "id": "p1", "name": "yarim", "materialId": "m1", "w": 244000, "h": 61000, "qty": 5, "rotation": "fixed" }]
+  },
+  "expected": {"sheetCount": 3, "wasteBps": 1666, "cutCount": 3, "placementsHash": "c32d435902fdc842"}
+}
