@@ -77,6 +77,11 @@ Hedefimiz launch'ta 6, 90 günde 12, yıl 1'de 20+ — ama **her locale'de tam k
    SEO sayfaları, mağaza metadata'sı ve destek şablonlarının TAMAMINA uygulanır.
 1. Bir locale ya TAM olur (UI + mağaza metadata + en az 3 SEO sayfası + lite) ya da yayınlanmaz.
 2. `reviewed: true` olmayan çeviri build'e girmez (CI bekçisi L-3'te).
+2b. iOS kapsam kanıtı `tools/i18n-kapsam.sh` (yerel, macOS): derleyici çıkarımı ↔ katalog
+   çift yönlü diff — L-2/L-3 kapılarında merge öncesi koşulur. Xcode editöründeki STALE
+   rozetleri IDE indeksidir, otorite değildir; "Remove from catalog" Fix'ine basılmaz.
+   Bilinen davranış: Xcode 26 Text-interpolasyonlarını %@ çıkarır — yeni interpolasyonlu
+   Text eklendiğinde %@ ikizi doğar; script yakalar.
 3. Ekran görüntüsü metinleri String Catalog'dan gelir — görselde hardcoded metin yasak.
 4. RTL (AR/HE/FA) ayrı iş kalemidir; T3 öncesi taahhüt verilmez.
 5. Desteklenmeyen dilde gelen mağaza yorumuna 48s içinde o dilde şablon yanıt.
