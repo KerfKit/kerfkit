@@ -127,6 +127,41 @@ final class VerifyTests: XCTestCase {
                     Placement(partId: "y", sheetIndex: 0, x: 0, y: 0, w: 1, h: 1, rotated: false)]
         XCTAssertNotEqual(placementsHash(crafted), placementsHash(pair))
     }
+    // — E1-S2: kerf mesafeleri + trim'li sınır (docs/04 §5 madde 4) —
+
+    func testInvariants_kerfGapTooSmall_reported() {
+        // kerf=300 iken y-izdüşümleri örtüşen komşular arasında 100'lük boşluk → ihlal
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 300, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "a", materialId: "m1", w: 10_000, h: 10_000, qty: 1),
+                    .init(id: "p2", name: "b", materialId: "m1", w: 10_000, h: 10_000, qty: 1)])
+        let res = result([pl("p1", 0, 0, 60_000, 40_000), pl("p2", 60_100, 0, 60_000, 40_000)])
+        let v = verifyInvariants(res, req: r)
+        XCTAssertTrue(v.contains { $0.kind == .kerfViolation && Set($0.subjectIds) == ["p1", "p2"] })
+    }
+    func testInvariants_exactKerfGap_clean() {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 300, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "a", materialId: "m1", w: 10_000, h: 10_000, qty: 1),
+                    .init(id: "p2", name: "b", materialId: "m1", w: 10_000, h: 10_000, qty: 1)])
+        let res = result([pl("p1", 0, 0, 60_000, 40_000), pl("p2", 60_300, 0, 60_000, 40_000)])
+        XCTAssertTrue(verifyInvariants(res, req: r).isEmpty)
+        // Çapraz ilişki (izdüşüm örtüşmesi yok) kerf kısıtı doğurmaz:
+        let diag = result([pl("p1", 0, 0, 60_000, 40_000), pl("p2", 60_100, 40_100, 60_000, 40_000)])
+        XCTAssertFalse(verifyInvariants(diag, req: r).contains { $0.kind == .kerfViolation })
+    }
+    func testInvariants_trimBounds_reported() {
+        // trim=1000 iken (0,0)'a yaslı yerleşim kullanılabilir alan dışındadır
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 1_000, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "a", materialId: "m1", w: 10_000, h: 10_000, qty: 1)])
+        let res = result([pl("p1", 0, 0, 10_000, 10_000)])
+        XCTAssertTrue(verifyInvariants(res, req: r).contains { $0.kind == .outOfBounds })
+    }
+
     func testInvariants_multiPinwheel_notGuillotine_terminates() {
         // Birden çok bağımsız guillotine-dışı küme: arama bütçesi erken ve SAĞLAM false verir
         // (geçerli yerleşim ≤ 2n−1 çağrıda kanıtlandığından bütçe aşımı ⇒ geçersiz)

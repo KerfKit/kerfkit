@@ -77,7 +77,7 @@ private func isGuillotineCuttable(_ rects: [PlacedRect], budget: inout Int) -> B
 }
 
 // docs/04 §5/§7 — değişmez doğrulayıcı: dejenere boyut, katalog tutarlılığı, sınır,
-// çakışma, guillotine-geçerlilik. kerf mesafe kontrolü (§5 madde 4) E1-S2'de eklenir.
+// çakışma, kerf mesafeleri (§5 madde 4, E1-S2), trim'li sınır, guillotine-geçerlilik.
 public func verifyInvariants(_ res: OptimizeResult, req: OptimizeRequest) -> [InvariantViolation] {
     var violations: [InvariantViolation] = []
     var partMaterial: [String: String] = [:]
@@ -106,16 +106,39 @@ public func verifyInvariants(_ res: OptimizeResult, req: OptimizeRequest) -> [In
             let candidates = req.stocks.filter { $0.materialId == material }
             let maxW = candidates.map(\.w).max() ?? 0
             let maxH = candidates.map(\.h).max() ?? 0
-            if p.x < 0 || p.y < 0 || p.x + p.w > maxW || p.y + p.h > maxH {
+            // Kullanılabilir alan = stok − 2·trim (docs/04 §3 4a); trim payına taşma ihlaldir.
+            if p.x < req.trim || p.y < req.trim
+                || p.x + p.w > maxW - req.trim || p.y + p.h > maxH - req.trim {
                 violations.append(.init(kind: .outOfBounds, sheetIndex: sheet,
-                                        subjectIds: [p.partId], message: "parca levha siniri disina tasiyor"))
+                                        subjectIds: [p.partId], message: "parca kullanilabilir alan disina tasiyor (trim dahil)"))
             }
         }
         for (i, a) in geometric.enumerated() {
-            for b in geometric[(i + 1)...]
-            where a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h {
-                violations.append(.init(kind: .overlap, sheetIndex: sheet,
-                                        subjectIds: [a.partId, b.partId], message: "parcalar cakisiyor"))
+            for b in geometric[(i + 1)...] {
+                let xOverlap = a.x < b.x + b.w && b.x < a.x + a.w
+                let yOverlap = a.y < b.y + b.h && b.y < a.y + a.h
+                if xOverlap && yOverlap {
+                    violations.append(.init(kind: .overlap, sheetIndex: sheet,
+                                            subjectIds: [a.partId, b.partId], message: "parcalar cakisiyor"))
+                    continue
+                }
+                // Kerf mesafesi (docs/04 §5 madde 4): bir eksende izdüşümleri örtüşen iki
+                // parça, guillotine ağacında o eksene dik bir kesimle ayrılmak zorundadır —
+                // aradaki boşluk kerf'ten küçük olamaz. Çapraz çiftlerde doğrudan kısıt yok.
+                guard req.kerf > 0 else { continue }
+                let gap: Units
+                if yOverlap {
+                    gap = max(b.x - (a.x + a.w), a.x - (b.x + b.w))
+                } else if xOverlap {
+                    gap = max(b.y - (a.y + a.h), a.y - (b.y + b.h))
+                } else {
+                    continue
+                }
+                if gap < req.kerf {
+                    violations.append(.init(kind: .kerfViolation, sheetIndex: sheet,
+                                            subjectIds: [a.partId, b.partId],
+                                            message: "komsu parcalar arasindaki bosluk kerf'ten kucuk"))
+                }
             }
         }
         let rects = geometric.map { PlacedRect(partId: $0.partId, x: $0.x, y: $0.y, w: $0.w, h: $0.h) }

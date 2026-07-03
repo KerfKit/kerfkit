@@ -10,11 +10,14 @@ public enum PlacementError: Error, Equatable {
 //
 // Kesim ağacı (docs/04 §3 4c): düğüm = levha içinde dikdörtgen bölge. Yaprak ya serbest
 // alan ya yerleşmiş parça; iç düğüm = 1 guillotine kesim. cutCount = iç düğüm sayısı (§3).
+// Kerf (E1-S2): kesim bıçağı kerf genişliği yer — uzak (hi) çocuğun boyutundan düşülür;
+// parça tarafı (lo) tam ölçü kalır. Levha/kullanılabilir-alan kenarında kesim olmadığından
+// kerf düşülmez (§3 4c). Artık kerf'ten küçükse toz olur: hi çocuğu üretilmez, kesim sayılır.
 struct CutTree {
     enum Kind {
         case free
         case part(id: String)
-        case cut(lo: Int, hi: Int) // lo = orijine yakın çocuk; BFS kesim sırası E1-S1b'de
+        case cut(lo: Int, hi: Int?) // lo = orijine yakın çocuk; hi=nil → artık toz oldu
     }
     struct Node {
         var x: Units, y: Units, w: Units, h: Units
@@ -23,8 +26,8 @@ struct CutTree {
     private(set) var nodes: [Node]
     private(set) var cutCount = 0
 
-    init(w: Units, h: Units) {
-        nodes = [Node(x: 0, y: 0, w: w, h: h, kind: .free)]
+    init(x: Units, y: Units, w: Units, h: Units) {
+        nodes = [Node(x: x, y: y, w: w, h: h, kind: .free)]
     }
 
     // Serbest yapraklar, oluşturulma (indeks) sırasıyla — docs/04 §3 4b'deki "ID" tie-break'i.
@@ -38,41 +41,52 @@ struct CutTree {
     // pw×ph parçayı serbest yaprağın sol-alt köşesine koyar; artığı guillotine kesimlerle böler.
     // İlk kesim ekseni (E1-S1a sabit kuralı): SAS — serbest dikdörtgenin kısa ekseni bölünür:
     // w <= h ise yatay kesim, aksi halde dikey. Bölme portföyü E1-S4'te gelir (docs/04 §3 adım 3).
-    mutating func place(partId: String, at leaf: Int, pw: Units, ph: Units) {
+    mutating func place(partId: String, at leaf: Int, pw: Units, ph: Units, kerf: Units) {
         var idx = leaf
         let n = nodes[idx]
         // iki eksende de artık varsa ilk kesim parçayı içeren şeridi ayırır
         if pw < n.w && ph < n.h {
-            idx = n.w <= n.h ? split(idx, horizontalAtHeight: ph) : split(idx, verticalAtWidth: pw)
+            idx = n.w <= n.h ? split(idx, horizontalAtHeight: ph, kerf: kerf)
+                             : split(idx, verticalAtWidth: pw, kerf: kerf)
         }
         // tek eksende artık kaldıysa ikinci (ya da tek) kesim
         let strip = nodes[idx]
         if pw < strip.w {
-            idx = split(idx, verticalAtWidth: pw)
+            idx = split(idx, verticalAtWidth: pw, kerf: kerf)
         } else if ph < strip.h {
-            idx = split(idx, horizontalAtHeight: ph)
+            idx = split(idx, horizontalAtHeight: ph, kerf: kerf)
         }
         nodes[idx].kind = .part(id: partId)
     }
 
     // Yaprağı y+h'de yatay kesimle böler; orijin tarafındaki (alt) şeridin indeksini döner.
-    private mutating func split(_ leaf: Int, horizontalAtHeight h: Units) -> Int {
+    private mutating func split(_ leaf: Int, horizontalAtHeight h: Units, kerf: Units) -> Int {
         let n = nodes[leaf]
         let lo = nodes.count
         nodes.append(Node(x: n.x, y: n.y, w: n.w, h: h, kind: .free))
-        nodes.append(Node(x: n.x, y: n.y + h, w: n.w, h: n.h - h, kind: .free))
-        nodes[leaf].kind = .cut(lo: lo, hi: lo + 1)
+        var hi: Int?
+        let hiH = n.h - h - kerf
+        if hiH > 0 {
+            hi = nodes.count
+            nodes.append(Node(x: n.x, y: n.y + h + kerf, w: n.w, h: hiH, kind: .free))
+        }
+        nodes[leaf].kind = .cut(lo: lo, hi: hi)
         cutCount += 1
         return lo
     }
 
     // Yaprağı x+w'de dikey kesimle böler; orijin tarafındaki (sol) şeridin indeksini döner.
-    private mutating func split(_ leaf: Int, verticalAtWidth w: Units) -> Int {
+    private mutating func split(_ leaf: Int, verticalAtWidth w: Units, kerf: Units) -> Int {
         let n = nodes[leaf]
         let lo = nodes.count
         nodes.append(Node(x: n.x, y: n.y, w: w, h: n.h, kind: .free))
-        nodes.append(Node(x: n.x + w, y: n.y, w: n.w - w, h: n.h, kind: .free))
-        nodes[leaf].kind = .cut(lo: lo, hi: lo + 1)
+        var hi: Int?
+        let hiW = n.w - w - kerf
+        if hiW > 0 {
+            hi = nodes.count
+            nodes.append(Node(x: n.x + w + kerf, y: n.y, w: hiW, h: n.h, kind: .free))
+        }
+        nodes[leaf].kind = .cut(lo: lo, hi: hi)
         cutCount += 1
         return lo
     }
@@ -119,18 +133,16 @@ private func bestFit(_ part: PartSpec, in sheets: [OpenSheet]) -> Fit? {
     return best
 }
 
-// E1-S1a kapsamı trim=0 olduğundan stok boyutu doğrudan kullanılabilir alandır.
-private func canHold(_ stock: StockSpec, _ part: PartSpec) -> Bool {
-    let direct = part.w <= stock.w && part.h <= stock.h
-    let rotated = part.rotation == .allowed && part.h <= stock.w && part.w <= stock.h
+// Kullanılabilir alan = stok − 2·trim (docs/04 §3 4a); kerf tek parçanın sığmasını etkilemez.
+private func canHold(_ stock: StockSpec, _ part: PartSpec, trim: Units) -> Bool {
+    let uw = stock.w - 2 * trim, uh = stock.h - 2 * trim
+    let direct = part.w <= uw && part.h <= uh
+    let rotated = part.rotation == .allowed && part.h <= uw && part.w <= uh
     return direct || rotated
 }
 
 // docs/04 §3 adım 4 — tek heuristik koşu. Portföy (adım 3) ve hedef seçimi (adım 5) E1-S4'te.
 func placeAll(_ req: OptimizeRequest) throws -> OptimizeResult {
-    guard req.kerf == 0 && req.trim == 0 else {
-        throw EngineError.notImplemented("E1-S2: kerf + trim")
-    }
     // Parça örnekleri; kararlı sıralama: alan↓ → uzun kenar↓ → id↑ (docs/04 §2),
     // son anahtar örnek sırası — total order olduğundan sort kararlılığına dayanmaz.
     var instances: [(part: PartSpec, ordinal: Int)] = []
@@ -148,6 +160,7 @@ func placeAll(_ req: OptimizeRequest) throws -> OptimizeResult {
 
     var pools = req.stocks.map { (stock: $0, remaining: $0.qty) }
     var sheets: [OpenSheet] = []
+    var sheetAreas: [Units] = [] // tam levha alanı — fire trim+kerf dahil raporlanır
     var placements: [Placement] = []
     var unplaced: [String] = []
 
@@ -155,7 +168,7 @@ func placeAll(_ req: OptimizeRequest) throws -> OptimizeResult {
         let n = sheets[fit.sheet].tree.nodes[fit.leaf]
         let pw = fit.rotated ? part.h : part.w
         let ph = fit.rotated ? part.w : part.h
-        sheets[fit.sheet].tree.place(partId: part.id, at: fit.leaf, pw: pw, ph: ph)
+        sheets[fit.sheet].tree.place(partId: part.id, at: fit.leaf, pw: pw, ph: ph, kerf: req.kerf)
         placements.append(.init(partId: part.id, sheetIndex: fit.sheet,
                                 x: n.x, y: n.y, w: pw, h: ph, rotated: fit.rotated))
     }
@@ -166,15 +179,18 @@ func placeAll(_ req: OptimizeRequest) throws -> OptimizeResult {
             continue
         }
         // Açık levhalara sığmadı → istek sırasındaki ilk uygun stoktan yeni levha (docs/04 §3 4d).
-        // "Uygun" = malzeme eşleşmesi + boyut; havuz tükendiyse unplaced.
+        // "Uygun" = malzeme eşleşmesi + boyut (trim dahil); havuz tükendiyse unplaced.
         guard let pi = pools.firstIndex(where: {
-            $0.remaining > 0 && $0.stock.materialId == part.materialId && canHold($0.stock, part)
+            $0.remaining > 0 && $0.stock.materialId == part.materialId && canHold($0.stock, part, trim: req.trim)
         }) else {
             unplaced.append(part.id)
             continue
         }
         pools[pi].remaining -= 1
-        sheets.append((pools[pi].stock.materialId, CutTree(w: pools[pi].stock.w, h: pools[pi].stock.h)))
+        let s = pools[pi].stock
+        sheets.append((s.materialId, CutTree(x: req.trim, y: req.trim,
+                                             w: s.w - 2 * req.trim, h: s.h - 2 * req.trim)))
+        sheetAreas.append(s.w * s.h)
         guard let fit = bestFit(part, in: sheets) else {
             unplaced.append(part.id) // canHold nedeniyle erişilmez; kuvvet-unwrap yerine kontrollü yol
             continue
@@ -182,7 +198,7 @@ func placeAll(_ req: OptimizeRequest) throws -> OptimizeResult {
         commit(part, fit)
     }
 
-    let sheetArea = sheets.reduce(Units(0)) { $0 + $1.tree.nodes[0].w * $1.tree.nodes[0].h }
+    let sheetArea = sheetAreas.reduce(Units(0), +)
     let usedArea = placements.reduce(Units(0)) { $0 + $1.w * $1.h }
     let wasteBps = sheetArea > 0 ? Int((sheetArea - usedArea) * 10_000 / sheetArea) : 0
     let cutCount = sheets.reduce(0) { $0 + $1.tree.cutCount }
