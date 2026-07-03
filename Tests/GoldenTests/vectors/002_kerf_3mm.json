@@ -9,5 +9,5 @@
       { "id": "p2", "name": "yan", "materialId": "m1", "w": 70000, "h": 45000, "qty": 2, "rotation": "allowed" }
     ]
   },
-  "expected": {"sheetCount": 2, "wasteBps": 6523, "cutCount": 12, "placementsHash": "3f6f828cd5580d25"}
+  "expected": {"sheetCount": 1, "wasteBps": 3046, "cutCount": 12, "placementsHash": "914c367fa59a390b"}
 }

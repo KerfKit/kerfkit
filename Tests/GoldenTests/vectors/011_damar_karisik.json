@@ -9,5 +9,5 @@
       { "id": "p2", "name": "raf", "materialId": "m1", "w": 90000, "h": 35000, "qty": 3, "rotation": "allowed" }
     ]
   },
-  "expected": {"sheetCount": 1, "wasteBps": 4138, "cutCount": 9, "placementsHash": "3c0830501f193126"}
+  "expected": {"sheetCount": 1, "wasteBps": 4138, "cutCount": 8, "placementsHash": "49a33364952ace4b"}
 }

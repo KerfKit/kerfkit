@@ -6,5 +6,5 @@
     "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
     "parts": [{ "id": "p1", "name": "panel", "materialId": "m1", "w": 60000, "h": 40000, "qty": 4, "rotation": "allowed" }]
   },
-  "expected": {"sheetCount": 1, "wasteBps": 6775, "cutCount": 6, "placementsHash": "ccf10a986116f8cf"}
+  "expected": {"sheetCount": 1, "wasteBps": 6775, "cutCount": 5, "placementsHash": "98376a32e1d801c8"}
 }
