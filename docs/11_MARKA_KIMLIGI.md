@@ -42,7 +42,7 @@ adı değişkeni olarak kullanılır.)
 - **İkon yapısı (Icon Composer, iOS 26):** 3 katman — arka: sıcak-siyah zemin (hafif ahşap doku,
   ~%4 opaklık); orta: amber kerf işareti (düz form, gölgesiz); ön: yok (sadelik). Default/Dark/
   Clear/Tinted varyantları Composer'da; pazarlama için 1024 flattened export.
-- **Wordmark:** geometrik sans (SF Pro Display Semibold tracking +2%), tamamı küçük harf "kerf";
+- **Wordmark:** geometrik sans (SF Pro Display Semibold tracking +2%), tamamı küçük harf "kerfkit";
   işaret + wordmark kilitli düzeni web başlıkta, ikon yalnız işaret.
 
 ## 5. Görsel imgelem

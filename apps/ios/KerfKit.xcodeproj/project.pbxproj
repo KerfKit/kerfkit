@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1401DF423D8E49F68FA98BEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EA5D64444B73147FEECBF /* ContentView.swift */; };
+		22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA125A3ACD9B4C2EB1F591EB /* DesignTokens.swift */; };
+		35A1794D8F00D421864D703C /* CutCore in Frameworks */ = {isa = PBXBuildFile; productRef = F9CAA491C502F5086B9A7D28 /* CutCore */; };
+		3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF971337B8801EAD765A85 /* KerfApp.swift */; };
+		6EDCFC9E8FCD7906516AEC3C /* CutProj in Frameworks */ = {isa = PBXBuildFile; productRef = 1149728F6F25D8F98455569F /* CutProj */; };
+		7683D0AC9EB09CFF6A16262D /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE9AE105085223AA8594CC8 /* PlanView.swift */; };
+		BC3F8209F20310CC0F53A62E /* CutModels in Frameworks */ = {isa = PBXBuildFile; productRef = BD4A2986EE6DF8CB09EEA377 /* CutModels */; };
+		E9AB3D0715EC467D01D15088 /* ProjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */; };
+		F0491D7B741D0262D6DCBB53 /* CutPersist in Frameworks */ = {isa = PBXBuildFile; productRef = BCD61F8BD27F41D116E43DDB /* CutPersist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0FE9AE105085223AA8594CC8 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
+		ADD3D46FC9C1AAB9D2219A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStore.swift; sourceTree = "<group>"; };
+		C8EB0AF15F7926D1C3280C63 /* KerfKit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = KerfKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAD372AA397F4D1B997B83A /* kerf */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerf; path = ../..; sourceTree = SOURCE_ROOT; };
+		F09EA5D64444B73147FEECBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F5AF971337B8801EAD765A85 /* KerfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KerfApp.swift; sourceTree = "<group>"; };
+		FA125A3ACD9B4C2EB1F591EB /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF7787EA3FC1FD5F70B15CAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35A1794D8F00D421864D703C /* CutCore in Frameworks */,
+				BC3F8209F20310CC0F53A62E /* CutModels in Frameworks */,
+				6EDCFC9E8FCD7906516AEC3C /* CutProj in Frameworks */,
+				F0491D7B741D0262D6DCBB53 /* CutPersist in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7DBD3D9EC5895C1F14EE0113 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				FA125A3ACD9B4C2EB1F591EB /* DesignTokens.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		8A9EF854B07DFF9D328B2B57 /* KerfKit */ = {
+			isa = PBXGroup;
+			children = (
+				F09EA5D64444B73147FEECBF /* ContentView.swift */,
+				ADD3D46FC9C1AAB9D2219A95 /* Info.plist */,
+				F5AF971337B8801EAD765A85 /* KerfApp.swift */,
+				0FE9AE105085223AA8594CC8 /* PlanView.swift */,
+				C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */,
+				7DBD3D9EC5895C1F14EE0113 /* Generated */,
+			);
+			path = KerfKit;
+			sourceTree = "<group>";
+		};
+		91355DA6FDE272CDE6DE6935 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD372AA397F4D1B997B83A /* kerf */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		A472E191F013A6F8C861B3DE = {
+			isa = PBXGroup;
+			children = (
+				8A9EF854B07DFF9D328B2B57 /* KerfKit */,
+				91355DA6FDE272CDE6DE6935 /* Packages */,
+				C199F9BE48349930D3C4553F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C199F9BE48349930D3C4553F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C8EB0AF15F7926D1C3280C63 /* KerfKit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		813062C9C93C122BD7E149AC /* KerfKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8566DEDE0C1D58A1EAF4C2A /* Build configuration list for PBXNativeTarget "KerfKit" */;
+			buildPhases = (
+				2C41DA582CE0023F0547A4A1 /* Sources */,
+				CF7787EA3FC1FD5F70B15CAD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KerfKit;
+			packageProductDependencies = (
+				F9CAA491C502F5086B9A7D28 /* CutCore */,
+				BD4A2986EE6DF8CB09EEA377 /* CutModels */,
+				1149728F6F25D8F98455569F /* CutProj */,
+				BCD61F8BD27F41D116E43DDB /* CutPersist */,
+			);
+			productName = KerfKit;
+			productReference = C8EB0AF15F7926D1C3280C63 /* KerfKit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		685AD86967C90349666BA45B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = E5FCCF5E3FC78395021CEDF3 /* Build configuration list for PBXProject "KerfKit" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A472E191F013A6F8C861B3DE;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				076D0D456F80C61188F8BC7A /* XCLocalSwiftPackageReference "../.." */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				813062C9C93C122BD7E149AC /* KerfKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C41DA582CE0023F0547A4A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1401DF423D8E49F68FA98BEA /* ContentView.swift in Sources */,
+				22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */,
+				3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */,
+				7683D0AC9EB09CFF6A16262D /* PlanView.swift in Sources */,
+				E9AB3D0715EC467D01D15088 /* ProjectStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		32B097F5AF75806035ED3A14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = KerfKit/Info.plist;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.kerfkit.KerfKit;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		582873ED23CC3DA6A2F3E672 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		B891E9AF8E58D9C72692F69B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = KerfKit/Info.plist;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.kerfkit.KerfKit;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F54D3445489F5CC63AE1F239 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E5FCCF5E3FC78395021CEDF3 /* Build configuration list for PBXProject "KerfKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F54D3445489F5CC63AE1F239 /* Debug */,
+				582873ED23CC3DA6A2F3E672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F8566DEDE0C1D58A1EAF4C2A /* Build configuration list for PBXNativeTarget "KerfKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32B097F5AF75806035ED3A14 /* Debug */,
+				B891E9AF8E58D9C72692F69B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		076D0D456F80C61188F8BC7A /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1149728F6F25D8F98455569F /* CutProj */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CutProj;
+		};
+		BCD61F8BD27F41D116E43DDB /* CutPersist */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CutPersist;
+		};
+		BD4A2986EE6DF8CB09EEA377 /* CutModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CutModels;
+		};
+		F9CAA491C502F5086B9A7D28 /* CutCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CutCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 685AD86967C90349666BA45B /* Project object */;
+}

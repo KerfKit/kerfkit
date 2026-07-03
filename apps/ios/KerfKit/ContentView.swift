@@ -57,7 +57,7 @@ struct ContentView: View {
                     .foregroundStyle(DesignTokens.colorTimber950)
                 }
             }
-            .navigationTitle("kerf")
+            .navigationTitle("kerfkit")
             .scrollDismissesKeyboard(.interactively)
             .onAppear {
                 // UI smoke testi kancası (K-17 temeli): -autoOptimize ile plan doğrudan açılır
