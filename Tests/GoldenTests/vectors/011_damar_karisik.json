@@ -1,0 +1,13 @@
+{
+  "name": "011 damar: fixed + allowed karisik paket, kerf 3mm (E1-S3)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
+    "parts": [
+      { "id": "p1", "name": "kapak", "materialId": "m1", "w": 80000, "h": 50000, "qty": 2, "rotation": "fixed" },
+      { "id": "p2", "name": "raf", "materialId": "m1", "w": 90000, "h": 35000, "qty": 3, "rotation": "allowed" }
+    ]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 4138, "cutCount": 9, "placementsHash": "3c0830501f193126"}
+}
