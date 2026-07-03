@@ -28,7 +28,8 @@ enum DetailTab: String, CaseIterable {
 }
 
 extension PlanStats {
-    var wastePercentText: String { String(format: "%%%.1f", Double(wasteBps) / 100) }
+    static func wastePercentText(bps: Int) -> String { String(format: "%%%.1f", Double(bps) / 100) }
+    var wastePercentText: String { Self.wastePercentText(bps: wasteBps) }
 }
 
 // Çok-projeli durum + kalıcılık (K-11): M-1 liste kartları depo özetlerinden; aktif proje
@@ -109,17 +110,15 @@ final class ProjectStore {
 
     // — M-1 liste işlemleri —
 
-    // Not (bilinçli borç): özetler için her doküman tam yükleniyor (N+1). Ucuz özet sorgusu
-    // CutPersist public API'sine alan eklemek ister — "önce sor" sınıfı, ayrı karar.
+    // Özetler v2 sütunlarından — doküman açılmaz (K-11 AC: 100 projede liste <100ms).
     func loadSummaries() {
         summaries = (try? repository?.list()) ?? []
         var infos: [String: String] = [:]
         for s in summaries {
-            guard let doc = try? repository?.load(id: s.id) else { continue }
-            if let plan = doc.plans.last {
-                infos[s.id] = "\(plan.result.stats.sheetCount) levha · \(plan.result.stats.wastePercentText) fire · \(doc.parts.count) parça"
+            if let sheets = s.planSheetCount, let bps = s.planWasteBps {
+                infos[s.id] = "\(sheets) levha · \(PlanStats.wastePercentText(bps: bps)) fire · \(s.partCount) parça"
             } else {
-                infos[s.id] = "\(doc.parts.count) parça · henüz plan yok"
+                infos[s.id] = "\(s.partCount) parça · henüz plan yok"
             }
         }
         planSummaries = infos
