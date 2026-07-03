@@ -58,4 +58,15 @@ final class SnapshotTests: XCTestCase {
                                 configure: { $0.benchMode = true }),
                        as: .image(on: .iPhone13), named: "atolye-tezgah")
     }
+
+    func testOnboarding_firstPage() {
+        assertSnapshot(of: host(OnboardingView(onFinish: { _ in }), sizeCategory: .medium),
+                       as: .image(on: .iPhone13), named: "onboarding-1")
+    }
+
+    func testOnboarding_ctaPage() {
+        assertSnapshot(of: host(OnboardingView(initialPage: 2, onFinish: { _ in }),
+                                sizeCategory: .medium),
+                       as: .image(on: .iPhone13), named: "onboarding-3")
+    }
 }

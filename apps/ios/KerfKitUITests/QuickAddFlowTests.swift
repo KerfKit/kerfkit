@@ -9,6 +9,7 @@ final class QuickAddFlowTests: XCTestCase {
     @MainActor
     func testOnPartsWithKeyboardUnder60Seconds() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["-skipOnboarding"]
         app.launch()
 
         // Yeni boş proje — detay Parçalar sekmesinde açılır.
@@ -42,6 +43,7 @@ final class QuickAddFlowTests: XCTestCase {
     @MainActor
     func testTouchTargetsAtLeast44pt() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["-skipOnboarding"]
         app.launch()
         app.buttons["Yeni proje"].tap()
         let name = app.textFields["Parça adı"]
