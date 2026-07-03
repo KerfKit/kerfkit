@@ -16,6 +16,10 @@
   imperial projelerde 1 birim = 1/6400″ olacak şekilde proje-birim-modu ile saklanır;
   karışık birim tek projede YASAK — doğrulama hatası).
 - Atık yüzdesi çıktısı "baz puan" (Int, 1/100 %) olarak raporlanır.
+- **Motor sınırları (taşma güvenliği):** her boyut (parça/stok w,h) ≤ 10⁸ birim (metrik ~1 km,
+  imperial ~397 m); toplam stok alanı Σ(w·h·qty) ≤ 5×10¹⁴ birim². Gerekçe: wasteBps = alan×10⁴
+  aritmetiğinin Int64 tavanı 9,22×10¹⁴ birim²; bu iki sınır motordaki tüm ara çarpımları Int64
+  içinde tutar. Aşan girdi doğrulama hatasıdır (dimensionTooLarge / totalStockAreaTooLarge).
 - RNG: kendi PCG32 implementasyonu, seed proje dosyasında; platform `random()` YASAK.
 - Sıralamalar: kararlı + deterministik tie-break (alan → uzun kenar → parça ID).
 - Hedef: **aynı girdi JSON → her platformda (iOS/Android/Wasm) bit-eşit çıktı hash'i.**
@@ -29,7 +33,8 @@ yalnız davranış referansı.
 
 ```
 OPTIMIZE(parts, stocks, config):
-1. Doğrula: boyutlar >0; parça ≤ (en büyük stok − 2·trim); birim modu tutarlı.
+1. Doğrula: boyutlar >0 ve ≤ 10^8 birim; toplam stok alanı ≤ 5×10^14 birim² (§2 motor
+   sınırları); parça ≤ (en büyük stok − 2·trim); birim modu tutarlı.
 2. Malzemeye göre grupla (18mm-birch ayrı havuz, 12mm-mdf ayrı).
 3. Her malzeme havuzu için heuristik PORTFÖYÜ koştur (6-12 kombinasyon):
    sıralama ∈ {alan↓, uzunKenar↓, çevre↓} × bölme ∈ {SAS kısa-eksen, min-artık-alan}

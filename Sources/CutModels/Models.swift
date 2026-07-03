@@ -83,6 +83,7 @@ public struct OptimizeResult: Codable, Sendable, Equatable {
 public struct ValidationIssue: Codable, Sendable, Equatable {
     public enum Kind: String, Codable, Sendable {
         case nonPositiveDimension, nonPositiveQuantity, partExceedsStock, unknownMaterial, negativeKerfOrTrim
+        case dimensionTooLarge, totalStockAreaTooLarge // docs/04 §2 motor sınırları (E1-S1c)
     }
     public var kind: Kind
     public var subjectId: String

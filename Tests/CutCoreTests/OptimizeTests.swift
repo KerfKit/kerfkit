@@ -65,6 +65,19 @@ final class OptimizeTests: XCTestCase {
         XCTAssertEqual(res.stats.sheetCount, 1, "yalnız m2'den tek levha açılmalı; m1 tüketilmemeli")
     }
 
+    // E1-S1c regresyonu: inceleme repro'su (w=h=2^32 birim) eskiden aritmetik taşma
+    // trap'iyle süreci çökertiyordu; motor sınırları (docs/04 §2) artık tipli hataya çevirir.
+    func testExtremeDimensions_typedErrorNotCrash() {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 4_294_967_296, h: 4_294_967_296, qty: 1)],
+            parts: [.init(id: "p1", name: "dev", materialId: "m1", w: 4_294_967_296, h: 4_294_967_296, qty: 1)])
+        XCTAssertEqual(validate(r).first?.kind, .dimensionTooLarge)
+        XCTAssertThrowsError(try optimize(r)) { error in
+            XCTAssertEqual(error as? EngineError, .invalidRequest)
+        }
+    }
+
     // AC-4 (hata): negatif/0 boyut → doğrulama katmanında yakalanır, optimize kontrollü fırlatır.
     func testAC4_negativeDimension_caughtByValidation() {
         let r = req(parts: [.init(id: "p1", name: "eksi", materialId: "m1", w: -100, h: 40_000, qty: 1)])

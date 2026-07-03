@@ -27,4 +27,37 @@ final class ValidateTests: XCTestCase {
         let r = req(parts: [.init(id: "p1", name: "yabanci", materialId: "mX", w: 10_000, h: 10_000, qty: 1)])
         XCTAssertEqual(validate(r).first?.kind, .unknownMaterial)
     }
+
+    // E1-S1c — docs/04 §2 motor sınırları: boyut ≤ 10^8 birim, toplam stok alanı ≤ 5×10^14 birim².
+    func testPartDimensionTooLarge_reported() {
+        let r = req(parts: [.init(id: "p1", name: "dev", materialId: "m1", w: 100_000_001, h: 40_000, qty: 1)])
+        XCTAssertEqual(validate(r).first?.kind, .dimensionTooLarge)
+    }
+    func testStockDimensionTooLarge_reported() {
+        let r = OptimizeRequest(unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+                                stocks: [.init(id: "s1", materialId: "m1", w: 100_000_001, h: 122_000, qty: 1)],
+                                parts: [])
+        XCTAssertEqual(validate(r).first?.kind, .dimensionTooLarge)
+    }
+    func testTotalStockAreaTooLarge_singleStock_reported() {
+        // 10^8 × 10^8 = 10^16 birim² > 5×10^14 (boyutlar tek tek sınır içinde)
+        let r = OptimizeRequest(unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+                                stocks: [.init(id: "s1", materialId: "m1", w: 100_000_000, h: 100_000_000, qty: 1)],
+                                parts: [])
+        XCTAssertEqual(validate(r).first?.kind, .totalStockAreaTooLarge)
+    }
+    func testTotalStockAreaTooLarge_viaQty_reported() {
+        // 244000×122000 = 2,977×10^10 birim²; qty 20000 → 5,95×10^14 > 5×10^14
+        let r = OptimizeRequest(unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+                                stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 20_000)],
+                                parts: [])
+        XCTAssertEqual(validate(r).first?.kind, .totalStockAreaTooLarge)
+    }
+    func testLimits_exactBoundary_ok() {
+        // Tam sınırda geçerli: boyut 10^8 ve toplam alan tam 5×10^14 birim²
+        let r = OptimizeRequest(unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+                                stocks: [.init(id: "s1", materialId: "m1", w: 100_000_000, h: 5_000_000, qty: 1)],
+                                parts: [.init(id: "p1", name: "raf", materialId: "m1", w: 60_000, h: 40_000, qty: 1)])
+        XCTAssertTrue(validate(r).isEmpty)
+    }
 }
