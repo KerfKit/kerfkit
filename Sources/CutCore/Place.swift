@@ -132,6 +132,12 @@ struct CutTree {
 
 // Aday konum skoru — docs/04 §3 4b: Best Area Fit → Best Short Side Fit → ID (levha, yaprak),
 // tam eşitlikte döndürülmemiş varyant önce (deterministik).
+private struct Orientation {
+    let w: Units
+    let h: Units
+    let rotated: Bool
+}
+
 private struct Fit {
     var sheet: Int
     var leaf: Int
@@ -148,18 +154,24 @@ private func isBetter(_ a: Fit, than b: Fit) -> Bool {
     return !a.rotated && b.rotated
 }
 
-private typealias OpenSheet = (materialId: String, tree: CutTree)
+private struct OpenSheet {
+    let materialId: String
+    var tree: CutTree
+}
 
 private func bestFit(_ part: PartSpec, in sheets: [OpenSheet]) -> Fit? {
     var best: Fit?
-    for (si, sheet) in sheets.enumerated() where sheet.materialId == part.materialId {
+    for si in 0..<sheets.count {
+        let sheet = sheets[si]
+        if sheet.materialId != part.materialId { continue }
         for li in sheet.tree.freeLeaves {
             let n = sheet.tree.nodes[li]
-            var orientations: [(w: Units, h: Units, rotated: Bool)] = [(part.w, part.h, false)]
+            var orientations: [Orientation] = [Orientation(w: part.w, h: part.h, rotated: false)]
             if part.rotation == .allowed && part.w != part.h {
-                orientations.append((part.h, part.w, true))
+                orientations.append(Orientation(w: part.h, h: part.w, rotated: true))
             }
-            for o in orientations where o.w <= n.w && o.h <= n.h {
+            for o in orientations {
+                if o.w > n.w || o.h > n.h { continue }
                 let cand = Fit(sheet: si, leaf: li, rotated: o.rotated,
                                leftover: n.w * n.h - o.w * o.h,
                                shortSide: min(n.w - o.w, n.h - o.h))
@@ -179,6 +191,16 @@ private func canHold(_ stock: StockSpec, _ part: PartSpec, trim: Units) -> Bool 
     return direct || rotated
 }
 
+private struct Instance {
+    let part: PartSpec
+    let ordinal: Int
+}
+
+private struct StockPool {
+    let stock: StockSpec
+    var remaining: Int
+}
+
 // Tek koşunun ham sonucu — havuz birleştirme ve hedef seçimi için ara yapı.
 struct PoolRun {
     var placements: [Placement]
@@ -194,27 +216,33 @@ struct PoolRun {
 func placeAll(_ req: OptimizeRequest, config: RunConfig) -> PoolRun {
     // Parça örnekleri; kararlı sıralama: config.sort anahtarı → alan/uzun-kenar ikincili →
     // id↑ → örnek sırası (total order, sort kararlılığına dayanmaz; docs/04 §2).
-    var instances: [(part: PartSpec, ordinal: Int)] = []
+    var instances: [Instance] = []
     for p in req.parts {
-        for _ in 0..<p.qty { instances.append((p, instances.count)) }
+        for _ in 0..<p.qty { instances.append(Instance(part: p, ordinal: instances.count)) }
     }
-    func sortKey(_ p: PartSpec) -> (Units, Units) {
-        let area = p.w * p.h, long = max(p.w, p.h)
+    func primaryKey(_ p: PartSpec) -> Units {
         switch config.sort {
-        case .alan: return (area, long)
-        case .uzunKenar: return (long, area)
-        case .cevre: return (p.w + p.h, area)
+        case .alan: return p.w * p.h
+        case .uzunKenar: return max(p.w, p.h)
+        case .cevre: return p.w + p.h
+        }
+    }
+    func secondaryKey(_ p: PartSpec) -> Units {
+        switch config.sort {
+        case .alan: return max(p.w, p.h)
+        case .uzunKenar, .cevre: return p.w * p.h
         }
     }
     instances.sort { a, b in
-        let ka = sortKey(a.part), kb = sortKey(b.part)
-        if ka.0 != kb.0 { return ka.0 > kb.0 }
-        if ka.1 != kb.1 { return ka.1 > kb.1 }
+        let k1a = primaryKey(a.part), k1b = primaryKey(b.part)
+        if k1a != k1b { return k1a > k1b }
+        let k2a = secondaryKey(a.part), k2b = secondaryKey(b.part)
+        if k2a != k2b { return k2a > k2b }
         if a.part.id != b.part.id { return a.part.id < b.part.id }
         return a.ordinal < b.ordinal
     }
 
-    var pools = req.stocks.map { (stock: $0, remaining: $0.qty) }
+    var pools = req.stocks.map { StockPool(stock: $0, remaining: $0.qty) }
     var sheets: [OpenSheet] = []
     var sheetAreas: [Units] = [] // tam levha alanı — fire trim+kerf dahil raporlanır
     var placements: [Placement] = []
@@ -230,7 +258,8 @@ func placeAll(_ req: OptimizeRequest, config: RunConfig) -> PoolRun {
                                 x: n.x, y: n.y, w: pw, h: ph, rotated: fit.rotated))
     }
 
-    for (part, _) in instances {
+    for inst in instances {
+        let part = inst.part
         if let fit = bestFit(part, in: sheets) {
             commit(part, fit)
             continue
@@ -245,8 +274,9 @@ func placeAll(_ req: OptimizeRequest, config: RunConfig) -> PoolRun {
         }
         pools[pi].remaining -= 1
         let s = pools[pi].stock
-        sheets.append((s.materialId, CutTree(x: req.trim, y: req.trim,
-                                             w: s.w - 2 * req.trim, h: s.h - 2 * req.trim)))
+        sheets.append(OpenSheet(materialId: s.materialId,
+                                tree: CutTree(x: req.trim, y: req.trim,
+                                              w: s.w - 2 * req.trim, h: s.h - 2 * req.trim)))
         sheetAreas.append(s.w * s.h)
         guard let fit = bestFit(part, in: sheets) else {
             unplaced.append(part.id) // canHold nedeniyle erişilmez; kuvvet-unwrap yerine kontrollü yol
@@ -273,7 +303,9 @@ private func betterRun(_ a: PoolRun, than b: PoolRun, objective: Objective) -> B
     case .waste:  ka = [a.wasteBps, a.sheetCount, a.cutCount]; kb = [b.wasteBps, b.sheetCount, b.cutCount]
     case .cuts:   ka = [a.cutCount, a.sheetCount, a.wasteBps]; kb = [b.cutCount, b.sheetCount, b.wasteBps]
     }
-    for (x, y) in zip(ka, kb) where x != y { return x < y }
+    for i in 0..<ka.count {
+        if ka[i] != kb[i] { return ka[i] < kb[i] }
+    }
     return false
 }
 

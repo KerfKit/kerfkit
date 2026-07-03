@@ -5,26 +5,54 @@ import CutModels
 private func escaped(_ id: String) -> String {
     var out = ""
     for ch in id {
-        if ch == "\\" || ch == "|" || ch == ";" { out.append("\\") }
-        out.append(ch)
+        let s = String(ch)
+        if s == "\\" || s == "|" || s == ";" { out += "\\" }
+        out += s
     }
     return out
+}
+
+// UTF-8 baytları (K-30): spec (docs/04 §5) UTF-8 ister — hash'ler platformlar arası sabit.
+// Swift tarafı stdlib .utf8; Kotlin tarafı (#if SKIP) dilin kendi UTF-8 kodlayıcısı —
+// ikisi de aynı bayt dizisini üretir, golden hash'ler bunun kanıtıdır.
+private func utf8Bytes(_ s: String) -> [UInt8] {
+    #if SKIP
+    var bytes: [UInt8] = []
+    let arr = s.toByteArray(Charsets.UTF_8)
+    for b in arr {
+        bytes.append(b.toUByte())
+    }
+    return bytes
+    #else
+    return Array(s.utf8)
+    #endif
 }
 
 // docs/04 §5 — placementsHash: FNV-1a 64-bit, kanonik serileştirme
 // `partId|sheetIndex|x|y|w|h|r;` (motor çıkış sırası), 16 haneli küçük-harf hex.
 // FNV çarpması bilinçli sarmal (&*): UInt64 modular aritmetiği her platformda bit-eşit.
 public func placementsHash(_ placements: [Placement]) -> String {
-    var hash: UInt64 = 0xcbf2_9ce4_8422_2325
+    // Sabitler iki 32-bit yarıdan kurulur; bileşik atama yok — Kotlin/Skip uyumu (K-30).
+    var hash: UInt64 = (UInt64(0xcbf2_9ce4) << 32) | UInt64(0x8422_2325)
+    let prime: UInt64 = UInt64(0x0000_0100) << 32 | UInt64(0x0000_01b3)
     for p in placements {
         let line = "\(escaped(p.partId))|\(p.sheetIndex)|\(p.x)|\(p.y)|\(p.w)|\(p.h)|\(p.rotated ? 1 : 0);"
-        for byte in line.utf8 {
-            hash ^= UInt64(byte)
-            hash = hash &* 0x0000_0100_0000_01b3
+        let bytes = utf8Bytes(line)
+        for byte in bytes {
+            hash = hash ^ UInt64(byte)
+            hash = hash &* prime
         }
     }
-    let hex = String(hash, radix: 16)
-    return String(repeating: "0", count: 16 - hex.count) + hex
+    // 16 hane küçük-harf hex, elle: String(_:radix:) Skip'te ULong için yok.
+    let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+    var hex = ""
+    var value = hash
+    for _ in 0..<16 {
+        let nibble = Int(value & UInt64(15))
+        hex = digits[nibble] + hex
+        value = value >> 4
+    }
+    return hex
 }
 
 private struct PlacedRect {
@@ -83,8 +111,14 @@ public func verifyInvariants(_ res: OptimizeResult, req: OptimizeRequest) -> [In
     var partMaterial: [String: String] = [:]
     for p in req.parts where partMaterial[p.id] == nil { partMaterial[p.id] = p.materialId }
 
-    let bySheet = Dictionary(grouping: res.placements, by: \.sheetIndex)
-    for (sheet, ps) in bySheet.sorted(by: { $0.key < $1.key }) {
+    var bySheet: [Int: [Placement]] = [:]
+    for p in res.placements {
+        var arr = bySheet[p.sheetIndex] ?? []
+        arr.append(p)
+        bySheet[p.sheetIndex] = arr
+    }
+    for sheet in bySheet.keys.sorted() {
+        let ps = bySheet[sheet] ?? []
         // Geometrik kontrollere yalnız pozitif boyutlu yerleşimler girer; dejenereler
         // ihlal olarak raporlanır (aksi halde guillotine aramasında küme küçülmez).
         var geometric: [Placement] = []
@@ -113,8 +147,10 @@ public func verifyInvariants(_ res: OptimizeResult, req: OptimizeRequest) -> [In
                                         subjectIds: [p.partId], message: "parca kullanilabilir alan disina tasiyor (trim dahil)"))
             }
         }
-        for (i, a) in geometric.enumerated() {
-            for b in geometric[(i + 1)...] {
+        for i in 0..<geometric.count {
+            let a = geometric[i]
+            for j in (i + 1)..<geometric.count {
+                let b = geometric[j]
                 let xOverlap = a.x < b.x + b.w && b.x < a.x + a.w
                 let yOverlap = a.y < b.y + b.h && b.y < a.y + a.h
                 if xOverlap && yOverlap {

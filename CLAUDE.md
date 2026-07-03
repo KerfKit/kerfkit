@@ -2,8 +2,9 @@
 
 ## Komutlar
 - Test: `swift test` (motor+model+golden) — Linux'ta Swift yoksa Mac'te koş
-- Token üretimi: `node tools/gen-tokens.mjs` (tokens.json → apps/web/styles/tokens.css)
-- Golden vektörler: Tests/GoldenTests/vectors/*.json (pending:true olanlar atlanır)
+- Token üretimi: `node tools/gen-tokens.mjs` (tokens.json → tokens.css + DesignTokens.swift)
+- Vektör gömme: `node tools/gen-vectors-swift.mjs` (vectors/*.json → VectorData.swift; bekçi test senkron zorlar)
+- Golden vektörler: Tests/CutCoreTests/vectors/*.json (pending:true olanlar atlanır)
 
 ## Proje yapısı
 - Sources/CutCore = motor (SAF Swift, stdlib-only, Int aritmetik — Double YASAK)

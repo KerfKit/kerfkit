@@ -61,7 +61,7 @@ cutwise/
 - **Web: SATIŞ YOK (karar: Ahmet, Tem 2026 — Stripe kaldırıldı).** Ödeme yalnız mağaza içi:
   App Store (StoreKit 2) + Google Play Billing. Landing e-posta listesi toplar ve mağaza
   rozetlerine yönlendirir; founding fiyat mağaza-içi launch teklifi olarak uygulanır.
-- **Android (v1.2):** Play Billing (30 Haz 2026 düzeni: %10 ilk $1M + %5 Play-billing ücreti;
+- **Android (öne çekildi — Ahmet, Tem 2026; motor paritesi K-30 tamam):** Play Billing (30 Haz 2026 düzeni: %10 ilk $1M + %5 Play-billing ücreti;
   alternatif faturalama serbest ama MVP'de Play Billing yeter).
 - **Lifetime'ın üç platformda dürüst yönetimi:** v1'de platform-başına satın alma (her mağaza
   kendi restore'u; sayfada açıkça yazılır). v2'de çok-platform lisans yeniden değerlendirilir:
