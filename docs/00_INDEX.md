@@ -33,6 +33,7 @@ dosyayı/bölümü ver, tamamını değil ("curse of instructions"tan kaçın).
 | 15 | FABLE5_TASARIM_IS_AKISI.md | Mockup→kod döngüsü, ikon hattı, tasarım QA, Figma kararı | Tasarım sürecinin kendisi |
 | 16 | EL_KITABI.md | Ahmet'in okuma kılavuzu: roller, iki çalışma alanı, ilk hafta, haftalık ritim | İnsan içindir — oturumlara verilmez |
 | 17 | PROMPT_KITABI.md | Baştan sona oturum promptları (K/D/W/P/R/A numaralı) | İnsan içindir — promptlar oturumlara tek tek yapıştırılır |
+| 18 | YERELLESTIRME_VE_GLOBAL_ASO.md | Dil katmanları, çok-dilli SEO/ASO, web→mobil huni, CutPlan teardown kararları | Global/i18n/L-E8-E9 oturumlarında (karar 3 Tem 2026) |
 
 ## Haftalık ritim (10 numaralı dosyada detay)
 

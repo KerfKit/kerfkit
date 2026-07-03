@@ -97,6 +97,29 @@
 - E7-S2: Wasm motor derlemesi + tek-levha lite hesaplayıcı (2 oturum)
   AC: aynı golden vektör tarayıcıda bit-eşit sonuç verir (parite kanıtı).
 - E7-S3: SEO sayfaları ilk 5 (09 §3 listesinden) (1 oturum)
+- E7-S4: Web→mobil huni: lite kapıları (3. hesapta banner; PDF/kaydet/çok-levha → mağaza
+  modalı + QR) + rehberlerde "App'te aç" şeridi (docs/18 §6) (1 oturum)
+- E7-S5: Compare sayfaları: cutlist-optimizer · cutplan · opticutter — dürüst tablo
+  (02 §3 kuralı; en yüksek niyetli SEO trafiği) (1 oturum)
+
+## Epik E8: Yerelleştirme + Global ASO (v1.0 T1 → v1.1 T2) — spec: 18 (karar: Ahmet, 3 Tem 2026)
+- E8-S1 (L-1): i18n altyapısı — iOS String Catalog; **taban dil TR→EN çevrilir**, TR locale
+  olur; sayı/ölçü Locale'den; imperial otomatiği ABD locale'inde (kesir pad'i E4-S2 ön koşul) (2 oturum)
+  AC: hardcoded kullanıcı-metni kalmaz (bekçi test); TR+EN'de tüm snapshot'lar yeşil.
+- E8-S2 (L-2): T1 UI çevirileri: DE FR ES IT (anadil gözden geçirme işaretiyle) (1 oturum)
+- E8-S3 (L-3): Çok dilli SEO: Astro /{lang}/ + hreflang + dil başına anahtar kelime araştırması
+  + ilk 3 rehberin T1 çevirileri; `reviewed: true` CI bekçisi (2 oturum)
+- E8-S4 (L-4): Çok-locale ASO: T1 metadata (yerel jenerik terimli başlıklar) + fastlane
+  snapshot çok-locale (K-19 ile birleşir) (1 oturum)
+- E8-S5 (L-5): T2 dilleri: PT-BR PL NL RU UK CS — UI+SEO+ASO (v1.1) (2 oturum)
+- E8-S6 (L-6): RTL hazırlık + T3 (v1.2 — ayrı taahhüt, 18 §5)
+
+## Epik E9: Android (Skip UI; v1.1'e öne çekildi — docs/18 §8) — spec: 06, 18
+- E9-S1 (K-31): Skip app iskeleti: paket app.kerfkit, motor bağlama (K-30 paritesi hazır ✓),
+  M-1/M-2/M-4 ekranları (2 oturum)
+- E9-S2: M-5 Atölye + M-6 onboarding + M-8 ayarlar Android paritesi (2 oturum)
+- E9-S3: Play Store: T1 metadata + görseller + Play Billing (2 oturum)
+- E9-S4: DXF export (CNC kitlesi; v1.2→v1.1 öne çekildi — docs/18 §7) (1 oturum)
 
 ## v1.1+ (launch sonrası — RICE sıralı, launch verisiyle yeniden puanlanır)
 

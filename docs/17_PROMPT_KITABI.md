@@ -124,6 +124,33 @@ Swift çıktısıyla diff'le; CI'a Node parite adımı ekle. PDF indirme → e-p
 'how to minimize plywood waste' sayfalarını yaz (her biri 900-1200 kelime, EN, usta-dili,
 uydurma istatistik yok, lite-hesaplayıcıya tek CTA). Astro content collection olarak."
 
+## HAFTA 6-8 (paralel) — GLOBAL (docs/18; karar 3 Tem 2026)
+
+**L-1 · E8-S1 i18n altyapısı:** "docs/18 §2'yi oku. iOS String Catalog kur; TÜM hardcoded
+Türkçe UI metnini EN tabana çevir, TR'yi locale yap; sayı/ölçü Locale'den; ABD locale'inde
+imperial varsayılanı. Bekçi: hardcoded kullanıcı-metni yakalayan test. TR+EN snapshot seti."
+
+**L-2 · E8-S2 T1 çevirileri:** "String Catalog'a DE FR ES IT ekle (docs/18 §1). Çeviriler
+taslak; `needsReview` işaretiyle bırak — anadil onayı gelmeden 'reviewed' yapma."
+
+**W-3 · E7-S4 Web→mobil huni:** "docs/18 §6 tablosunu uygula: 3. hesapta banner, PDF/kaydet/
+çok-levha kapılarında mağaza modalı + QR; rehberlere 'App'te aç' şeridi. Hesap SINIRSIZ kalır."
+
+**P-6 · E7-S5 Compare sayfaları:** "docs/02 matrisinden /compare/cutlist-optimizer, /compare/
+cutplan, /compare/opticutter sayfalarını yaz — dürüst tablo (kendi zaaflarımız dahil: bulut
+senkron v1'de yok). Her satır kanıtlı; abartı sıfır."
+
+**L-3 · E8-S3 Çok dilli SEO:** "Astro /{lang}/ yönlendirmesi + hreflang + x-default. Dil başına
+anahtar kelimeyi YENİDEN araştır (docs/18 §3 çekirdekleri; birebir çeviri yasak). İlk 3 rehberi
+T1 dillerine çevir; frontmatter `reviewed: true` olmadan build o sayfayı üretmesin (CI bekçisi)."
+
+**L-4 · E8-S4 Çok-locale ASO:** "docs/18 §4: T1 için başlık/altbaşlık/keywords — yerel jenerik
+terimle (DE 'Zuschnitt Optimierer' vb.); fastlane snapshot'ı çok-locale koştur (K-19 birleşik)."
+
+**K-31 · E9-S1 Android iskeleti:** "docs/06 + 18 §8. Skip app: paket app.kerfkit, K-30 motoru
+bağla, M-1/M-2/M-4 ekranları. String Catalog→strings.xml akışını doğrula; sürpriz varsa
+docs/10 risk tablosuna işle ve DUR."
+
 ## HAFTA 7-8 — Monetizasyon
 
 **K-14 · E5-S1 StoreKit2:** "docs/08 §3'ü oku. lifetime (non-consumable) + yıllık (auto-renew)

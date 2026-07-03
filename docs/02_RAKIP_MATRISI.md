@@ -11,7 +11,7 @@
 | **CutList Plus fx** | Windows | $89/$249/$499 tek-sefer | Board-foot+maliyet; tam offline; tek-sefer modeli kanıtlı | "Windows 7/8/10" — güncellenmiyor; Mac/mobil yok (mobil salt görüntüleyici); offcut takibi yok |
 | **OptiCutter** | Web | €90-190/yıl (+API €99/ay) | Maliyet-minimizasyonu; 5 birim modu | Native mobil/offline yok; ücretsiz katman gerçek projede tükeniyor |
 | **CutListCalc** (2025) | Web | Tamamen ücretsiz | Şablonlar, temiz UI | Damar/bant YOK; offline yok; monetizasyonsuz (sürdürülebilirlik ?) |
-| **CutPlan.ai** (2025-26) | Web | $29/ay veya $9/2-gün | Offcut envanteri; 21 dil | Pahalı abonelik; mobil yok |
+| **CutPlan.ai** (2025-26) | Web/PWA | Free 30 hesap/ay; $29/ay veya $9/2-gün | Offcut envanteri; **22 locale hreflang + blog/compare SEO makinesi**; bulut senkron; DXF (Pro); malzeme kütüphanesi | Pahalı abonelik; **native mobil YOK (PWA savunusu yazılı)**; offline yok; kesim talimatı statik liste — teardown 3 Tem 2026, docs/18 §7 |
 | Yan referanslar | — | — | OpenCutList (ücretsiz SketchUp eklentisi, GPL); workshop-buddy (siper-ayarı min.) | — |
 
 ## 2. Özellik matrisi (V=var K=kısmi –=yok)
@@ -31,8 +31,9 @@
 | Offcut envanteri | – | V | V | V | – | – | – | V | v1.1 |
 | Maliyet + board-foot | – | – | V (Evo) | V | V | V | K | – | v1.1 |
 | Etiket (QR/Avery) | K | V | V | V | V | K | – | – | v1.1 |
-| Atölye modu (interaktif kesim rehberi) | – | – | – | – | – | – | – | – | **v1 lite / v1.1 tam — KİMSEDE YOK** |
-| DXF | – | V | V | K | K ($499) | V | – | K | v1.2 |
+| Atölye modu (interaktif kesim rehberi) | – | – | – | – | – | – | – | K (statik liste, Pro) | **v1 ✓ — interaktifi KİMSEDE YOK** |
+| Çok dilli UI + SEO/ASO | K | – | – | – | – | K | – | **V (22 locale)** | **v1: 6 dil → y1: 20+ (docs/18)** |
+| DXF | – | V | V | K | K ($499) | V | – | K (Pro) | **v1.1 (öne çekildi — docs/18 §7)** |
 | Foto/ses ile parça girişi | – | – | – (kaldırdı!) | – | – | – | – | – | v1.2 — **wow** |
 | **iOS+Android+Web üçlüsü** | – | – | – | – | – | – | – | – | **v1.2 — tek üründe İLK** |
 

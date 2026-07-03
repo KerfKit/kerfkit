@@ -17,7 +17,11 @@
 | 11 | Beta düzeltmeleri; E6-S3 mağaza varlıkları; App Review'a gönder | Launch postları taslakları; basın e-postaları |
 | 12 | **LAUNCH** + hotfix nöbeti | Kurucu postu + PH + bülten; yorum ritmi başlar |
 
-Sonrası: 01 §8 kapıları → v1.1 (offcut, maliyet, atölye v2, iCloud) → Kapı-2 → v1.2 Android/Web.
+Sonrası: 01 §8 kapıları → v1.1 (offcut, maliyet, atölye v2, iCloud, **Android (Skip) öne
+çekildi, DXF öne çekildi, T2 dilleri** — karar+gerekçe docs/18 §7-8, Ahmet 3 Tem 2026) →
+Kapı-2 → v1.2 Web-tam/senkron + T3 dilleri + RTL.
+v1.0'a eklendi: **L-1 i18n altyapısı + T1 dilleri (EN DE FR ES IT TR) + compare sayfaları +
+web→mobil huni** (docs/18; launch 6 dilde yapılır).
 
 ## 2. Oturum protokolü (her Fable 5 inşa oturumu)
 
