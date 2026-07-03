@@ -13,10 +13,25 @@ struct PartInput: Identifiable, Hashable {
     var rotationAllowed: Bool
 }
 
-// UI durumu + kalıcılık (K-11): her değişiklik touch() ile 500ms debounce'lu otomatik
-// kayda düşer; arka plana geçişte flush. Açılışta son proje yüklenir, yoksa örnek proje.
+enum DetailTab: String, CaseIterable {
+    case parts = "Parçalar"
+    case stock = "Stok"
+    case plan = "Plan"
+}
+
+// Çok-projeli durum + kalıcılık (K-11): M-1 liste kartları depo özetlerinden; aktif proje
+// alanları her değişiklikte touch() ile 500ms debounce'lu kayda düşer. Son plan .cutproj'a
+// gömülür (liste özeti + docs/05 Plan kaydı).
 @Observable
 final class ProjectStore {
+    // M-1 liste
+    var summaries: [ProjectRepository.Summary] = []
+    var planSummaries: [String: String] = [:]
+    var detailOpen = false
+    var selectedTab: DetailTab = .parts
+
+    // aktif proje
+    var projectName = "Yeni Proje"
     var parts: [PartInput] = []
     var sheetWidthMM = 2440
     var sheetHeightMM = 1220
@@ -24,11 +39,12 @@ final class ProjectStore {
     var kerfMM = 3
     var trimMM = 0
     var objective: Objective = .sheets
-    var projectName = "Mutfak Dolabı"
 
     var result: OptimizeResult?
+    var lastRequest: OptimizeRequest?
     var partNames: [String: String] = [:]
     var errorMessage: String?
+    var stale = false // E-4 bayat-sonuç bandı: girdiler plan sonrası değiştiyse
 
     private var projectId = UUID().uuidString
     private var createdAt = ProjectStore.nowISO()
@@ -42,37 +58,75 @@ final class ProjectStore {
         do {
             let dir = try FileManager.default.url(for: .applicationSupportDirectory,
                                                   in: .userDomainMask, appropriateFor: nil, create: true)
-            let repo = try ProjectRepository(path: dir.appendingPathComponent("kerf.sqlite").path)
+            let repo = try ProjectRepository(path: dir.appendingPathComponent("kerfkit.sqlite").path)
             repository = repo
             autosaver = Autosaver(repository: repo)
         } catch {
             repository = nil
             autosaver = nil
         }
-        if let last = try? repository?.list().first,
-           let doc = try? repository?.load(id: last.id) {
-            apply(doc)
-        } else {
-            seedSampleProject()
-        }
+        loadSummaries()
     }
-
-    private func seedSampleProject() {
-        // Örnek proje: onboarding aktivasyon garantisi özü (docs/03 E4-S6)
-        parts = [
-            .init(name: "Yan", widthMM: 720, heightMM: 580, qty: 2, rotationAllowed: false),
-            .init(name: "Raf", widthMM: 764, heightMM: 560, qty: 2, rotationAllowed: true),
-            .init(name: "Kapak", widthMM: 396, heightMM: 716, qty: 1, rotationAllowed: false),
-            .init(name: "Çekmece", widthMM: 396, heightMM: 180, qty: 6, rotationAllowed: true),
-        ]
-        touch()
-    }
-
-    // — kalıcılık köprüsü —
 
     static func nowISO() -> String {
         ISO8601DateFormatter().string(from: Date())
     }
+
+    // — M-1 liste işlemleri —
+
+    func loadSummaries() {
+        summaries = (try? repository?.list()) ?? []
+        var infos: [String: String] = [:]
+        for s in summaries {
+            if let doc = try? repository?.load(id: s.id), let plan = doc.plans.last {
+                let waste = Double(plan.result.stats.wasteBps) / 100
+                infos[s.id] = "\(plan.result.stats.sheetCount) levha · %\(String(format: "%.1f", waste)) fire · \(doc.parts.count) parça"
+            } else if let doc = try? repository?.load(id: s.id) {
+                infos[s.id] = "\(doc.parts.count) parça · henüz plan yok"
+            }
+        }
+        planSummaries = infos
+    }
+
+    func createProject(sample: Bool) {
+        projectId = UUID().uuidString
+        createdAt = ProjectStore.nowISO()
+        result = nil; lastRequest = nil; errorMessage = nil; stale = false
+        sheetWidthMM = 2440; sheetHeightMM = 1220; sheetQty = 5; kerfMM = 3; trimMM = 0
+        objective = .sheets
+        if sample {
+            projectName = "Mutfak Dolabı"
+            parts = [
+                .init(name: "Yan", widthMM: 720, heightMM: 580, qty: 2, rotationAllowed: false),
+                .init(name: "Raf", widthMM: 764, heightMM: 560, qty: 2, rotationAllowed: true),
+                .init(name: "Kapak", widthMM: 396, heightMM: 716, qty: 1, rotationAllowed: false),
+                .init(name: "Çekmece", widthMM: 396, heightMM: 180, qty: 6, rotationAllowed: true),
+            ]
+        } else {
+            projectName = "Yeni Proje"
+            parts = []
+        }
+        selectedTab = .parts
+        detailOpen = true
+        touch(markStale: false)
+    }
+
+    func open(id: String) {
+        guard let doc = try? repository?.load(id: id) else { return }
+        apply(doc)
+        selectedTab = .parts
+        detailOpen = true
+    }
+
+    func deleteProjects(at offsets: IndexSet) {
+        for index in offsets {
+            let id = summaries[index].id
+            try? repository?.delete(id: id)
+        }
+        loadSummaries()
+    }
+
+    // — kalıcılık köprüsü —
 
     private func currentDoc() -> ProjectDoc {
         var doc = ProjectDoc(id: projectId, name: projectName,
@@ -87,6 +141,11 @@ final class ProjectStore {
             PartDoc(id: "p\(i)", name: p.name.isEmpty ? "Parça \(i + 1)" : p.name,
                     materialId: "panel", w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
                     qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed)
+        }
+        if let result, let lastRequest {
+            doc.plans = [PlanDoc(id: "plan-son", createdAt: ProjectStore.nowISO(),
+                                 engineVersion: result.engineVersion,
+                                 request: lastRequest, result: result, stale: stale)]
         }
         return doc
     }
@@ -107,10 +166,22 @@ final class ProjectStore {
             PartInput(name: $0.name, widthMM: Int($0.w / 100), heightMM: Int($0.h / 100),
                       qty: $0.qty, rotationAllowed: $0.rotation == .allowed)
         }
+        if let plan = doc.plans.last {
+            result = plan.result
+            lastRequest = plan.request
+            stale = plan.stale
+            var names: [String: String] = [:]
+            for p in plan.request.parts { names[p.id] = p.name }
+            partNames = names
+        } else {
+            result = nil; lastRequest = nil; stale = false
+        }
+        errorMessage = nil
     }
 
-    // Her kullanıcı değişikliğinden sonra çağrılır — 500ms debounce'lu otomatik kayıt.
-    func touch() {
+    // Her kullanıcı değişikliğinden sonra: bayat işareti + 500ms debounce'lu kayıt.
+    func touch(markStale: Bool = true) {
+        if markStale && result != nil { stale = true }
         guard let autosaver else { return }
         let doc = currentDoc()
         Task { await autosaver.scheduleSave(doc) }
@@ -143,8 +214,10 @@ final class ProjectStore {
             parts: specs)
         do {
             result = try optimize(req)
+            lastRequest = req
             partNames = names
             errorMessage = nil
+            stale = false
         } catch let error as PlacementError {
             result = nil
             if case .partExceedsStock(let pid) = error {
@@ -154,6 +227,6 @@ final class ProjectStore {
             result = nil
             errorMessage = "Girdi doğrulamadan geçmedi — boyut ve adetleri kontrol et."
         }
-        touch()
+        touch(markStale: false)
     }
 }

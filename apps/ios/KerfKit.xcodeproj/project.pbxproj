@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1401DF423D8E49F68FA98BEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EA5D64444B73147FEECBF /* ContentView.swift */; };
+		1C7FC8DB018C314A2E32712B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB5382DB13ECAADA9A08A6DD /* Assets.xcassets */; };
 		22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA125A3ACD9B4C2EB1F591EB /* DesignTokens.swift */; };
 		35A1794D8F00D421864D703C /* CutCore in Frameworks */ = {isa = PBXBuildFile; productRef = F9CAA491C502F5086B9A7D28 /* CutCore */; };
 		3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF971337B8801EAD765A85 /* KerfApp.swift */; };
+		6A7F52DE163FD0F28B15F835 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */; };
 		6EDCFC9E8FCD7906516AEC3C /* CutProj in Frameworks */ = {isa = PBXBuildFile; productRef = 1149728F6F25D8F98455569F /* CutProj */; };
 		7683D0AC9EB09CFF6A16262D /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE9AE105085223AA8594CC8 /* PlanView.swift */; };
 		BC3F8209F20310CC0F53A62E /* CutModels in Frameworks */ = {isa = PBXBuildFile; productRef = BD4A2986EE6DF8CB09EEA377 /* CutModels */; };
@@ -20,13 +22,15 @@
 
 /* Begin PBXFileReference section */
 		0FE9AE105085223AA8594CC8 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
+		3947A1970267BE3B58930826 /* kerfkit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerfkit; path = ../..; sourceTree = SOURCE_ROOT; };
+		9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		ADD3D46FC9C1AAB9D2219A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStore.swift; sourceTree = "<group>"; };
 		C8EB0AF15F7926D1C3280C63 /* KerfKit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = KerfKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEAD372AA397F4D1B997B83A /* kerf */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerf; path = ../..; sourceTree = SOURCE_ROOT; };
 		F09EA5D64444B73147FEECBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F5AF971337B8801EAD765A85 /* KerfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KerfApp.swift; sourceTree = "<group>"; };
 		FA125A3ACD9B4C2EB1F591EB /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+		FB5382DB13ECAADA9A08A6DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +59,12 @@
 		8A9EF854B07DFF9D328B2B57 /* KerfKit */ = {
 			isa = PBXGroup;
 			children = (
+				FB5382DB13ECAADA9A08A6DD /* Assets.xcassets */,
 				F09EA5D64444B73147FEECBF /* ContentView.swift */,
 				ADD3D46FC9C1AAB9D2219A95 /* Info.plist */,
 				F5AF971337B8801EAD765A85 /* KerfApp.swift */,
 				0FE9AE105085223AA8594CC8 /* PlanView.swift */,
+				9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */,
 				C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */,
 				7DBD3D9EC5895C1F14EE0113 /* Generated */,
 			);
@@ -68,7 +74,7 @@
 		91355DA6FDE272CDE6DE6935 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				CEAD372AA397F4D1B997B83A /* kerf */,
+				3947A1970267BE3B58930826 /* kerfkit */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -98,6 +104,7 @@
 			buildConfigurationList = F8566DEDE0C1D58A1EAF4C2A /* Build configuration list for PBXNativeTarget "KerfKit" */;
 			buildPhases = (
 				2C41DA582CE0023F0547A4A1 /* Sources */,
+				3202713430ED60614E1DD514 /* Resources */,
 				CF7787EA3FC1FD5F70B15CAD /* Frameworks */,
 			);
 			buildRules = (
@@ -146,6 +153,17 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		3202713430ED60614E1DD514 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C7FC8DB018C314A2E32712B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2C41DA582CE0023F0547A4A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -155,6 +173,7 @@
 				22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */,
 				3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */,
 				7683D0AC9EB09CFF6A16262D /* PlanView.swift in Sources */,
+				6A7F52DE163FD0F28B15F835 /* ProjectDetailView.swift in Sources */,
 				E9AB3D0715EC467D01D15088 /* ProjectStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
