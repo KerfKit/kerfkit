@@ -14,6 +14,11 @@ struct KerfApp: App {
         if args.contains("-resetOnboarding") {
             UserDefaults.standard.set(false, forKey: "onboardingSeen")
         }
+        if args.contains("-resetDefaults") { // M-8 varsayılanlarını test için sıfırla
+            for key in ["defaultKerfMM", "defaultTrimMM", "defaultObjective"] {
+                UserDefaults.standard.removeObject(forKey: key)
+            }
+        }
         let seen = UserDefaults.standard.bool(forKey: "onboardingSeen")
         let skip = args.contains("-skipOnboarding") || args.contains("-autoOptimize")
         _onboardingShown = State(initialValue: !seen && !skip)

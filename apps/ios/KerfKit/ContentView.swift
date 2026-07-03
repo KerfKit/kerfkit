@@ -5,6 +5,7 @@ import CutModels
 struct ContentView: View {
     @Environment(ProjectStore.self) private var store
     @State private var autoOptimizeRan = false
+    @State private var settingsOpen = false
 
     var body: some View {
         @Bindable var store = store
@@ -18,6 +19,14 @@ struct ContentView: View {
             }
             .navigationTitle("kerfkit")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        settingsOpen = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel("Ayarlar")
+                }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         store.createProject(sample: false)
@@ -26,6 +35,11 @@ struct ContentView: View {
                     }
                     .accessibilityLabel("Yeni proje")
                 }
+            }
+            .sheet(isPresented: $settingsOpen) {
+                NavigationStack { SettingsView() }
+                    .environment(store)
+                    .preferredColorScheme(.dark)
             }
             .navigationDestination(isPresented: $store.detailOpen) {
                 ProjectDetailView()

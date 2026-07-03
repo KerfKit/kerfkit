@@ -75,6 +75,8 @@ final class ProjectStore {
     private var createdAt = ProjectStore.nowISO()
     // Aktif proje listeden silindiyse touch/flush onu geri yazmasın (diriltme yasağı).
     private var activeDeleted = false
+    // inMemory testlerde M-8 kullanıcı varsayılanları okunmaz — snapshot determinizmi.
+    private var usesUserDefaults = true
     private let repository: ProjectRepository?
     private let autosaver: Autosaver?
 
@@ -111,6 +113,7 @@ final class ProjectStore {
         if inMemory {
             repository = try? ProjectRepository()
             autosaver = repository.map { Autosaver(repository: $0) }
+            usesUserDefaults = false
             loadSummaries()
             return
         }
@@ -156,6 +159,22 @@ final class ProjectStore {
         planSummaries = infos
     }
 
+    // M-8 Verilerim: her proje .cutproj olarak geçici dizine yazılır (ShareLink için).
+    func exportAllProjects() -> [URL] {
+        var urls: [URL] = []
+        let dir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("kerfkit-disari", isDirectory: true)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        for s in summaries {
+            guard let doc = try? repository?.load(id: s.id),
+                  let data = try? ProjectIO.encode(doc) else { continue }
+            let safeName = s.name.replacingOccurrences(of: "/", with: "-")
+            let url = dir.appendingPathComponent("\(safeName)-\(s.id.prefix(6)).cutproj")
+            if (try? data.write(to: url)) != nil { urls.append(url) }
+        }
+        return urls
+    }
+
     // Detaydan dönüşte: bekleyen debounce'u bitir, listeyi ancak yazım tamamlanınca tazele
     // (yoksa 500ms'lik kayıtla yarışıp bayat özet gösterir).
     func flushThenReload() {
@@ -174,8 +193,16 @@ final class ProjectStore {
         result = nil; lastRequest = nil; errorMessage = nil; stale = false
         completedCutIds = []; workshopOpen = false
         sheetWidthMM = Defaults.sheetWidthMM; sheetHeightMM = Defaults.sheetHeightMM
-        sheetQty = Defaults.sheetQty; kerfMM = Defaults.kerfMM; trimMM = Defaults.trimMM
-        objective = Defaults.objective
+        sheetQty = Defaults.sheetQty
+        // M-8 kullanıcı varsayılanları — yeni projelere uygulanır (docs/13 §M-8).
+        let ud = UserDefaults.standard
+        kerfMM = usesUserDefaults ? (ud.object(forKey: "defaultKerfMM") as? Int ?? Defaults.kerfMM)
+                                  : Defaults.kerfMM
+        trimMM = usesUserDefaults ? (ud.object(forKey: "defaultTrimMM") as? Int ?? Defaults.trimMM)
+                                  : Defaults.trimMM
+        objective = usesUserDefaults
+            ? (Objective(rawValue: ud.string(forKey: "defaultObjective") ?? "") ?? Defaults.objective)
+            : Defaults.objective
         if sample {
             projectName = "Mutfak Dolabı"
             parts = [

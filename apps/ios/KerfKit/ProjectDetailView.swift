@@ -241,6 +241,7 @@ struct StockTabView: View {
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 80)
+                .accessibilityIdentifier(label)
         }
         .listRowBackground(DesignTokens.colorTimber900)
     }
