@@ -69,8 +69,10 @@ OPTIMIZE(parts, stocks, config):
 
 - `vectors/NNN_isim.json`:
   `{unitMode, kerf, trim, objective, seed, stocks[], parts[], expected:{sheetCount, wasteBps, cutCount, placementsHash}}`
-- `placementsHash` = FNV-1a 64-bit; (partId, stokIndex, x, y, w, h, rotated) beşlilerinin
-  sıralı serileştirmesi üzerinden.
+- `placementsHash` = FNV-1a 64-bit; (partId, stokIndex, x, y, w, h, rotated) alanlarının
+  sıralı serileştirmesi üzerinden. Kanonik format (E1-S1b): her yerleşim, placements dizisinin
+  motor çıkış sırasıyla `partId|sheetIndex|x|y|w|h|r;` (r = 0/1, sayılar taban-10, UTF-8 bayt);
+  çıktı 16 haneli küçük-harf hex. FNV-1a sabitleri: offset 0xcbf29ce484222325, prime 0x100000001b3.
 - **Değişmez doğrulayıcı** her vektörde ayrıca koşar: (1) çakışma yok, (2) sınır içi,
   (3) guillotine-geçerli (yerleşimden kesim ağacı yeniden inşa edilebilir), (4) kerf mesafeleri doğru.
 - Minimum vektör seti (v1): 25 adet — basit(5), kerf uçları(4), grain(3), çoklu-levha/malzeme(4),
