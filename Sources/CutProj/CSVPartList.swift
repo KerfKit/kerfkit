@@ -1,4 +1,5 @@
 import Foundation
+import CutModels
 
 // K-12 (E3-S3) — parça listesi CSV/TSV alışverişi (docs/03 AC):
 //   · ayraç otomatik algılanır (virgül / noktalı virgül / tab)
@@ -11,15 +12,15 @@ public enum CSVPartList {
 
     public struct Row: Equatable, Sendable {
         public var name: String
-        public var widthMM: Int
-        public var heightMM: Int
+        public var width: Int
+        public var height: Int
         public var qty: Int
         public var rotationAllowed: Bool
         public var banding: BandingDoc
 
-        public init(name: String, widthMM: Int, heightMM: Int, qty: Int,
+        public init(name: String, width: Int, height: Int, qty: Int,
                     rotationAllowed: Bool = true, banding: BandingDoc = BandingDoc()) {
-            self.name = name; self.widthMM = widthMM; self.heightMM = heightMM
+            self.name = name; self.width = width; self.height = height
             self.qty = qty; self.rotationAllowed = rotationAllowed; self.banding = banding
         }
     }
@@ -91,7 +92,7 @@ public enum CSVPartList {
 
             let rotation = fields.count >= 5 ? fields[4].lowercased() : ""
             let bandingCode = fields.count >= 6 ? fields[5].uppercased() : ""
-            rows.append(Row(name: fields[0], widthMM: w, heightMM: h, qty: qty,
+            rows.append(Row(name: fields[0], width: w, height: h, qty: qty,
                             rotationAllowed: rotation != "fixed",
                             banding: BandingDoc(top: bandingCode.contains("T"),
                                                 bottom: bandingCode.contains("B"),
@@ -101,12 +102,15 @@ public enum CSVPartList {
         return (rows, issues)
     }
 
-    public static func export(_ rows: [Row]) -> String {
-        var out = "name,width_mm,height_mm,qty,rotation,banding\n"
+    // Başlık proje birimini söyler: metrik width_mm, imperial width_64th (sayı uzayı
+    // projeninkidir; import başlığı zaten toleransla atlar — dönüşüm yapılmaz).
+    public static func export(_ rows: [Row], unit: UnitMode = .metricMM) -> String {
+        let cols = unit == .metricMM ? "width_mm,height_mm" : "width_64th,height_64th"
+        var out = "name,\(cols),qty,rotation,banding\n"
         for r in rows {
             let banding = (r.banding.top ? "T" : "") + (r.banding.bottom ? "B" : "")
                 + (r.banding.left ? "L" : "") + (r.banding.right ? "R" : "")
-            out += [quote(r.name), String(r.widthMM), String(r.heightMM), String(r.qty),
+            out += [quote(r.name), String(r.width), String(r.height), String(r.qty),
                     r.rotationAllowed ? "allowed" : "fixed", banding].joined(separator: ",") + "\n"
         }
         return out

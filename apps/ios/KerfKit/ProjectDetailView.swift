@@ -46,6 +46,10 @@ struct PartsTabView: View {
     @State private var name = ""
     @State private var widthMM: Int?
     @State private var heightMM: Int?
+    @State private var w64 = 0 // imperial hızlı-giriş (1/64″)
+    @State private var h64 = 0
+    @State private var wPadOpen = false
+    @State private var hPadOpen = false
     @State private var qty: Int?
     @FocusState private var focus: Field?
 
@@ -103,14 +107,28 @@ struct PartsTabView: View {
                 .autocorrectionDisabled()
                 .focused($focus, equals: .name)
                 .onSubmit { focus = .width }
-            TextField(String(localized: "W"), value: $widthMM, format: .number)
-                .frame(width: 56)
-                .focused($focus, equals: .width)
-                .onSubmit { focus = .height }
-            TextField(String(localized: "H"), value: $heightMM, format: .number)
-                .frame(width: 56)
-                .focused($focus, equals: .height)
-                .onSubmit { focus = .qty }
+            if store.unitMode == .imperialFrac64 {
+                // Kesir pad'i (E4-S2b): 60pt tuşlu sayfa; klavye yerine dokunuşla.
+                padButton(value: w64, placeholder: String(localized: "W"), id: "parts.wpad") { wPadOpen = true }
+                    .sheet(isPresented: $wPadOpen) {
+                        FractionPad(title: String(localized: "W"), frac64: $w64)
+                            .presentationDetents([.medium]).preferredColorScheme(.dark)
+                    }
+                padButton(value: h64, placeholder: String(localized: "H"), id: "parts.hpad") { hPadOpen = true }
+                    .sheet(isPresented: $hPadOpen) {
+                        FractionPad(title: String(localized: "H"), frac64: $h64)
+                            .presentationDetents([.medium]).preferredColorScheme(.dark)
+                    }
+            } else {
+                TextField(String(localized: "W"), value: $widthMM, format: .number)
+                    .frame(width: 56)
+                    .focused($focus, equals: .width)
+                    .onSubmit { focus = .height }
+                TextField(String(localized: "H"), value: $heightMM, format: .number)
+                    .frame(width: 56)
+                    .focused($focus, equals: .height)
+                    .onSubmit { focus = .qty }
+            }
             TextField(String(localized: "Qty"), value: $qty, format: .number)
                 .frame(width: 44)
                 .focused($focus, equals: .qty)
@@ -136,16 +154,36 @@ struct PartsTabView: View {
     }
 
     private func addPart() {
-        guard let w = widthMM, let h = heightMM, w > 0, h > 0 else {
-            focus = widthMM == nil ? .width : .height
-            return
+        let w: Int, h: Int
+        if store.unitMode == .imperialFrac64 {
+            w = w64; h = h64
+            guard w > 0, h > 0 else { wPadOpen = w == 0; hPadOpen = w != 0 && h == 0; return }
+        } else {
+            guard let mw = widthMM, let mh = heightMM, mw > 0, mh > 0 else {
+                focus = widthMM == nil ? .width : .height
+                return
+            }
+            w = mw; h = mh
         }
         let partName = name.isEmpty ? String(localized: "Part \(store.parts.count + 1)") : name
-        store.parts.append(.init(name: partName, widthMM: w, heightMM: h,
+        store.parts.append(.init(name: partName, width: w, height: h,
                                  qty: max(qty ?? 1, 1), rotationAllowed: true))
         store.touch()
-        name = ""; widthMM = nil; heightMM = nil; qty = nil
+        name = ""; widthMM = nil; heightMM = nil; w64 = 0; h64 = 0; qty = nil
         focus = .name
+    }
+
+    private func padButton(value: Int, placeholder: String, id: String,
+                           action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(value == 0 ? placeholder : UnitFormat.fraction(frac64: value))
+                .font(.subheadline.monospacedDigit())
+                .lineLimit(1).minimumScaleFactor(0.6)
+                .frame(width: 64, height: 44)
+                .background(DesignTokens.colorTimber800, in: RoundedRectangle(cornerRadius: 8))
+                .foregroundStyle(value == 0 ? DesignTokens.colorTimber500 : DesignTokens.colorTimber50)
+        }
+        .accessibilityIdentifier(id)
     }
 }
 
@@ -160,7 +198,7 @@ private struct PartRow: View {
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(DesignTokens.colorTimber50)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("\(part.widthMM) × \(part.heightMM)")
+            Text(UnitFormat.size(part.width, part.height, unit: store.unitMode))
                 .font(.subheadline.monospacedDigit())
                 .foregroundStyle(DesignTokens.colorTimber200)
             Text("×\(part.qty)")
@@ -240,18 +278,44 @@ struct StockTabView: View {
         @Bindable var store = store
         Form {
             Section("Sheet") {
-                numberRow(String(localized: "Width (mm)"), id: "stock.width", value: $store.sheetWidthMM, floor: 1)
-                numberRow(String(localized: "Height (mm)"), id: "stock.height", value: $store.sheetHeightMM, floor: 1)
+                Picker("Unit", selection: Binding(get: { store.unitMode },
+                                                  set: { store.setUnitMode($0) })) {
+                    Text("mm").tag(UnitMode.metricMM)
+                    Text("inches").tag(UnitMode.imperialFrac64)
+                }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("stock.unit")
+                .listRowBackground(DesignTokens.colorTimber900)
+                if store.unitMode == .imperialFrac64 {
+                    FractionField(label: String(localized: "Width"), id: "stock.width",
+                                  frac64: $store.sheetWidth)
+                        .listRowBackground(DesignTokens.colorTimber900)
+                    FractionField(label: String(localized: "Height"), id: "stock.height",
+                                  frac64: $store.sheetHeight)
+                        .listRowBackground(DesignTokens.colorTimber900)
+                } else {
+                    numberRow(String(localized: "Width (mm)"), id: "stock.width", value: $store.sheetWidth, floor: 1)
+                    numberRow(String(localized: "Height (mm)"), id: "stock.height", value: $store.sheetHeight, floor: 1)
+                }
                 numberRow(String(localized: "Quantity"), id: "stock.qty", value: $store.sheetQty, floor: 1)
             }
             Section("Cutting defaults") {
-                numberRow(String(localized: "Blade kerf (mm)"), id: "stock.kerf", value: $store.kerfMM, floor: 0)
-                numberRow(String(localized: "Edge trim (mm)"), id: "stock.trim", value: $store.trimMM, floor: 0)
+                if store.unitMode == .imperialFrac64 {
+                    FractionField(label: String(localized: "Blade kerf"), id: "stock.kerf",
+                                  frac64: $store.kerf)
+                        .listRowBackground(DesignTokens.colorTimber900)
+                    FractionField(label: String(localized: "Edge trim"), id: "stock.trim",
+                                  frac64: $store.trim)
+                        .listRowBackground(DesignTokens.colorTimber900)
+                } else {
+                    numberRow(String(localized: "Blade kerf (mm)"), id: "stock.kerf", value: $store.kerf, floor: 0)
+                    numberRow(String(localized: "Edge trim (mm)"), id: "stock.trim", value: $store.trim, floor: 0)
+                }
             }
         }
         .scrollContentBackground(.hidden)
-        .onChange(of: [store.sheetWidthMM, store.sheetHeightMM, store.sheetQty,
-                       store.kerfMM, store.trimMM]) { store.touch() }
+        .onChange(of: [store.sheetWidth, store.sheetHeight, store.sheetQty,
+                       store.kerf, store.trim]) { store.touch() }
     }
 
     // floor: 0/eksi girilirse diyagramda sıfıra bölme ve motora geçersiz stok gitmesin.
@@ -347,6 +411,7 @@ struct PlanTabView: View {
             if let request = store.lastRequest {
                 ShareLink(item: PlanPDFExport(input: PlanPDF.Input(
                     projectName: store.projectName,
+                    unit: store.unitMode,
                     dateText: Date().formatted(date: .long, time: .omitted),
                     parts: store.parts, result: result, request: request,
                     names: store.partNames)),
@@ -354,7 +419,7 @@ struct PlanTabView: View {
                     shareTile("PDF", icon: "doc.richtext")
                 }
             }
-            ShareLink(item: CSVExport(name: store.projectName, rows: store.csvRows),
+            ShareLink(item: CSVExport(name: store.projectName, rows: store.csvRows, unit: store.unitMode),
                       preview: SharePreview("\(store.projectName).csv")) {
                 shareTile("CSV", icon: "tablecells")
             }

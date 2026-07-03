@@ -7,7 +7,7 @@ final class LocalizationTests: XCTestCase {
     @MainActor
     func testTurkishLocaleShowsTurkishUI() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-AppleLanguages", "(tr)",
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-AppleLanguages", "(tr)",
                                "-AppleLocale", "tr_TR"]
         app.launch()
 

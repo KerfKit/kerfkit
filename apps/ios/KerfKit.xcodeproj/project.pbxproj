@@ -11,11 +11,13 @@
 		1401DF423D8E49F68FA98BEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EA5D64444B73147FEECBF /* ContentView.swift */; };
 		15696A2538D33D6D735ED74B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7150D463BF0687CF7E0183 /* SettingsView.swift */; };
 		1C7FC8DB018C314A2E32712B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB5382DB13ECAADA9A08A6DD /* Assets.xcassets */; };
+		1E4CBACE49FE77003E92C293 /* ImperialFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D0C7EE9DDE476192AC7A82 /* ImperialFlowTests.swift */; };
 		22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA125A3ACD9B4C2EB1F591EB /* DesignTokens.swift */; };
 		35A1794D8F00D421864D703C /* CutCore in Frameworks */ = {isa = PBXBuildFile; productRef = F9CAA491C502F5086B9A7D28 /* CutCore */; };
 		3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF971337B8801EAD765A85 /* KerfApp.swift */; };
 		4A87903F903927DABBCDF234 /* PlanPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BCED2AED2B0CAD77C0DEA /* PlanPDF.swift */; };
 		4B530C9FA53B63953F718ADB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F7411E7B8EE374DE8AF2F9 /* OnboardingView.swift */; };
+		4D3873FFE6C73D0E348917B1 /* FractionPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D516A972487F03930C64651 /* FractionPad.swift */; };
 		50B0B8A2554E27661FE050B2 /* ShareExports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47ED80955683CCE24FF266 /* ShareExports.swift */; };
 		6A7F52DE163FD0F28B15F835 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */; };
 		6BD00DF77B2271FDC1F76011 /* CSVImportUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A5BBA57433B3C2A79B890B /* CSVImportUITests.swift */; };
@@ -23,10 +25,12 @@
 		79D5E2CEF61270BDCCD55B3E /* PlanComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */; };
 		7EAA1D7472D02168309B4AB9 /* PlanPDFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D84F49D149208ADDDFDF04 /* PlanPDFTests.swift */; };
 		7F00E1FE372F23BCC804F381 /* QuickAddFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */; };
+		855157E3F1EA528FFEF384A7 /* UnitFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84BE0318A84A841719DDFC3 /* UnitFormat.swift */; };
 		A39CBA086FBE5C848599B0A9 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */; };
 		A4BE5DDE6822AAC61F9C1A55 /* SettingsFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26893ED8ABFF9E6A7E4CBA8B /* SettingsFlowTests.swift */; };
 		A705EFE66CECE57A7D6FFE91 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF468CC0D56AE47AA07FD7 /* SnapshotTests.swift */; };
 		BC3F8209F20310CC0F53A62E /* CutModels in Frameworks */ = {isa = PBXBuildFile; productRef = BD4A2986EE6DF8CB09EEA377 /* CutModels */; };
+		CB935EA486BB944E0C163245 /* UnitFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EC41AD339341DA855FAD0B /* UnitFormatTests.swift */; };
 		CEEF5CAA0BBCB667756F1A6C /* WorkshopFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED938EB0165D60600CBDF9CC /* WorkshopFlowTests.swift */; };
 		D2F0D3517C295424CD94D65B /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6D415217AC54834D17646E /* SnapshotTesting */; };
 		DF5610C93DD15D31A7A4CBEA /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */; };
@@ -56,6 +60,7 @@
 		0542E974336B5C254ED63F9D /* KerfKitTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KerfKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F47ED80955683CCE24FF266 /* ShareExports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareExports.swift; sourceTree = "<group>"; };
 		18ADEB6938947B1BC5AC96DC /* WorkshopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkshopView.swift; sourceTree = "<group>"; };
+		25EC41AD339341DA855FAD0B /* UnitFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitFormatTests.swift; sourceTree = "<group>"; };
 		26893ED8ABFF9E6A7E4CBA8B /* SettingsFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFlowTests.swift; sourceTree = "<group>"; };
 		33840CB323684E85D6D4AACA /* KerfKitUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KerfKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3947A1970267BE3B58930826 /* kerfkit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerfkit; path = ../..; sourceTree = SOURCE_ROOT; };
@@ -66,7 +71,9 @@
 		5B7BCED2AED2B0CAD77C0DEA /* PlanPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPDF.swift; sourceTree = "<group>"; };
 		5CEF468CC0D56AE47AA07FD7 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
 		6C7150D463BF0687CF7E0183 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		6D516A972487F03930C64651 /* FractionPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FractionPad.swift; sourceTree = "<group>"; };
 		6E4EC8307545892285B9608E /* OnboardingFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowTests.swift; sourceTree = "<group>"; };
+		71D0C7EE9DDE476192AC7A82 /* ImperialFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImperialFlowTests.swift; sourceTree = "<group>"; };
 		9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddFlowTests.swift; sourceTree = "<group>"; };
 		ADD3D46FC9C1AAB9D2219A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +81,7 @@
 		C3D84F49D149208ADDDFDF04 /* PlanPDFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPDFTests.swift; sourceTree = "<group>"; };
 		C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStore.swift; sourceTree = "<group>"; };
 		C8EB0AF15F7926D1C3280C63 /* KerfKit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = KerfKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D84BE0318A84A841719DDFC3 /* UnitFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitFormat.swift; sourceTree = "<group>"; };
 		ED938EB0165D60600CBDF9CC /* WorkshopFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkshopFlowTests.swift; sourceTree = "<group>"; };
 		F09EA5D64444B73147FEECBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F5AF971337B8801EAD765A85 /* KerfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KerfApp.swift; sourceTree = "<group>"; };
@@ -117,6 +125,7 @@
 			children = (
 				FB5382DB13ECAADA9A08A6DD /* Assets.xcassets */,
 				F09EA5D64444B73147FEECBF /* ContentView.swift */,
+				6D516A972487F03930C64651 /* FractionPad.swift */,
 				ADD3D46FC9C1AAB9D2219A95 /* Info.plist */,
 				F5AF971337B8801EAD765A85 /* KerfApp.swift */,
 				4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */,
@@ -127,6 +136,7 @@
 				C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */,
 				6C7150D463BF0687CF7E0183 /* SettingsView.swift */,
 				0F47ED80955683CCE24FF266 /* ShareExports.swift */,
+				D84BE0318A84A841719DDFC3 /* UnitFormat.swift */,
 				18ADEB6938947B1BC5AC96DC /* WorkshopView.swift */,
 				7DBD3D9EC5895C1F14EE0113 /* Generated */,
 			);
@@ -167,6 +177,7 @@
 			children = (
 				C3D84F49D149208ADDDFDF04 /* PlanPDFTests.swift */,
 				5CEF468CC0D56AE47AA07FD7 /* SnapshotTests.swift */,
+				25EC41AD339341DA855FAD0B /* UnitFormatTests.swift */,
 			);
 			path = KerfKitTests;
 			sourceTree = "<group>";
@@ -175,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				55A5BBA57433B3C2A79B890B /* CSVImportUITests.swift */,
+				71D0C7EE9DDE476192AC7A82 /* ImperialFlowTests.swift */,
 				417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */,
 				6E4EC8307545892285B9608E /* OnboardingFlowTests.swift */,
 				9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */,
@@ -307,6 +319,7 @@
 			files = (
 				7EAA1D7472D02168309B4AB9 /* PlanPDFTests.swift in Sources */,
 				A705EFE66CECE57A7D6FFE91 /* SnapshotTests.swift in Sources */,
+				CB935EA486BB944E0C163245 /* UnitFormatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BD00DF77B2271FDC1F76011 /* CSVImportUITests.swift in Sources */,
+				1E4CBACE49FE77003E92C293 /* ImperialFlowTests.swift in Sources */,
 				DF5610C93DD15D31A7A4CBEA /* LocalizationTests.swift in Sources */,
 				FA92B1FDD39181146202A637 /* OnboardingFlowTests.swift in Sources */,
 				7F00E1FE372F23BCC804F381 /* QuickAddFlowTests.swift in Sources */,
@@ -329,6 +343,7 @@
 			files = (
 				1401DF423D8E49F68FA98BEA /* ContentView.swift in Sources */,
 				22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */,
+				4D3873FFE6C73D0E348917B1 /* FractionPad.swift in Sources */,
 				3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */,
 				4B530C9FA53B63953F718ADB /* OnboardingView.swift in Sources */,
 				79D5E2CEF61270BDCCD55B3E /* PlanComponents.swift in Sources */,
@@ -337,6 +352,7 @@
 				E9AB3D0715EC467D01D15088 /* ProjectStore.swift in Sources */,
 				15696A2538D33D6D735ED74B /* SettingsView.swift in Sources */,
 				50B0B8A2554E27661FE050B2 /* ShareExports.swift in Sources */,
+				855157E3F1EA528FFEF384A7 /* UnitFormat.swift in Sources */,
 				0437CAABA9B9AF0F5A03D5F7 /* WorkshopView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

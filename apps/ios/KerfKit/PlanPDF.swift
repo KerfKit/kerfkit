@@ -23,6 +23,7 @@ enum PlanPDF {
 
     struct Input {
         var projectName: String
+        var unit: UnitMode = .metricMM
         var dateText: String
         var parts: [PartInput]
         var result: OptimizeResult
@@ -47,21 +48,24 @@ enum PlanPDF {
 
             // Özet satırı
             let s = input.result.stats
-            let bandMM = input.parts.reduce(0) { $0 + $1.bandLengthMM }
+            let band = Double(input.parts.reduce(0) { $0 + $1.bandLength })
+            let bandText = input.unit == .metricMM
+                ? String(format: "%.1f m", band / 1000)
+                : String(format: "%.1f ft", band / 64 / 12)
             let summary = "\(s.sheetCount) \(String(localized: "sheets"))  ·  \(s.wastePercentText) \(String(localized: "waste"))  ·  " +
-                "\(s.cutCount) \(String(localized: "cuts"))  ·  \(String(localized: "banding")) \(String(format: "%.1f", Double(bandMM) / 1000)) m"
+                "\(s.cutCount) \(String(localized: "cuts"))  ·  \(String(localized: "banding")) \(bandText)"
             y = draw(summary, at: y, x: margin, font: .systemFont(ofSize: 12, weight: .semibold),
                      color: ink) + 14
 
             // Parça tablosu
-            y = drawTableHeader(at: y, x: margin, width: contentWidth)
+            y = drawTableHeader(at: y, x: margin, width: contentWidth, unit: input.unit)
             for part in input.parts {
                 if y > pageSize.height - margin - 24 { // sayfa doldu — devam sayfası
                     ctx.beginPage()
                     y = margin
-                    y = drawTableHeader(at: y, x: margin, width: contentWidth)
+                    y = drawTableHeader(at: y, x: margin, width: contentWidth, unit: input.unit)
                 }
-                y = drawRow(part, at: y, x: margin, width: contentWidth)
+                y = drawRow(part, at: y, x: margin, width: contentWidth, unit: input.unit)
             }
 
             // Levha diyagramları — her levha kendi sayfasında, açık temada.
@@ -92,10 +96,12 @@ enum PlanPDF {
         return y + size.height
     }
 
-    private static func drawTableHeader(at y: CGFloat, x: CGFloat, width: CGFloat) -> CGFloat {
+    private static func drawTableHeader(at y: CGFloat, x: CGFloat, width: CGFloat,
+                                        unit: UnitMode) -> CGFloat {
         let font = UIFont.systemFont(ofSize: 9, weight: .bold)
         let cols = columns(x: x, width: width)
-        let headers = [(String(localized: "PART"), cols.name), (String(localized: "W × H (mm)"), cols.size),
+        let sizeHeader = unit == .metricMM ? String(localized: "W × H (mm)") : String(localized: "W × H (in)")
+        let headers = [(String(localized: "PART"), cols.name), (sizeHeader, cols.size),
                        (String(localized: "QTY"), cols.qty), (String(localized: "BANDING"), cols.band)]
         for (title, colX) in headers {
             (title as NSString).draw(at: CGPoint(x: colX, y: y),
@@ -107,13 +113,13 @@ enum PlanPDF {
     }
 
     private static func drawRow(_ part: PartInput, at y: CGFloat, x: CGFloat,
-                                width: CGFloat) -> CGFloat {
+                                width: CGFloat, unit: UnitMode) -> CGFloat {
         let font = UIFont.systemFont(ofSize: 11)
         let cols = columns(x: x, width: width)
         let edges = [part.banding.top, part.banding.bottom, part.banding.left, part.banding.right]
             .filter { $0 }.count
         let cells = [(part.name, cols.name),
-                     ("\(part.widthMM) × \(part.heightMM)", cols.size),
+                     (UnitFormat.size(part.width, part.height, unit: unit), cols.size),
                      ("×\(part.qty)", cols.qty),
                      (edges == 0 ? "—" : String(localized: "\(edges) edges"), cols.band)]
         for (text, colX) in cells {

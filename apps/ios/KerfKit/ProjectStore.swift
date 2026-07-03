@@ -7,16 +7,16 @@ import CutCore
 struct PartInput: Identifiable, Hashable {
     var id = UUID()
     var name: String
-    var widthMM: Int
-    var heightMM: Int
+    var width: Int
+    var height: Int
     var qty: Int
     var rotationAllowed: Bool
     var banding = BandingDoc()
 
     // Bant uzunluğu: en kenarları (üst/alt) genişlik, boy kenarları (sol/sağ) yükseklik.
-    var bandLengthMM: Int {
-        let single = (banding.top ? widthMM : 0) + (banding.bottom ? widthMM : 0)
-            + (banding.left ? heightMM : 0) + (banding.right ? heightMM : 0)
+    var bandLength: Int {
+        let single = (banding.top ? width : 0) + (banding.bottom ? width : 0)
+            + (banding.left ? height : 0) + (banding.right ? height : 0)
         return single * qty
     }
 }
@@ -45,9 +45,13 @@ extension PlanStats {
 @Observable
 final class ProjectStore {
     private enum Defaults {
-        static let sheetWidthMM = 2440, sheetHeightMM = 1220, sheetQty = 5
-        static let kerfMM = 3, trimMM = 0
+        // Metrik: mm · Imperial: 1/64″ adedi (docs/04 §2). 4×8ft = 96″×48″; kerf 1/8″.
+        static let sheetQty = 5
         static let objective: Objective = .sheets
+        static func sheetWidth(_ u: UnitMode) -> Int { u == .metricMM ? 2440 : 96 * 64 }
+        static func sheetHeight(_ u: UnitMode) -> Int { u == .metricMM ? 1220 : 48 * 64 }
+        static func kerf(_ u: UnitMode) -> Int { u == .metricMM ? 3 : 8 }
+        static func trim(_ u: UnitMode) -> Int { 0 }
     }
 
     // M-1 liste
@@ -57,13 +61,14 @@ final class ProjectStore {
     var selectedTab: DetailTab = .parts
 
     // aktif proje
+    var unitMode: UnitMode = .metricMM // proje birimi — karışık birim yasak (docs/04 §2)
     var projectName = String(localized: "New Project")
     var parts: [PartInput] = []
-    var sheetWidthMM = Defaults.sheetWidthMM
-    var sheetHeightMM = Defaults.sheetHeightMM
+    var sheetWidth = 2440
+    var sheetHeight = 1220
     var sheetQty = Defaults.sheetQty
-    var kerfMM = Defaults.kerfMM
-    var trimMM = Defaults.trimMM
+    var kerf = 3
+    var trim = 0
     var objective: Objective = Defaults.objective
 
     var result: OptimizeResult?
@@ -87,12 +92,15 @@ final class ProjectStore {
     private let repository: ProjectRepository?
     private let autosaver: Autosaver?
 
-    var sheetW: Units { Units(sheetWidthMM) * 100 }
-    var sheetH: Units { Units(sheetHeightMM) * 100 }
+    var sheetW: Units { Units(sheetWidth) * 100 }
+    var sheetH: Units { Units(sheetHeight) * 100 }
 
-    // M-4 bant stat kartı: projedeki toplam bant kenarı uzunluğu (yerleşimden bağımsız).
+    // M-4 bant stat kartı: metrikte metre, imperial'da feet (yerleşimden bağımsız).
     var bandLengthText: String {
-        String(format: "%.1fm", Double(parts.reduce(0) { $0 + $1.bandLengthMM }) / 1000)
+        let total = Double(parts.reduce(0) { $0 + $1.bandLength })
+        return unitMode == .metricMM
+            ? String(format: "%.1fm", total / 1000)
+            : String(format: "%.1fft", total / 64 / 12)
     }
 
     // — M-5 atölye adımları —
@@ -176,7 +184,7 @@ final class ProjectStore {
     // — K-12 CSV köprüsü —
 
     var csvRows: [CSVPartList.Row] {
-        parts.map { .init(name: $0.name, widthMM: $0.widthMM, heightMM: $0.heightMM,
+        parts.map { .init(name: $0.name, width: $0.width, height: $0.height,
                           qty: $0.qty, rotationAllowed: $0.rotationAllowed, banding: $0.banding) }
     }
 
@@ -184,7 +192,7 @@ final class ProjectStore {
     func importParts(fromCSV text: String) {
         let (rows, issues) = CSVPartList.parse(text)
         parts.append(contentsOf: rows.map {
-            PartInput(name: $0.name, widthMM: $0.widthMM, heightMM: $0.heightMM,
+            PartInput(name: $0.name, width: $0.width, height: $0.height,
                       qty: $0.qty, rotationAllowed: $0.rotationAllowed, banding: $0.banding)
         })
         let imported = String(localized: "\(rows.count) parts imported")
@@ -227,27 +235,42 @@ final class ProjectStore {
         activeDeleted = false
         result = nil; lastRequest = nil; errorMessage = nil; stale = false
         completedCutIds = []; workshopOpen = false
-        sheetWidthMM = Defaults.sheetWidthMM; sheetHeightMM = Defaults.sheetHeightMM
-        sheetQty = Defaults.sheetQty
-        // M-8 kullanıcı varsayılanları — yeni projelere uygulanır (docs/13 §M-8).
+        // Birim: kullanıcı seçimi > bölge otomatiği (ABD → inç; docs/18 §2). Test store metrik.
         let ud = UserDefaults.standard
-        kerfMM = usesUserDefaults ? (ud.object(forKey: "defaultKerfMM") as? Int ?? Defaults.kerfMM)
-                                  : Defaults.kerfMM
-        trimMM = usesUserDefaults ? (ud.object(forKey: "defaultTrimMM") as? Int ?? Defaults.trimMM)
-                                  : Defaults.trimMM
+        if usesUserDefaults {
+            let pref = ud.string(forKey: "defaultUnitMode") ?? "auto"
+            unitMode = pref == UnitMode.imperialFrac64.rawValue ? .imperialFrac64
+                : pref == UnitMode.metricMM.rawValue ? .metricMM
+                : (Locale.current.measurementSystem == .us ? .imperialFrac64 : .metricMM)
+        } else {
+            unitMode = .metricMM
+        }
+        sheetWidth = Defaults.sheetWidth(unitMode); sheetHeight = Defaults.sheetHeight(unitMode)
+        sheetQty = Defaults.sheetQty
+        // M-8 kullanıcı varsayılanları (mm-tabanlı) yalnız metrik projelere uygulanır;
+        // imperial varsayılanları sabit (1/8″ kerf) — Ayarlar dipnotunda söylenir.
+        if usesUserDefaults, unitMode == .metricMM {
+            kerf = ud.object(forKey: "defaultKerfMM") as? Int ?? Defaults.kerf(.metricMM)
+            trim = ud.object(forKey: "defaultTrimMM") as? Int ?? Defaults.trim(.metricMM)
+        } else {
+            kerf = Defaults.kerf(unitMode); trim = Defaults.trim(unitMode)
+        }
         objective = usesUserDefaults
             ? (Objective(rawValue: ud.string(forKey: "defaultObjective") ?? "") ?? Defaults.objective)
             : Defaults.objective
         if sample {
+            unitMode = .metricMM // örnek veri mm ile tanımlı
+            sheetWidth = Defaults.sheetWidth(.metricMM); sheetHeight = Defaults.sheetHeight(.metricMM)
+            kerf = Defaults.kerf(.metricMM); trim = Defaults.trim(.metricMM)
             projectName = String(localized: "Kitchen Cabinet")
             parts = [
-                .init(name: String(localized: "Side"), widthMM: 720, heightMM: 580, qty: 2, rotationAllowed: false,
+                .init(name: String(localized: "Side"), width: 720, height: 580, qty: 2, rotationAllowed: false,
                       banding: BandingDoc(top: true, left: true, right: true)),
-                .init(name: String(localized: "Shelf"), widthMM: 764, heightMM: 560, qty: 2, rotationAllowed: true,
+                .init(name: String(localized: "Shelf"), width: 764, height: 560, qty: 2, rotationAllowed: true,
                       banding: BandingDoc(top: true)),
-                .init(name: String(localized: "Door"), widthMM: 396, heightMM: 716, qty: 1, rotationAllowed: false,
+                .init(name: String(localized: "Door"), width: 396, height: 716, qty: 1, rotationAllowed: false,
                       banding: BandingDoc(top: true, bottom: true, left: true, right: true)),
-                .init(name: String(localized: "Drawer"), widthMM: 396, heightMM: 180, qty: 6, rotationAllowed: true),
+                .init(name: String(localized: "Drawer"), width: 396, height: 180, qty: 6, rotationAllowed: true),
             ]
         } else {
             projectName = String(localized: "New Project")
@@ -275,13 +298,30 @@ final class ProjectStore {
         loadSummaries()
     }
 
+    // Stok'taki birim değişimi: tüm alanlar en yakın hedef birime çevrilir (deterministik).
+    func setUnitMode(_ new: UnitMode) {
+        guard new != unitMode else { return }
+        let old = unitMode
+        unitMode = new
+        sheetWidth = UnitFormat.convert(sheetWidth, from: old, to: new)
+        sheetHeight = UnitFormat.convert(sheetHeight, from: old, to: new)
+        kerf = UnitFormat.convert(kerf, from: old, to: new)
+        trim = UnitFormat.convert(trim, from: old, to: new)
+        for i in parts.indices {
+            parts[i].width = UnitFormat.convert(parts[i].width, from: old, to: new)
+            parts[i].height = UnitFormat.convert(parts[i].height, from: old, to: new)
+        }
+        touch()
+    }
+
     // — kalıcılık köprüsü —
 
     private func currentDoc() -> ProjectDoc {
         var doc = ProjectDoc(id: projectId, name: projectName,
                              createdAt: createdAt, modifiedAt: ProjectStore.nowISO(),
-                             defaults: DefaultsDoc(kerf: Units(kerfMM) * 100,
-                                                   trim: Units(trimMM) * 100,
+                             unitMode: unitMode,
+                             defaults: DefaultsDoc(kerf: Units(kerf) * 100,
+                                                   trim: Units(trim) * 100,
                                                    objective: objective))
         doc.materials = [MaterialDoc(id: "panel", name: "Panel", kind: "sheet")]
         doc.stocks = [StockDoc(id: "levha", materialId: "panel",
@@ -289,7 +329,7 @@ final class ProjectStore {
         // Parça id'si UUID — dizin-tabanlı id silmede kayar, gömülü plan referansları kırılırdı.
         doc.parts = parts.enumerated().map { i, p in
             PartDoc(id: p.id.uuidString, name: p.name.isEmpty ? String(localized: "Part \(i + 1)") : p.name,
-                    materialId: "panel", w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
+                    materialId: "panel", w: Units(p.width) * 100, h: Units(p.height) * 100,
                     qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed,
                     banding: p.banding == BandingDoc() ? nil : p.banding)
         }
@@ -306,18 +346,19 @@ final class ProjectStore {
     private func apply(_ doc: ProjectDoc) {
         projectId = doc.id
         createdAt = doc.createdAt
+        unitMode = doc.unitMode
         projectName = doc.name
-        kerfMM = Int(doc.defaults.kerf / 100)
-        trimMM = Int(doc.defaults.trim / 100)
+        kerf = Int(doc.defaults.kerf / 100)
+        trim = Int(doc.defaults.trim / 100)
         objective = doc.defaults.objective
         if let stock = doc.stocks.first {
-            sheetWidthMM = Int(stock.w / 100)
-            sheetHeightMM = Int(stock.h / 100)
+            sheetWidth = Int(stock.w / 100)
+            sheetHeight = Int(stock.h / 100)
             sheetQty = stock.qty
         }
         parts = doc.parts.map {
             PartInput(id: UUID(uuidString: $0.id) ?? UUID(),
-                      name: $0.name, widthMM: Int($0.w / 100), heightMM: Int($0.h / 100),
+                      name: $0.name, width: Int($0.w / 100), height: Int($0.h / 100),
                       qty: $0.qty, rotationAllowed: $0.rotation == .allowed,
                       banding: $0.banding ?? BandingDoc())
         }
@@ -354,17 +395,17 @@ final class ProjectStore {
     func optimizePlan() {
         var names: [String: String] = [:]
         let specs = parts.compactMap { p -> PartSpec? in
-            guard p.widthMM > 0, p.heightMM > 0, p.qty > 0 else { return nil }
+            guard p.width > 0, p.height > 0, p.qty > 0 else { return nil }
             let pid = p.id.uuidString
             names[pid] = p.name.isEmpty ? String(localized: "Part") : p.name
             return PartSpec(id: pid, name: names[pid] ?? "", materialId: "panel",
-                            w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
+                            w: Units(p.width) * 100, h: Units(p.height) * 100,
                             qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed)
         }
         let req = OptimizeRequest(
-            unitMode: .metricMM,
-            kerf: Units(kerfMM) * 100,
-            trim: Units(trimMM) * 100,
+            unitMode: unitMode,
+            kerf: Units(kerf) * 100,
+            trim: Units(trim) * 100,
             objective: objective,
             seed: 1,
             stocks: [StockSpec(id: "levha", materialId: "panel", w: sheetW, h: sheetH, qty: sheetQty)],

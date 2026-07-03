@@ -8,7 +8,7 @@ final class CSVImportUITests: XCTestCase {
         UIPasteboard.general.string = "Side\t720\t580\t2\nShelf\t764\t560\t2\nBadRow\t\nDoor\t396\t716\t1\n"
 
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding"]
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults"]
         app.launch()
         app.buttons["nav.newProject"].tap()
 
