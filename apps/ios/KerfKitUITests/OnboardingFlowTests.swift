@@ -10,21 +10,21 @@ final class OnboardingFlowTests: XCTestCase {
         app.launchArguments = ["-resetOnboarding"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Levhayı gir, parçaları yaz, planı al."]
+        XCTAssertTrue(app.staticTexts["Enter the sheet, type your parts, get the plan."]
             .waitForExistence(timeout: 5), "Onboarding 1. ekran gelmedi")
 
         app.swipeLeft()
-        XCTAssertTrue(app.staticTexts["Kerf, damar, kenar bandı — pro detaylar hazır."]
+        XCTAssertTrue(app.staticTexts["Kerf, grain, edge banding — the pro details are covered."]
             .waitForExistence(timeout: 3))
 
         app.swipeLeft()
-        let cta = app.buttons["Örnek projeyle dene"]
+        let cta = app.buttons["Try the sample project"]
         XCTAssertTrue(cta.waitForExistence(timeout: 3))
-        XCTAssertTrue(app.staticTexts["Tek seferlik satın al. Abonelik yok."].exists)
+        XCTAssertTrue(app.staticTexts["Buy once. No subscription."].exists)
         cta.tap()
 
         // Aha-anı: Plan sekmesinde gerçek plan (Atölye Modu butonu yalnız planla görünür).
-        XCTAssertTrue(app.buttons["Atölye Modu"].waitForExistence(timeout: 8),
+        XCTAssertTrue(app.buttons["Workshop Mode"].waitForExistence(timeout: 8),
                       "CTA sonrası Plan sekmesine plan ile inilmedi")
     }
 
@@ -33,16 +33,16 @@ final class OnboardingFlowTests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments = ["-resetOnboarding"]
         app.launch()
-        XCTAssertTrue(app.staticTexts["Levhayı gir, parçaları yaz, planı al."]
+        XCTAssertTrue(app.staticTexts["Enter the sheet, type your parts, get the plan."]
             .waitForExistence(timeout: 5))
-        app.buttons["Onboarding'i atla"].tap()
+        app.buttons["Skip intro"].tap()
         XCTAssertTrue(app.staticTexts["kerfkit"].waitForExistence(timeout: 3), "Atla listeye dönmeli")
 
         // İkinci açılış (arg'sız): onboarding bir daha gelmemeli.
         app.terminate()
         app.launchArguments = []
         app.launch()
-        XCTAssertFalse(app.staticTexts["Levhayı gir, parçaları yaz, planı al."]
+        XCTAssertFalse(app.staticTexts["Enter the sheet, type your parts, get the plan."]
             .waitForExistence(timeout: 3), "Onboarding ikinci açılışta tekrarlanmamalı")
     }
 }

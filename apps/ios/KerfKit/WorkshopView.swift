@@ -37,7 +37,7 @@ struct WorkshopView: View {
             Button {
                 dismiss()
             } label: {
-                Label("Plan", systemImage: "chevron.left")
+                Label(String(localized: "Plan"), systemImage: "chevron.left")
                     .font(.body.weight(.bold))
                     .frame(minWidth: 56, minHeight: 56, alignment: .leading)
             }
@@ -49,14 +49,14 @@ struct WorkshopView: View {
                 .lineLimit(1)
             Spacer()
             Toggle(isOn: Binding(get: { store.benchMode }, set: { store.benchMode = $0 })) {
-                Label("Tezgâh", systemImage: "sun.max.fill")
+                Label(String(localized: "Bench"), systemImage: "sun.max.fill")
                     .font(.footnote.weight(.bold))
             }
             .toggleStyle(.button)
             .buttonStyle(.bordered)
             .tint(bench ? DesignTokens.colorAmber600 : DesignTokens.colorTimber500)
             .frame(minHeight: 56)
-            .accessibilityLabel("Tezgâh Modu")
+            .accessibilityLabel(String(localized: "Bench Mode"))
         }
     }
 
@@ -66,11 +66,11 @@ struct WorkshopView: View {
         let total = store.workshopSteps.count
         return VStack(spacing: 0) {
             HStack {
-                Text("KESİM \(index + 1)/\(total)")
+                Text("CUT \(index + 1)/\(total)")
                     .font(.footnote.weight(.bold))
                     .kerning(2)
                     .foregroundStyle(fg2)
-                    .accessibilityLabel("Kesim \(index + 1), toplam \(total)")
+                    .accessibilityLabel(String(localized: "Cut \(index + 1) of \(total)"))
                 Spacer()
                 ProgressRing(progress: Double(index) / Double(total), bench: bench)
                     .frame(width: 44, height: 44)
@@ -86,7 +86,7 @@ struct WorkshopView: View {
                 Text("\(step.w / 100) × \(step.h / 100) mm\(step.rotated ? "  ⤾" : "")")
                     .font(.system(size: bench ? 34 : 28, weight: .bold).monospacedDigit())
                     .foregroundStyle(fg)
-                Text("Levha \(step.sheetIndex + 1)")
+                Text("Sheet \(step.sheetIndex + 1)")
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(fg2)
 
@@ -113,7 +113,7 @@ struct WorkshopView: View {
             Button {
                 store.markCut(index)
             } label: {
-                Text("✓ KESİLDİ")
+                Text(verbatim: "✓ " + String(localized: "DONE"))
                     .font(.system(size: bench ? 26 : 22, weight: .heavy))
                     .frame(maxWidth: .infinity, minHeight: bench ? 72 : 64)
             }
@@ -124,7 +124,7 @@ struct WorkshopView: View {
             Button {
                 store.undoLastCut()
             } label: {
-                Text("Geri al")
+                Text("Undo")
                     .font(.body.weight(bench ? .bold : .regular))
                     .frame(maxWidth: .infinity, minHeight: 56)
             }
@@ -142,17 +142,17 @@ struct WorkshopView: View {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 64))
                 .foregroundStyle(DesignTokens.colorGreen500)
-            Text("Tüm kesimler tamam")
+            Text("All cuts done")
                 .font(.system(size: 34, weight: .heavy))
                 .foregroundStyle(fg)
-            Text("\(store.workshopSteps.count) parça kesildi — iyi iş!")
+            Text("\(store.workshopSteps.count) parts cut — nice work!")
                 .font(.title3)
                 .foregroundStyle(fg2)
             Spacer()
             Button {
                 store.undoLastCut()
             } label: {
-                Text("Geri al")
+                Text("Undo")
                     .frame(maxWidth: .infinity, minHeight: 56)
             }
             .buttonStyle(.bordered)
@@ -160,7 +160,7 @@ struct WorkshopView: View {
             Button {
                 dismiss()
             } label: {
-                Text("Plana dön")
+                Text("Back to plan")
                     .font(.headline)
                     .frame(maxWidth: .infinity, minHeight: 56)
             }
@@ -187,6 +187,6 @@ struct ProgressRing: View {
                         style: StrokeStyle(lineWidth: 5, lineCap: .round))
                 .rotationEffect(.degrees(-90))
         }
-        .accessibilityLabel("İlerleme yüzde \(Int(progress * 100))")
+        .accessibilityLabel(String(localized: "\(Int(progress * 100)) percent done"))
     }
 }

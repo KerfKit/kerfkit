@@ -21,3 +21,6 @@ jobs:
         with: { node-version: "20" }
       - name: Wasm motor paritesi (Node)
         run: node --no-warnings tools/wasm-parite.mjs
+      # L-1: taban dil EN — uygulama kaynaklarında hardcoded Türkçe literal yasak.
+      - name: i18n bekcisi
+        run: python3 tools/i18n-bekci.py

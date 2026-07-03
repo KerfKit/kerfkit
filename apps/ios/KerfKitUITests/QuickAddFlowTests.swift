@@ -13,11 +13,11 @@ final class QuickAddFlowTests: XCTestCase {
         app.launch()
 
         // Yeni boş proje — detay Parçalar sekmesinde açılır.
-        app.buttons["Yeni proje"].tap()
-        let name = app.textFields["Parça adı"]
-        let width = app.textFields["En"]
-        let height = app.textFields["Boy"]
-        let qty = app.textFields["Adet"]
+        app.buttons["nav.newProject"].tap()
+        let name = app.textFields["Part name"]
+        let width = app.textFields["W"]
+        let height = app.textFields["H"]
+        let qty = app.textFields["Qty"]
         XCTAssertTrue(name.waitForExistence(timeout: 5), "Hızlı-ekleme satırı görünmedi")
 
         let start = Date()
@@ -45,16 +45,16 @@ final class QuickAddFlowTests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments = ["-skipOnboarding"]
         app.launch()
-        app.buttons["Yeni proje"].tap()
-        let name = app.textFields["Parça adı"]
+        app.buttons["nav.newProject"].tap()
+        let name = app.textFields["Part name"]
         XCTAssertTrue(name.waitForExistence(timeout: 5))
         name.tap()
-        app.typeText("Test\n"); waitFocus(app.textFields["En"])
-        app.typeText("300\n"); waitFocus(app.textFields["Boy"])
-        app.typeText("200\n"); waitFocus(app.textFields["Adet"])
+        app.typeText("Test\n"); waitFocus(app.textFields["W"])
+        app.typeText("300\n"); waitFocus(app.textFields["H"])
+        app.typeText("200\n"); waitFocus(app.textFields["Qty"])
         app.typeText("1\n")
 
-        for label in ["Parçayı ekle", "Döndürme serbest", "Bant kenarları"] {
+        for label in ["parts.add", "Rotation allowed", "Edge banding"] {
             let el = app.buttons[label].firstMatch
             XCTAssertTrue(el.waitForExistence(timeout: 3), "\(label) bulunamadı")
             XCTAssertGreaterThanOrEqual(el.frame.width, 44, "\(label) genişliği <44pt")

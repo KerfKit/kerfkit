@@ -75,6 +75,6 @@ struct SheetDiagram: View {
             }
         }
         .aspectRatio(CGFloat(sheetW) / CGFloat(sheetH), contentMode: .fit)
-        .accessibilityLabel("Kesim diyagramı: \(placements.count) parça yerleşimi")
+        .accessibilityLabel(String(localized: "Cut diagram: \(placements.count) parts placed"))
     }
 }

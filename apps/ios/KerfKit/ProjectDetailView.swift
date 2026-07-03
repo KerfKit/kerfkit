@@ -9,9 +9,9 @@ struct ProjectDetailView: View {
     var body: some View {
         @Bindable var store = store
         VStack(spacing: 0) {
-            Picker("Sekme", selection: $store.selectedTab) {
+            Picker("Tab", selection: $store.selectedTab) {
                 ForEach(DetailTab.allCases, id: \.self) { tab in
-                    Text(tab.rawValue).tag(tab)
+                    Text(tab.title).tag(tab)
                 }
             }
             .pickerStyle(.segmented)
@@ -28,7 +28,7 @@ struct ProjectDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                TextField("Proje adı", text: $store.projectName)
+                TextField(String(localized: "Project name"), text: $store.projectName)
                     .font(.headline)
                     .multilineTextAlignment(.center)
                     .onSubmit { store.touch(markStale: false) }
@@ -55,7 +55,7 @@ struct PartsTabView: View {
         @Bindable var store = store
         VStack(spacing: 0) {
             quickAddBar
-            Text("Return → satır eklenir, imleç yeni ada geçer")
+            Text("Return adds the part and jumps back to Name")
                 .font(.caption2)
                 .foregroundStyle(DesignTokens.colorTimber500)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -78,19 +78,19 @@ struct PartsTabView: View {
 
     private var quickAddBar: some View {
         HStack(spacing: 6) {
-            TextField("Parça adı", text: $name)
+            TextField(String(localized: "Part name"), text: $name)
                 .autocorrectionDisabled()
                 .focused($focus, equals: .name)
                 .onSubmit { focus = .width }
-            TextField("En", value: $widthMM, format: .number)
+            TextField(String(localized: "W"), value: $widthMM, format: .number)
                 .frame(width: 56)
                 .focused($focus, equals: .width)
                 .onSubmit { focus = .height }
-            TextField("Boy", value: $heightMM, format: .number)
+            TextField(String(localized: "H"), value: $heightMM, format: .number)
                 .frame(width: 56)
                 .focused($focus, equals: .height)
                 .onSubmit { focus = .qty }
-            TextField("Adet", value: $qty, format: .number)
+            TextField(String(localized: "Qty"), value: $qty, format: .number)
                 .frame(width: 44)
                 .focused($focus, equals: .qty)
                 .onSubmit(addPart)
@@ -101,7 +101,8 @@ struct PartsTabView: View {
                     .background(DesignTokens.colorAmber500, in: RoundedRectangle(cornerRadius: 8))
                     .foregroundStyle(DesignTokens.colorTimber950)
             }
-            .accessibilityLabel("Parçayı ekle")
+            .accessibilityLabel(String(localized: "Add part"))
+            .accessibilityIdentifier("parts.add")
         }
         .textFieldStyle(.roundedBorder)
         .controlSize(.large) // alan yüksekliği ≥44pt (HIG)
@@ -118,7 +119,7 @@ struct PartsTabView: View {
             focus = widthMM == nil ? .width : .height
             return
         }
-        let partName = name.isEmpty ? "Parça \(store.parts.count + 1)" : name
+        let partName = name.isEmpty ? String(localized: "Part \(store.parts.count + 1)") : name
         store.parts.append(.init(name: partName, widthMM: w, heightMM: h,
                                  qty: max(qty ?? 1, 1), rotationAllowed: true))
         store.touch()
@@ -156,7 +157,7 @@ private struct PartRow: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(part.rotationAllowed ? "Döndürme serbest" : "Damar kilitli")
+            .accessibilityLabel(part.rotationAllowed ? String(localized: "Rotation allowed") : String(localized: "Grain locked"))
 
             bandingMenu
         }
@@ -165,19 +166,19 @@ private struct PartRow: View {
     // Bant rozeti (docs/13 M-2: 4 nokta) — Menu ile kenar seçimi, sistem bileşeni.
     private var bandingMenu: some View {
         Menu {
-            Toggle("Üst kenar", isOn: bandBinding(\.top))
-            Toggle("Alt kenar", isOn: bandBinding(\.bottom))
-            Toggle("Sol kenar", isOn: bandBinding(\.left))
-            Toggle("Sağ kenar", isOn: bandBinding(\.right))
+            Toggle("Top edge", isOn: bandBinding(\.top))
+            Toggle("Bottom edge", isOn: bandBinding(\.bottom))
+            Toggle("Left edge", isOn: bandBinding(\.left))
+            Toggle("Right edge", isOn: bandBinding(\.right))
             Divider()
-            Button("Dört kenar") { setBanding(BandingDoc(top: true, bottom: true, left: true, right: true)) }
-            Button("Bant yok") { setBanding(BandingDoc()) }
+            Button("All four edges") { setBanding(BandingDoc(top: true, bottom: true, left: true, right: true)) }
+            Button("No banding") { setBanding(BandingDoc()) }
         } label: {
             BandingDots(banding: part.banding)
                 .frame(width: 44, height: 44)
                 .contentShape(Rectangle())
         }
-        .accessibilityLabel("Bant kenarları")
+        .accessibilityLabel(String(localized: "Edge banding"))
     }
 
     private func bandBinding(_ path: WritableKeyPath<BandingDoc, Bool>) -> Binding<Bool> {
@@ -217,14 +218,14 @@ struct StockTabView: View {
     var body: some View {
         @Bindable var store = store
         Form {
-            Section("Levha") {
-                numberRow("En (mm)", value: $store.sheetWidthMM, floor: 1)
-                numberRow("Boy (mm)", value: $store.sheetHeightMM, floor: 1)
-                numberRow("Adet", value: $store.sheetQty, floor: 1)
+            Section("Sheet") {
+                numberRow(String(localized: "Width (mm)"), id: "stock.width", value: $store.sheetWidthMM, floor: 1)
+                numberRow(String(localized: "Height (mm)"), id: "stock.height", value: $store.sheetHeightMM, floor: 1)
+                numberRow(String(localized: "Quantity"), id: "stock.qty", value: $store.sheetQty, floor: 1)
             }
-            Section("Kesim varsayılanları") {
-                numberRow("Testere payı — kerf (mm)", value: $store.kerfMM, floor: 0)
-                numberRow("Kenar tıraşı — trim (mm)", value: $store.trimMM, floor: 0)
+            Section("Cutting defaults") {
+                numberRow(String(localized: "Blade kerf (mm)"), id: "stock.kerf", value: $store.kerfMM, floor: 0)
+                numberRow(String(localized: "Edge trim (mm)"), id: "stock.trim", value: $store.trimMM, floor: 0)
             }
         }
         .scrollContentBackground(.hidden)
@@ -233,7 +234,7 @@ struct StockTabView: View {
     }
 
     // floor: 0/eksi girilirse diyagramda sıfıra bölme ve motora geçersiz stok gitmesin.
-    private func numberRow(_ label: String, value: Binding<Int>, floor: Int) -> some View {
+    private func numberRow(_ label: String, id: String, value: Binding<Int>, floor: Int) -> some View {
         let clamped = Binding(get: { value.wrappedValue },
                               set: { value.wrappedValue = max(floor, $0) })
         return LabeledContent(label) {
@@ -241,7 +242,7 @@ struct StockTabView: View {
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 80)
-                .accessibilityIdentifier(label)
+                .accessibilityIdentifier(id)
         }
         .listRowBackground(DesignTokens.colorTimber900)
     }
@@ -257,10 +258,10 @@ struct PlanTabView: View {
             VStack(spacing: 12) {
                 if let result = store.result {
                     HStack(spacing: 8) {
-                        StatCard(title: "levha", value: "\(result.stats.sheetCount)")
-                        StatCard(title: "fire", value: result.stats.wastePercentText)
-                        StatCard(title: "kesim", value: "\(result.stats.cutCount)")
-                        StatCard(title: "bant", value: store.bandLengthText)
+                        StatCard(title: String(localized: "sheets"), value: "\(result.stats.sheetCount)")
+                        StatCard(title: String(localized: "waste"), value: result.stats.wastePercentText)
+                        StatCard(title: String(localized: "cuts"), value: "\(result.stats.cutCount)")
+                        StatCard(title: String(localized: "banding"), value: store.bandLengthText)
                     }
 
                     objectivePicker
@@ -270,8 +271,8 @@ struct PlanTabView: View {
                     }
 
                     if !result.unplaced.isEmpty {
-                        warningCard("\(result.unplaced.count) parça yerleşmedi",
-                                    detail: "Stok adedini artır ya da parça ölçülerini kontrol et.")
+                        warningCard(String(localized: "\(result.unplaced.count) parts didn\u{2019}t fit"),
+                                    detail: String(localized: "Add more stock or check the part sizes."))
                     }
 
                     diagramPager(result)
@@ -280,7 +281,7 @@ struct PlanTabView: View {
                     Button {
                         store.workshopOpen = true
                     } label: {
-                        Label("Atölye Modu", systemImage: "hammer.fill")
+                        Label(String(localized: "Workshop Mode"), systemImage: "hammer.fill")
                             .font(.headline)
                             .frame(maxWidth: .infinity, minHeight: 56)
                     }
@@ -294,7 +295,7 @@ struct PlanTabView: View {
                 }
 
                 if let message = store.errorMessage {
-                    warningCard("Plan hesaplanamadı", detail: message)
+                    warningCard(String(localized: "Couldn\u{2019}t calculate the plan"), detail: message)
                 }
             }
             .padding(.horizontal)
@@ -307,10 +308,10 @@ struct PlanTabView: View {
     // Hedef değişince mevcut plan anında yeniden hesaplanır (motor deterministik + hızlı).
     private var objectivePicker: some View {
         @Bindable var store = store
-        return Picker("Hedef", selection: $store.objective) {
-            Text("Az levha").tag(Objective.sheets)
-            Text("Az fire").tag(Objective.waste)
-            Text("Az kesim").tag(Objective.cuts)
+        return Picker("Objective", selection: $store.objective) {
+            Text("Fewer sheets").tag(Objective.sheets)
+            Text("Less waste").tag(Objective.waste)
+            Text("Fewer cuts").tag(Objective.cuts)
         }
         .pickerStyle(.segmented)
         .onChange(of: store.objective) {
@@ -349,10 +350,10 @@ struct PlanTabView: View {
 
     private var staleBanner: some View {
         HStack {
-            Text("Girdiler değişti — plan bayat")
+            Text("Inputs changed — plan is stale")
                 .font(.footnote.weight(.bold))
             Spacer()
-            Button("Yeniden hesapla") { store.optimizePlan() }
+            Button("Recalculate") { store.optimizePlan() }
                 .font(.footnote.weight(.bold))
         }
         .padding(.horizontal, 14)
@@ -396,7 +397,7 @@ struct PlanTabView: View {
             .tabViewStyle(.page(indexDisplayMode: result.stats.sheetCount > 1 ? .always : .never))
             .frame(height: 240)
             if result.stats.sheetCount > 1 {
-                Text("levha kaydır")
+                Text("swipe for sheets")
                     .font(.caption2)
                     .foregroundStyle(DesignTokens.colorTimber500)
             }
@@ -409,15 +410,15 @@ struct PlanTabView: View {
                 .font(.system(size: 40))
                 .foregroundStyle(DesignTokens.colorTimber500)
             Text(store.parts.isEmpty
-                 ? "Önce Parçalar sekmesinden parça ekle."
-                 : "\(store.parts.count) parça hazır — planı hesapla.")
+                 ? String(localized: "Add parts on the Parts tab first.")
+                 : String(localized: "\(store.parts.count) parts ready — calculate the plan."))
                 .font(.callout)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(DesignTokens.colorTimber300)
             Button {
                 store.optimizePlan()
             } label: {
-                Text("Planı hesapla")
+                Text("Calculate plan")
                     .font(.headline)
                     .padding(.horizontal, 24)
                     .frame(minHeight: 48)

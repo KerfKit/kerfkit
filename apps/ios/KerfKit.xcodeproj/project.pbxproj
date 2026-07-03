@@ -22,11 +22,13 @@
 		79D5E2CEF61270BDCCD55B3E /* PlanComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */; };
 		7EAA1D7472D02168309B4AB9 /* PlanPDFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D84F49D149208ADDDFDF04 /* PlanPDFTests.swift */; };
 		7F00E1FE372F23BCC804F381 /* QuickAddFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */; };
+		A39CBA086FBE5C848599B0A9 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */; };
 		A4BE5DDE6822AAC61F9C1A55 /* SettingsFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26893ED8ABFF9E6A7E4CBA8B /* SettingsFlowTests.swift */; };
 		A705EFE66CECE57A7D6FFE91 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF468CC0D56AE47AA07FD7 /* SnapshotTests.swift */; };
 		BC3F8209F20310CC0F53A62E /* CutModels in Frameworks */ = {isa = PBXBuildFile; productRef = BD4A2986EE6DF8CB09EEA377 /* CutModels */; };
 		CEEF5CAA0BBCB667756F1A6C /* WorkshopFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED938EB0165D60600CBDF9CC /* WorkshopFlowTests.swift */; };
 		D2F0D3517C295424CD94D65B /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6D415217AC54834D17646E /* SnapshotTesting */; };
+		DF5610C93DD15D31A7A4CBEA /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */; };
 		E9AB3D0715EC467D01D15088 /* ProjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75DADCF239EB7DABD2CC6D7 /* ProjectStore.swift */; };
 		F0491D7B741D0262D6DCBB53 /* CutPersist in Frameworks */ = {isa = PBXBuildFile; productRef = BCD61F8BD27F41D116E43DDB /* CutPersist */; };
 		FA92B1FDD39181146202A637 /* OnboardingFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4EC8307545892285B9608E /* OnboardingFlowTests.swift */; };
@@ -56,6 +58,8 @@
 		26893ED8ABFF9E6A7E4CBA8B /* SettingsFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFlowTests.swift; sourceTree = "<group>"; };
 		33840CB323684E85D6D4AACA /* KerfKitUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KerfKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3947A1970267BE3B58930826 /* kerfkit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerfkit; path = ../..; sourceTree = SOURCE_ROOT; };
+		417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
+		4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		59F7411E7B8EE374DE8AF2F9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5B7BCED2AED2B0CAD77C0DEA /* PlanPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPDF.swift; sourceTree = "<group>"; };
 		5CEF468CC0D56AE47AA07FD7 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				F09EA5D64444B73147FEECBF /* ContentView.swift */,
 				ADD3D46FC9C1AAB9D2219A95 /* Info.plist */,
 				F5AF971337B8801EAD765A85 /* KerfApp.swift */,
+				4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */,
 				59F7411E7B8EE374DE8AF2F9 /* OnboardingView.swift */,
 				B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */,
 				5B7BCED2AED2B0CAD77C0DEA /* PlanPDF.swift */,
@@ -167,6 +172,7 @@
 		D1A8BE7D452C396E8807D7CB /* KerfKitUITests */ = {
 			isa = PBXGroup;
 			children = (
+				417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */,
 				6E4EC8307545892285B9608E /* OnboardingFlowTests.swift */,
 				9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */,
 				26893ED8ABFF9E6A7E4CBA8B /* SettingsFlowTests.swift */,
@@ -260,6 +266,7 @@
 			knownRegions = (
 				Base,
 				en,
+				tr,
 			);
 			mainGroup = A472E191F013A6F8C861B3DE;
 			minimizedProjectReferenceProxies = 1;
@@ -284,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C7FC8DB018C314A2E32712B /* Assets.xcassets in Resources */,
+				A39CBA086FBE5C848599B0A9 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF5610C93DD15D31A7A4CBEA /* LocalizationTests.swift in Sources */,
 				FA92B1FDD39181146202A637 /* OnboardingFlowTests.swift in Sources */,
 				7F00E1FE372F23BCC804F381 /* QuickAddFlowTests.swift in Sources */,
 				A4BE5DDE6822AAC61F9C1A55 /* SettingsFlowTests.swift in Sources */,
