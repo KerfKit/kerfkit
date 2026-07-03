@@ -65,6 +65,64 @@ final class OptimizeTests: XCTestCase {
         XCTAssertEqual(res.stats.sheetCount, 1, "yalnız m2'den tek levha açılmalı; m1 tüketilmemeli")
     }
 
+    // — E1-S2 (K-3): kerf + trim — docs/03 E1-S2, docs/04 §3 4a/4c —
+
+    // AC-1: kerf=3mm iken iki komşu parça arasında TAM 3mm boşluk; levha kenarında kerf düşülmez.
+    func testE1S2_AC1_kerfGapBetweenNeighbors_noneAtSheetEdge() throws {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 300, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "panel", materialId: "m1", w: 100_000, h: 122_000, qty: 2, rotation: .fixed)])
+        let res = try optimize(r)
+        XCTAssertEqual(res.placements.count, 2)
+        let sorted = res.placements.sorted { $0.x < $1.x }
+        XCTAssertEqual(sorted[0].x, 0, "levha kenarında kerf düşülmez — ilk parça kenara yaslı")
+        XCTAssertEqual(sorted[1].x - (sorted[0].x + sorted[0].w), 300, "komşular arasında tam kerf boşluğu")
+        XCTAssertTrue(verifyInvariants(res, req: r).isEmpty)
+    }
+
+    // AC-2: trim=10mm iken kullanılabilir alan (W−2·trim)×(H−2·trim).
+    func testE1S2_AC2_trimInsetsUsableArea() throws {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 1_000, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "panel", materialId: "m1", w: 60_000, h: 40_000, qty: 1, rotation: .fixed)])
+        let res = try optimize(r)
+        XCTAssertEqual(res.placements.first?.x, 1_000, "yerleşim trim payının içinden başlar")
+        XCTAssertEqual(res.placements.first?.y, 1_000)
+        XCTAssertTrue(verifyInvariants(res, req: r).isEmpty)
+    }
+    func testE1S2_AC2_partExactlyUsableArea_fits() throws {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 1_000, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "tam", materialId: "m1", w: 242_000, h: 120_000, qty: 1, rotation: .fixed)])
+        let res = try optimize(r)
+        XCTAssertEqual(res.placements.count, 1)
+        XCTAssertEqual(res.stats.cutCount, 0, "kullanılabilir alanı tam dolduran parça kesim istemez")
+    }
+    func testE1S2_AC2_partExceedingUsableArea_typedError() {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 1_000, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "tasan", materialId: "m1", w: 243_000, h: 120_000, qty: 1, rotation: .fixed)])
+        XCTAssertThrowsError(try optimize(r)) { error in
+            XCTAssertEqual(error as? PlacementError, .partExceedsStock(partId: "p1"))
+        }
+    }
+
+    // Kerf artığı kerf'ten küçükse serbest yaprak üretilmez (toz) — kesim yine sayılır.
+    func testE1S2_dustRemainder_noOverflowNoGhostLeaf() throws {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 300, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "yarim", materialId: "m1", w: 121_700, h: 122_000, qty: 2, rotation: .fixed)])
+        let res = try optimize(r)
+        XCTAssertEqual(res.placements.count, 2)
+        XCTAssertTrue(res.unplaced.isEmpty)
+        XCTAssertTrue(verifyInvariants(res, req: r).isEmpty)
+    }
+
     // E1-S1c regresyonu: inceleme repro'su (w=h=2^32 birim) eskiden aritmetik taşma
     // trap'iyle süreci çökertiyordu; motor sınırları (docs/04 §2) artık tipli hataya çevirir.
     func testExtremeDimensions_typedErrorNotCrash() {

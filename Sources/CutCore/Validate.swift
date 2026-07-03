@@ -11,6 +11,12 @@ public func validate(_ req: OptimizeRequest) -> [ValidationIssue] {
     if req.kerf < 0 || req.trim < 0 {
         issues.append(.init(kind: .negativeKerfOrTrim, subjectId: "request", message: "kerf/trim >= 0 olmali"))
     }
+    if req.kerf > maxDimension || req.trim > maxDimension {
+        issues.append(.init(kind: .dimensionTooLarge, subjectId: "request", message: "kerf/trim <= 10^8 birim olmali (04 §2)"))
+    }
+    // 2·trim aritmetiği ancak trim sınır içindeyken güvenli — aşırı değerde sığma
+    // kontrolü atlanır (istek zaten geçersiz, optimize tipli hatayla döner).
+    let trimSafe = req.trim >= 0 && req.trim <= maxDimension
     let materialIds = Set(req.stocks.map(\.materialId))
     var areaBudget = maxTotalStockArea
     var areaExceeded = false
@@ -43,6 +49,7 @@ public func validate(_ req: OptimizeRequest) -> [ValidationIssue] {
             issues.append(.init(kind: .unknownMaterial, subjectId: p.id, message: "parcanin malzemesi stoklarda yok"))
             continue
         }
+        guard trimSafe else { continue }
         let fits = req.stocks.contains { s in
             guard s.materialId == p.materialId else { return false }
             let uw = s.w - 2 * req.trim, uh = s.h - 2 * req.trim

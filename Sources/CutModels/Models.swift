@@ -86,6 +86,7 @@ public struct InvariantViolation: Codable, Sendable, Equatable {
     public enum Kind: String, Codable, Sendable {
         case overlap, outOfBounds, notGuillotine
         case nonPositiveSize, unknownPart // R-3 inceleme bulguları (E1-S1b)
+        case kerfViolation // docs/04 §5 madde 4 — kerf mesafeleri (E1-S2)
     }
     public var kind: Kind
     public var sheetIndex: Int

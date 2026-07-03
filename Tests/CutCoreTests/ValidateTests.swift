@@ -53,6 +53,22 @@ final class ValidateTests: XCTestCase {
                                 parts: [])
         XCTAssertEqual(validate(r).first?.kind, .totalStockAreaTooLarge)
     }
+    // E1-S2 incelemesi: kerf/trim üst sınırsızdı — 2·trim aritmetiği validate İÇİNDE taşabiliyordu.
+    func testTrimTooLarge_reportedNotCrash() {
+        let r = OptimizeRequest(unitMode: .metricMM, kerf: 0, trim: 5_000_000_000_000_000_000,
+                                objective: .sheets, seed: 1,
+                                stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+                                parts: [.init(id: "p1", name: "a", materialId: "m1", w: 10_000, h: 10_000, qty: 1)])
+        XCTAssertEqual(validate(r).first?.kind, .dimensionTooLarge)
+    }
+    func testKerfTooLarge_reported() {
+        let r = OptimizeRequest(unitMode: .metricMM, kerf: 100_000_001, trim: 0,
+                                objective: .sheets, seed: 1,
+                                stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+                                parts: [])
+        XCTAssertEqual(validate(r).first?.kind, .dimensionTooLarge)
+    }
+
     func testLimits_exactBoundary_ok() {
         // Tam sınırda geçerli: boyut 10^8 ve toplam alan tam 5×10^14 birim²
         let r = OptimizeRequest(unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
