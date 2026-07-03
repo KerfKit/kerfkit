@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- D-1 / aile (a) kerf-çizgisi: diyagonal tek kesim + merkezde testere-payı boşluğu.
+       Katmanlar: zemin (sıcak-siyah + %4 ahşap doku) / işaret (amber, düz, gölgesiz). -->
+  <g id="zemin">
+    <rect width="1024" height="1024" fill="#1C1917"/>
+    <g fill="none" stroke="#E7E5E4" stroke-opacity="0.04" stroke-width="16">
+      <path d="M0 178 C260 150 520 212 1024 176"/>
+      <path d="M0 420 C300 458 640 386 1024 430"/>
+      <path d="M0 662 C240 626 560 700 1024 664"/>
+      <path d="M0 892 C320 922 700 856 1024 894"/>
+    </g>
+  </g>
+  <g id="isaret" fill="#F59E0B" transform="rotate(-45 512 512)">
+    <rect x="-300" y="342" width="788" height="340"/>
+    <rect x="536" y="342" width="788" height="340"/>
+  </g>
+</svg>

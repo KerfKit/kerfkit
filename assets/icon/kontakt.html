@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kerf — D-1 ikon kontakt tabakası</title>
+<style>
+  /* Tek sayfalık kontakt tabakası — bağımsız dosya, ağ isteği yok (D-1).
+     Renkler docs/11 §3 marka değerleri; UI token zinciri (tokens.css) web uygulamasına aittir. */
+  :root { --zemin:#0E0D0C; --kart:#1C1917; --metin:#E7E5E4; --soluk:#A8A29E; --amber:#F59E0B; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--zemin); color:var(--metin);
+         font:15px/1.5 -apple-system, "SF Pro Text", "Segoe UI", sans-serif; padding:40px; }
+  h1 { font-size:22px; letter-spacing:.02em; }
+  h1 em { color:var(--amber); font-style:normal; }
+  p.alt { color:var(--soluk); margin:6px 0 28px; max-width:70ch; }
+  table { border-collapse:collapse; width:100%; }
+  th { text-align:left; color:var(--soluk); font-weight:600; font-size:12px;
+       text-transform:uppercase; letter-spacing:.08em; padding:0 14px 10px 0; }
+  td { padding:14px 14px 14px 0; border-top:1px solid #2b2725; vertical-align:middle; }
+  .ad { font-weight:600; }
+  .aile { color:var(--soluk); font-size:13px; }
+  .not { color:var(--soluk); font-size:13px; max-width:34ch; }
+  .uyari { color:var(--amber); }
+  img.ikon { display:block; background:var(--kart); border-radius:22.4%; } /* iOS squircle yaklaşığı */
+  .cip { display:inline-flex; flex-direction:column; align-items:center; gap:6px;
+         margin-right:18px; vertical-align:middle; }
+  .cip span { color:var(--soluk); font-size:11px; }
+  .acik { background:#E7E5E4; padding:8px; border-radius:14px; display:inline-block; }
+  footer { margin-top:32px; color:var(--soluk); font-size:13px; max-width:80ch; }
+  footer strong { color:var(--metin); }
+</style>
+</head>
+<body>
+<h1><em>kerf</em> — D-1 ikon kontakt tabakası</h1>
+<p class="alt">Konsept: "kerf işareti" — koyu levha yüzeyinde tek, kararlı amber kesim izi (docs/11 §4).
+Katmanlı SVG, düz form, gölge yok. 29pt sütunları gerçek App Store/ayarlar küçültmesini temsil eder
+(1x=29px · 2x=58px · 3x=87px). Açık zemin çipi, duvar kâğıdı çeşitliliği provasıdır.</p>
+
+<table>
+  <tr><th>Varyant</th><th>192px</th><th>29pt @3x · @2x · @1x</th><th>Açık zeminde @2x</th><th>Not</th></tr>
+
+  <tr>
+    <td><div class="ad">01 · kerf çizgisi, testere-payı boşluklu</div><div class="aile">aile (a) — diyagonal tek kerf</div></td>
+    <td><img class="ikon" src="01_kerf_cizgisi_bosluklu.svg" width="192" height="192" alt=""></td>
+    <td>
+      <span class="cip"><img class="ikon" src="01_kerf_cizgisi_bosluklu.svg" width="87" height="87" alt=""><span>87</span></span>
+      <span class="cip"><img class="ikon" src="01_kerf_cizgisi_bosluklu.svg" width="58" height="58" alt=""><span>58</span></span>
+      <span class="cip"><img class="ikon" src="01_kerf_cizgisi_bosluklu.svg" width="29" height="29" alt=""><span>29</span></span>
+    </td>
+    <td><span class="acik"><img class="ikon" src="01_kerf_cizgisi_bosluklu.svg" width="58" height="58" alt=""></span></td>
+    <td class="not">Amber ≈ %40. Boşluk = testere payı; 29px'te bile ayrışıyor.</td>
+  </tr>
+
+  <tr>
+    <td><div class="ad">02 · kerf çizgisi, V-ağızlı</div><div class="aile">aile (a) — kesintisiz kerf + giriş ağzı</div></td>
+    <td><img class="ikon" src="02_kerf_cizgisi_agiz.svg" width="192" height="192" alt=""></td>
+    <td>
+      <span class="cip"><img class="ikon" src="02_kerf_cizgisi_agiz.svg" width="87" height="87" alt=""><span>87</span></span>
+      <span class="cip"><img class="ikon" src="02_kerf_cizgisi_agiz.svg" width="58" height="58" alt=""><span>58</span></span>
+      <span class="cip"><img class="ikon" src="02_kerf_cizgisi_agiz.svg" width="29" height="29" alt=""><span>29</span></span>
+    </td>
+    <td><span class="acik"><img class="ikon" src="02_kerf_cizgisi_agiz.svg" width="58" height="58" alt=""></span></td>
+    <td class="not">Amber ≈ %43. En sade aday; ağız 29px'te kayboluyor, banda dönüşüyor.</td>
+  </tr>
+
+  <tr>
+    <td><div class="ad">03 · V-kertik</div><div class="aile">aile (b) — üst kenardan açılmış kertik</div></td>
+    <td><img class="ikon" src="03_v_kertik.svg" width="192" height="192" alt=""></td>
+    <td>
+      <span class="cip"><img class="ikon" src="03_v_kertik.svg" width="87" height="87" alt=""><span>87</span></span>
+      <span class="cip"><img class="ikon" src="03_v_kertik.svg" width="58" height="58" alt=""><span>58</span></span>
+      <span class="cip"><img class="ikon" src="03_v_kertik.svg" width="29" height="29" alt=""><span>29</span></span>
+    </td>
+    <td><span class="acik"><img class="ikon" src="03_v_kertik.svg" width="58" height="58" alt=""></span></td>
+    <td class="not">Amber ≈ %40. En yüksek siluet ayırt ediciliği; "V" harf çağrışımı riski not.</td>
+  </tr>
+
+  <tr>
+    <td><div class="ad">04 · V-oluk</div><div class="aile">aile (b) — kenardan kenara oluk kesiti</div></td>
+    <td><img class="ikon" src="04_v_oluk.svg" width="192" height="192" alt=""></td>
+    <td>
+      <span class="cip"><img class="ikon" src="04_v_oluk.svg" width="87" height="87" alt=""><span>87</span></span>
+      <span class="cip"><img class="ikon" src="04_v_oluk.svg" width="58" height="58" alt=""><span>58</span></span>
+      <span class="cip"><img class="ikon" src="04_v_oluk.svg" width="29" height="29" alt=""><span>29</span></span>
+    </td>
+    <td><span class="acik"><img class="ikon" src="04_v_oluk.svg" width="58" height="58" alt=""></span></td>
+    <td class="not">Amber ≈ %37. Güçlü ama jenerik "chevron/ok" okunması riski — anket sorusu.</td>
+  </tr>
+
+  <tr>
+    <td><div class="ad">05 · çizecek izi</div><div class="aile">aile (c) — marking-knife skoru + gönye referansı</div></td>
+    <td><img class="ikon" src="05_cizecek_izi.svg" width="192" height="192" alt=""></td>
+    <td>
+      <span class="cip"><img class="ikon" src="05_cizecek_izi.svg" width="87" height="87" alt=""><span>87</span></span>
+      <span class="cip"><img class="ikon" src="05_cizecek_izi.svg" width="58" height="58" alt=""><span>58</span></span>
+      <span class="cip"><img class="ikon" src="05_cizecek_izi.svg" width="29" height="29" alt=""><span>29</span></span>
+    </td>
+    <td><span class="acik"><img class="ikon" src="05_cizecek_izi.svg" width="58" height="58" alt=""></span></td>
+    <td class="not"><span class="uyari">Amber ≈ %17 — ret kriteri sınırında.</span> Zanaat çağrışımı en yüksek, ölçek dayanımı en düşük aday.</td>
+  </tr>
+</table>
+
+<footer>
+  <strong>Ret kriterleri (docs/15 §3):</strong> 29pt'te okunmuyor · testere-dişi/grid klişesine benziyor ·
+  amber &lt; %40 alan. — Testere dişi/daire ve grid-nesting bilinçli olarak hiçbir varyantta yok (docs/11 §4 yasak listesi).
+  <br><strong>Sıradaki adım:</strong> kısa liste 2'ye iner → TestFlight mini-anketi (H−5) → seçilen varyant
+  resvg ile katman-başına 1024 PNG → Icon Composer (docs/15 §3).
+</footer>
+</body>
+</html>
