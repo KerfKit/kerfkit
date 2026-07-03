@@ -1,0 +1,38 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>M-2 B kart-satır</title>
+<link rel="stylesheet" href="../../apps/web/styles/tokens.css">
+<style>
+* { box-sizing:border-box; margin:0; font-family:-apple-system,"SF Pro Text",sans-serif; }
+body { background:var(--color-timber-950); color:var(--color-timber-200); width:390px; margin:0 auto; min-height:844px; padding-bottom:32px; }
+.nav { display:flex; justify-content:space-between; align-items:center; padding:16px; font-weight:700; color:var(--color-timber-50); }
+.nav .baslik { font-size:20px; }
+.sekme { display:flex; gap:4px; padding:0 16px 12px; }
+.sekme span { flex:1; text-align:center; padding:8px; border-radius:8px; font-size:14px; color:var(--color-timber-300); background:var(--color-timber-900); }
+.sekme .aktif { background:var(--color-amber-500); color:var(--color-timber-950); font-weight:700; }
+
+.kart { background:var(--color-timber-900); border-radius:14px; margin:8px 16px; padding:14px 16px; }
+.kart .ust { display:flex; justify-content:space-between; margin-bottom:6px; }
+.kart .ad { color:var(--color-timber-50); font-weight:700; font-size:17px; }
+.kart .kilit { font-size:12px; color:var(--color-amber-400); }
+.kart .alt { display:flex; gap:14px; font-size:14px; color:var(--color-timber-300); }
+.kart .boyut { font-variant-numeric:tabular-nums; color:var(--color-timber-200); }
+.ekle { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--color-amber-500);
+        color:var(--color-timber-950); font-weight:800; font-size:16px; padding:16px 28px; border-radius:999px; }
+.pad { margin:16px; background:var(--color-timber-900); border-radius:14px; padding:12px; }
+.pad .baslik { font-size:12px; color:var(--color-timber-500); margin-bottom:8px; }
+.pad .kesirler { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; }
+.pad .kesirler span { background:var(--color-timber-800); text-align:center; padding:10px 0; border-radius:8px; font-size:14px; color:var(--color-timber-50); }
+
+</style></head><body>
+<div class="nav"><span>‹ Projeler</span><span class="baslik">Mutfak Dolabı</span><span>⋯</span></div>
+<div class="sekme"><span class="aktif">Parçalar</span><span>Stok</span><span>Plan</span></div>
+<div class="kart"><div class="ust"><span class="ad">Yan</span><span class="kilit">🔒 damar</span></div>
+<div class="alt"><span class="boyut">720 × 580 mm</span><span class="adet">×2</span><span class="bant">üç kenar</span></div></div><div class="kart"><div class="ust"><span class="ad">Raf</span><span class="kilit">↻ serbest</span></div>
+<div class="alt"><span class="boyut">764 × 560 mm</span><span class="adet">×2</span><span class="bant">ön kenar</span></div></div><div class="kart"><div class="ust"><span class="ad">Kapak</span><span class="kilit">🔒 damar</span></div>
+<div class="alt"><span class="boyut">396 × 716 mm</span><span class="adet">×1</span><span class="bant">dört kenar</span></div></div><div class="kart"><div class="ust"><span class="ad">Çekmece önü</span><span class="kilit">↻ serbest</span></div>
+<div class="alt"><span class="boyut">396 × 180 mm</span><span class="adet">×6</span><span class="bant">—</span></div></div>
+<div class="pad"><div class="baslik">KESİR PAD'İ (imperial modda görünür)</div>
+<div class="kesirler"><span>1/2</span><span>1/4</span><span>3/4</span><span>1/8</span><span>3/8</span><span>5/8</span><span>7/8</span><span>1/16</span><span>3/16</span><span>5/16</span><span>7/16</span><span>…64</span></div></div>
+<div class="ekle">＋ Parça ekle</div>
+</body></html>
