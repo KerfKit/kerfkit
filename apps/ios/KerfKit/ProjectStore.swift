@@ -11,6 +11,14 @@ struct PartInput: Identifiable, Hashable {
     var heightMM: Int
     var qty: Int
     var rotationAllowed: Bool
+    var banding = BandingDoc()
+
+    // Bant uzunluğu: en kenarları (üst/alt) genişlik, boy kenarları (sol/sağ) yükseklik.
+    var bandLengthMM: Int {
+        let single = (banding.top ? widthMM : 0) + (banding.bottom ? widthMM : 0)
+            + (banding.left ? heightMM : 0) + (banding.right ? heightMM : 0)
+        return single * qty
+    }
 }
 
 enum DetailTab: String, CaseIterable {
@@ -66,6 +74,11 @@ final class ProjectStore {
 
     var sheetW: Units { Units(sheetWidthMM) * 100 }
     var sheetH: Units { Units(sheetHeightMM) * 100 }
+
+    // M-4 bant stat kartı: projedeki toplam bant kenarı uzunluğu (yerleşimden bağımsız).
+    var bandLengthText: String {
+        String(format: "%.1fm", Double(parts.reduce(0) { $0 + $1.bandLengthMM }) / 1000)
+    }
 
     init() {
         do {
@@ -134,9 +147,12 @@ final class ProjectStore {
         if sample {
             projectName = "Mutfak Dolabı"
             parts = [
-                .init(name: "Yan", widthMM: 720, heightMM: 580, qty: 2, rotationAllowed: false),
-                .init(name: "Raf", widthMM: 764, heightMM: 560, qty: 2, rotationAllowed: true),
-                .init(name: "Kapak", widthMM: 396, heightMM: 716, qty: 1, rotationAllowed: false),
+                .init(name: "Yan", widthMM: 720, heightMM: 580, qty: 2, rotationAllowed: false,
+                      banding: BandingDoc(top: true, left: true, right: true)),
+                .init(name: "Raf", widthMM: 764, heightMM: 560, qty: 2, rotationAllowed: true,
+                      banding: BandingDoc(top: true)),
+                .init(name: "Kapak", widthMM: 396, heightMM: 716, qty: 1, rotationAllowed: false,
+                      banding: BandingDoc(top: true, bottom: true, left: true, right: true)),
                 .init(name: "Çekmece", widthMM: 396, heightMM: 180, qty: 6, rotationAllowed: true),
             ]
         } else {
@@ -180,7 +196,8 @@ final class ProjectStore {
         doc.parts = parts.enumerated().map { i, p in
             PartDoc(id: p.id.uuidString, name: p.name.isEmpty ? "Parça \(i + 1)" : p.name,
                     materialId: "panel", w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
-                    qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed)
+                    qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed,
+                    banding: p.banding == BandingDoc() ? nil : p.banding)
         }
         if let result, let lastRequest {
             doc.plans = [PlanDoc(id: "plan-son", createdAt: ProjectStore.nowISO(),
@@ -205,7 +222,8 @@ final class ProjectStore {
         parts = doc.parts.map {
             PartInput(id: UUID(uuidString: $0.id) ?? UUID(),
                       name: $0.name, widthMM: Int($0.w / 100), heightMM: Int($0.h / 100),
-                      qty: $0.qty, rotationAllowed: $0.rotation == .allowed)
+                      qty: $0.qty, rotationAllowed: $0.rotation == .allowed,
+                      banding: $0.banding ?? BandingDoc())
         }
         if let plan = doc.plans.last {
             result = plan.result

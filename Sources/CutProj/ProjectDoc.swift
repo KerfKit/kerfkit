@@ -148,7 +148,7 @@ public struct StockDoc: Codable, Equatable, Sendable {
     }
 }
 
-public struct BandingDoc: Codable, Equatable, Sendable {
+public struct BandingDoc: Codable, Hashable, Sendable {
     public var top: Bool
     public var bottom: Bool
     public var left: Bool
