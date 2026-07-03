@@ -11,6 +11,14 @@ struct GoldenVector: Codable {
     struct Expected: Codable { var sheetCount: Int; var wasteBps: Int; var cutCount: Int; var placementsHash: String }
 }
 
+// 1D vektörler `1d_` dosya-adı önekiyle ayrışır (docs/04 §5).
+struct GoldenVector1D: Codable {
+    var name: String
+    var pending: Bool
+    var request: Optimize1DRequest
+    var expected: GoldenVector.Expected?
+}
+
 final class GoldenRunnerTests: XCTestCase {
     // Vektörler VectorData.swift'ten (gömülü) okunur: Android asset dosya sistemi dizin
     // listelemeyi desteklemez, Wasm'da Bundle yok (K-30). Tek kaynak vectors/*.json —
@@ -43,6 +51,10 @@ final class GoldenRunnerTests: XCTestCase {
                 XCTFail("\(name): gömülü veri okunamadı")
                 continue
             }
+            if name.hasPrefix("1d_") {
+                try runVector1D(data)
+                continue
+            }
             let vector = try JSONDecoder().decode(GoldenVector.self, from: data)
             XCTAssertTrue(validate(vector.request).isEmpty, "\(vector.name): istek gecerli olmali")
             if vector.pending {
@@ -61,5 +73,24 @@ final class GoldenRunnerTests: XCTestCase {
             let violations = verifyInvariants(result, req: vector.request)
             XCTAssertTrue(violations.isEmpty, "\(vector.name): \(violations)")
         }
+    }
+
+    func runVector1D(_ data: Data) throws {
+        let vector = try JSONDecoder().decode(GoldenVector1D.self, from: data)
+        XCTAssertTrue(validate1D(vector.request).isEmpty, "\(vector.name): istek gecerli olmali")
+        if vector.pending {
+            return
+        }
+        let result = try optimize1D(vector.request)
+        guard let exp = vector.expected else {
+            XCTFail("\(vector.name): pending=false ise expected zorunlu")
+            return
+        }
+        XCTAssertEqual(result.stats.sheetCount, exp.sheetCount, vector.name)
+        XCTAssertEqual(result.stats.wasteBps, exp.wasteBps, vector.name)
+        XCTAssertEqual(result.stats.cutCount, exp.cutCount, vector.name)
+        XCTAssertEqual(placements1DHash(result.placements), exp.placementsHash, vector.name)
+        let violations = verifyInvariants1D(result, req: vector.request)
+        XCTAssertTrue(violations.isEmpty, "\(vector.name): \(violations)")
     }
 }

@@ -2,7 +2,7 @@ import CutModels
 
 // partId serileştirmede ayırıcılarla çakışamaz: '\', '|', ';' ters bölü ile kaçışlanır —
 // serileştirme enjektif kalır, ayırıcısız id'lerin hash'i değişmez (docs/04 §5).
-private func escaped(_ id: String) -> String {
+func escaped(_ id: String) -> String {
     var out = ""
     for ch in id {
         let s = String(ch)
@@ -31,12 +31,12 @@ private func utf8Bytes(_ s: String) -> [UInt8] {
 // docs/04 §5 — placementsHash: FNV-1a 64-bit, kanonik serileştirme
 // `partId|sheetIndex|x|y|w|h|r;` (motor çıkış sırası), 16 haneli küçük-harf hex.
 // FNV çarpması bilinçli sarmal (&*): UInt64 modular aritmetiği her platformda bit-eşit.
-public func placementsHash(_ placements: [Placement]) -> String {
+// FNV-1a 64 çekirdeği — 2D ve 1D kanonik satırları aynı sabitlerle özetler (docs/04 §5).
+func canonicalFNVHex(_ lines: [String]) -> String {
     // Sabitler iki 32-bit yarıdan kurulur; bileşik atama yok — Kotlin/Skip uyumu (K-30).
     var hash: UInt64 = (UInt64(0xcbf2_9ce4) << 32) | UInt64(0x8422_2325)
     let prime: UInt64 = UInt64(0x0000_0100) << 32 | UInt64(0x0000_01b3)
-    for p in placements {
-        let line = "\(escaped(p.partId))|\(p.sheetIndex)|\(p.x)|\(p.y)|\(p.w)|\(p.h)|\(p.rotated ? 1 : 0);"
+    for line in lines {
         let bytes = utf8Bytes(line)
         for byte in bytes {
             hash = hash ^ UInt64(byte)
@@ -53,6 +53,14 @@ public func placementsHash(_ placements: [Placement]) -> String {
         value = value >> 4
     }
     return hex
+}
+
+public func placementsHash(_ placements: [Placement]) -> String {
+    var lines: [String] = []
+    for p in placements {
+        lines.append("\(escaped(p.partId))|\(p.sheetIndex)|\(p.x)|\(p.y)|\(p.w)|\(p.h)|\(p.rotated ? 1 : 0);")
+    }
+    return canonicalFNVHex(lines)
 }
 
 private struct PlacedRect {
