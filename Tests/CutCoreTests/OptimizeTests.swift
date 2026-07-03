@@ -123,6 +123,42 @@ final class OptimizeTests: XCTestCase {
         XCTAssertTrue(verifyInvariants(res, req: r).isEmpty)
     }
 
+    // — E1-S3 (K-4): damar kilidi — docs/03 E1-S3 —
+    // Davranış E1-S1a'daki bestFit/validate'te zaten kuruluydu; bu testler AC'leri sabitler.
+
+    // AC-1: rotation=fixed parça 90° denenmez — rotasyon kazançlı olsa bile.
+    func testE1S3_AC1_fixedNeverRotated_allowedMayRotate() throws {
+        let fixedReq = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "damarli", materialId: "m1", w: 40_000, h: 60_000, qty: 4, rotation: .fixed)])
+        let fixedRes = try optimize(fixedReq)
+        XCTAssertEqual(fixedRes.placements.count, 4)
+        XCTAssertTrue(fixedRes.placements.allSatisfy { !$0.rotated }, "fixed parça asla döndürülmez")
+        // Aynı geometri rotation=allowed iken motor 90° adayını kullanabilmeli (001 vektörü bunu kanıtlıyor);
+        // burada asgari güvence: allowed koşusu da 4 parçayı yerleştirir.
+        var allowedReq = fixedReq
+        allowedReq.parts[0].rotation = .allowed
+        XCTAssertEqual(try optimize(allowedReq).placements.count, 4)
+    }
+
+    // AC-2: yalnız döndürülünce sığan parça — allowed rotasyonla yerleşir,
+    // fixed ise SESSİZCE atlanmaz: tipli partExceedsStock ile raporlanır.
+    func testE1S3_AC2_onlyRotatedFits_fixedReported_allowedPlaced() throws {
+        let base = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "uzun", materialId: "m1", w: 120_000, h: 230_000, qty: 1, rotation: .allowed)])
+        let res = try optimize(base)
+        XCTAssertEqual(res.placements.count, 1)
+        XCTAssertEqual(res.placements.first?.rotated, true, "yalnız 90° sığar")
+        var fixedReq = base
+        fixedReq.parts[0].rotation = .fixed
+        XCTAssertThrowsError(try optimize(fixedReq)) { error in
+            XCTAssertEqual(error as? PlacementError, .partExceedsStock(partId: "p1"))
+        }
+    }
+
     // E1-S1c regresyonu: inceleme repro'su (w=h=2^32 birim) eskiden aritmetik taşma
     // trap'iyle süreci çökertiyordu; motor sınırları (docs/04 §2) artık tipli hataya çevirir.
     func testExtremeDimensions_typedErrorNotCrash() {
