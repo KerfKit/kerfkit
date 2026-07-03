@@ -159,6 +159,9 @@ final class ProjectStore {
         planSummaries = infos
     }
 
+    // K-13 paylaşımı: aktif projenin dokümanı (tembel .cutproj/PDF üretimi için).
+    func exportableDoc() -> ProjectDoc { currentDoc() }
+
     // M-8 Verilerim: her proje .cutproj olarak geçici dizine yazılır (ShareLink için).
     func exportAllProjects() -> [URL] {
         var urls: [URL] = []
