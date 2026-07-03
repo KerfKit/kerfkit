@@ -1,0 +1,1 @@
+Optimizador de despiece de tableros. Sin conexión, con kerf, pago único.

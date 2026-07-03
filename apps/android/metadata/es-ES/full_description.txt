@@ -1,0 +1,19 @@
+Deja de pagar cada mes por cortar tablero. kerfkit es un optimizador de despiece que compras una vez y es tuyo para siempre — hecho para el taller, no para el navegador.
+
+PLANO EN SEGUNDOS
+Escribe tus piezas y recibe el despiece optimizado para tableros y listones. 2D y 1D en la misma app. Motor determinista: misma entrada, mismo plano, siempre.
+
+LOS DETALLES DE PRO, CUBIERTOS
+• Ancho de sierra contado entre cada par de piezas
+• Bloqueo de veta pieza a pieza
+• Canteado con sus metros en el plano
+• Milímetros o pulgadas fraccionarias a 1/64″ — tú eliges
+
+MODO TALLER
+Pon el móvil junto a la sierra. Letra gigante, botones a prueba de guantes, pantalla siempre encendida. Marca cada corte y ve siempre el siguiente.
+
+SIN CONEXIÓN Y TUYO
+Sin cuenta. Sin nube. Sin analíticas. Funciona en un sótano sin cobertura. Exporta PDF, listas CSV y proyectos .cutproj cuando quieras.
+
+PAGO ÚNICO
+Sin suscripciones. Nunca.

@@ -1,0 +1,19 @@
+Basta canoni mensili per sezionare pannelli. kerfkit è un ottimizzatore di piani di taglio che compri una volta ed è tuo per sempre — fatto per l'officina, non per il browser.
+
+PIANO IN POCHI SECONDI
+Scrivi i pezzi e ottieni il sezionamento ottimizzato per pannelli e barre. 2D e 1D nella stessa app. Motore deterministico: stesso input, stesso piano, ogni volta.
+
+I DETTAGLI DA PRO CI SONO
+• Spessore lama contato tra ogni coppia di pezzi
+• Blocco venatura pezzo per pezzo
+• Bordatura tracciata, con i metri sul piano
+• Millimetri o pollici frazionari a 1/64″ — scegli tu
+
+MODALITÀ OFFICINA
+Metti il telefono accanto alla sega. Caratteri giganti, tasti a prova di guanto, schermo sempre acceso. Spunta ogni taglio e vedi sempre il prossimo.
+
+OFFLINE E TUO
+Niente account. Niente cloud. Niente analytics. Funziona in cantina senza campo. Esporta PDF, liste CSV e progetti .cutproj quando vuoi.
+
+SI PAGA UNA VOLTA
+Niente abbonamenti. Mai.
