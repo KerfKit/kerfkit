@@ -6,25 +6,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ passt nicht auf die Platte — prüf die Maße oder die Maserungs-Sperre."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ no cabe en el tablero — revisa sus medidas o el bloqueo de veta."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ ne rentre pas dans le panneau — vérifie ses dimensions ou le blocage du fil."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ non entra nel pannello — controlla le misure o il blocco venatura."
           }
         },
@@ -40,25 +40,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ Teile gesägt — sauber!"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ piezas cortadas — ¡buen trabajo!"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ pièces coupées — beau boulot !"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ pezzi tagliati — bel lavoro!"
           }
         },
@@ -75,25 +75,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ Verschnitt"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ de desperdicio"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ de chutes"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@ di sfrido"
           }
         },
@@ -109,25 +109,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@%@"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@%@"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@%@"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "%@%@"
           }
         },
@@ -147,13 +147,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Kante"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Kanten"
                 }
               }
@@ -183,13 +183,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld canto"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld cantos"
                 }
               }
@@ -201,13 +201,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld chant"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld chants"
                 }
               }
@@ -219,13 +219,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld bordo"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld bordi"
                 }
               }
@@ -248,13 +248,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teil"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teile"
                 }
               }
@@ -284,13 +284,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pieza"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld piezas"
                 }
               }
@@ -302,13 +302,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièce"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièces"
                 }
               }
@@ -320,13 +320,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzo"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzi"
                 }
               }
@@ -349,13 +349,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teil gesägt — sauber!"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teile gesägt — sauber!"
                 }
               }
@@ -385,13 +385,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pieza cortada — ¡buen trabajo!"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld piezas cortadas — ¡buen trabajo!"
                 }
               }
@@ -403,13 +403,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièce coupée — beau boulot !"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièces coupées — beau boulot !"
                 }
               }
@@ -421,13 +421,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzo tagliato — bel lavoro!"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzi tagliati — bel lavoro!"
                 }
               }
@@ -450,13 +450,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teil passte nicht"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teile passten nicht"
                 }
               }
@@ -486,13 +486,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pieza no cupo"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld piezas no cupieron"
                 }
               }
@@ -504,13 +504,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièce ne rentre pas"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièces ne rentrent pas"
                 }
               }
@@ -522,13 +522,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzo non è entrato"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzi non sono entrati"
                 }
               }
@@ -551,13 +551,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teil importiert"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teile importiert"
                 }
               }
@@ -587,13 +587,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pieza importada"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld piezas importadas"
                 }
               }
@@ -605,13 +605,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièce importée"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièces importées"
                 }
               }
@@ -623,13 +623,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzo importato"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzi importati"
                 }
               }
@@ -652,13 +652,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teil bereit — berechne den Plan."
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Teile bereit — berechne den Plan."
                 }
               }
@@ -688,13 +688,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pieza lista — calcula el plan."
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld piezas listas — calcula el plan."
                 }
               }
@@ -706,13 +706,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièce prête — calcule le plan."
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pièces prêtes — calcule le plan."
                 }
               }
@@ -724,13 +724,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzo pronto — calcola il piano."
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pezzi pronti — calcola il piano."
                 }
               }
@@ -753,13 +753,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Prozent geschafft"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Prozent geschafft"
                 }
               }
@@ -771,13 +771,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld por ciento hecho"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld por ciento hecho"
                 }
               }
@@ -789,13 +789,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pour cent fait"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pour cent fait"
                 }
               }
@@ -807,13 +807,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld per cento fatto"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld per cento fatto"
                 }
               }
@@ -836,13 +836,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Zeile übersprungen"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Zeilen übersprungen"
                 }
               }
@@ -872,13 +872,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld fila omitida"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld filas omitidas"
                 }
               }
@@ -890,13 +890,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld ligne ignorée"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld lignes ignorées"
                 }
               }
@@ -908,13 +908,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld riga saltata"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld righe saltate"
                 }
               }
@@ -937,13 +937,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Platte"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld Platten"
                 }
               }
@@ -973,13 +973,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld tablero"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld tableros"
                 }
               }
@@ -991,13 +991,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld panneau"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld panneaux"
                 }
               }
@@ -1009,13 +1009,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pannello"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "%lld pannelli"
                 }
               }
@@ -1034,25 +1034,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ein helles Design kommt, sobald es fertig ist; PDFs drucken immer hell."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "El tema claro llegará cuando esté listo; los PDF siempre se imprimen en claro."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Un thème clair arrivera dès qu'il sera prêt ; les PDF s'impriment toujours en clair."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Il tema chiaro arriverà appena pronto; i PDF si stampano sempre in chiaro."
           }
         },
@@ -1069,25 +1069,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Über"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Acerca de"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "À propos"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Info"
           }
         },
@@ -1104,25 +1104,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Leg mehr Platten an oder prüf die Teilmaße."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Añade más tableros o revisa las medidas de las piezas."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ajoute des panneaux ou vérifie les dimensions des pièces."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Aggiungi pannelli o controlla le misure dei pezzi."
           }
         },
@@ -1139,25 +1139,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Teil hinzufügen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Añadir pieza"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ajouter la pièce"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Aggiungi pezzo"
           }
         },
@@ -1174,25 +1174,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Leg zuerst Teile im Reiter „Teile“ an."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Primero añade piezas en la pestaña Piezas."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ajoute d'abord des pièces dans l'onglet Pièces."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Prima aggiungi i pezzi nella scheda Pezzi."
           }
         },
@@ -1208,25 +1208,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Alle Schnitte fertig"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Todos los cortes hechos"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Toutes les coupes sont faites"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tutti i tagli fatti"
           }
         },
@@ -1243,25 +1243,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Alle vier Kanten"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Los cuatro cantos"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Les quatre chants"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tutti e quattro i bordi"
           }
         },
@@ -1277,25 +1277,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Darstellung"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Apariencia"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Apparence"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Aspetto"
           }
         },
@@ -1311,25 +1311,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Gilt für neue Projekte; bestehende behalten ihre Einstellungen."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Se aplica a proyectos nuevos; los existentes conservan sus ajustes."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "S'applique aux nouveaux projets ; les projets existants gardent leurs réglages."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Vale per i nuovi progetti; quelli esistenti tengono le loro impostazioni."
           }
         },
@@ -1345,25 +1345,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Automatisch (Region)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Automático (región)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Automatique (région)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Automatico (regione)"
           }
         },
@@ -1380,25 +1380,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "KANTE"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "CANTO"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "CHANT"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "BORDO"
           }
         },
@@ -1414,25 +1414,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Zurück zum Plan"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Volver al plan"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Retour au plan"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Torna al piano"
           }
         },
@@ -1449,25 +1449,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Werkbank"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Banco"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Établi"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Banco"
           }
         },
@@ -1484,25 +1484,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Werkbank-Modus"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Modo Banco"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Mode Établi"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Modalità Banco"
           }
         },
@@ -1519,25 +1519,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Schnittfuge"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ancho de sierra"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Trait de scie"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Spessore lama"
           }
         },
@@ -1554,25 +1554,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Schnittfuge (mm)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ancho de sierra (mm)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Trait de scie (mm)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Spessore lama (mm)"
           }
         },
@@ -1589,25 +1589,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Untere Kante"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Canto inferior"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Chant bas"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Bordo inferiore"
           }
         },
@@ -1624,25 +1624,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Einmal kaufen. Kein Abo."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Págalo una vez. Sin suscripciones."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Achetez une fois. Pas d'abonnement."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Lo compri una volta. Niente abbonamenti."
           }
         },
@@ -1658,25 +1658,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "SCHNITT %@/%@"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "CORTE %@/%@"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "COUPE %@/%@"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "TAGLIO %@/%@"
           }
         },
@@ -1693,25 +1693,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "SCHNITT %lld/%lld"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "CORTE %lld/%lld"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "COUPE %lld/%lld"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "TAGLIO %lld/%lld"
           }
         },
@@ -1727,25 +1727,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Plan berechnen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Calcular plan"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Calculer le plan"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Calcola il piano"
           }
         },
@@ -1762,25 +1762,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Plan konnte nicht berechnet werden"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "No se pudo calcular el plan"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Impossible de calculer le plan"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Impossibile calcolare il piano"
           }
         },
@@ -1797,25 +1797,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Eingaben passen nicht — prüf Maße und Stückzahlen."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Los datos no cuadran — revisa medidas y cantidades."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Les données ne passent pas — vérifie dimensions et quantités."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "I dati non tornano — controlla misure e quantità."
           }
         },
@@ -1831,25 +1831,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Leg dein erstes Projekt an"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Crea tu primer proyecto"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Crée ton premier projet"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Crea il tuo primo progetto"
           }
         },
@@ -1866,25 +1866,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Schnitt %lld von %lld"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Corte %lld de %lld"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Coupe %lld sur %lld"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Taglio %lld di %lld"
           }
         },
@@ -1904,13 +1904,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Schnittbild: %lld Teil platziert"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Schnittbild: %lld Teile platziert"
                 }
               }
@@ -1940,13 +1940,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Diagrama de corte: %lld pieza colocada"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Diagrama de corte: %lld piezas colocadas"
                 }
               }
@@ -1958,13 +1958,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Schéma de coupe : %lld pièce placée"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Schéma de coupe : %lld pièces placées"
                 }
               }
@@ -1976,13 +1976,13 @@
             "plural": {
               "one": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Schema di taglio: %lld pezzo piazzato"
                 }
               },
               "other": {
                 "stringUnit": {
-                  "state": "needs_review",
+                  "state": "translated",
                   "value": "Schema di taglio: %lld pezzi piazzati"
                 }
               }
@@ -2002,25 +2002,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Zuschnitt-Vorgaben"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ajustes de corte"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Réglages de coupe"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Impostazioni di taglio"
           }
         },
@@ -2037,25 +2037,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "GESÄGT"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "CORTADO"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "COUPÉ"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "TAGLIATO"
           }
         },
@@ -2072,25 +2072,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Dunkel"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Oscuro"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Sombre"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Scuro"
           }
         },
@@ -2106,25 +2106,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Vorgaben"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Valores por defecto"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Réglages par défaut"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Predefiniti"
           }
         },
@@ -2141,25 +2141,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ziffer löschen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Borrar dígito"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Effacer le chiffre"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Cancella cifra"
           }
         },
@@ -2175,25 +2175,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Fertig"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Listo"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "OK"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Fatto"
           }
         },
@@ -2210,25 +2210,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tür"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Puerta"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Porte"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Anta"
           }
         },
@@ -2245,25 +2245,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Schublade"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Cajón"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tiroir"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Cassetto"
           }
         },
@@ -2280,25 +2280,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Kantenband"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Canteado"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Bande de chant"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Bordatura"
           }
         },
@@ -2315,25 +2315,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Randbeschnitt"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Recorte de borde"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Recoupe de rive"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Rifilo"
           }
         },
@@ -2350,25 +2350,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Randbeschnitt (mm)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Recorte de borde (mm)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Recoupe de rive (mm)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Rifilo (mm)"
           }
         },
@@ -2385,25 +2385,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Platte eingeben, Teile eintippen, Plan bekommen."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pon el tablero, escribe tus piezas y saca el plan."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Entre le panneau, tape tes pièces, récupère le plan."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Inserisci il pannello, scrivi i pezzi, prendi il piano."
           }
         },
@@ -2420,25 +2420,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Alles exportieren (.cutproj)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Exportar todo (.cutproj)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tout exporter (.cutproj)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Esporta tutto (.cutproj)"
           }
         },
@@ -2454,25 +2454,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Weniger Schnitte"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Menos cortes"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Moins de coupes"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Meno tagli"
           }
         },
@@ -2488,25 +2488,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Weniger Platten"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Menos tableros"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Moins de panneaux"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Meno pannelli"
           }
         },
@@ -2523,25 +2523,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Bruch-Zoll kommt zusammen mit dem Bruch-Feld."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Las pulgadas fraccionarias llegan junto con el teclado de fracciones."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Les pouces fractionnaires arrivent avec le pavé de fractions."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "I pollici frazionari arrivano insieme al tastierino delle frazioni."
           }
         },
@@ -2558,25 +2558,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Maserung gesperrt"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Veta bloqueada"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Fil bloqué"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Venatura bloccata"
           }
         },
@@ -2593,25 +2593,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "H"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "A"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "H"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "A"
           }
         },
@@ -2628,25 +2628,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Höhe"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Alto"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Hauteur"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Altezza"
           }
         },
@@ -2663,25 +2663,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Höhe (mm)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Alto (mm)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Hauteur (mm)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Altezza (mm)"
           }
         },
@@ -2697,25 +2697,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Zoll"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pulgadas"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pouces"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pollici"
           }
         },
@@ -2731,25 +2731,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Eingaben geändert — Plan ist veraltet"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Los datos cambiaron — el plan quedó desactualizado"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Les données ont changé — le plan n'est plus à jour"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "I dati sono cambiati — il piano non è più aggiornato"
           }
         },
@@ -2766,25 +2766,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Schnittfuge eingerechnet, Maserung mit einem Tipp gesperrt, Kantenmeter auf der Karte."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "La sierra descontada, la veta bloqueada con un toque, los metros de canto en la tarjeta."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Trait de scie compté, fil bloqué d'un geste, mètres de chant sur la carte."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Lama già contata, venatura bloccata con un tocco, metri di bordo sulla scheda."
           }
         },
@@ -2801,25 +2801,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Schnittfuge, Maserung, Kantenband — die Profi-Details sind drin."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ancho de sierra, veta, cantos — los detalles de pro están cubiertos."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Trait de scie, fil du bois, chants — les détails de pro sont gérés."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Spessore lama, venatura, bordi — i dettagli da pro ci sono."
           }
         },
@@ -2836,25 +2836,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Küchenschrank"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Mueble de cocina"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Meuble de cuisine"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Mobile da cucina"
           }
         },
@@ -2871,25 +2871,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Linke Kante"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Canto izquierdo"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Chant gauche"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Bordo sinistro"
           }
         },
@@ -2905,25 +2905,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Weniger Verschnitt"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Menos desperdicio"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Moins de chutes"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Meno sfrido"
           }
         },
@@ -2939,25 +2939,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Die mm-Vorgaben unten gelten für metrische Projekte; Zoll-Projekte starten mit 1/8″ Schnittfuge."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Los valores en mm de abajo aplican a proyectos métricos; los de pulgadas arrancan con sierra de 1/8″."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Les réglages mm ci-dessous valent pour les projets métriques ; les projets en pouces démarrent avec un trait de scie de 1/8″."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "I valori in mm qui sotto valgono per i progetti metrici; quelli in pollici partono con lama da 1/8″."
           }
         },
@@ -2973,25 +2973,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Millimeter"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Milímetros"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Millimètres"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Millimetri"
           }
         },
@@ -3007,25 +3007,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Meine Daten"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Mis datos"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Mes données"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "I miei dati"
           }
         },
@@ -3042,25 +3042,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Neues Projekt"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Proyecto nuevo"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nouveau projet"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nuovo progetto"
           }
         },
@@ -3076,25 +3076,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Keine Analyse, keine Konten, läuft komplett offline."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Sin analíticas, sin cuentas, funciona totalmente sin conexión."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pas de tracking, pas de compte, fonctionne entièrement hors ligne."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Niente analytics, niente account, funziona completamente offline."
           }
         },
@@ -3111,25 +3111,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Keine Kante"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Sin canto"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pas de chant"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Senza bordo"
           }
         },
@@ -3146,25 +3146,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ziel"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Objetivo"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Objectif"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Obiettivo"
           }
         },
@@ -3180,25 +3180,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Oder starte mit einem fertigen Beispiel —\nund sieh sofort einen Schnittplan."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "O empieza con un ejemplo ya montado —\ny ve un plan de corte al momento."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ou pars d'un exemple tout prêt —\net vois un plan de coupe tout de suite."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Oppure parti da un esempio già pronto —\ne vedi subito un piano di taglio."
           }
         },
@@ -3215,25 +3215,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "TEIL"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "PIEZA"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "PIÈCE"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "PEZZO"
           }
         },
@@ -3250,25 +3250,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Seite %lld von 3"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Página %lld de 3"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Page %lld sur 3"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pagina %lld di 3"
           }
         },
@@ -3285,25 +3285,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Teil"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pieza"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pièce"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pezzo"
           }
         },
@@ -3320,25 +3320,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Teil %lld"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pieza %lld"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pièce %lld"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pezzo %lld"
           }
         },
@@ -3355,25 +3355,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Teilname"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nombre de la pieza"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nom de la pièce"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nome del pezzo"
           }
         },
@@ -3390,25 +3390,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Teile"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Piezas"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pièces"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pezzi"
           }
         },
@@ -3425,25 +3425,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Plan"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Plan"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Plan"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Piano"
           }
         },
@@ -3459,25 +3459,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Datenschutz"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Privacidad"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Confidentialité"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Privacy"
           }
         },
@@ -3494,25 +3494,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Projektname"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nombre del proyecto"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nom du projet"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Nome del progetto"
           }
         },
@@ -3529,25 +3529,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "STK"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "CANT"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "QTÉ"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "QTÀ"
           }
         },
@@ -3564,25 +3564,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Stk"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Cant"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Qté"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Qtà"
           }
         },
@@ -3599,25 +3599,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Stückzahl"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Cantidad"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Quantité"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Quantità"
           }
         },
@@ -3634,25 +3634,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Neu berechnen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Recalcular"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Recalculer"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ricalcola"
           }
         },
@@ -3668,25 +3668,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Return fügt das Teil hinzu und springt zurück zum Namen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Intro añade la pieza y vuelve al nombre"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Entrée ajoute la pièce et revient au nom"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Invio aggiunge il pezzo e torna al nome"
           }
         },
@@ -3703,25 +3703,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Rechte Kante"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Canto derecho"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Chant droit"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Bordo destro"
           }
         },
@@ -3738,25 +3738,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Drehen erlaubt"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Rotación permitida"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Rotation autorisée"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Rotazione consentita"
           }
         },
@@ -3772,25 +3772,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Einstellungen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ajustes"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Réglages"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Impostazioni"
           }
         },
@@ -3807,25 +3807,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Platte"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tablero"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Panneau"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pannello"
           }
         },
@@ -3841,25 +3841,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Platte %@"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tablero %@"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Panneau %@"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pannello %@"
           }
         },
@@ -3876,25 +3876,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Platte %lld"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tablero %lld"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Panneau %lld"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pannello %lld"
           }
         },
@@ -3911,25 +3911,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Boden"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Balda"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Étagère"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ripiano"
           }
         },
@@ -3946,25 +3946,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Seite"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Lateral"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Côté"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Fianco"
           }
         },
@@ -3981,25 +3981,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Überspringen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Saltar"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Passer"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Salta"
           }
         },
@@ -4016,25 +4016,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Intro überspringen"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Saltar la intro"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Passer l'intro"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Salta l'intro"
           }
         },
@@ -4051,25 +4051,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Material"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tableros"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Panneaux"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pannelli"
           }
         },
@@ -4086,25 +4086,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Support"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Soporte"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Support"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Assistenza"
           }
         },
@@ -4121,25 +4121,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Reiter"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pestaña"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Onglet"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Scheda"
           }
         },
@@ -4156,25 +4156,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Design"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tema"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Thème"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tema"
           }
         },
@@ -4191,25 +4191,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Obere Kante"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Canto superior"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Chant haut"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Bordo superiore"
           }
         },
@@ -4226,25 +4226,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Probier’s erst aus: dein erster Plan mit dem Beispielprojekt."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Pruébalo primero: tu primer plan con el proyecto de ejemplo."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Essaie d'abord : ton premier plan avec le projet d'exemple."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Provalo prima: il tuo primo piano con il progetto di esempio."
           }
         },
@@ -4260,25 +4260,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Beispielprojekt ausprobieren"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Probar el proyecto de ejemplo"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Essayer le projet d'exemple"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Prova il progetto di esempio"
           }
         },
@@ -4294,25 +4294,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Rückgängig"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Deshacer"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Annuler"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Annulla"
           }
         },
@@ -4329,25 +4329,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Einheit"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Unidad"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Unité"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Unità"
           }
         },
@@ -4363,25 +4363,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Einheiten"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Unidades"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Unités"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Unità"
           }
         },
@@ -4398,25 +4398,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Version"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Versión"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Version"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Versione"
           }
         },
@@ -4433,25 +4433,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "B"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "An"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "L"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "L"
           }
         },
@@ -4468,25 +4468,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "B × H (Zoll)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "An × Al (pulg)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "L × H (pouces)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "L × A (pollici)"
           }
         },
@@ -4503,25 +4503,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "B × H (mm)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "An × Al (mm)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "L × H (mm)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "L × A (mm)"
           }
         },
@@ -4538,25 +4538,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Breite"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ancho"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Largeur"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Larghezza"
           }
         },
@@ -4573,25 +4573,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Breite (mm)"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ancho (mm)"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Largeur (mm)"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Larghezza (mm)"
           }
         },
@@ -4608,25 +4608,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Werkstatt-Modus"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Modo Taller"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Mode Atelier"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Modalità Officina"
           }
         },
@@ -4643,25 +4643,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Dein Schnittplan in Sekunden — jedes Mal dasselbe Ergebnis."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tu plan de corte en segundos — el mismo resultado cada vez."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Ton plan de coupe en quelques secondes — le même résultat à chaque fois."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Il tuo piano di taglio in pochi secondi — sempre lo stesso risultato."
           }
         },
@@ -4677,25 +4677,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Deine Daten gehören dir — kein Konto, keine Cloud; nimm sie jederzeit mit."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tus datos son tuyos — sin cuenta, sin nube; llévatelos cuando quieras."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Tes données t'appartiennent — pas de compte, pas de cloud ; repars avec quand tu veux."
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "I tuoi dati sono tuoi — niente account, niente cloud; portali via quando vuoi."
           }
         },
@@ -4712,25 +4712,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Kante"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "canto"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "chant"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "bordo"
           }
         },
@@ -4747,25 +4747,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Kante 7,5 m"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "canto 7,5 m"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "chant 7,5 m"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "bordo 7,5 m"
           }
         },
@@ -4782,25 +4782,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Schnitte"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "cortes"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "coupes"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "tagli"
           }
         },
@@ -4817,25 +4817,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Engine"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "motor"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "moteur"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "motore"
           }
         },
@@ -4852,25 +4852,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Maserung 🔒"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "veta 🔒"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "fil 🔒"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "venatura 🔒"
           }
         },
@@ -4886,25 +4886,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Zoll"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "pulgadas"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "pouces"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "pollici"
           }
         },
@@ -4921,25 +4921,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Fuge 3 mm"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "sierra 3 mm"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "trait 3 mm"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "lama 3 mm"
           }
         },
@@ -4956,25 +4956,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "kerfkit sammelt keine Daten"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "kerfkit no recopila datos"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "kerfkit ne collecte aucune donnée"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "kerfkit non raccoglie dati"
           }
         },
@@ -4990,25 +4990,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "mm"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "mm"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "mm"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "mm"
           }
         },
@@ -5025,25 +5025,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "noch kein Plan"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "aún sin plan"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "pas encore de plan"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "ancora nessun piano"
           }
         },
@@ -5059,25 +5059,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Antwort in unter 24 h"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "respuesta en menos de 24 h"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "réponse en moins de 24 h"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "risposta in meno di 24 ore"
           }
         },
@@ -5094,25 +5094,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Platten"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "tableros"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "panneaux"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "pannelli"
           }
         },
@@ -5128,25 +5128,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "wischen für Platten"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "desliza para cambiar de tablero"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "balaye pour changer de panneau"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "scorri per i pannelli"
           }
         },
@@ -5163,25 +5163,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "Verschnitt"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "desperdicio"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "chutes"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "sfrido"
           }
         },
@@ -5197,25 +5197,25 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "×%@"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "×%@"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "×%@"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "needs_review",
+            "state": "translated",
             "value": "×%@"
           }
         },

@@ -24,3 +24,8 @@ jobs:
       # L-1: taban dil EN — uygulama kaynaklarında hardcoded Türkçe literal yasak.
       - name: i18n bekcisi
         run: python3 tools/i18n-bekci.py
+      # L-3: web build — reviewed:false sayfa üretilmez; hreflang/route bozulursa kırmızı.
+      - name: Web build (Astro)
+        run: |
+          npm --prefix apps/web ci
+          npm --prefix apps/web run build

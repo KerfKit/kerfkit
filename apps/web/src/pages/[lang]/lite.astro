@@ -1,0 +1,11 @@
+---
+// L-3: /{lang}/lite — EN kök /lite'ta; diğer T1 dilleri burada (docs/18 §3).
+import LiteCalc from '../../components/LiteCalc.astro';
+import { LITE_LANGS, type LiteLang } from '../../i18n/lite';
+
+export function getStaticPaths() {
+  return LITE_LANGS.filter((l) => l !== 'en').map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as LiteLang;
+---
+<LiteCalc lang={lang} />

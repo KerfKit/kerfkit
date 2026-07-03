@@ -1,16 +1,20 @@
 ---
-// P-2 rehber şablonu (EN kök) — L-3: hreflang alternates `key` üzerinden.
-import '../../../styles/tokens.css';
+// L-3: /{lang}/guides/{yerel-slug} — yalnız reviewed:true sayfalar üretilir (docs/18 §5.2).
+import '../../../../styles/tokens.css';
 import { getCollection, render } from 'astro:content';
-import { siteDict, guideUrl, liteUrl } from '../../i18n/site';
+import { siteDict, guideUrl, liteUrl } from '../../../i18n/site';
 
 export async function getStaticPaths() {
-  const guides = await getCollection('guides', (g) => g.data.reviewed && !g.id.includes('/'));
-  return guides.map((g) => ({ params: { slug: g.id.replace(/\.md$/, '') }, props: { g } }));
+  const guides = await getCollection('guides', (g) => g.data.reviewed && g.id.includes('/'));
+  return guides.map((g) => {
+    const clean = g.id.replace(/\.md$/, '');
+    const [lang, ...rest] = clean.split('/');
+    return { params: { lang, slug: rest.join('/') }, props: { g, lang } };
+  });
 }
-const { g } = Astro.props;
+const { g, lang } = Astro.props;
 const { Content } = await render(g);
-const t = siteDict.en;
+const t = siteDict[lang] ?? siteDict.en;
 
 // Aynı `key`li onaylı dil sürümleri → hreflang
 const all = await getCollection('guides', (e) => e.data.reviewed && e.data.key === g.data.key);
@@ -23,7 +27,7 @@ const alternates = all.map((e) => {
 const xDefault = alternates.find((a) => a.lang === 'en')?.href;
 ---
 
-<html lang="en">
+<html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,13 +43,13 @@ const xDefault = alternates.find((a) => a.lang === 'en')?.href;
     <svg viewBox="0 0 1024 1024" width="28" height="28" aria-hidden="true"><rect width="1024" height="1024" fill="var(--color-timber-900)" rx="230"/><g fill="var(--color-amber-500)" transform="rotate(-45 512 512)"><rect x="-300" y="342" width="788" height="340"/><rect x="536" y="342" width="788" height="340"/></g></svg>
     <span>kerfkit</span>
   </a>
-  <a class="cta cta-sm" href={liteUrl('en')}>{t.calcCta}</a>
+  <a class="cta cta-sm" href={liteUrl(lang)}>{t.calcCta}</a>
 </header>
 
 <main>
   <div class="serit">
     {t.stripA}
-    <a href={liteUrl('en')}>{t.stripCalc}</a> · <a href="/#founding">{t.stripFound}</a>
+    <a href={liteUrl(lang)}>{t.stripCalc}</a> · <a href="/#founding">{t.stripFound}</a>
   </div>
   <article>
     <h1>{g.data.title}</h1>
@@ -54,7 +58,7 @@ const xDefault = alternates.find((a) => a.lang === 'en')?.href;
 </main>
 
 <footer class="kabuk alt">
-  <span>© 2026 kerfkit · <a href="/">{t.footHome}</a> · <a href={liteUrl('en')}>{t.footCalc}</a></span>
+  <span>© 2026 kerfkit · <a href="/">{t.footHome}</a> · <a href={liteUrl(lang)}>{t.footCalc}</a></span>
 </footer>
 
 <style is:global>

@@ -1,0 +1,253 @@
+---
+// W-2 lite çekirdeği, L-3'te 6 dile bağlandı (sözlük: src/i18n/lite.ts).
+// Motor mantığı W-2 ile birebir; yalnız metinler t.* üzerinden.
+import '../../styles/tokens.css';
+import { LITE_LANGS, liteDict, type LiteLang } from '../i18n/lite';
+
+interface Props { lang: LiteLang }
+const { lang } = Astro.props;
+const t = liteDict[lang];
+const FOUNDING = '/#founding';
+const alternates = LITE_LANGS.map((l) => ({
+  l, href: l === 'en' ? '/lite' : `/${l}/lite`,
+}));
+const partNames = t.partNames.split('|');
+---
+
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{t.title}</title>
+  <meta name="description" content={t.metaDesc} />
+  {alternates.map(({ l, href }) => <link rel="alternate" hreflang={l} href={`https://kerfkit.app${href}`} />)}
+  <link rel="alternate" hreflang="x-default" href="https://kerfkit.app/lite" />
+</head>
+<body>
+
+<header class="kabuk">
+  <a class="marka" href="/">
+    <svg viewBox="0 0 1024 1024" width="28" height="28" aria-hidden="true"><rect width="1024" height="1024" fill="var(--color-timber-900)" rx="230"/><g fill="var(--color-amber-500)" transform="rotate(-45 512 512)"><rect x="-300" y="342" width="788" height="340"/><rect x="536" y="342" width="788" height="340"/></g></svg>
+    <span>kerfkit <em>lite</em></span>
+  </a>
+  <a class="cta cta-sm" href={FOUNDING}>{t.fullVersion}</a>
+</header>
+
+<main>
+  <h1>{t.h1}</h1>
+  <p class="alt">{t.sub}</p>
+
+  <div class="izgara">
+    <section class="panel">
+      <h2>{t.sheet}</h2>
+      <div class="satir">
+        <label>{t.widthMM} <input id="sw" type="number" value="2440" min="1" /></label>
+        <label>{t.heightMM} <input id="sh" type="number" value="1220" min="1" /></label>
+      </div>
+      <div class="satir">
+        <label>{t.kerfMM} <input id="kerf" type="number" value="3" min="0" /></label>
+        <label>{t.trimMM} <input id="trim" type="number" value="0" min="0" /></label>
+      </div>
+
+      <h2>{t.parts} <span id="sayac" class="soluk"></span></h2>
+      <div id="parcalar"></div>
+      <button id="ekle" class="ghost" type="button">{t.addPart}</button>
+      <div id="sinir" class="soluk" hidden>{t.limit} <a href={FOUNDING}>{t.getApp}</a></div>
+    </section>
+
+    <section class="panel">
+      <div id="istatistik" class="istatistik soluk">{t.loading}</div>
+      <svg id="diyagram" viewBox="0 0 800 400" role="img" aria-label={t.diagramLbl}></svg>
+      <div id="yerlesmeyen" class="uyari" hidden></div>
+      <div id="huni" class="huni" hidden>
+        {t.funnel}
+        <span class="rozetler">
+          <a class="rozet" href={FOUNDING}>{t.badgeAS}</a>
+          <a class="rozet" href={FOUNDING}>{t.badgeGP}</a>
+        </span>
+      </div>
+      <div class="eylem">
+        <button id="pdf" class="cta" type="button">{t.pdfBtn}</button>
+        <span class="soluk">{t.pdfNote} <a href="/">{t.appLink}</a></span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<dialog id="modal">
+  <h3>{t.modalTitle}</h3>
+  <p class="soluk">{t.modalBody}</p>
+  <p class="rozetler"><a class="rozet" href={FOUNDING}>{t.badgeAS}</a>
+     <a class="rozet" href={FOUNDING}>{t.badgeGP}</a></p>
+  <p class="soluk">{t.modalMail}</p>
+  <form method="dialog">
+    <input id="eposta" type="email" placeholder={t.emailPh} required />
+    <button class="cta" id="gonder" type="submit">{t.send}</button>
+    <button class="ghost" value="cancel">{t.cancel}</button>
+  </form>
+</dialog>
+
+<script define:vars={{ T: t, PART_NAMES: partNames }}>
+  let engine = null;
+  async function bootEngine() {
+    const resp = await fetch('/wasm/kerfkit-motor.wasm');
+    const module = await WebAssembly.compile(await resp.arrayBuffer());
+    let memory;
+    const stub = new Proxy({
+      fd_write: (_fd, _iov, _cnt, nw) => { new DataView(memory.buffer).setUint32(nw, 0, true); return 0; },
+      random_get: (ptr, len) => { crypto.getRandomValues(new Uint8Array(memory.buffer, ptr, len)); return 0; },
+      clock_time_get: (_id, _prec, out) => { new DataView(memory.buffer).setBigUint64(out, BigInt(Math.round(performance.now() * 1e6)), true); return 0; },
+      proc_exit: (c) => { throw new Error(`wasm exit ${c}`); },
+      environ_sizes_get: (a, b) => { const dv = new DataView(memory.buffer); dv.setUint32(a, 0, true); dv.setUint32(b, 0, true); return 0; },
+      environ_get: () => 0,
+      args_sizes_get: (a, b) => { const dv = new DataView(memory.buffer); dv.setUint32(a, 0, true); dv.setUint32(b, 0, true); return 0; },
+      args_get: () => 0,
+    }, { get: (t2, name) => t2[name] ?? (() => 52) });
+    const inst = await WebAssembly.instantiate(module, { wasi_snapshot_preview1: stub });
+    memory = inst.exports.memory;
+    inst.exports._initialize();
+    engine = inst.exports;
+  }
+
+  function optimize(request) {
+    const bytes = new TextEncoder().encode(JSON.stringify(request));
+    const ptr = engine.kk_input_alloc(bytes.length);
+    new Uint8Array(engine.memory.buffer, ptr, bytes.length).set(bytes);
+    const n = engine.kk_optimize(bytes.length);
+    if (n < 0) throw new Error(`engine error ${n}`);
+    return JSON.parse(new TextDecoder().decode(new Uint8Array(engine.memory.buffer, engine.kk_output_ptr(), n)));
+  }
+
+  const MAX_PARTS = 20;
+  const $ = (id) => document.getElementById(id);
+  const varsayilan = [
+    { name: PART_NAMES[0], w: 720, h: 580, q: 2 },
+    { name: PART_NAMES[1], w: 764, h: 560, q: 2 },
+    { name: PART_NAMES[2], w: 396, h: 716, q: 1 },
+  ];
+
+  function partRow(p = { name: '', w: '', h: '', q: 1 }) {
+    const row = document.createElement('div');
+    row.className = 'parca';
+    row.innerHTML = `
+      <input class="ad" placeholder="${T.partPh}" value="${p.name}" />
+      <input class="w" type="number" min="1" placeholder="W" value="${p.w}" />
+      <input class="h" type="number" min="1" placeholder="H" value="${p.h}" />
+      <input class="q" type="number" min="1" value="${p.q}" />
+      <button type="button" class="sil" aria-label="${T.removeLbl}">×</button>`;
+    row.querySelector('.sil').onclick = () => { row.remove(); hesapla(); };
+    row.querySelectorAll('input').forEach((i) => (i.oninput = hesapla));
+    return row;
+  }
+
+  function okuIstek() {
+    const mm = (el, min = 1) => Math.max(min, parseInt(el.value || '0', 10) || min);
+    const parts = [...document.querySelectorAll('.parca')].map((r, i) => ({
+      id: `p${i}`, name: r.querySelector('.ad').value || `${T.partPh} ${i + 1}`, materialId: 'm1',
+      w: mm(r.querySelector('.w')) * 100, h: mm(r.querySelector('.h')) * 100,
+      qty: mm(r.querySelector('.q')), rotation: 'allowed',
+    })).filter((p) => p.w > 100 && p.h > 100);
+    return {
+      unitMode: 'metric_mm', kerf: Math.max(0, parseInt($('kerf').value || '0', 10)) * 100,
+      trim: Math.max(0, parseInt($('trim').value || '0', 10)) * 100,
+      objective: 'sheets', seed: 1,
+      stocks: [{ id: 's1', materialId: 'm1', w: mm($('sw')) * 100, h: mm($('sh')) * 100, qty: 1, isOffcut: false }],
+      parts,
+    };
+  }
+
+  function ciz(reply, req) {
+    const svg = $('diyagram');
+    const W = req.stocks[0].w, H = req.stocks[0].h;
+    const genis = 800, yuksek = Math.round((genis * H) / W);
+    svg.setAttribute('viewBox', `0 0 ${genis} ${yuksek}`);
+    const s = genis / W;
+    const names = Object.fromEntries(req.parts.map((p) => [p.id, p.name]));
+    let out = `<rect width="${genis}" height="${yuksek}" fill="var(--color-timber-800)" rx="6"/>`;
+    for (const p of reply.result.placements) {
+      if (p.sheetIndex !== 0) continue;
+      const x = p.x * s, y = yuksek - (p.y + p.h) * s, w = p.w * s, h = p.h * s;
+      out += `<rect x="${x + 1}" y="${y + 1}" width="${w - 2}" height="${h - 2}" fill="var(--color-amber-500)" rx="3"/>`;
+      if (w > 70 && h > 22) out += `<text x="${x + w / 2}" y="${y + h / 2}" text-anchor="middle" dominant-baseline="middle" font-size="14" font-weight="600" fill="var(--color-timber-950)">${names[p.partId] ?? ''}${p.rotated ? ' ⤾' : ''}</text>`;
+    }
+    svg.innerHTML = out;
+  }
+
+  let zamanlayici;
+  function hesapla() {
+    clearTimeout(zamanlayici);
+    zamanlayici = setTimeout(() => {
+      if (!engine) return;
+      const req = okuIstek();
+      $('sayac').textContent = `${document.querySelectorAll('.parca').length}/${MAX_PARTS}`;
+      const dolu = document.querySelectorAll('.parca').length >= MAX_PARTS;
+      $('ekle').disabled = dolu;
+      $('sinir').hidden = !dolu;
+      if (req.parts.length === 0) { $('istatistik').textContent = T.addPrompt; $('diyagram').innerHTML = ''; return; }
+      const t0 = performance.now();
+      const reply = optimize(req);
+      const ms = (performance.now() - t0).toFixed(1);
+      if (!reply.ok) { $('istatistik').textContent = `${T.inputErr} (${reply.error})`; return; }
+      const st = reply.result.stats;
+      const yuzde = (st.wasteBps / 10000).toLocaleString(T.locale, { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+      $('istatistik').textContent = `${st.sheetCount} ${T.sheets} · ${yuzde} ${T.waste} · ${st.cutCount} ${T.cuts} · ${ms} ms`;
+      const n = (parseInt(localStorage.getItem('kk_hesap') || '0', 10) || 0) + 1;
+      localStorage.setItem('kk_hesap', String(n));
+      $('huni').hidden = n < 3;
+      const yer = $('yerlesmeyen');
+      yer.hidden = reply.result.unplaced.length === 0;
+      yer.textContent = reply.result.unplaced.length ? `${reply.result.unplaced.length} ${T.unplaced}` : '';
+      ciz(reply, req);
+    }, 30);
+  }
+
+  $('ekle').onclick = () => { $('parcalar').appendChild(partRow()); hesapla(); };
+  $('pdf').onclick = () => $('modal').showModal();
+  $('gonder').onclick = () => {
+    location.href = `mailto:hello@kerfkit.app?subject=Lite%20PDF&body=${encodeURIComponent($('eposta').value)}`;
+  };
+
+  varsayilan.forEach((p) => $('parcalar').appendChild(partRow(p)));
+  bootEngine().then(hesapla).catch((e) => { $('istatistik').textContent = `${T.inputErr} ${e.message}`; });
+</script>
+
+<style is:global>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--color-timber-950); color: var(--color-timber-200);
+         font: 16px/1.55 -apple-system, "SF Pro Text", "Segoe UI", sans-serif; }
+  main { max-width: 1080px; margin: 0 auto; padding: 0 24px 64px; }
+  h1 { color: var(--color-timber-50); font-size: 34px; margin-top: 24px; }
+  h2 { color: var(--color-timber-50); font-size: 17px; margin: 20px 0 10px; }
+  .alt { color: var(--color-timber-300); margin-top: 8px; }
+  .kabuk { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; max-width: 1080px; margin: 0 auto; }
+  .marka { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 22px; color: var(--color-timber-50); text-decoration: none; }
+  .marka em { color: var(--color-amber-500); font-style: normal; }
+  .cta { display: inline-block; background: var(--color-amber-500); color: var(--color-timber-950); font-weight: 700; text-decoration: none; border: 0; padding: 12px 20px; border-radius: 10px; font-size: 15px; cursor: pointer; }
+  .cta-sm { padding: 8px 16px; font-size: 14px; }
+  .ghost { background: none; border: 1px solid var(--color-timber-700); color: var(--color-timber-300); border-radius: 8px; padding: 8px 14px; margin-top: 8px; cursor: pointer; }
+  .izgara { display: grid; grid-template-columns: 380px 1fr; gap: 24px; margin-top: 24px; }
+  .panel { background: var(--color-timber-900); border-radius: 14px; padding: 18px; }
+  .satir { display: flex; gap: 10px; }
+  label { display: block; font-size: 12px; color: var(--color-timber-300); flex: 1; }
+  input { width: 100%; background: var(--color-timber-800); color: var(--color-timber-50); border: 0; border-radius: 8px; padding: 9px 10px; font-size: 15px; margin-top: 4px; }
+  .parca { display: grid; grid-template-columns: 1.4fr .8fr .8fr .5fr 32px; gap: 6px; margin-bottom: 6px; align-items: center; }
+  .parca .sil { background: none; border: 0; color: var(--color-timber-500); font-size: 18px; cursor: pointer; }
+  .istatistik { font-size: 15px; font-weight: 600; color: var(--color-amber-400); min-height: 24px; margin-bottom: 12px; }
+  .soluk { color: var(--color-timber-500); font-weight: 400; font-size: 13px; }
+  #diyagram { width: 100%; border-radius: 10px; }
+  .uyari { margin-top: 10px; color: var(--color-red-500); font-size: 14px; }
+  .huni { margin-top: 14px; background: var(--color-timber-900); border-left: 3px solid var(--color-amber-500);
+          border-radius: 10px; padding: 12px 14px; font-size: 14px; color: var(--color-timber-200); }
+  .rozetler { display: inline-flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .rozet { border: 1px solid var(--color-timber-700); border-radius: 8px; padding: 6px 12px;
+           font-size: 13px; color: var(--color-timber-50); text-decoration: none; white-space: nowrap; }
+  .rozet:hover { border-color: var(--color-amber-500); }
+  .eylem { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .eylem a { color: var(--color-amber-400); }
+  dialog { background: var(--color-timber-900); color: var(--color-timber-200); border: 1px solid var(--color-timber-700); border-radius: 14px; padding: 24px; max-width: 380px; }
+  dialog::backdrop { background: rgb(0 0 0 / .6); }
+  dialog h3 { color: var(--color-timber-50); margin-bottom: 8px; }
+  dialog form { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+  @media (max-width: 860px) { .izgara { grid-template-columns: 1fr; } }
+</style>
+</body></html>

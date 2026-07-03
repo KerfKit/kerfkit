@@ -1,4 +1,6 @@
 ---
+key: "minimize-waste"
+reviewed: true
 title: "How to Minimize Plywood Waste: A Shop-Floor Guide"
 description: "Practical ways to get more parts from every sheet — sizing to the sheet, grouping by thickness, planning offcuts, and letting the layout math work for you."
 date: "2026-07-03"
