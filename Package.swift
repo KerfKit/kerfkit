@@ -39,7 +39,8 @@ var packageTargets: [Target] = wasmBuild ? [
     // Birim bekçileri macOS-yalnız; Android parite kanıtı golden koşucudur (CutCoreTests —
     // Skip konvansiyonu: <Modül>Tests, CutCore'un Kotlin test modülü olarak çevrilir).
     .testTarget(name: "CutCoreUnitTests", dependencies: ["CutCore"]),
-    .testTarget(name: "CutProjTests", dependencies: ["CutProj"]),
+    .testTarget(name: "CutProjTests", dependencies: ["CutProj"],
+                resources: [.copy("fixtures")]),
     .testTarget(name: "CutCoreTests",
                 dependencies: ["CutCore",
                                .product(name: "SkipTest", package: "skip"),

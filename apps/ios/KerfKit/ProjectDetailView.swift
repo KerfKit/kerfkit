@@ -55,12 +55,33 @@ struct PartsTabView: View {
         @Bindable var store = store
         VStack(spacing: 0) {
             quickAddBar
-            Text("Return adds the part and jumps back to Name")
-                .font(.caption2)
-                .foregroundStyle(DesignTokens.colorTimber500)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                .padding(.vertical, 6)
+            HStack(spacing: 8) {
+                Text("Return adds the part and jumps back to Name")
+                    .font(.caption2)
+                    .foregroundStyle(DesignTokens.colorTimber500)
+                Spacer()
+                // K-12: pano içe aktarma — PasteButton izin uyarısı çıkarmaz (M-2 bandının
+                // gizlilik-dostu hali; sistem kendi dilinde "Yapıştır" yazar).
+                PasteButton(payloadType: String.self) { items in
+                    Task { @MainActor in
+                        if let text = items.first { store.importParts(fromCSV: text) }
+                    }
+                }
+                .labelStyle(.titleOnly)
+                .controlSize(.small)
+                .tint(DesignTokens.colorTimber700)
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 6)
+
+            if let summary = store.importSummary {
+                Text(summary)
+                    .font(.caption)
+                    .foregroundStyle(DesignTokens.colorAmber400)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .accessibilityIdentifier("parts.importSummary")
+            }
 
             List {
                 ForEach($store.parts) { $part in
@@ -332,6 +353,10 @@ struct PlanTabView: View {
                           preview: SharePreview("\(store.projectName).pdf")) {
                     shareTile("PDF", icon: "doc.richtext")
                 }
+            }
+            ShareLink(item: CSVExport(name: store.projectName, rows: store.csvRows),
+                      preview: SharePreview("\(store.projectName).csv")) {
+                shareTile("CSV", icon: "tablecells")
             }
             ShareLink(item: CutprojExport(doc: store.exportableDoc()),
                       preview: SharePreview("\(store.projectName).cutproj")) {

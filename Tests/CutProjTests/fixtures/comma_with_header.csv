@@ -1,0 +1,5 @@
+name,width_mm,height_mm,qty,rotation,banding
+"Side, left",720,580,2,fixed,TLR
+Shelf,764,560,2,allowed,T
+Door,396,716,1,fixed,TBLR
+Drawer front,396,180,6,,
