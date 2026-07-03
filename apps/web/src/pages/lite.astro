@@ -41,12 +41,21 @@ const FOUNDING_LIST = 'mailto:hello@kerfkit.app?subject=Lite%20PDF';
       <h2>Parts <span id="sayac" class="soluk"></span></h2>
       <div id="parcalar"></div>
       <button id="ekle" class="ghost" type="button">+ Add part</button>
+      <div id="sinir" class="soluk" hidden>20-part limit is a browser thing — the app has none. <a href="/#founding">Get the app →</a></div>
     </section>
 
     <section class="panel" aria-label="Result">
       <div id="istatistik" class="istatistik soluk">Loading engine…</div>
       <svg id="diyagram" viewBox="0 0 800 400" role="img" aria-label="Cut layout diagram"></svg>
       <div id="yerlesmeyen" class="uyari" hidden></div>
+      <!-- W-3 huni: 3. hesaptan sonra nazik banner — hesap SINIRSIZ kalır (docs/18 §6) -->
+      <div id="huni" class="huni" hidden>
+        Unlimited projects, multi-sheet plans &amp; Workshop Mode — fully offline in the app.
+        <span class="rozetler">
+          <a class="rozet" href="/#founding">App Store — coming soon</a>
+          <a class="rozet" href="/#founding">Google Play — coming soon</a>
+        </span>
+      </div>
       <div class="eylem">
         <button id="pdf" class="cta" type="button">Download PDF</button>
         <span class="soluk">PDF &amp; multi-sheet plans live in the <a href="/">iOS app</a>.</span>
@@ -56,8 +65,11 @@ const FOUNDING_LIST = 'mailto:hello@kerfkit.app?subject=Lite%20PDF';
 </main>
 
 <dialog id="modal">
-  <h3>Get the PDF by email</h3>
-  <p class="soluk">Leave your email and we’ll send the cut plan — and early-bird founding pricing for the full app.</p>
+  <h3>PDF lives in the app</h3>
+  <p class="soluk">PDF export, saved projects and multi-sheet plans are app features — one-time purchase, works offline.</p>
+  <p class="rozetler"><a class="rozet" href="/#founding">App Store — coming soon</a>
+     <a class="rozet" href="/#founding">Google Play — coming soon</a></p>
+  <p class="soluk">Or leave your email — we’ll send this plan and ping you at launch.</p>
   <form method="dialog">
     <input id="eposta" type="email" placeholder="you@workshop.com" required />
     <button class="cta" id="gonder" type="submit">Send it</button>
@@ -160,13 +172,19 @@ const FOUNDING_LIST = 'mailto:hello@kerfkit.app?subject=Lite%20PDF';
       if (!engine) return;
       const req = okuIstek();
       $('sayac').textContent = `${document.querySelectorAll('.parca').length}/${MAX_PARTS}`;
-      $('ekle').disabled = document.querySelectorAll('.parca').length >= MAX_PARTS;
+      const dolu = document.querySelectorAll('.parca').length >= MAX_PARTS;
+      $('ekle').disabled = dolu;
+      $('sinir').hidden = !dolu;
       if (req.parts.length === 0) { $('istatistik').textContent = 'Add a part to see the layout.'; $('diyagram').innerHTML = ''; return; }
       const t0 = performance.now();
       const reply = optimize(req);
       const ms = (performance.now() - t0).toFixed(1);
       if (!reply.ok) { $('istatistik').textContent = `Input error — check sizes. (${reply.error})`; return; }
       const st = reply.result.stats;
+      // W-3: 3. hesaptan itibaren huni banner'ı (localStorage — nazik, kapatmasız)
+      const n = (parseInt(localStorage.getItem('kk_hesap') || '0', 10) || 0) + 1;
+      localStorage.setItem('kk_hesap', String(n));
+      $('huni').hidden = n < 3;
       $('istatistik').textContent = `${st.sheetCount} sheet · ${(st.wasteBps / 100).toFixed(1)}% waste · ${st.cutCount} cuts · ${ms} ms`;
       const yer = $('yerlesmeyen');
       yer.hidden = reply.result.unplaced.length === 0;
@@ -212,6 +230,12 @@ const FOUNDING_LIST = 'mailto:hello@kerfkit.app?subject=Lite%20PDF';
   .soluk { color: var(--color-timber-500); font-weight: 400; font-size: 13px; }
   #diyagram { width: 100%; border-radius: 10px; }
   .uyari { margin-top: 10px; color: var(--color-red-500); font-size: 14px; }
+  .huni { margin-top: 14px; background: var(--color-timber-900); border-left: 3px solid var(--color-amber-500);
+          border-radius: 10px; padding: 12px 14px; font-size: 14px; color: var(--color-timber-200); }
+  .rozetler { display: inline-flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .rozet { border: 1px solid var(--color-timber-700); border-radius: 8px; padding: 6px 12px;
+           font-size: 13px; color: var(--color-timber-50); text-decoration: none; white-space: nowrap; }
+  .rozet:hover { border-color: var(--color-amber-500); }
   .eylem { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
   .eylem a { color: var(--color-amber-400); }
   dialog { background: var(--color-timber-900); color: var(--color-timber-200); border: 1px solid var(--color-timber-700); border-radius: 14px; padding: 24px; max-width: 380px; }

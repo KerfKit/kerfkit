@@ -8,6 +8,8 @@
 
 - [ ] **App Store Connect'te uygulama kaydı** — ad "KerfKit", bundle `app.kerfkit.KerfKit`
   (Xcode projesiyle birebir). K-20 TestFlight ve K-19 mağaza görselleri buna bağlı.
+- [ ] **Mağaza URL'leri** — App Store/Play kayıtları oluşunca iki mağaza linkini bana ver;
+  web hunisindeki "yakında" rozetlerini gerçek rozet+QR'a çevireceğim (W-3).
 - [ ] **Google Play Console'da uygulama kaydı** — ad "KerfKit", paket `app.kerfkit`
   (E9 Android hattı buna bağlı; K-31 başlamadan şart değil ama yaklaşıyor).
 - [ ] **kerfkit.app domaini** (birincil; .app'te HTTPS zorunlu — sorun değil) +
