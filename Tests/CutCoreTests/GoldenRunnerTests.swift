@@ -1,4 +1,5 @@
 import XCTest
+import Foundation
 import CutModels
 @testable import CutCore
 
@@ -11,21 +12,41 @@ struct GoldenVector: Codable {
 }
 
 final class GoldenRunnerTests: XCTestCase {
-    func testAllVectors() throws {
-        // Bundle.urls(...) Linux'ta [NSURL] dondurdugu icin FileManager ile geziyoruz (iki platformda da [URL]).
+    // Vektörler VectorData.swift'ten (gömülü) okunur: Android asset dosya sistemi dizin
+    // listelemeyi desteklemez, Wasm'da Bundle yok (K-30). Tek kaynak vectors/*.json —
+    // testEmbeddedVectorsMatchDisk (macOS) gömülü kopyanın bayat kalmasını engeller;
+    // güncelleme: node tools/gen-vectors-swift.mjs
+
+    #if !SKIP
+    func testEmbeddedVectorsMatchDisk() throws {
         guard let dir = Bundle.module.resourceURL?.appendingPathComponent("vectors") else {
             XCTFail("vectors klasoru bulunamadi"); return
         }
-        let urls = try FileManager.default.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil)
+        let onDisk = try FileManager.default.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil)
             .filter { $0.pathExtension == "json" }
-            .sorted { $0.absoluteString < $1.absoluteString }
-        XCTAssertFalse(urls.isEmpty, "vectors klasoru bos olmamali")
-        for url in urls {
-            let data = try Data(contentsOf: url)
+        XCTAssertEqual(onDisk.map(\.lastPathComponent).sorted(), VectorData.all.keys.sorted(),
+                       "gömülü vektör seti dizinle eşleşmiyor — node tools/gen-vectors-swift.mjs koş")
+        for url in onDisk {
+            let disk = try String(contentsOf: url, encoding: .utf8)
+            XCTAssertEqual(VectorData.all[url.lastPathComponent], disk,
+                           "\(url.lastPathComponent) gömülü kopyadan sapmış — node tools/gen-vectors-swift.mjs koş")
+        }
+    }
+    #endif
+
+    func testAllVectors() throws {
+        let names = VectorData.all.keys.sorted()
+        XCTAssertFalse(names.isEmpty, "gömülü vektör seti boş olmamalı")
+        for name in names {
+            guard let json = VectorData.all[name],
+                  let data = json.data(using: .utf8) else {
+                XCTFail("\(name): gömülü veri okunamadı")
+                continue
+            }
             let vector = try JSONDecoder().decode(GoldenVector.self, from: data)
             XCTAssertTrue(validate(vector.request).isEmpty, "\(vector.name): istek gecerli olmali")
             if vector.pending {
-                continue // motor implementasyonu (E1) gelince expected doldurulur, pending false yapilir
+                continue // motor implementasyonu gelince expected doldurulur, pending false yapilir
             }
             let result = try optimize(vector.request)
             guard let exp = vector.expected else {
