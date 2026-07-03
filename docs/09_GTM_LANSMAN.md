@@ -37,6 +37,10 @@ haftada ≥1 levha kesen; karşılık: $29 (founding altı) + "Founding Craftsme
 
 ## 2. ASO planı
 
+> **Global revizyon (3 Tem 2026):** ASO tek dilli değildir — başlık/altbaşlık/keywords/ekran
+> metinleri T1 dillerinde (EN DE FR ES IT TR) locale başına yerel jenerik terimle hazırlanır;
+> strateji ve dil katmanları docs/18 §4. Aşağıdaki EN planı taban şablondur.
+
 - **Başlık:** "[İsim]: Cut List Optimizer" — jenerik terim + marka (jenerik trafik kategoriye ait).
 - **Altbaşlık:** "Plywood & board cut planner — no subscription."
 - **Anahtar kelimeler:** cutlist, cut list calculator, plywood cut calculator, panel saw, sheet
@@ -54,7 +58,13 @@ haftada ≥1 levha kesen; karşılık: $29 (founding altı) + "Founding Craftsme
 waste · what is kerf (+chart) · board foot calculator · 4x8 sheet layout planner ·
 cutlistoptimizer alternative (karşılaştırma — dürüst tablo) · plywood grain direction rules ·
 cabinet cut list template · table saw vs track saw for sheet goods.
-Lite hesaplayıcı her sayfadan 1 tık; PDF isteyince e-posta.
+Lite hesaplayıcı her sayfadan 1 tık; PDF isteyince e-posta → mağaza yönlendirme (huni: docs/18 §6).
+
+**Global revizyon (3 Tem 2026):** SEO çok dillidir — URL `/{lang}/`, hreflang + x-default,
+anahtar kelimeler dil başına YENİDEN araştırılır (birebir çeviri değil; çekirdek terimler
+docs/18 §3). Compare sayfaları (`/compare/cutlist-optimizer`, `/compare/cutplan`,
+`/compare/opticutter`) en yüksek niyetli trafiktir ve İLK sıradadır — dürüst tablo kuralı
+(02 §3) aynen geçerli. Çeviri yayına `reviewed: true` işareti olmadan çıkmaz (docs/18 §5).
 
 ## 4. Launch günü (Hafta 0)
 
