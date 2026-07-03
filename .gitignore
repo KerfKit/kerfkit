@@ -4,3 +4,5 @@ DerivedData/
 xcuserdata/
 node_modules/
 *.xcworkspace/xcuserdata
+apps/web/dist/
+apps/web/.astro/
