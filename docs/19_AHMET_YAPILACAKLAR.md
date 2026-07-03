@@ -4,6 +4,9 @@
 > adımlar kalır. Tamamlananlar tarihle işaretlenir, yenileri eklenir.
 > Son güncelleme: 3 Tem 2026 gece (TR onayı işlendi).
 
+> **Sıra kararı (Ahmet, 4 Tem 2026):** mağaza kayıtları EN SONA alındı — mağaza-bağımlı
+> işler (K-19/K-20, huni gerçek rozetleri, ASO yayını) o zamana park; geri kalan her şey sürer.
+
 ## 🔴 Bloklayanlar (geliştirme bunlara dayanınca durur)
 
 - [ ] **App Store Connect'te uygulama kaydı** — ad "KerfKit", bundle `app.kerfkit.KerfKit`

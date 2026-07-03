@@ -8,13 +8,13 @@ cd "$(dirname "$0")/../apps/ios"
 OUT=$(mktemp -d)
 trap 'rm -rf "$OUT"' EXIT
 xcodebuild -exportLocalizations -project KerfKit.xcodeproj \
-  -localizationPath "$OUT" -exportLanguage tr -quiet 2>/dev/null
+  -localizationPath "$OUT" -exportLanguage tr -exportLanguage de -exportLanguage fr -exportLanguage es -exportLanguage it -quiet 2>/dev/null
 
 python3 - "$OUT" <<'PYEOF'
 import glob, json, re, sys
 out = sys.argv[1]
 missing_target, extracted = [], set()
-for xliff in glob.glob(f"{out}/tr.xcloc/Localized Contents/*.xliff"):
+for xliff in glob.glob(f"{out}/*.xcloc/Localized Contents/*.xliff"):
     s = open(xliff, encoding='utf-8').read()
     for uid, body in re.findall(r'<trans-unit id="([^"]+)"((?:(?!</trans-unit>).)*?)</trans-unit>', s, re.S):
         uid = uid.replace('&#10;', '\n').replace('\r', '')
