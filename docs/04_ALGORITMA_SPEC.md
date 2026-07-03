@@ -62,8 +62,14 @@ OPTIMIZE(parts, stocks, config):
 ## 4. 1D motor
 
 - FFD (azalan sırala, ilk sığan stoğa koy, kerf düş). Garanti: FFD ≤ 11/9·OPT + 6/9 (Dósa 2007).
-- Benzersiz parça ≤15 ise: dальше branch-and-bound tam çözüm (zaman sınırı 500ms, aşarsa FFD kal).
-- Aynı çıktı yapısı: placements(stok başına segment listesi), stats, offcuts, unplaced.
+- Benzersiz parça boyu ≤15 VE stok boyları tek-tip ise: branch-and-bound tam çözüm.
+  Sınır DETERMİNİSTİK düğüm bütçesidir (~500ms karşılığı; §2 determinizm kuralı duvar-saati
+  sınırını yasaklar — aynı girdi her cihazda aynı plan). Bütçe aşılırsa FFD sonucu kalır;
+  B&B yalnız FFD'den kesin iyiyse benimsenir. Karışık stok boylarında FFD.
+- Kerf: parça sonunda stokta malzeme kalıyorsa 1 kesim + kerf düşülür; stok ucuna tam
+  gelen parçada kesim/kerf yok (2D'deki levha-kenarı kuralının 1D karşılığı).
+- Aynı çıktı yapısı: placements(stok başına segment listesi), stats, unplaced
+  (offcuts alanı 2D ile birlikte şema kararına bağlı).
 
 ## 5. Golden test stratejisi (paritenin anayasası)
 
@@ -74,7 +80,8 @@ OPTIMIZE(parts, stocks, config):
   motor çıkış sırasıyla `partId|sheetIndex|x|y|w|h|r;` (r = 0/1, sayılar taban-10, UTF-8 bayt);
   partId içindeki `\`, `|`, `;` ters bölü ile kaçışlanır (enjektiflik — ayırıcısız id'lerde hash
   değişmez); çıktı 16 haneli küçük-harf hex. FNV-1a sabitleri: offset 0xcbf29ce484222325,
-  prime 0x100000001b3.
+  prime 0x100000001b3. 1D kanonik biçim: `partId|stockIndex|offset|length;` (aynı sabitler
+  ve kaçış kuralı; 1D vektör dosya adı `1d_` önekiyle ayrışır).
 - **Değişmez doğrulayıcı** her vektörde ayrıca koşar: (1) çakışma yok, (2) sınır içi,
   (3) guillotine-geçerli (yerleşimden kesim ağacı yeniden inşa edilebilir), (4) kerf mesafeleri doğru.
 - Minimum vektör seti (v1): 25 adet — basit(5), kerf uçları(4), grain(3), çoklu-levha/malzeme(4),
