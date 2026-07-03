@@ -1,120 +1,98 @@
 import SwiftUI
 import CutModels
 
+// M-1 Projeler Listesi (docs/07 E-1) — kartlar + boş durumda "Örnek projeyi dene".
 struct ContentView: View {
     @Environment(ProjectStore.self) private var store
-    @State private var showPlan = false
+    @State private var autoOptimizeRan = false
 
     var body: some View {
         @Bindable var store = store
         NavigationStack {
-            Form {
-                Section("Levha") {
-                    LabeledContent("Boyut (mm)") {
-                        HStack(spacing: 4) {
-                            NumberField(value: $store.sheetWidthMM)
-                            Text("×").foregroundStyle(DesignTokens.colorTimber500)
-                            NumberField(value: $store.sheetHeightMM)
-                        }
-                    }
-                    Stepper("Adet: \(store.sheetQty)", value: $store.sheetQty, in: 1...200)
-                    LabeledContent("Kerf (mm)") { NumberField(value: $store.kerfMM) }
-                    LabeledContent("Kenar payı (mm)") { NumberField(value: $store.trimMM) }
-                    Picker("Hedef", selection: $store.objective) {
-                        Text("Az levha").tag(Objective.sheets)
-                        Text("Az fire").tag(Objective.waste)
-                        Text("Az kesim").tag(Objective.cuts)
-                    }
-                }
-                Section("Parçalar") {
-                    ForEach($store.parts) { $part in
-                        PartRow(part: $part)
-                    }
-                    .onDelete { store.parts.remove(atOffsets: $0); store.touch() }
-                    Button {
-                        store.parts.append(.init(name: "", widthMM: 400, heightMM: 300, qty: 1, rotationAllowed: true))
-                        store.touch()
-                    } label: {
-                        Label("Parça ekle", systemImage: "plus")
-                    }
-                }
-                if let msg = store.errorMessage {
-                    Section {
-                        Label(msg, systemImage: "exclamationmark.triangle.fill")
-                            .foregroundStyle(DesignTokens.colorAmber400)
-                    }
-                }
-                Section {
-                    Button {
-                        store.optimizePlan()
-                        showPlan = store.result != nil
-                    } label: {
-                        Text("Optimize et")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, minHeight: 44) // dokunma hedefi ≥44pt (docs/12)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .foregroundStyle(DesignTokens.colorTimber950)
+            Group {
+                if store.summaries.isEmpty {
+                    emptyState
+                } else {
+                    projectList
                 }
             }
             .navigationTitle("kerfkit")
-            .scrollDismissesKeyboard(.interactively)
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        store.createProject(sample: false)
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .accessibilityLabel("Yeni proje")
+                }
+            }
+            .navigationDestination(isPresented: $store.detailOpen) {
+                ProjectDetailView()
+            }
+            .onChange(of: store.detailOpen) {
+                // Detaydan dönüş: bekleyen otomatik kaydı bitirip özetleri tazele.
+                if !store.detailOpen { store.flushThenReload() }
+            }
             .onAppear {
-                // UI smoke testi kancası (K-17 temeli): -autoOptimize ile plan doğrudan açılır
-                if CommandLine.arguments.contains("-autoOptimize") {
+                // UI smoke testi kancası (K-17): -autoOptimize örnek projeyle planı açar.
+                // Tek sefer — onAppear her pop-back'te tetiklenir, kanca tekrarlamamalı.
+                if !autoOptimizeRan, CommandLine.arguments.contains("-autoOptimize") {
+                    autoOptimizeRan = true
+                    store.createProject(sample: true)
                     store.optimizePlan()
-                    showPlan = store.result != nil
-                }
-            }
-            .sheet(isPresented: $showPlan) {
-                if let result = store.result {
-                    PlanView(result: result, store: store)
+                    store.selectedTab = .plan
                 }
             }
         }
     }
-}
 
-struct PartRow: View {
-    @Binding var part: PartInput
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                TextField("Parça adı", text: $part.name)
+    private var emptyState: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "rectangle.split.3x1")
+                .font(.system(size: 44))
+                .foregroundStyle(DesignTokens.colorTimber500)
+            Text("İlk projeni oluştur")
+                .font(.title3.bold())
+                .foregroundStyle(DesignTokens.colorTimber50)
+            Text("Ya da tek dokunuşla dolu bir projeyle başla —\nkesim planını hemen gör.")
+                .font(.callout)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(DesignTokens.colorTimber300)
+            Button {
+                store.createProject(sample: true)
+                store.optimizePlan()
+                store.selectedTab = .plan
+            } label: {
+                Text("Örnek projeyi dene")
                     .font(.headline)
-                Spacer()
-                Button {
-                    part.rotationAllowed.toggle()
-                } label: {
-                    Image(systemName: part.rotationAllowed ? "rotate.right" : "lock")
-                        .foregroundStyle(part.rotationAllowed ? DesignTokens.colorAmber500 : DesignTokens.colorTimber500)
-                }
-                .buttonStyle(.borderless)
-                .accessibilityLabel(part.rotationAllowed ? "Rotasyon serbest" : "Damar kilidi: rotasyon kapalı")
+                    .padding(.horizontal, 24)
+                    .frame(minHeight: 48)
             }
-            HStack(spacing: 4) {
-                NumberField(value: $part.widthMM)
-                Text("×").foregroundStyle(DesignTokens.colorTimber500)
-                NumberField(value: $part.heightMM)
-                Text("mm").foregroundStyle(DesignTokens.colorTimber500)
-                Spacer()
-                Stepper("×\(part.qty)", value: $part.qty, in: 1...500)
-                    .fixedSize()
-            }
+            .buttonStyle(.borderedProminent)
+            .foregroundStyle(DesignTokens.colorTimber950)
         }
-        .padding(.vertical, 2)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-}
 
-struct NumberField: View {
-    @Binding var value: Int
-
-    var body: some View {
-        TextField("0", value: $value, format: .number)
-            .keyboardType(.numberPad)
-            .multilineTextAlignment(.trailing)
-            .frame(width: 64)
-            .textFieldStyle(.roundedBorder)
+    private var projectList: some View {
+        List {
+            ForEach(store.summaries, id: \.id) { summary in
+                Button {
+                    store.open(id: summary.id)
+                } label: {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(summary.name)
+                            .font(.headline)
+                            .foregroundStyle(DesignTokens.colorTimber50)
+                        Text(store.planSummaries[summary.id] ?? "Henüz plan yok")
+                            .font(.caption)
+                            .foregroundStyle(DesignTokens.colorTimber300)
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+            .onDelete { store.deleteProjects(at: $0) }
+        }
     }
 }
