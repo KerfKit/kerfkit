@@ -1,0 +1,17 @@
+{
+  "name": "015 iki malzeme + kerf 3mm + trim 10mm karisik (E1-S4)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "trim": 1000, "objective": "sheets", "seed": 1,
+    "stocks": [
+      { "id": "birch", "materialId": "birch18", "w": 244000, "h": 122000, "qty": 2, "isOffcut": false },
+      { "id": "mdf", "materialId": "mdf12", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }
+    ],
+    "parts": [
+      { "id": "yan", "name": "yan", "materialId": "birch18", "w": 72000, "h": 58000, "qty": 4, "rotation": "fixed" },
+      { "id": "raf", "name": "raf", "materialId": "birch18", "w": 76400, "h": 30000, "qty": 3, "rotation": "allowed" },
+      { "id": "arka", "name": "arka", "materialId": "mdf12", "w": 118000, "h": 75000, "qty": 1, "rotation": "allowed" }
+    ]
+  },
+  "expected": {"sheetCount": 2, "wasteBps": 4552, "cutCount": 14, "placementsHash": "7e4b635c7a190194"}
+}

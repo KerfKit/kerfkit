@@ -1,0 +1,16 @@
+{
+  "name": "012 iki malzeme havuzu ayrik (E1-S4 AC-1)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [
+      { "id": "mdf", "materialId": "mdf12", "w": 280000, "h": 207000, "qty": 2, "isOffcut": false },
+      { "id": "birch", "materialId": "birch18", "w": 244000, "h": 122000, "qty": 2, "isOffcut": false }
+    ],
+    "parts": [
+      { "id": "b1", "name": "govde", "materialId": "birch18", "w": 60000, "h": 40000, "qty": 4, "rotation": "allowed" },
+      { "id": "m1", "name": "arkalik", "materialId": "mdf12", "w": 120000, "h": 90000, "qty": 2, "rotation": "fixed" }
+    ]
+  },
+  "expected": {"sheetCount": 2, "wasteBps": 6443, "cutCount": 9, "placementsHash": "80463f6dadc4644e"}
+}

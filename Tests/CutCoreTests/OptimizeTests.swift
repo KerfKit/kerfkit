@@ -159,6 +159,41 @@ final class OptimizeTests: XCTestCase {
         }
     }
 
+    // — E1-S4a (K-5): çoklu levha + çoklu malzeme — docs/03 E1-S4 —
+
+    // AC-1: malzeme havuzları ayrık — 18mm huş parçası 12mm MDF stoğuna asla yerleşmez,
+    // MDF levhası hiç açılmaz; karışık istekte her levha tek malzemenin parçalarını taşır.
+    func testE1S4a_AC1_materialPoolsSeparate() throws {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "mdf", materialId: "mdf12", w: 280_000, h: 207_000, qty: 5),
+                     .init(id: "birch", materialId: "birch18", w: 244_000, h: 122_000, qty: 5)],
+            parts: [.init(id: "b1", name: "govde", materialId: "birch18", w: 60_000, h: 40_000, qty: 2),
+                    .init(id: "m1", name: "arkalik", materialId: "mdf12", w: 80_000, h: 50_000, qty: 2)])
+        let res = try optimize(r)
+        XCTAssertEqual(res.placements.count, 4)
+        XCTAssertTrue(res.unplaced.isEmpty)
+        XCTAssertEqual(res.stats.sheetCount, 2, "malzeme başına bir levha")
+        let birchSheets = Set(res.placements.filter { $0.partId == "b1" }.map(\.sheetIndex))
+        let mdfSheets = Set(res.placements.filter { $0.partId == "m1" }.map(\.sheetIndex))
+        XCTAssertEqual(birchSheets.count, 1)
+        XCTAssertEqual(mdfSheets.count, 1)
+        XCTAssertTrue(birchSheets.isDisjoint(with: mdfSheets), "havuzlar ayrık")
+        XCTAssertTrue(verifyInvariants(res, req: r).isEmpty)
+    }
+
+    // AC-3: stok tükenirse yerleşmeyenler unplaced'ta döner (sessiz atlama yok).
+    func testE1S4a_AC3_stockExhausted_unplacedReported() throws {
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 1)],
+            parts: [.init(id: "p1", name: "yarim", materialId: "m1", w: 244_000, h: 61_000, qty: 3, rotation: .fixed)])
+        let res = try optimize(r)
+        XCTAssertEqual(res.placements.count, 2, "tek levhaya iki yarım sığar")
+        XCTAssertEqual(res.unplaced, ["p1"], "üçüncü örnek nedenli listede — sessiz düşmez")
+        XCTAssertEqual(res.stats.sheetCount, 1)
+    }
+
     // E1-S1c regresyonu: inceleme repro'su (w=h=2^32 birim) eskiden aritmetik taşma
     // trap'iyle süreci çökertiyordu; motor sınırları (docs/04 §2) artık tipli hataya çevirir.
     func testExtremeDimensions_typedErrorNotCrash() {

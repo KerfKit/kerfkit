@@ -1,0 +1,10 @@
+{
+  "name": "013 stok tukenmesi: 3 yarimdan 1'i unplaced (E1-S4 AC-3)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
+    "parts": [{ "id": "p1", "name": "yarim", "materialId": "m1", "w": 244000, "h": 61000, "qty": 3, "rotation": "fixed" }]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 0, "cutCount": 1, "placementsHash": "589e46812750c42e"}
+}
