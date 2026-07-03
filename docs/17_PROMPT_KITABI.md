@@ -56,7 +56,7 @@ sığan fixed parça unplaced+nedenle döner (sessiz atlama YASAK). E1-S3 AC'ler
 
 **W-1 · E7-S1 Landing + founding ön-satış:** "docs/14 W-1 ve docs/09 §1'i oku. apps/web'de
 Astro projesi kur; tek sayfa landing: başlık/alt-başlık docs/09 §1'deki İngilizce metinler,
-GERÇEK founding sayacı (basit JSON endpoint stub), Stripe Payment Link butonu [link], 14 gün
+GERÇEK founding sayacı (basit JSON endpoint stub), e-posta listesi CTA + mağaza rozetleri (ödeme yalnız mağaza içi), 14 gün
 iade + KDV + cayma metinleri. tokens.css kullan, hex yazma. Lighthouse ≥90 hedef."
 
 **P-1 · Landing metin cilası (SEN onaylayacaksın):** "docs/09 §1'deki başlık iskeletinden
@@ -212,8 +212,8 @@ derinleştirme) çıkar. Karar önerisi: devam/iterasyon."
   (geri tuşu, tipografi eşlemesi)."
 - **K-32 Play Billing + mağaza:** "Play Billing (yeni %10 düzeni) entegrasyonu + Play metadata
   + kapalı test track. Şeffaf-fatura listesi Android'de de kanıtlanır."
-- **K-33 Web tam sürüm + lisans:** "docs/06 §5 v2: Supabase auth+licenses; Stripe webhook →
-  anahtar üretimi; mobil 'anahtarla aç' (30 gün offline grace); üç platform fiyat paritesi."
+- **K-33 Çok-platform lisans (v2):** "docs/06 §5 v2: Supabase licenses; mağaza-içi alımların
+  e-postaya bağlanması; mobil platformlar arası tanıma (30 gün offline grace); fiyat paritesi."
 
 ## ACİL DURUM PROMPTLARI
 

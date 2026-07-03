@@ -93,7 +93,7 @@
 - E6-S4: TestFlight beta (20-30 marangoz) + geri bildirim formu + crash izleme (1 oturum)
 
 ## Epik E7: Web-lite + Landing (Hafta 2 ve 6, paralel hafif iş) — spec: 06 §4, 09 §1
-- E7-S1: Landing + founding ön-satış (Stripe Payment Link, AB-uyumlu metin) (1 oturum)
+- E7-S1: Landing + founding duyurusu (e-posta listesi + mağaza rozetleri; ödeme yalnız mağaza içi; AB-uyumlu metin) (1 oturum)
 - E7-S2: Wasm motor derlemesi + tek-levha lite hesaplayıcı (2 oturum)
   AC: aynı golden vektör tarayıcıda bit-eşit sonuç verir (parite kanıtı).
 - E7-S3: SEO sayfaları ilk 5 (09 §3 listesinden) (1 oturum)

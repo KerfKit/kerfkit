@@ -2,7 +2,8 @@
 // W-1 Landing (docs/14 §W-1 + docs/09 §1). Metinler docs/09 §1 iskeletinden; P-1 cilası
 // Ahmet onayı ile finalize edilir. Renkler yalnız tokens.css değişkenlerinden (QA: hex yok).
 import '../../styles/tokens.css';
-const STRIPE_PAYMENT_LINK = '#'; // TODO(W-1): gerçek Stripe Payment Link — Ahmet hesabı açınca
+// Ödeme YALNIZ mağaza içi (App Store / Google Play) — webde satış yok (docs/06 §5).
+const FOUNDING_LIST = 'mailto:hello@kerf.app?subject=Founding%20list'; // TODO(W-1): e-posta liste servisi (Buttondown/Loops)
 ---
 
 <html lang="en">
@@ -19,7 +20,7 @@ const STRIPE_PAYMENT_LINK = '#'; // TODO(W-1): gerçek Stripe Payment Link — A
     <svg viewBox="0 0 1024 1024" width="28" height="28" aria-hidden="true"><rect width="1024" height="1024" fill="var(--color-timber-900)" rx="230"/><g fill="var(--color-amber-500)" transform="rotate(-45 512 512)"><rect x="-300" y="342" width="788" height="340"/><rect x="536" y="342" width="788" height="340"/></g></svg>
     <span>kerf</span>
   </div>
-  <a class="cta cta-sm" href={STRIPE_PAYMENT_LINK}>Claim founding seat</a>
+  <a class="cta cta-sm" href={FOUNDING_LIST}>Join the founding list</a>
 </header>
 
 <main>
@@ -31,9 +32,9 @@ const STRIPE_PAYMENT_LINK = '#'; // TODO(W-1): gerçek Stripe Payment Link — A
       <p class="founding-satir">
         Founding price — first 300 seats (<span id="sayac" data-endpoint="/founding.json">real counter</span>), then $99.99.
       </p>
-      <a class="cta" href={STRIPE_PAYMENT_LINK}>Get lifetime access — $49</a>
-      <p class="uyum-notu">Price includes VAT where applicable · 14-day no-questions refund ·
-      By purchasing you consent to immediate digital delivery and waive the EU withdrawal right after download.</p>
+      <a class="cta" href={FOUNDING_LIST}>Join the founding list — lock in $49</a>
+      <p class="magaza-notu">Payment happens in-app at launch — <strong>App Store</strong> &amp; <strong>Google Play</strong>. No card forms here, ever.</p>
+      <p class="uyum-notu">Prices include VAT where applicable · Store refund policies apply, plus our 14-day support promise · Founding counter reads real launch sales data.</p>
     </div>
 
     <!-- Canlı mini-demo: GERÇEK motor çıktısı (11 parçalık dolap projesi; 1 levha,
@@ -105,7 +106,7 @@ const STRIPE_PAYMENT_LINK = '#'; // TODO(W-1): gerçek Stripe Payment Link — A
           <li>Unlimited projects &amp; parts</li>
           <li>PDF/CSV export, full workshop mode</li>
         </ul>
-        <a class="cta" href={STRIPE_PAYMENT_LINK}>Claim your seat</a>
+        <a class="cta" href={FOUNDING_LIST}>Get notified at launch</a>
       </div>
       <div class="kutu">
         <h3>Yearly</h3>
@@ -124,7 +125,9 @@ const STRIPE_PAYMENT_LINK = '#'; // TODO(W-1): gerçek Stripe Payment Link — A
     <h2>Questions, answered straight</h2>
     <dl>
       <dt>What if it's not for me?</dt>
-      <dd>14-day refund, no questions asked. Email us, money back.</dd>
+      <dd>Refunds go through the App Store / Google Play, and we back them with a 14-day support promise — email us and we'll make it right.</dd>
+      <dt>How do I pay?</dt>
+      <dd>In the app, through the App Store or Google Play. This site never asks for a card.</dd>
       <dt>Which platforms?</dt>
       <dd>iOS first (launching now), Android next, web lite calculator free in your browser. Founding license covers the platform you buy on — pricing parity promise across platforms.</dd>
       <dt>Does it work offline?</dt>
@@ -179,6 +182,7 @@ const STRIPE_PAYMENT_LINK = '#'; // TODO(W-1): gerçek Stripe Payment Link — A
   .alt-baslik strong { color: var(--color-amber-400); }
   .founding-satir { color: var(--color-timber-300); margin-bottom: 24px; }
   #sayac { color: var(--color-amber-400); font-weight: 600; }
+  .magaza-notu { font-size: 14px; color: var(--color-timber-300); margin-top: 12px; }
   .uyum-notu { font-size: 12px; color: var(--color-timber-500); margin-top: 14px; max-width: 46ch; }
 
   .demo svg { width: 100%; height: auto; }

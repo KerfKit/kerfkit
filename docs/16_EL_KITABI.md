@@ -27,7 +27,7 @@ birincildir; doğrulanamayan hiçbir şey sevk edilmez; non-goals listesi kutsal
    sınıf-9 + domain bak (docs/11 §0'daki kontrol listesi). Karar notunu `docs/NAME.md`e yaz.
 3. **İlk kod oturumu (Fable 5):** aşağıdaki Oturum-1 promptunu aynen ver.
 4. **İlk tasarım oturumu (Fable 5):** Oturum-D1 promptu (ikon varyantları).
-5. **Landing kararları (SEN):** founding fiyat $49/300 koltuk onayı + Stripe hesabı aç.
+5. **Landing kararları (SEN):** founding fiyat $49/300 koltuk onayı + e-posta liste servisi seç (ödeme yalnız mağaza içi — Stripe YOK).
 
 ## 4. Haftalık ritmin (her hafta aynı)
 

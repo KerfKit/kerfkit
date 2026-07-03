@@ -17,8 +17,9 @@
 
 - $49 lifetime, **300 koltuk, gerçek sayaçlı** (sahte kıtlık yok — AB Omnibus uyumu: $99.99
   "gelecekteki fiyat" olarak etiketlenir, "indirim" DENMEZ).
-- Web'den Stripe Payment Link ile; makbuz e-postası launch'ta promosyon koduna dönüşür
-  (offer code — StoreKit2 destekli). 14 gün koşulsuz iade.
+- Satış YALNIZ mağaza içi (karar: Ahmet, Tem 2026): founding $49, App Store launch teklifi
+  (intro/offer code) + Play launch fiyatı olarak uygulanır; web e-posta listesi toplar,
+  sayaç mağaza satış verisinden beslenir. İade: mağaza koşulları + 14 gün destek sözü.
 
 ## 3. Teknik uygulama
 
@@ -42,10 +43,9 @@
 
 ## 5. Çok-platform lisans (v1.2 — 06 §5 ile)
 
-- Supabase `licenses`: e-posta ↔ anahtar ↔ platform kayıtları; web/Stripe alımı anahtar üretir;
-  mobil "anahtarla aç" (offline grace 30 gün). Mağaza-içi alımlar isteğe bağlı e-postaya bağlanır.
-- Fiyat paritesi üç platformda aynı; web'de Stripe kesintisi avantajı fiyata YANSITILMAZ
-  (karışıklık + mağaza ilişkisi riski).
+- Supabase `licenses`: e-posta ↔ platform kayıtları; mağaza-içi alımlar isteğe bağlı e-postaya
+  bağlanır, mobil platformlar arası tanıma buradan (offline grace 30 gün). Web satışı YOK.
+- Fiyat paritesi platformlarda aynı.
 
 ## 6. Gelir modeli bağlantısı (3. Dalga raporuyla tutarlılık)
 
