@@ -1,4 +1,6 @@
 ---
+key: "cutting-calculator"
+reviewed: true
 title: "Plywood Cutting Calculator: Get More Parts Out of Every Sheet"
 description: "How a cut list calculator works, what kerf-aware optimization actually changes, and how to lay out a 4×8 sheet without the guesswork."
 date: "2026-07-03"

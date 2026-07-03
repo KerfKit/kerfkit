@@ -24,9 +24,6 @@
 
 - [ ] **Buttondown hesabı** (kullanıcı adı: kerfkit; gönderen: hello@kerfkit.app) —
   açılınca söyle: landing + lite'taki e-posta formlarını embed-subscribe'a bağlayacağım.
-- [ ] **T1 dilleri için anadil gözden geçirme kanalı kararı** (DE FR ES IT): freelance mi
-  (Upwork/ProZ, sayfa başı küçük iş) topluluk mu? Onay gelmeden çeviriler "reviewed"
-  işaretlenmez, yayınlanmaz.
 - [ ] **Sosyal @kerfkit rezervasyonları:** X, Instagram, YouTube, TikTok, Pinterest,
   Reddit u/kerfkit. Alınamazsa yedek: @kerfkitapp. (thekerfapp.com rakip — benzer görünme.)
 
@@ -40,4 +37,5 @@
 
 ## ✅ Tamamlananlar
 
+- [x] **T1 anadil onayı (DE FR ES IT)** — 4 Tem 2026 (Ahmet; katalog "translated" damgalı)
 - [x] **TR çeviri onayı** — 3 Tem 2026 (Ahmet; String Catalog TR seti onaylı — docs/18 §5 üslup kuralına göre)

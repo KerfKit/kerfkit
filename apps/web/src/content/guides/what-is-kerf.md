@@ -1,4 +1,6 @@
 ---
+key: "what-is-kerf"
+reviewed: true
 title: "What Is Kerf? The Blade Width That Eats Your Plywood"
 description: "Kerf is the material your saw blade removes with every cut. Here's how wide it really is, why it ruins paper math, and how to measure yours."
 date: "2026-07-03"
