@@ -4,7 +4,31 @@
     "CFBundleDisplayName": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
+        "it": {
           "stringUnit": {
             "state": "translated",
             "value": "KerfKit"
@@ -21,7 +45,31 @@
     "CFBundleName": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KerfKit"
+          }
+        },
+        "it": {
           "stringUnit": {
             "state": "translated",
             "value": "KerfKit"

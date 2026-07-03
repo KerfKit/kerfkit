@@ -19,4 +19,19 @@ final class LocalizationTests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Testere payı (mm)"].waitForExistence(timeout: 3),
                       "TR'de kerf satırı 'Testere payı (mm)' olmalı")
     }
+
+    // L-2: T1 dillerinden biri (DE) çalışma anında gerçekten render oluyor mu?
+    // (needs_review durumundaki değerler de derlenir — editoryal işaret, işlevsel değil.)
+    @MainActor
+    func testGermanLocaleShowsGermanUI() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-AppleLanguages", "(de)",
+                               "-AppleLocale", "de_DE"]
+        app.launch()
+        app.buttons["nav.newProject"].tap()
+        XCTAssertTrue(app.buttons["Teile"].waitForExistence(timeout: 5), "DE'de sekme 'Teile' olmalı")
+        app.buttons["Material"].tap()
+        XCTAssertTrue(app.staticTexts["Schnittfuge (mm)"].waitForExistence(timeout: 3),
+                      "DE'de kerf satırı 'Schnittfuge (mm)' olmalı")
+    }
 }
