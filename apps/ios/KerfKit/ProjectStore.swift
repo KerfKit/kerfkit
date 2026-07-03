@@ -34,7 +34,15 @@ enum DetailTab: CaseIterable {
 }
 
 extension PlanStats {
-    static func wastePercentText(bps: Int) -> String { String(format: "%%%.1f", Double(bps) / 100) }
+    // Yüzde biçimi locale'den: EN "19.3%", DE "19,3 %", TR "%19,3" (L-2b).
+    static func wastePercentText(bps: Int) -> String {
+        let f = NumberFormatter()
+        f.numberStyle = .percent
+        f.minimumFractionDigits = 1
+        f.maximumFractionDigits = 1
+        return f.string(from: NSNumber(value: Double(bps) / 10_000))
+            ?? String(format: "%.1f%%", Double(bps) / 100)
+    }
     var wastePercentText: String { Self.wastePercentText(bps: wasteBps) }
 }
 
