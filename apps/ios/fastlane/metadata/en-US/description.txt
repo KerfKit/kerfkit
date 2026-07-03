@@ -1,0 +1,19 @@
+Stop paying monthly to cut plywood. kerfkit is a cut list optimizer you buy once and own forever — built for the workshop, not the browser.
+
+PLAN IN SECONDS
+Type your parts, get an optimized layout for sheets and boards. 2D panels and 1D linear stock in the same app. Deterministic engine: same input, same plan, every time.
+
+THE PRO DETAILS, HANDLED
+• Blade kerf counted between every pair of parts
+• Grain direction locks per part
+• Edge banding tracked with meters on the plan
+• Fractional inches with a 1/64″ pad, or millimeters — your call
+
+WORKSHOP MODE
+Put the phone next to the saw. Giant type, glove-sized buttons, screen stays awake. Tap off each cut and always see what's next.
+
+YOURS, FULLY OFFLINE
+No account. No cloud. No analytics. Works in a basement shop with zero bars. Export PDF cut sheets, CSV part lists and .cutproj project files anytime.
+
+ONE-TIME PURCHASE
+No subscription. Ever.

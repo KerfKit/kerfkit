@@ -1,0 +1,19 @@
+Arrêtez de payer tous les mois pour débiter du panneau. kerfkit est un optimiseur de plan de coupe qu'on achète une fois et qu'on garde pour toujours — pensé pour l'atelier, pas pour le navigateur.
+
+UN PLAN EN QUELQUES SECONDES
+Tapez vos pièces, récupérez un débit optimisé pour panneaux et barres. 2D et 1D dans la même app. Moteur déterministe : même saisie, même plan, à chaque fois.
+
+LES DÉTAILS DE PRO, GÉRÉS
+• Trait de scie compté entre chaque paire de pièces
+• Verrou de fil du bois pièce par pièce
+• Bande de chant suivie, avec les mètres sur le plan
+• Millimètres ou pouces fractionnaires au 1/64″ — au choix
+
+MODE ATELIER
+Posez le téléphone à côté de la scie. Grands caractères, boutons format gants, écran toujours allumé. Cochez chaque coupe, voyez toujours la suivante.
+
+HORS LIGNE, À VOUS
+Pas de compte. Pas de cloud. Pas de tracking. Fonctionne dans une cave sans réseau. Export PDF, listes CSV et fichiers projet .cutproj à volonté.
+
+ACHAT UNIQUE
+Pas d'abonnement. Jamais.

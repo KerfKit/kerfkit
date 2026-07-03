@@ -13,6 +13,8 @@
   (Xcode projesiyle birebir). K-20 TestFlight ve K-19 mağaza görselleri buna bağlı.
 - [ ] **Mağaza URL'leri** — App Store/Play kayıtları oluşunca iki mağaza linkini bana ver;
   web hunisindeki "yakında" rozetlerini gerçek rozet+QR'a çevireceğim (W-3).
+  Not: 6 dilin TÜM mağaza metinleri hazır (apps/ios/fastlane/metadata + apps/android/metadata,
+  limit bekçisi CI'da) — kayıtlar açılınca fastlane deliver ile tek geçişte yüklerim (L-4 ✓).
 - [ ] **Google Play Console'da uygulama kaydı** — ad "KerfKit", paket `app.kerfkit`
   (E9 Android hattı buna bağlı; K-31 başlamadan şart değil ama yaklaşıyor).
 - [ ] **kerfkit.app domaini** (birincil; .app'te HTTPS zorunlu — sorun değil) +

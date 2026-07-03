@@ -1,0 +1,19 @@
+Plaka kesmek için her ay para ödemeyi bırak. kerfkit, bir kez alıp ömür boyu kullandığın bir kesim planı programı — tarayıcı için değil, atölye için yapıldı.
+
+SANİYELER İÇİNDE PLAN
+Parçaları yaz, levha ve profiller için en verimli yerleşimi al. 2D plaka ve 1D boy kesim aynı uygulamada. Deterministik motor: aynı girdi, her seferinde aynı plan.
+
+USTALIK DETAYLARI HAZIR
+• Testere payı her parça çiftinin arasında hesapta
+• Parça başına damar yönü kilidi
+• Kenar bandı metresiyle planda
+• İster milimetre, ister 1/64″ hassasiyetinde kesirli inç
+
+ATÖLYE MODU
+Telefonu testerenin yanına koy. Dev yazı, eldivenle basılır tuşlar, ekran uyanık kalır. Her kesimi tek dokunuşla işaretle, sıradakini hep gör.
+
+TAMAMEN ÇEVRİMDIŞI, TAMAMEN SENİN
+Hesap yok. Bulut yok. Analitik yok. Çekmeyen bodrum atölyesinde bile çalışır. PDF kesim föyü, CSV parça listesi ve .cutproj proje dosyasını istediğin an dışarı al.
+
+TEK SEFERLİK ÖDEME
+Abonelik yok. Hiç olmayacak.

@@ -1,0 +1,1 @@
+Ottimizzatore di taglio pannelli e barre. Offline, con lama, pagamento unico.

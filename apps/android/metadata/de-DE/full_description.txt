@@ -1,0 +1,19 @@
+Schluss mit Monatsgebühren fürs Plattensägen. kerfkit ist ein Zuschnitt-Optimierer, den du einmal kaufst und für immer behältst — gebaut für die Werkstatt, nicht für den Browser.
+
+PLAN IN SEKUNDEN
+Teile eintippen, optimales Layout für Platten und Leisten bekommen. 2D-Platten und 1D-Zuschnitt in einer App. Deterministische Engine: gleiche Eingabe, gleicher Plan — jedes Mal.
+
+DIE PROFI-DETAILS SIND DRIN
+• Schnittfuge zwischen jedem Teilepaar eingerechnet
+• Maserungs-Sperre pro Teil
+• Kantenband mit Metern im Plan
+• Millimeter oder Bruch-Zoll mit 1/64″-Feld — deine Wahl
+
+WERKSTATT-MODUS
+Handy neben die Säge legen. Riesige Schrift, handschuhtaugliche Tasten, Display bleibt an. Jeden Schnitt abtippen, immer den nächsten sehen.
+
+KOMPLETT OFFLINE, KOMPLETT DEINS
+Kein Konto. Keine Cloud. Keine Analyse. Läuft auch im Keller ohne Empfang. PDF-Schnittpläne, CSV-Teilelisten und .cutproj-Projekte jederzeit exportieren.
+
+EINMAL KAUFEN
+Kein Abo. Nie.
