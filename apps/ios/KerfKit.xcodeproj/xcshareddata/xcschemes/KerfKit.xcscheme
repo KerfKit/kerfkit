@@ -44,6 +44,17 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "745316871213D7713D84E97F"
+               BuildableName = "KerfKitTests.xctest"
+               BlueprintName = "KerfKitTests"
+               ReferencedContainer = "container:KerfKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "A03A27E05ED812F05A64D20E"
                BuildableName = "KerfKitUITests.xctest"
                BlueprintName = "KerfKitUITests"

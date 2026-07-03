@@ -97,13 +97,14 @@ struct PartsTabView: View {
             Button(action: addPart) {
                 Image(systemName: "return")
                     .font(.headline)
-                    .frame(width: 44, height: 40)
+                    .frame(width: 44, height: 44) // HIG asgari dokunma hedefi
                     .background(DesignTokens.colorAmber500, in: RoundedRectangle(cornerRadius: 8))
                     .foregroundStyle(DesignTokens.colorTimber950)
             }
             .accessibilityLabel("Parçayı ekle")
         }
         .textFieldStyle(.roundedBorder)
+        .controlSize(.large) // alan yüksekliği ≥44pt (HIG)
         .keyboardType(.default)
         .padding(12)
         .background(DesignTokens.colorTimber900)

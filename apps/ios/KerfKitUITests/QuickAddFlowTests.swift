@@ -38,6 +38,28 @@ final class QuickAddFlowTests: XCTestCase {
         XCTAssertLessThan(elapsed, 60, "10 parça klavye akışı 60 saniyeyi aştı: \(elapsed)sn")
     }
 
+    // docs/17 K-UI şablonu: 44pt dokunma hedefi assert'i (HIG asgarisi — mağaza reddi riski).
+    @MainActor
+    func testTouchTargetsAtLeast44pt() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Yeni proje"].tap()
+        let name = app.textFields["Parça adı"]
+        XCTAssertTrue(name.waitForExistence(timeout: 5))
+        name.tap()
+        app.typeText("Test\n"); waitFocus(app.textFields["En"])
+        app.typeText("300\n"); waitFocus(app.textFields["Boy"])
+        app.typeText("200\n"); waitFocus(app.textFields["Adet"])
+        app.typeText("1\n")
+
+        for label in ["Parçayı ekle", "Döndürme serbest", "Bant kenarları"] {
+            let el = app.buttons[label].firstMatch
+            XCTAssertTrue(el.waitForExistence(timeout: 3), "\(label) bulunamadı")
+            XCTAssertGreaterThanOrEqual(el.frame.width, 44, "\(label) genişliği <44pt")
+            XCTAssertGreaterThanOrEqual(el.frame.height, 44, "\(label) yüksekliği <44pt")
+        }
+    }
+
     @MainActor
     private func waitFocus(_ element: XCUIElement) {
         // XCTNSPredicateExpectation ~1sn aralıkla yoklar (40 bekleme ≈ +40sn harness
