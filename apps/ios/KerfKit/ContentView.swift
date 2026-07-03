@@ -25,7 +25,8 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "gearshape")
                     }
-                    .accessibilityLabel("Ayarlar")
+                    .accessibilityLabel(String(localized: "Settings"))
+                    .accessibilityIdentifier("nav.settings")
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
@@ -33,7 +34,8 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
-                    .accessibilityLabel("Yeni proje")
+                    .accessibilityLabel(String(localized: "New Project"))
+                    .accessibilityIdentifier("nav.newProject")
                 }
             }
             .sheet(isPresented: $settingsOpen) {
@@ -66,10 +68,10 @@ struct ContentView: View {
             Image(systemName: "rectangle.split.3x1")
                 .font(.system(size: 44))
                 .foregroundStyle(DesignTokens.colorTimber500)
-            Text("İlk projeni oluştur")
+            Text("Create your first project")
                 .font(.title3.bold())
                 .foregroundStyle(DesignTokens.colorTimber50)
-            Text("Ya da tek dokunuşla dolu bir projeyle başla —\nkesim planını hemen gör.")
+            Text("Or start with a ready-made sample —\nsee a cut plan right away.")
                 .font(.callout)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(DesignTokens.colorTimber300)
@@ -78,7 +80,7 @@ struct ContentView: View {
                 store.optimizePlan()
                 store.selectedTab = .plan
             } label: {
-                Text("Örnek projeyi dene")
+                Text("Try the sample project")
                     .font(.headline)
                     .padding(.horizontal, 24)
                     .frame(minHeight: 48)
@@ -99,7 +101,7 @@ struct ContentView: View {
                         Text(summary.name)
                             .font(.headline)
                             .foregroundStyle(DesignTokens.colorTimber50)
-                        Text(store.planSummaries[summary.id] ?? "Henüz plan yok")
+                        Text(store.planSummaries[summary.id] ?? String(localized: "no plan yet"))
                             .font(.caption)
                             .foregroundStyle(DesignTokens.colorTimber300)
                     }

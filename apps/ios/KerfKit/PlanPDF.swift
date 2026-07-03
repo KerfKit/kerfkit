@@ -48,8 +48,8 @@ enum PlanPDF {
             // Özet satırı
             let s = input.result.stats
             let bandMM = input.parts.reduce(0) { $0 + $1.bandLengthMM }
-            let summary = "\(s.sheetCount) levha  ·  \(s.wastePercentText) fire  ·  " +
-                "\(s.cutCount) kesim  ·  bant \(String(format: "%.1f", Double(bandMM) / 1000)) m"
+            let summary = "\(s.sheetCount) \(String(localized: "sheets"))  ·  \(s.wastePercentText) \(String(localized: "waste"))  ·  " +
+                "\(s.cutCount) \(String(localized: "cuts"))  ·  \(String(localized: "banding")) \(String(format: "%.1f", Double(bandMM) / 1000)) m"
             y = draw(summary, at: y, x: margin, font: .systemFont(ofSize: 12, weight: .semibold),
                      color: ink) + 14
 
@@ -70,7 +70,7 @@ enum PlanPDF {
             for sheet in 0..<s.sheetCount {
                 ctx.beginPage()
                 var dy = margin
-                dy = draw("Levha \(sheet + 1) / \(s.sheetCount) — \(input.projectName)",
+                dy = draw("\(String(localized: "Sheet")) \(sheet + 1) / \(s.sheetCount) — \(input.projectName)",
                           at: dy, x: margin, font: .boldSystemFont(ofSize: 14), color: ink) + 12
                 let placements = input.result.placements.filter { $0.sheetIndex == sheet }
                 let avail = CGRect(x: margin, y: dy, width: contentWidth,
@@ -95,8 +95,9 @@ enum PlanPDF {
     private static func drawTableHeader(at y: CGFloat, x: CGFloat, width: CGFloat) -> CGFloat {
         let font = UIFont.systemFont(ofSize: 9, weight: .bold)
         let cols = columns(x: x, width: width)
-        for (title, colX) in [("PARÇA", cols.name), ("EN × BOY (mm)", cols.size),
-                              ("ADET", cols.qty), ("BANT", cols.band)] {
+        let headers = [(String(localized: "PART"), cols.name), (String(localized: "W × H (mm)"), cols.size),
+                       (String(localized: "QTY"), cols.qty), (String(localized: "BANDING"), cols.band)]
+        for (title, colX) in headers {
             (title as NSString).draw(at: CGPoint(x: colX, y: y),
                                      withAttributes: [.font: font, .foregroundColor: inkSoft])
         }
@@ -114,7 +115,7 @@ enum PlanPDF {
         let cells = [(part.name, cols.name),
                      ("\(part.widthMM) × \(part.heightMM)", cols.size),
                      ("×\(part.qty)", cols.qty),
-                     (edges == 0 ? "—" : "\(edges) kenar", cols.band)]
+                     (edges == 0 ? "—" : String(localized: "\(edges) edges"), cols.band)]
         for (text, colX) in cells {
             (text as NSString).draw(at: CGPoint(x: colX, y: y),
                                     withAttributes: [.font: font, .foregroundColor: ink])

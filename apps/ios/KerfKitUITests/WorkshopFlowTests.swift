@@ -9,21 +9,21 @@ final class WorkshopFlowTests: XCTestCase {
         app.launchArguments = ["-autoOptimize"] // örnek proje + plan + Plan sekmesi (K-17)
         app.launch()
 
-        let workshop = app.buttons["Atölye Modu"]
+        let workshop = app.buttons["Workshop Mode"]
         XCTAssertTrue(workshop.waitForExistence(timeout: 8), "Plan sekmesinde Atölye Modu yok")
         workshop.tap()
 
-        let done = app.buttons["✓ KESİLDİ"]
+        let done = app.buttons["✓ DONE"]
         XCTAssertTrue(done.waitForExistence(timeout: 5))
-        // Sayaç VoiceOver etiketiyle sorgulanır (görünen metin "KESİM 1/11").
-        XCTAssertTrue(app.staticTexts["Kesim 1, toplam 11"].exists, "İlk adım 1/11 olmalı")
+        // Sayaç VoiceOver etiketiyle sorgulanır (görünen metin "CUT 1/11").
+        XCTAssertTrue(app.staticTexts["Cut 1 of 11"].exists, "İlk adım 1/11 olmalı")
 
         done.tap()
-        XCTAssertTrue(app.staticTexts["Kesim 2, toplam 11"].waitForExistence(timeout: 3),
+        XCTAssertTrue(app.staticTexts["Cut 2 of 11"].waitForExistence(timeout: 3),
                       "KESİLDİ sonrası 2/11'e ilerlemeli")
 
-        app.buttons["Geri al"].tap()
-        XCTAssertTrue(app.staticTexts["Kesim 1, toplam 11"].waitForExistence(timeout: 3),
+        app.buttons["Undo"].tap()
+        XCTAssertTrue(app.staticTexts["Cut 1 of 11"].waitForExistence(timeout: 3),
                       "Geri al 1/11'e dönmeli")
     }
 }

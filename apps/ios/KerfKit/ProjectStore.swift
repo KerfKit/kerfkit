@@ -21,10 +21,16 @@ struct PartInput: Identifiable, Hashable {
     }
 }
 
-enum DetailTab: String, CaseIterable {
-    case parts = "Parçalar"
-    case stock = "Stok"
-    case plan = "Plan"
+enum DetailTab: CaseIterable {
+    case parts, stock, plan
+
+    var title: String {
+        switch self {
+        case .parts: String(localized: "Parts")
+        case .stock: String(localized: "Stock")
+        case .plan: String(localized: "Plan")
+        }
+    }
 }
 
 extension PlanStats {
@@ -51,7 +57,7 @@ final class ProjectStore {
     var selectedTab: DetailTab = .parts
 
     // aktif proje
-    var projectName = "Yeni Proje"
+    var projectName = String(localized: "New Project")
     var parts: [PartInput] = []
     var sheetWidthMM = Defaults.sheetWidthMM
     var sheetHeightMM = Defaults.sheetHeightMM
@@ -151,9 +157,13 @@ final class ProjectStore {
         var infos: [String: String] = [:]
         for s in summaries {
             if let sheets = s.planSheetCount, let bps = s.planWasteBps {
-                infos[s.id] = "\(sheets) levha · \(PlanStats.wastePercentText(bps: bps)) fire · \(s.partCount) parça"
+                let sheetsText = String(localized: "\(sheets) sheets")
+                let partsText = String(localized: "\(s.partCount) parts")
+                let wasteText = String(localized: "\(PlanStats.wastePercentText(bps: bps)) waste")
+                infos[s.id] = "\(sheetsText) · \(wasteText) · \(partsText)"
             } else {
-                infos[s.id] = "\(s.partCount) parça · henüz plan yok"
+                let partsText = String(localized: "\(s.partCount) parts")
+                infos[s.id] = "\(partsText) · \(String(localized: "no plan yet"))"
             }
         }
         planSummaries = infos
@@ -207,18 +217,18 @@ final class ProjectStore {
             ? (Objective(rawValue: ud.string(forKey: "defaultObjective") ?? "") ?? Defaults.objective)
             : Defaults.objective
         if sample {
-            projectName = "Mutfak Dolabı"
+            projectName = String(localized: "Kitchen Cabinet")
             parts = [
-                .init(name: "Yan", widthMM: 720, heightMM: 580, qty: 2, rotationAllowed: false,
+                .init(name: String(localized: "Side"), widthMM: 720, heightMM: 580, qty: 2, rotationAllowed: false,
                       banding: BandingDoc(top: true, left: true, right: true)),
-                .init(name: "Raf", widthMM: 764, heightMM: 560, qty: 2, rotationAllowed: true,
+                .init(name: String(localized: "Shelf"), widthMM: 764, heightMM: 560, qty: 2, rotationAllowed: true,
                       banding: BandingDoc(top: true)),
-                .init(name: "Kapak", widthMM: 396, heightMM: 716, qty: 1, rotationAllowed: false,
+                .init(name: String(localized: "Door"), widthMM: 396, heightMM: 716, qty: 1, rotationAllowed: false,
                       banding: BandingDoc(top: true, bottom: true, left: true, right: true)),
-                .init(name: "Çekmece", widthMM: 396, heightMM: 180, qty: 6, rotationAllowed: true),
+                .init(name: String(localized: "Drawer"), widthMM: 396, heightMM: 180, qty: 6, rotationAllowed: true),
             ]
         } else {
-            projectName = "Yeni Proje"
+            projectName = String(localized: "New Project")
             parts = []
         }
         selectedTab = .parts
@@ -256,7 +266,7 @@ final class ProjectStore {
                                w: sheetW, h: sheetH, qty: sheetQty)]
         // Parça id'si UUID — dizin-tabanlı id silmede kayar, gömülü plan referansları kırılırdı.
         doc.parts = parts.enumerated().map { i, p in
-            PartDoc(id: p.id.uuidString, name: p.name.isEmpty ? "Parça \(i + 1)" : p.name,
+            PartDoc(id: p.id.uuidString, name: p.name.isEmpty ? String(localized: "Part \(i + 1)") : p.name,
                     materialId: "panel", w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
                     qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed,
                     banding: p.banding == BandingDoc() ? nil : p.banding)
@@ -324,7 +334,7 @@ final class ProjectStore {
         let specs = parts.compactMap { p -> PartSpec? in
             guard p.widthMM > 0, p.heightMM > 0, p.qty > 0 else { return nil }
             let pid = p.id.uuidString
-            names[pid] = p.name.isEmpty ? "Parça" : p.name
+            names[pid] = p.name.isEmpty ? String(localized: "Part") : p.name
             return PartSpec(id: pid, name: names[pid] ?? "", materialId: "panel",
                             w: Units(p.widthMM) * 100, h: Units(p.heightMM) * 100,
                             qty: p.qty, rotation: p.rotationAllowed ? .allowed : .fixed)
@@ -347,10 +357,10 @@ final class ProjectStore {
         } catch let error as PlacementError {
             // Son geçerli plan korunur (bayat kalır) — nil'lemek diske de plansız yazardı.
             if case .partExceedsStock(let pid) = error {
-                errorMessage = "\(names[pid] ?? pid) levhaya sığmıyor — boyutları ya da damar kilidini kontrol et."
+                errorMessage = String(localized: "\(names[pid] ?? pid) doesn\u{2019}t fit the sheet — check its size or the grain lock.")
             }
         } catch {
-            errorMessage = "Girdi doğrulamadan geçmedi — boyut ve adetleri kontrol et."
+            errorMessage = String(localized: "Couldn\u{2019}t validate the input — check sizes and quantities.")
         }
         touch(markStale: false)
     }

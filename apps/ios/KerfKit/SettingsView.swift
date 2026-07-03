@@ -17,78 +17,80 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section {
-                LabeledContent("Birim", value: "mm")
+                LabeledContent("Unit", value: "mm")
             } header: {
-                Text("Birimler")
+                Text("Units")
             } footer: {
-                Text("Kesirli inç, kesir pad'iyle birlikte gelecek.")
+                Text("Fractional inches arrive together with the fraction pad.")
             }
 
             Section {
-                clampedRow("Testere payı — kerf (mm)", value: $defaultKerfMM, floor: 0)
-                clampedRow("Kenar tıraşı — trim (mm)", value: $defaultTrimMM, floor: 0)
-                Picker("Hedef", selection: $defaultObjective) {
-                    Text("Az levha").tag(Objective.sheets.rawValue)
-                    Text("Az fire").tag(Objective.waste.rawValue)
-                    Text("Az kesim").tag(Objective.cuts.rawValue)
+                clampedRow(String(localized: "Blade kerf (mm)"), id: "settings.kerf",
+                           value: $defaultKerfMM, floor: 0)
+                clampedRow(String(localized: "Edge trim (mm)"), id: "settings.trim",
+                           value: $defaultTrimMM, floor: 0)
+                Picker("Objective", selection: $defaultObjective) {
+                    Text("Fewer sheets").tag(Objective.sheets.rawValue)
+                    Text("Less waste").tag(Objective.waste.rawValue)
+                    Text("Fewer cuts").tag(Objective.cuts.rawValue)
                 }
                 .pickerStyle(.segmented)
             } header: {
-                Text("Varsayılanlar")
+                Text("Defaults")
             } footer: {
-                Text("Yeni projelere uygulanır; mevcut projeler etkilenmez.")
+                Text("Applies to new projects; existing ones keep their settings.")
             }
 
             Section {
-                LabeledContent("Tema", value: "Koyu")
+                LabeledContent("Theme", value: String(localized: "Dark"))
             } header: {
-                Text("Görünüm")
+                Text("Appearance")
             } footer: {
-                Text("Açık tema türetildiğinde seçilebilir olacak; PDF her zaman açık temada.")
+                Text("A light theme will be selectable once it\u{2019}s ready; PDFs always print light.")
             }
 
             Section {
                 ShareLink(items: exportURLs) {
-                    Label("Tümünü dışa aktar (.cutproj)", systemImage: "square.and.arrow.up")
+                    Label("Export everything (.cutproj)", systemImage: "square.and.arrow.up")
                 }
                 .disabled(exportURLs.isEmpty)
             } header: {
-                Text("Verilerim")
+                Text("My data")
             } footer: {
-                Text("Verin senindir — hesap yok, bulut yok; istediğin an dışarı al.")
+                Text("Your data is yours — no account, no cloud; take it with you anytime.")
             }
 
             Section {
-                Label("kerfkit hiçbir veri toplamaz", systemImage: "checkmark.seal")
+                Label("kerfkit collects no data", systemImage: "checkmark.seal")
                     .foregroundStyle(DesignTokens.colorTimber200)
             } header: {
-                Text("Gizlilik")
+                Text("Privacy")
             } footer: {
-                Text("Analitik yok, hesap yok, internet gerekmez.")
+                Text("No analytics, no accounts, works fully offline.")
             }
 
-            Section("Destek") {
+            Section("Support") {
                 if let mail = URL(string: "mailto:hello@kerfkit.app") {
                     Link(destination: mail) {
                         LabeledContent {
-                            Text("<24s yanıt")
+                            Text("replies in under 24h")
                         } label: {
-                            Text("hello@kerfkit.app")
+                            Text(verbatim: "hello@kerfkit.app")
                                 .foregroundStyle(DesignTokens.colorAmber500)
                         }
                     }
                 }
             }
 
-            Section("Hakkında") {
-                LabeledContent("Sürüm", value: "\(appVersion) · motor \(engineVersion)")
+            Section("About") {
+                LabeledContent("Version", value: "\(appVersion) · \(String(localized: "engine")) \(engineVersion)")
             }
         }
-        .navigationTitle("Ayarlar")
+        .navigationTitle(Text("Settings"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Bitti") { dismiss() }
+                Button("Done") { dismiss() }
             }
         }
         .scrollContentBackground(.hidden)
@@ -102,7 +104,7 @@ struct SettingsView: View {
 
     // HStack bilinçli (LabeledContent değil): birleşik erişilebilirlik öğesi alanın
     // klavye odağını UI testinden gizliyor.
-    private func clampedRow(_ label: String, value: Binding<Int>, floor: Int) -> some View {
+    private func clampedRow(_ label: String, id: String, value: Binding<Int>, floor: Int) -> some View {
         let clamped = Binding(get: { value.wrappedValue },
                               set: { value.wrappedValue = max(floor, $0) })
         return HStack {
@@ -112,7 +114,7 @@ struct SettingsView: View {
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 80)
-                .accessibilityIdentifier(label)
+                .accessibilityIdentifier(id)
         }
     }
 }

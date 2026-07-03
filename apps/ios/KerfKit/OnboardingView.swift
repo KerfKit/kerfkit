@@ -20,25 +20,25 @@ struct OnboardingView: View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
-                Button("Atla") { onFinish(false) }
+                Button("Skip") { onFinish(false) }
                     .font(.subheadline)
                     .foregroundStyle(DesignTokens.colorTimber500)
                     .frame(minWidth: 44, minHeight: 44)
-                    .accessibilityLabel("Onboarding'i atla")
+                    .accessibilityLabel(String(localized: "Skip intro"))
             }
 
             TabView(selection: $page) {
                 pageView(visual: planVisual,
-                         sentence: "Levhayı gir, parçaları yaz, planı al.",
-                         detail: "Kesim planı saniyeler içinde — deterministik, her seferinde aynı.")
+                         sentence: String(localized: "Enter the sheet, type your parts, get the plan."),
+                         detail: String(localized: "Your cut plan in seconds — same result every time."))
                     .tag(0)
                 pageView(visual: proVisual,
-                         sentence: "Kerf, damar, kenar bandı — pro detaylar hazır.",
-                         detail: "Testere payı hesapta, damar kilidi tek dokunuş, bant metresi kartında.")
+                         sentence: String(localized: "Kerf, grain, edge banding — the pro details are covered."),
+                         detail: String(localized: "Kerf in the math, grain locked in one tap, banding meters on the card."))
                     .tag(1)
                 pageView(visual: statsVisual,
-                         sentence: "Tek seferlik satın al. Abonelik yok.",
-                         detail: "Önce dene: örnek projeyle ilk planını hemen gör.")
+                         sentence: String(localized: "Buy once. No subscription."),
+                         detail: String(localized: "Try it first: see your first plan with the sample project."))
                     .tag(2)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -48,7 +48,7 @@ struct OnboardingView: View {
             Button {
                 onFinish(true)
             } label: {
-                Text("Örnek projeyle dene")
+                Text("Try the sample project")
                     .font(.headline)
                     .frame(maxWidth: .infinity, minHeight: 56)
             }
@@ -93,7 +93,7 @@ struct OnboardingView: View {
             }
         }
         .padding(.vertical, 16)
-        .accessibilityLabel("Sayfa \(page + 1), toplam 3")
+        .accessibilityLabel(String(localized: "Page \(page + 1) of 3"))
     }
 
     // — gerçek render görselleri —
@@ -111,9 +111,9 @@ struct OnboardingView: View {
                          highlight: sample.result.placements.first { $0.rotated })
                 .padding(.horizontal, 16)
             HStack(spacing: 8) {
-                chip("kerf 3 mm")
-                chip("damar 🔒")
-                chip("bant 7.5 m")
+                chip(String(localized: "kerf 3 mm"))
+                chip(String(localized: "grain 🔒"))
+                chip(String(localized: "banding 7.5 m"))
             }
             .padding(.bottom, 14)
         }
@@ -122,9 +122,9 @@ struct OnboardingView: View {
 
     private var statsVisual: some View {
         HStack(spacing: 8) {
-            StatCard(title: "levha", value: "\(sample.result.stats.sheetCount)")
-            StatCard(title: "fire", value: sample.result.stats.wastePercentText)
-            StatCard(title: "kesim", value: "\(sample.result.stats.cutCount)")
+            StatCard(title: String(localized: "sheets"), value: "\(sample.result.stats.sheetCount)")
+            StatCard(title: String(localized: "waste"), value: sample.result.stats.wastePercentText)
+            StatCard(title: String(localized: "cuts"), value: "\(sample.result.stats.cutCount)")
         }
         .padding(16)
     }
@@ -141,10 +141,10 @@ struct OnboardingView: View {
     // Örnek proje motordan bir kez geçirilir — onboarding görseli gerçek çıktıdır.
     static func makeSamplePlan() -> (result: OptimizeResult, names: [String: String]) {
         let parts: [(String, Units, Units, Int, RotationRule)] = [
-            ("Yan", 72_000, 58_000, 2, .fixed),
-            ("Raf", 76_400, 56_000, 2, .allowed),
-            ("Kapak", 39_600, 71_600, 1, .fixed),
-            ("Çekmece", 39_600, 18_000, 6, .allowed),
+            (String(localized: "Side"), 72_000, 58_000, 2, .fixed),
+            (String(localized: "Shelf"), 76_400, 56_000, 2, .allowed),
+            (String(localized: "Door"), 39_600, 71_600, 1, .fixed),
+            (String(localized: "Drawer"), 39_600, 18_000, 6, .allowed),
         ]
         var names: [String: String] = [:]
         let specs = parts.enumerated().map { i, p in
