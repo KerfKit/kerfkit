@@ -85,6 +85,7 @@ public struct OptimizeResult: Codable, Sendable, Equatable {
 public struct InvariantViolation: Codable, Sendable, Equatable {
     public enum Kind: String, Codable, Sendable {
         case overlap, outOfBounds, notGuillotine
+        case nonPositiveSize, unknownPart // R-3 inceleme bulguları (E1-S1b)
     }
     public var kind: Kind
     public var sheetIndex: Int

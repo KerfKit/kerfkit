@@ -4,10 +4,13 @@ import CutModels
 
 // docs/04 §5 — E1-S1b: değişmez doğrulayıcı + placementsHash.
 final class VerifyTests: XCTestCase {
-    func req(stockW: Units = 244_000, stockH: Units = 122_000) -> OptimizeRequest {
+    // Fikstür kataloğu: doğrulayıcı partId→malzeme çözümü yaptığından, kullanılan
+    // her id istekte tanımlı olmalı (boyutlar doğrulayıcı için önemsiz).
+    func req(stockW: Units = 244_000, stockH: Units = 122_000,
+             partIds: [String] = ["p1", "p2", "a", "b", "c", "d"]) -> OptimizeRequest {
         .init(unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
               stocks: [.init(id: "s1", materialId: "m1", w: stockW, h: stockH, qty: 5)],
-              parts: [.init(id: "p1", name: "x", materialId: "m1", w: 10_000, h: 10_000, qty: 1)])
+              parts: partIds.map { .init(id: $0, name: $0, materialId: "m1", w: 10_000, h: 10_000, qty: 1) })
     }
     func result(_ placements: [Placement]) -> OptimizeResult {
         .init(placements: placements, stats: .init(sheetCount: 1, wasteBps: 0, cutCount: 0),
@@ -88,5 +91,54 @@ final class VerifyTests: XCTestCase {
         // İlk kesimin bir yanı boş kalabilir (kenar firesi): alt şeritte iki parça, üst boş
         let res = result([pl("p1", 0, 0, 100_000, 30_000), pl("p2", 100_000, 0, 80_000, 30_000)])
         XCTAssertTrue(verifyInvariants(res, req: req()).isEmpty)
+    }
+
+    // — R-3 inceleme bulguları (E1-S1b) —
+
+    func testInvariants_zeroSizePlacement_reportedNotCrash() {
+        // Sıfır-boyutlu yerleşim: SIGSEGV değil, tipli ihlal raporu
+        let res = result([pl("p1", 5_000, 0, 0, 10_000), pl("p2", 20_000, 0, 10_000, 10_000)])
+        let v = verifyInvariants(res, req: req())
+        XCTAssertTrue(v.contains { $0.kind == .nonPositiveSize && $0.subjectIds == ["p1"] })
+    }
+    func testInvariants_unknownPartId_reported() {
+        // Katalog dışı partId sessizce temiz geçmemeli
+        let res = result([pl("ghost", 0, 0, 10_000, 10_000)])
+        let v = verifyInvariants(res, req: req())
+        XCTAssertTrue(v.contains { $0.kind == .unknownPart && $0.subjectIds == ["ghost"] })
+    }
+    func testInvariants_boundsUsePlacementOwnMaterial() {
+        // Sınır kontrolü her yerleşimin KENDİ malzemesiyle ölçülmeli; levhadaki ilk
+        // (katalog dışı) yerleşim malzeme çözümünü gevşetememeli
+        let r = OptimizeRequest(
+            unitMode: .metricMM, kerf: 0, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 100_000, h: 100_000, qty: 1),
+                     .init(id: "s2", materialId: "m2", w: 900_000, h: 900_000, qty: 1)],
+            parts: [.init(id: "p1", name: "kucuk", materialId: "m1", w: 10_000, h: 10_000, qty: 1)])
+        let res = result([pl("ghost", 0, 0, 5_000, 5_000), pl("p1", 500_000, 500_000, 10_000, 10_000)])
+        let v = verifyInvariants(res, req: r)
+        XCTAssertTrue(v.contains { $0.kind == .outOfBounds && $0.subjectIds == ["p1"] },
+                      "p1 kendi malzemesinin (m1, 100k) çok dışında — m2 stoğuyla aklanmamalı")
+    }
+    func testHash_separatorInPartId_noCollision() {
+        // Enjektiflik: partId içindeki ayırıcılar kaçışlanmalı (inceleme çakışma kanıtı)
+        let crafted = [Placement(partId: "x|0|0|0|1|1|0;y", sheetIndex: 0, x: 0, y: 0, w: 1, h: 1, rotated: false)]
+        let pair = [Placement(partId: "x", sheetIndex: 0, x: 0, y: 0, w: 1, h: 1, rotated: false),
+                    Placement(partId: "y", sheetIndex: 0, x: 0, y: 0, w: 1, h: 1, rotated: false)]
+        XCTAssertNotEqual(placementsHash(crafted), placementsHash(pair))
+    }
+    func testInvariants_multiPinwheel_notGuillotine_terminates() {
+        // Birden çok bağımsız guillotine-dışı küme: arama bütçesi erken ve SAĞLAM false verir
+        // (geçerli yerleşim ≤ 2n−1 çağrıda kanıtlandığından bütçe aşımı ⇒ geçersiz)
+        var ps: [Placement] = []
+        for k in 0..<3 {
+            let ox = Units(k) * 110_000
+            ps.append(pl("a", ox, 0, 60_000, 40_000))
+            ps.append(pl("b", ox + 60_000, 0, 40_000, 60_000))
+            ps.append(pl("c", ox + 40_000, 60_000, 60_000, 40_000))
+            ps.append(pl("d", ox, 40_000, 40_000, 60_000))
+        }
+        let v = verifyInvariants(result(ps), req: req(stockW: 400_000, stockH: 100_000))
+        XCTAssertTrue(v.contains { $0.kind == .notGuillotine })
     }
 }
