@@ -70,6 +70,11 @@ Hedefimiz launch'ta 6, 90 günde 12, yıl 1'de 20+ — ama **her locale'de tam k
 
 ## 5. Kalite kuralları (yarım global = kötü global)
 
+0. **Üslup kuralı (Ahmet, 3 Tem 2026):** her çeviri, o dili GÜNLÜK hayatta akıcı konuşan
+   birinin yazacağı gibi olur — sözlük/robot çevirisi değil. Ölçüt: arkaik/kalıp kelime
+   yerine günlük karşılık (TR örneği: "ala/fevkalade" değil "çok iyi/iyi"); deyimler hedef
+   dilin kendi deyimiyle; UI metinleri kısa ve konuşur gibi. Bu kural String Catalog,
+   SEO sayfaları, mağaza metadata'sı ve destek şablonlarının TAMAMINA uygulanır.
 1. Bir locale ya TAM olur (UI + mağaza metadata + en az 3 SEO sayfası + lite) ya da yayınlanmaz.
 2. `reviewed: true` olmayan çeviri build'e girmez (CI bekçisi L-3'te).
 3. Ekran görüntüsü metinleri String Catalog'dan gelir — görselde hardcoded metin yasak.
