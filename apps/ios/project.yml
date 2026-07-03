@@ -7,6 +7,9 @@ options:
 packages:
   kerfkit:
     path: ../..
+  SnapshotTesting:
+    url: https://github.com/pointfreeco/swift-snapshot-testing
+    from: 1.17.0
 targets:
   KerfKit:
     type: application
@@ -41,6 +44,18 @@ targets:
       base:
         SWIFT_VERSION: "6.0"
         GENERATE_INFOPLIST_FILE: YES
+  KerfKitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [KerfKitTests]
+    dependencies:
+      - target: KerfKit
+      - package: SnapshotTesting
+        product: SnapshotTesting
+    settings:
+      base:
+        SWIFT_VERSION: "6.0"
+        GENERATE_INFOPLIST_FILE: YES
 schemes:
   KerfKit:
     build:
@@ -50,4 +65,4 @@ schemes:
       config: Debug
     test:
       config: Debug
-      targets: [KerfKitUITests]
+      targets: [KerfKitTests, KerfKitUITests]

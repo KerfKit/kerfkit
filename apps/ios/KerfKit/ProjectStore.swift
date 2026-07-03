@@ -81,7 +81,14 @@ final class ProjectStore {
         String(format: "%.1fm", Double(parts.reduce(0) { $0 + $1.bandLengthMM }) / 1000)
     }
 
-    init() {
+    // inMemory: snapshot/birim testleri kalıcı mağazayı kirletmesin.
+    init(inMemory: Bool = false) {
+        if inMemory {
+            repository = try? ProjectRepository()
+            autosaver = repository.map { Autosaver(repository: $0) }
+            loadSummaries()
+            return
+        }
         do {
             let dir = try FileManager.default.url(for: .applicationSupportDirectory,
                                                   in: .userDomainMask, appropriateFor: nil, create: true)
