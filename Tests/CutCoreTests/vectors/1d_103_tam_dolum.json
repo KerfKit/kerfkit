@@ -1,0 +1,10 @@
+{
+  "name": "1d 103 tam dolum: uca oturan parcada kesim yok",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "length": 240000, "qty": 2, "isOffcut": false }],
+    "parts": [{ "id": "yarim", "name": "y", "materialId": "m1", "length": 120000, "qty": 2 }]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 0, "cutCount": 1, "placementsHash": "772db350b8d31bac"}
+}

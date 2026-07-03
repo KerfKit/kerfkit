@@ -1,0 +1,16 @@
+{
+  "name": "1d 104 karisik stok boyu (FFD yolu) + tukenme: 2 parca unplaced",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "objective": "sheets", "seed": 1,
+    "stocks": [
+      { "id": "uzun", "materialId": "m1", "length": 300000, "qty": 1, "isOffcut": false },
+      { "id": "kisa", "materialId": "m1", "length": 240000, "qty": 1, "isOffcut": false }
+    ],
+    "parts": [
+      { "id": "p90", "name": "boy", "materialId": "m1", "length": 90000, "qty": 5 },
+      { "id": "p60", "name": "kisa", "materialId": "m1", "length": 60000, "qty": 2 }
+    ]
+  },
+  "expected": {"sheetCount": 2, "wasteBps": 1666, "cutCount": 5, "placementsHash": "b1a845dce926a74b"}
+}
