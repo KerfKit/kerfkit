@@ -11,17 +11,24 @@ struct SettingsView: View {
     @AppStorage("defaultKerfMM") private var defaultKerfMM = 3
     @AppStorage("defaultTrimMM") private var defaultTrimMM = 0
     @AppStorage("defaultObjective") private var defaultObjective = Objective.sheets.rawValue
+    @AppStorage("defaultUnitMode") private var defaultUnitMode = "auto"
 
     @State private var exportURLs: [URL] = []
 
     var body: some View {
         Form {
             Section {
-                LabeledContent("Unit", value: "mm")
+                Picker("Unit", selection: $defaultUnitMode) {
+                    Text("Automatic (region)").tag("auto")
+                    Text("Millimeters").tag(UnitMode.metricMM.rawValue)
+                    Text("Inches").tag(UnitMode.imperialFrac64.rawValue)
+                }
+                .pickerStyle(.menu)
+                .accessibilityIdentifier("settings.unit")
             } header: {
                 Text("Units")
             } footer: {
-                Text("Fractional inches arrive together with the fraction pad.")
+                Text("Metric defaults below apply to mm projects; inch projects start at 1/8\u{2033} kerf.")
             }
 
             Section {

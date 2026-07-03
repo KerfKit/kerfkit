@@ -15,7 +15,7 @@ struct KerfApp: App {
             UserDefaults.standard.set(false, forKey: "onboardingSeen")
         }
         if args.contains("-resetDefaults") { // M-8 varsayılanlarını test için sıfırla
-            for key in ["defaultKerfMM", "defaultTrimMM", "defaultObjective"] {
+            for key in ["defaultKerfMM", "defaultTrimMM", "defaultObjective", "defaultUnitMode"] {
                 UserDefaults.standard.removeObject(forKey: key)
             }
         }

@@ -49,10 +49,10 @@ final class CSVPartListTests: XCTestCase {
 
     func testRoundTrip_lossless() throws {
         let original: [CSVPartList.Row] = [
-            .init(name: "Side, \"left\"", widthMM: 720, heightMM: 580, qty: 2,
+            .init(name: "Side, \"left\"", width: 720, height: 580, qty: 2,
                   rotationAllowed: false, banding: BandingDoc(top: true, left: true, right: true)),
-            .init(name: "Şerit; dar", widthMM: 120, heightMM: 60, qty: 12),
-            .init(name: "Plain", widthMM: 300, heightMM: 200, qty: 1,
+            .init(name: "Şerit; dar", width: 120, height: 60, qty: 12),
+            .init(name: "Plain", width: 300, height: 200, qty: 1,
                   rotationAllowed: true, banding: BandingDoc(top: true, bottom: true, left: true, right: true)),
         ]
         let exported = CSVPartList.export(original)
