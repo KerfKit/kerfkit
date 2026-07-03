@@ -34,6 +34,11 @@ final class GoldenRunnerTests: XCTestCase {
             }
             XCTAssertEqual(result.stats.sheetCount, exp.sheetCount, vector.name)
             XCTAssertEqual(result.stats.wasteBps, exp.wasteBps, vector.name)
+            XCTAssertEqual(result.stats.cutCount, exp.cutCount, vector.name)
+            XCTAssertEqual(placementsHash(result.placements), exp.placementsHash, vector.name)
+            // docs/04 §5 — değişmez doğrulayıcı her vektörde ayrıca koşar
+            let violations = verifyInvariants(result, req: vector.request)
+            XCTAssertTrue(violations.isEmpty, "\(vector.name): \(violations)")
         }
     }
 }

@@ -80,6 +80,21 @@ public struct OptimizeResult: Codable, Sendable, Equatable {
     }
 }
 
+// docs/04 §5 değişmez doğrulayıcı + §7 verifyInvariants çıktısı (E1-S1b).
+// kerfSpacing kontrolü E1-S2 ile gelir (docs/04 §5 madde 4).
+public struct InvariantViolation: Codable, Sendable, Equatable {
+    public enum Kind: String, Codable, Sendable {
+        case overlap, outOfBounds, notGuillotine
+    }
+    public var kind: Kind
+    public var sheetIndex: Int
+    public var subjectIds: [String]
+    public var message: String
+    public init(kind: Kind, sheetIndex: Int, subjectIds: [String], message: String) {
+        self.kind = kind; self.sheetIndex = sheetIndex; self.subjectIds = subjectIds; self.message = message
+    }
+}
+
 public struct ValidationIssue: Codable, Sendable, Equatable {
     public enum Kind: String, Codable, Sendable {
         case nonPositiveDimension, nonPositiveQuantity, partExceedsStock, unknownMaterial, negativeKerfOrTrim
