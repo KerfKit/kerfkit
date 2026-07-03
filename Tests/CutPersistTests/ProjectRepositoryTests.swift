@@ -1,5 +1,7 @@
 import XCTest
+import CutModels
 import CutProj
+import GRDB
 @testable import CutPersist
 
 // docs/03 E3-S2 AC: öldür-aç bütünlüğü · 100 projede liste <100ms · 500ms debounce.
@@ -72,5 +74,49 @@ final class ProjectRepositoryTests: XCTestCase {
         await saver.scheduleSave(doc)
         await saver.flush(doc)
         XCTAssertEqual(try repo.load(id: "proj-7")?.name, "acil")
+    }
+
+    // — v2 özet sütunları: liste kartları doküman açmadan dolar —
+
+    func makePlannedDoc(_ n: Int) -> ProjectDoc {
+        var doc = makeDoc(n)
+        let req = OptimizeRequest(unitMode: .metricMM, kerf: 300, trim: 0, objective: .sheets, seed: 1,
+                                  stocks: [], parts: doc.parts.map(\.asSpec))
+        let res = OptimizeResult(placements: [], stats: .init(sheetCount: 2, wasteBps: 1930, cutCount: 20),
+                                 unplaced: [], engineVersion: "test")
+        doc.plans.append(PlanDoc(id: "pl1", createdAt: doc.modifiedAt,
+                                 engineVersion: "test", request: req, result: res))
+        return doc
+    }
+
+    func testList_summaryColumnsWithoutDocDecode() throws {
+        let repo = try ProjectRepository()
+        try repo.save(makeDoc(1))            // plansız
+        try repo.save(makePlannedDoc(2))     // planlı
+        let byId = Dictionary(uniqueKeysWithValues: try repo.list().map { ($0.id, $0) })
+        XCTAssertEqual(byId["proj-1"]?.partCount, 1)
+        XCTAssertNil(byId["proj-1"]?.planSheetCount)
+        XCTAssertEqual(byId["proj-2"]?.planSheetCount, 2)
+        XCTAssertEqual(byId["proj-2"]?.planWasteBps, 1930)
+    }
+
+    func testMigrationV2_backfillsExistingRows() throws {
+        let path = NSTemporaryDirectory() + "kerf-mig-\(UUID().uuidString).sqlite"
+        defer { try? FileManager.default.removeItem(atPath: path) }
+        // v1 şemasında satır bırak (eski sürümden kalan DB'yi taklit et).
+        do {
+            let dbQueue = try DatabaseQueue(path: path)
+            try ProjectRepository.migrator.migrate(dbQueue, upTo: "v1")
+            let data = try ProjectIO.encode(makePlannedDoc(3))
+            try dbQueue.write { db in
+                try db.execute(sql: "INSERT INTO project (id, name, modifiedAt, doc) VALUES (?, ?, ?, ?)",
+                               arguments: ["proj-3", "Eski", "2026-07-03T10:03:00Z", data])
+            }
+        }
+        let repo = try ProjectRepository(path: path) // v2 migrasyonu + geri doldurma
+        let summary = try repo.list().first
+        XCTAssertEqual(summary?.partCount, 1)
+        XCTAssertEqual(summary?.planSheetCount, 2)
+        XCTAssertEqual(summary?.planWasteBps, 1930)
     }
 }

@@ -28,6 +28,25 @@ public final class ProjectRepository: Sendable {
                 t.column("doc", .blob).notNull()
             }
         }
+        // Liste özet sütunları — M-1 kartları doküman açmadan dolsun (100 projede <100ms AC).
+        m.registerMigration("v2-ozet-sutunlari") { db in
+            try db.alter(table: "project") { t in
+                t.add(column: "partCount", .integer).notNull().defaults(to: 0)
+                t.add(column: "planSheetCount", .integer)
+                t.add(column: "planWasteBps", .integer)
+            }
+            // Tek seferlik geri doldurma: mevcut satırlar bir kez çözülür.
+            let rows = try Row.fetchAll(db, sql: "SELECT id, doc FROM project")
+            for row in rows {
+                let data: Data = row["doc"]
+                guard let doc = try? ProjectIO.decode(data) else { continue }
+                let plan = doc.plans.last
+                try db.execute(
+                    sql: "UPDATE project SET partCount = ?, planSheetCount = ?, planWasteBps = ? WHERE id = ?",
+                    arguments: [doc.parts.count, plan?.result.stats.sheetCount,
+                                plan?.result.stats.wasteBps, row["id"] as String])
+            }
+        }
         return m
     }
 
@@ -35,18 +54,26 @@ public final class ProjectRepository: Sendable {
         public let id: String
         public let name: String
         public let modifiedAt: String
+        public let partCount: Int
+        public let planSheetCount: Int?
+        public let planWasteBps: Int?
     }
 
     public func save(_ doc: ProjectDoc) throws {
         let data = try ProjectIO.encode(doc)
+        let plan = doc.plans.last
         try dbQueue.write { db in
             try db.execute(
                 sql: """
-                INSERT INTO project (id, name, modifiedAt, doc) VALUES (?, ?, ?, ?)
+                INSERT INTO project (id, name, modifiedAt, doc, partCount, planSheetCount, planWasteBps)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(id) DO UPDATE SET
-                  name = excluded.name, modifiedAt = excluded.modifiedAt, doc = excluded.doc
+                  name = excluded.name, modifiedAt = excluded.modifiedAt, doc = excluded.doc,
+                  partCount = excluded.partCount, planSheetCount = excluded.planSheetCount,
+                  planWasteBps = excluded.planWasteBps
                 """,
-                arguments: [doc.id, doc.name, doc.modifiedAt, data])
+                arguments: [doc.id, doc.name, doc.modifiedAt, data,
+                            doc.parts.count, plan?.result.stats.sheetCount, plan?.result.stats.wasteBps])
         }
     }
 
@@ -61,8 +88,13 @@ public final class ProjectRepository: Sendable {
 
     public func list() throws -> [Summary] {
         try dbQueue.read { db in
-            try Row.fetchAll(db, sql: "SELECT id, name, modifiedAt FROM project ORDER BY modifiedAt DESC")
-                .map { Summary(id: $0["id"], name: $0["name"], modifiedAt: $0["modifiedAt"]) }
+            try Row.fetchAll(db, sql: """
+                SELECT id, name, modifiedAt, partCount, planSheetCount, planWasteBps
+                FROM project ORDER BY modifiedAt DESC
+                """)
+                .map { Summary(id: $0["id"], name: $0["name"], modifiedAt: $0["modifiedAt"],
+                               partCount: $0["partCount"], planSheetCount: $0["planSheetCount"],
+                               planWasteBps: $0["planWasteBps"]) }
         }
     }
 
