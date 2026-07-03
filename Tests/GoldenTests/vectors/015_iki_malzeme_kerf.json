@@ -13,5 +13,5 @@
       { "id": "arka", "name": "arka", "materialId": "mdf12", "w": 118000, "h": 75000, "qty": 1, "rotation": "allowed" }
     ]
   },
-  "expected": {"sheetCount": 2, "wasteBps": 4552, "cutCount": 14, "placementsHash": "7e4b635c7a190194"}
+  "expected": {"sheetCount": 2, "wasteBps": 4552, "cutCount": 13, "placementsHash": "aa86a4ca1a909f03"}
 }

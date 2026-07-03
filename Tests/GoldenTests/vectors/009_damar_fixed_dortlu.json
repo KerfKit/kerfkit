@@ -6,5 +6,5 @@
     "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
     "parts": [{ "id": "p1", "name": "damarli", "materialId": "m1", "w": 40000, "h": 60000, "qty": 4, "rotation": "fixed" }]
   },
-  "expected": {"sheetCount": 1, "wasteBps": 6775, "cutCount": 6, "placementsHash": "9ceacf7ef76c5ab5"}
+  "expected": {"sheetCount": 1, "wasteBps": 6775, "cutCount": 5, "placementsHash": "e255af01cc747b00"}
 }

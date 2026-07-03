@@ -1,0 +1,16 @@
+{
+  "name": "018 hedef=cuts: ayni girdi, az kesim odunlesimi (E1-S4 AC-2 uclusu)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 300, "trim": 0, "objective": "cuts", "seed": 1,
+    "stocks": [
+      { "id": "kucuk", "materialId": "m1", "w": 130000, "h": 130000, "qty": 10, "isOffcut": false },
+      { "id": "buyuk", "materialId": "m1", "w": 250000, "h": 250000, "qty": 10, "isOffcut": false }
+    ],
+    "parts": [
+      { "id": "kare", "name": "kare", "materialId": "m1", "w": 120000, "h": 120000, "qty": 4, "rotation": "allowed" },
+      { "id": "serit", "name": "serit", "materialId": "m1", "w": 240000, "h": 30000, "qty": 4, "rotation": "fixed" }
+    ]
+  },
+  "expected": {"sheetCount": 4, "wasteBps": 2367, "cutCount": 13, "placementsHash": "aac97dc9d0226631"}
+}

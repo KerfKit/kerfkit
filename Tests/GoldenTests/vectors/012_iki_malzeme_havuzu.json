@@ -12,5 +12,5 @@
       { "id": "m1", "name": "arkalik", "materialId": "mdf12", "w": 120000, "h": 90000, "qty": 2, "rotation": "fixed" }
     ]
   },
-  "expected": {"sheetCount": 2, "wasteBps": 6443, "cutCount": 9, "placementsHash": "80463f6dadc4644e"}
+  "expected": {"sheetCount": 2, "wasteBps": 6443, "cutCount": 8, "placementsHash": "14c233d618413cdb"}
 }

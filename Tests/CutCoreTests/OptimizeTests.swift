@@ -194,6 +194,37 @@ final class OptimizeTests: XCTestCase {
         XCTAssertEqual(res.stats.sheetCount, 1)
     }
 
+    // — E1-S4b (K-6): heuristik portföyü + hedef fonksiyonu — docs/04 §3 adım 3+5 —
+
+    // İki boy stok + kare/şerit karışımı: cuts hedefi levha/fire'dan kesim sayısına
+    // ödünleşim yapar (E1-S4 AC-2). Not: sheets ve waste bu girdide aynı planı seçer —
+    // tam üçlü ayrışma stok-sırası araması ister (portföy boyutu değil; docs/04 §3 4a
+    // offcut-önceliği config'i v1.1). Mekanizma kanıtı: cuts planı diğerlerinden farklı.
+    func portfolioReq(_ objective: Objective) -> OptimizeRequest {
+        .init(unitMode: .metricMM, kerf: 300, trim: 0, objective: objective, seed: 1,
+              stocks: [.init(id: "kucuk", materialId: "m1", w: 130_000, h: 130_000, qty: 10),
+                       .init(id: "buyuk", materialId: "m1", w: 250_000, h: 250_000, qty: 10)],
+              parts: [.init(id: "kare", name: "kare", materialId: "m1", w: 120_000, h: 120_000, qty: 4, rotation: .allowed),
+                      .init(id: "serit", name: "serit", materialId: "m1", w: 240_000, h: 30_000, qty: 4, rotation: .fixed)])
+    }
+    func testE1S4b_AC2_objectivesProduceDifferentPlans() throws {
+        let sheets = try optimize(portfolioReq(.sheets))
+        let waste = try optimize(portfolioReq(.waste))
+        let cuts = try optimize(portfolioReq(.cuts))
+        XCTAssertTrue(sheets.unplaced.isEmpty && waste.unplaced.isEmpty && cuts.unplaced.isEmpty)
+        XCTAssertNotEqual(placementsHash(cuts.placements), placementsHash(sheets.placements),
+                          "cuts hedefi farklı plan seçmeli")
+        XCTAssertLessThan(cuts.stats.cutCount, sheets.stats.cutCount, "daha az kesim")
+        XCTAssertLessThanOrEqual(sheets.stats.sheetCount, cuts.stats.sheetCount, "daha az levha")
+        XCTAssertLessThanOrEqual(waste.stats.wasteBps, cuts.stats.wasteBps, "waste hedefi fire'da üstün")
+    }
+    func testE1S4b_deterministic_sameInputSameHash() throws {
+        let a = try optimize(portfolioReq(.waste))
+        let b = try optimize(portfolioReq(.waste))
+        XCTAssertEqual(placementsHash(a.placements), placementsHash(b.placements))
+        XCTAssertEqual(a.stats, b.stats)
+    }
+
     // E1-S1c regresyonu: inceleme repro'su (w=h=2^32 birim) eskiden aritmetik taşma
     // trap'iyle süreci çökertiyordu; motor sınırları (docs/04 §2) artık tipli hataya çevirir.
     func testExtremeDimensions_typedErrorNotCrash() {

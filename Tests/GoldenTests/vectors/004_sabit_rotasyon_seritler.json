@@ -6,5 +6,5 @@
     "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
     "parts": [{ "id": "p1", "name": "raf", "materialId": "m1", "w": 200000, "h": 30000, "qty": 4, "rotation": "fixed" }]
   },
-  "expected": { "sheetCount": 1, "wasteBps": 1937, "cutCount": 5, "placementsHash": "5fc29031baa9c875" }
+  "expected": {"sheetCount": 1, "wasteBps": 1937, "cutCount": 5, "placementsHash": "5fc29031baa9c875"}
 }
