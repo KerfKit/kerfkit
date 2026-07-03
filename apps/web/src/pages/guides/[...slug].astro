@@ -1,0 +1,66 @@
+---
+// P-2 rehber şablonu — landing ile aynı token dili; tek CTA lite hesaplayıcıya.
+import '../../../styles/tokens.css';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((g) => ({ params: { slug: g.id.replace(/\.md$/, '') }, props: { g } }));
+}
+const { g } = Astro.props;
+const { Content } = await render(g);
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{g.data.title} — kerfkit</title>
+  <meta name="description" content={g.data.description} />
+</head>
+<body>
+
+<header class="kabuk">
+  <a class="marka" href="/">
+    <svg viewBox="0 0 1024 1024" width="28" height="28" aria-hidden="true"><rect width="1024" height="1024" fill="var(--color-timber-900)" rx="230"/><g fill="var(--color-amber-500)" transform="rotate(-45 512 512)"><rect x="-300" y="342" width="788" height="340"/><rect x="536" y="342" width="788" height="340"/></g></svg>
+    <span>kerfkit</span>
+  </a>
+  <a class="cta cta-sm" href="/lite">Free cut calculator</a>
+</header>
+
+<main>
+  <article>
+    <h1>{g.data.title}</h1>
+    <Content />
+  </article>
+</main>
+
+<footer class="kabuk alt">
+  <span>© 2026 kerfkit · <a href="/">home</a> · <a href="/lite">free calculator</a></span>
+</footer>
+
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--color-timber-950); color: var(--color-timber-200);
+         font: 17px/1.7 -apple-system, "SF Pro Text", "Segoe UI", sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 24px 80px; }
+  .kabuk { display: flex; justify-content: space-between; align-items: center;
+           padding: 16px 24px; max-width: 1080px; margin: 0 auto; }
+  .marka { display: flex; align-items: center; gap: 10px; font-weight: 700;
+           font-size: 22px; color: var(--color-timber-50); text-decoration: none; }
+  .cta { display: inline-block; background: var(--color-amber-500); color: var(--color-timber-950);
+         font-weight: 700; text-decoration: none; padding: 8px 16px; border-radius: 10px; font-size: 14px; }
+  article h1 { color: var(--color-timber-50); font-size: 34px; line-height: 1.2; margin: 24px 0 8px; }
+  article :global(h2) { color: var(--color-timber-50); font-size: 24px; margin: 40px 0 12px; }
+  article :global(p) { margin: 14px 0; }
+  article :global(a) { color: var(--color-amber-400); }
+  article :global(li) { margin: 8px 0 8px 20px; }
+  article :global(strong) { color: var(--color-timber-50); }
+  article :global(table) { border-collapse: collapse; margin: 16px 0; width: 100%; }
+  article :global(th), article :global(td) { border: 1px solid var(--color-timber-700);
+    padding: 8px 12px; text-align: left; font-size: 15px; }
+  article :global(th) { color: var(--color-timber-50); background: var(--color-timber-900); }
+  footer.alt { color: var(--color-timber-500); font-size: 14px; }
+  footer.alt a { color: var(--color-timber-300); }
+</style>
+</body></html>
