@@ -287,6 +287,8 @@ struct PlanTabView: View {
                     .buttonStyle(.borderedProminent)
                     .foregroundStyle(DesignTokens.colorTimber950)
                     .disabled(store.stale)
+
+                    shareRow(result)
                 } else {
                     emptyPlan
                 }
@@ -315,6 +317,34 @@ struct PlanTabView: View {
             // Parça kalmadıysa yeniden hesaplama son geçerli planı silmesin.
             if store.result != nil && !store.parts.isEmpty { store.optimizePlan() }
         }
+    }
+
+    // K-13 paylaşım satırı (M-4A mockup'ındaki üçlüden ikisi gerçek; CSV K-12'de gelir).
+    private func shareRow(_ result: OptimizeResult) -> some View {
+        HStack(spacing: 8) {
+            if let request = store.lastRequest {
+                ShareLink(item: PlanPDFExport(input: PlanPDF.Input(
+                    projectName: store.projectName,
+                    dateText: Date().formatted(date: .long, time: .omitted),
+                    parts: store.parts, result: result, request: request,
+                    names: store.partNames)),
+                          preview: SharePreview("\(store.projectName).pdf")) {
+                    shareTile("PDF", icon: "doc.richtext")
+                }
+            }
+            ShareLink(item: CutprojExport(doc: store.exportableDoc()),
+                      preview: SharePreview("\(store.projectName).cutproj")) {
+                shareTile(".cutproj", icon: "square.and.arrow.up")
+            }
+        }
+    }
+
+    private func shareTile(_ title: String, icon: String) -> some View {
+        Label(title, systemImage: icon)
+            .font(.subheadline.weight(.semibold))
+            .frame(maxWidth: .infinity, minHeight: 48)
+            .background(DesignTokens.colorTimber900, in: RoundedRectangle(cornerRadius: 10))
+            .foregroundStyle(DesignTokens.colorTimber50)
     }
 
     private var staleBanner: some View {
