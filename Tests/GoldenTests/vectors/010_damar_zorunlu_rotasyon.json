@@ -1,0 +1,10 @@
+{
+  "name": "010 damar: yalniz donerek sigan allowed parca (E1-S3 AC-2)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
+    "parts": [{ "id": "p1", "name": "uzun", "materialId": "m1", "w": 120000, "h": 230000, "qty": 1, "rotation": "allowed" }]
+  },
+  "expected": {"sheetCount": 1, "wasteBps": 728, "cutCount": 2, "placementsHash": "613503806aef7010"}
+}
