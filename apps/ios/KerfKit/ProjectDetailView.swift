@@ -1,5 +1,6 @@
 import SwiftUI
 import CutModels
+import CutProj
 
 // Proje Detayı — docs/07 §1: 3 sekme (Parçalar | Stok | Plan), TabView yok.
 struct ProjectDetailView: View {
@@ -150,12 +151,61 @@ private struct PartRow: View {
                 Image(systemName: part.rotationAllowed ? "arrow.triangle.2.circlepath" : "lock.fill")
                     .foregroundStyle(part.rotationAllowed
                                      ? DesignTokens.colorTimber300 : DesignTokens.colorAmber500)
-                    .frame(width: 32, height: 32)
+                    .frame(width: 44, height: 44) // HIG asgari dokunma hedefi
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .accessibilityLabel(part.rotationAllowed ? "Döndürme serbest" : "Damar kilitli")
+
+            bandingMenu
         }
-        .padding(.vertical, 2)
+    }
+
+    // Bant rozeti (docs/13 M-2: 4 nokta) — Menu ile kenar seçimi, sistem bileşeni.
+    private var bandingMenu: some View {
+        Menu {
+            Toggle("Üst kenar", isOn: bandBinding(\.top))
+            Toggle("Alt kenar", isOn: bandBinding(\.bottom))
+            Toggle("Sol kenar", isOn: bandBinding(\.left))
+            Toggle("Sağ kenar", isOn: bandBinding(\.right))
+            Divider()
+            Button("Dört kenar") { setBanding(BandingDoc(top: true, bottom: true, left: true, right: true)) }
+            Button("Bant yok") { setBanding(BandingDoc()) }
+        } label: {
+            BandingDots(banding: part.banding)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel("Bant kenarları")
+    }
+
+    private func bandBinding(_ path: WritableKeyPath<BandingDoc, Bool>) -> Binding<Bool> {
+        Binding(get: { part.banding[keyPath: path] },
+                set: { part.banding[keyPath: path] = $0; store.touch() })
+    }
+
+    private func setBanding(_ value: BandingDoc) {
+        part.banding = value
+        store.touch()
+    }
+}
+
+// 4 nokta: üst/alt/sol/sağ kenar bantlıysa amber dolu.
+struct BandingDots: View {
+    let banding: BandingDoc
+
+    var body: some View {
+        VStack(spacing: 3) {
+            dot(banding.top)
+            HStack(spacing: 9) { dot(banding.left); dot(banding.right) }
+            dot(banding.bottom)
+        }
+    }
+
+    private func dot(_ on: Bool) -> some View {
+        Circle()
+            .fill(on ? DesignTokens.colorAmber500 : DesignTokens.colorTimber700)
+            .frame(width: 5, height: 5)
     }
 }
 
@@ -208,6 +258,7 @@ struct PlanTabView: View {
                         StatCard(title: "levha", value: "\(result.stats.sheetCount)")
                         StatCard(title: "fire", value: result.stats.wastePercentText)
                         StatCard(title: "kesim", value: "\(result.stats.cutCount)")
+                        StatCard(title: "bant", value: store.bandLengthText)
                     }
 
                     objectivePicker
