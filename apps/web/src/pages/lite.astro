@@ -1,0 +1,223 @@
+---
+// W-2 Lite hesaplayıcı (docs/06 §4): tek levha, ≤20 parça, GERÇEK Wasm motoru —
+// hem parite kanıtı hem lead-gen. PDF → e-posta modalı (Buttondown açılınca bağlanır).
+import '../../styles/tokens.css';
+const FOUNDING_LIST = 'mailto:hello@kerfkit.app?subject=Lite%20PDF';
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free cut list calculator — kerfkit lite</title>
+  <meta name="description" content="Free plywood cut list calculator. One sheet, up to 20 parts, kerf-aware — powered by the exact same engine as the kerfkit iOS app, running in your browser." />
+</head>
+<body>
+
+<header class="kabuk">
+  <a class="marka" href="/">
+    <svg viewBox="0 0 1024 1024" width="28" height="28" aria-hidden="true"><rect width="1024" height="1024" fill="var(--color-timber-900)" rx="230"/><g fill="var(--color-amber-500)" transform="rotate(-45 512 512)"><rect x="-300" y="342" width="788" height="340"/><rect x="536" y="342" width="788" height="340"/></g></svg>
+    <span>kerfkit <em>lite</em></span>
+  </a>
+  <a class="cta cta-sm" href="/">Full version on iOS →</a>
+</header>
+
+<main>
+  <h1>Cut list calculator</h1>
+  <p class="alt">One sheet, up to 20 parts. Same engine as the app — kerf-aware, deterministic, in your browser. No signup.</p>
+
+  <div class="izgara">
+    <section class="panel" aria-label="Inputs">
+      <h2>Sheet</h2>
+      <div class="satir">
+        <label>Width (mm) <input id="sw" type="number" value="2440" min="1" /></label>
+        <label>Height (mm) <input id="sh" type="number" value="1220" min="1" /></label>
+      </div>
+      <div class="satir">
+        <label>Kerf (mm) <input id="kerf" type="number" value="3" min="0" /></label>
+        <label>Trim (mm) <input id="trim" type="number" value="0" min="0" /></label>
+      </div>
+
+      <h2>Parts <span id="sayac" class="soluk"></span></h2>
+      <div id="parcalar"></div>
+      <button id="ekle" class="ghost" type="button">+ Add part</button>
+    </section>
+
+    <section class="panel" aria-label="Result">
+      <div id="istatistik" class="istatistik soluk">Loading engine…</div>
+      <svg id="diyagram" viewBox="0 0 800 400" role="img" aria-label="Cut layout diagram"></svg>
+      <div id="yerlesmeyen" class="uyari" hidden></div>
+      <div class="eylem">
+        <button id="pdf" class="cta" type="button">Download PDF</button>
+        <span class="soluk">PDF &amp; multi-sheet plans live in the <a href="/">iOS app</a>.</span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<dialog id="modal">
+  <h3>Get the PDF by email</h3>
+  <p class="soluk">Leave your email and we’ll send the cut plan — and early-bird founding pricing for the full app.</p>
+  <form method="dialog">
+    <input id="eposta" type="email" placeholder="you@workshop.com" required />
+    <button class="cta" id="gonder" type="submit">Send it</button>
+    <button class="ghost" value="cancel">Cancel</button>
+  </form>
+</dialog>
+
+<script>
+  // — Wasm motoru: WASI mini-stub (motor G/Ç yapmaz; eksik import ENOSYS döner) —
+  let engine = null;
+  async function bootEngine() {
+    const resp = await fetch('/wasm/kerfkit-motor.wasm');
+    const module = await WebAssembly.compile(await resp.arrayBuffer());
+    let memory;
+    const stub = new Proxy({
+      fd_write: (_fd, _iov, _cnt, nw) => { new DataView(memory.buffer).setUint32(nw, 0, true); return 0; },
+      random_get: (ptr, len) => { crypto.getRandomValues(new Uint8Array(memory.buffer, ptr, len)); return 0; },
+      clock_time_get: (_id, _prec, out) => { new DataView(memory.buffer).setBigUint64(out, BigInt(Math.round(performance.now() * 1e6)), true); return 0; },
+      proc_exit: (c) => { throw new Error(`wasm exit ${c}`); },
+      environ_sizes_get: (a, b) => { const dv = new DataView(memory.buffer); dv.setUint32(a, 0, true); dv.setUint32(b, 0, true); return 0; },
+      environ_get: () => 0,
+      args_sizes_get: (a, b) => { const dv = new DataView(memory.buffer); dv.setUint32(a, 0, true); dv.setUint32(b, 0, true); return 0; },
+      args_get: () => 0,
+    }, { get: (t, name) => t[name] ?? (() => 52 /* ENOSYS */) });
+    const inst = await WebAssembly.instantiate(module, { wasi_snapshot_preview1: stub });
+    memory = inst.exports.memory;
+    inst.exports._initialize();
+    engine = inst.exports;
+  }
+
+  function optimize(request) {
+    const bytes = new TextEncoder().encode(JSON.stringify(request));
+    const ptr = engine.kk_input_alloc(bytes.length);
+    new Uint8Array(engine.memory.buffer, ptr, bytes.length).set(bytes);
+    const n = engine.kk_optimize(bytes.length);
+    if (n < 0) throw new Error(`engine error ${n}`);
+    return JSON.parse(new TextDecoder().decode(new Uint8Array(engine.memory.buffer, engine.kk_output_ptr(), n)));
+  }
+
+  // — UI durumu —
+  const MAX_PARTS = 20;
+  const $ = (id) => document.getElementById(id);
+  const varsayilan = [
+    { name: 'Side', w: 720, h: 580, q: 2 },
+    { name: 'Shelf', w: 764, h: 560, q: 2 },
+    { name: 'Door', w: 396, h: 716, q: 1 },
+  ];
+
+  function partRow(p = { name: '', w: '', h: '', q: 1 }) {
+    const row = document.createElement('div');
+    row.className = 'parca';
+    row.innerHTML = `
+      <input class="ad" placeholder="Part" value="${p.name}" />
+      <input class="w" type="number" min="1" placeholder="W" value="${p.w}" />
+      <input class="h" type="number" min="1" placeholder="H" value="${p.h}" />
+      <input class="q" type="number" min="1" value="${p.q}" />
+      <button type="button" class="sil" aria-label="Remove">×</button>`;
+    row.querySelector('.sil').onclick = () => { row.remove(); hesapla(); };
+    row.querySelectorAll('input').forEach((i) => (i.oninput = hesapla));
+    return row;
+  }
+
+  function okuIstek() {
+    const mm = (el, min = 1) => Math.max(min, parseInt(el.value || '0', 10) || min);
+    const parts = [...document.querySelectorAll('.parca')].map((r, i) => ({
+      id: `p${i}`, name: r.querySelector('.ad').value || `Part ${i + 1}`, materialId: 'm1',
+      w: mm(r.querySelector('.w')) * 100, h: mm(r.querySelector('.h')) * 100,
+      qty: mm(r.querySelector('.q')), rotation: 'allowed',
+    })).filter((p) => p.w > 100 && p.h > 100);
+    return {
+      unitMode: 'metric_mm', kerf: Math.max(0, parseInt($('kerf').value || '0', 10)) * 100,
+      trim: Math.max(0, parseInt($('trim').value || '0', 10)) * 100,
+      objective: 'sheets', seed: 1,
+      stocks: [{ id: 's1', materialId: 'm1', w: mm($('sw')) * 100, h: mm($('sh')) * 100, qty: 1, isOffcut: false }],
+      parts,
+    };
+  }
+
+  function ciz(reply, req) {
+    const svg = $('diyagram');
+    const W = req.stocks[0].w, H = req.stocks[0].h;
+    const genis = 800, yuksek = Math.round((genis * H) / W);
+    svg.setAttribute('viewBox', `0 0 ${genis} ${yuksek}`);
+    const s = genis / W;
+    const names = Object.fromEntries(req.parts.map((p) => [p.id, p.name]));
+    let out = `<rect width="${genis}" height="${yuksek}" fill="var(--color-timber-800)" rx="6"/>`;
+    for (const p of reply.result.placements) {
+      if (p.sheetIndex !== 0) continue;
+      const x = p.x * s, y = yuksek - (p.y + p.h) * s, w = p.w * s, h = p.h * s;
+      out += `<rect x="${x + 1}" y="${y + 1}" width="${w - 2}" height="${h - 2}" fill="var(--color-amber-500)" rx="3"/>`;
+      if (w > 70 && h > 22) out += `<text x="${x + w / 2}" y="${y + h / 2}" text-anchor="middle" dominant-baseline="middle" font-size="14" font-weight="600" fill="var(--color-timber-950)">${names[p.partId] ?? ''}${p.rotated ? ' ⤾' : ''}</text>`;
+    }
+    svg.innerHTML = out;
+  }
+
+  let zamanlayici;
+  function hesapla() {
+    clearTimeout(zamanlayici);
+    zamanlayici = setTimeout(() => {
+      if (!engine) return;
+      const req = okuIstek();
+      $('sayac').textContent = `${document.querySelectorAll('.parca').length}/${MAX_PARTS}`;
+      $('ekle').disabled = document.querySelectorAll('.parca').length >= MAX_PARTS;
+      if (req.parts.length === 0) { $('istatistik').textContent = 'Add a part to see the layout.'; $('diyagram').innerHTML = ''; return; }
+      const t0 = performance.now();
+      const reply = optimize(req);
+      const ms = (performance.now() - t0).toFixed(1);
+      if (!reply.ok) { $('istatistik').textContent = `Input error — check sizes. (${reply.error})`; return; }
+      const st = reply.result.stats;
+      $('istatistik').textContent = `${st.sheetCount} sheet · ${(st.wasteBps / 100).toFixed(1)}% waste · ${st.cutCount} cuts · ${ms} ms`;
+      const yer = $('yerlesmeyen');
+      yer.hidden = reply.result.unplaced.length === 0;
+      yer.textContent = reply.result.unplaced.length ? `${reply.result.unplaced.length} part(s) didn’t fit on one sheet — the iOS app handles multi-sheet plans.` : '';
+      ciz(reply, req);
+    }, 30);
+  }
+
+  $('ekle').onclick = () => { $('parcalar').appendChild(partRow()); hesapla(); };
+  $('pdf').onclick = () => $('modal').showModal();
+  $('gonder').onclick = () => {
+    const adres = 'hello@kerfkit.app'; // Buttondown açılınca embed-subscribe olacak (landing ile aynı karar)
+    location.href = `mailto:${adres}?subject=Lite%20PDF&body=${encodeURIComponent($('eposta').value)}`;
+  };
+
+  varsayilan.forEach((p) => $('parcalar').appendChild(partRow(p)));
+  bootEngine().then(hesapla).catch((e) => { $('istatistik').textContent = `Engine failed to load: ${e.message}`; });
+</script>
+
+<style is:global>
+  /* is:global: parça satırları JS ile üretilir — Astro scoped stiller onları yakalamaz. */
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--color-timber-950); color: var(--color-timber-200);
+         font: 16px/1.55 -apple-system, "SF Pro Text", "Segoe UI", sans-serif; }
+  main { max-width: 1080px; margin: 0 auto; padding: 0 24px 64px; }
+  h1 { color: var(--color-timber-50); font-size: 34px; margin-top: 24px; }
+  h2 { color: var(--color-timber-50); font-size: 17px; margin: 20px 0 10px; }
+  .alt { color: var(--color-timber-300); margin-top: 8px; }
+  .kabuk { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; max-width: 1080px; margin: 0 auto; }
+  .marka { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 22px; color: var(--color-timber-50); text-decoration: none; }
+  .marka em { color: var(--color-amber-500); font-style: normal; }
+  .cta { display: inline-block; background: var(--color-amber-500); color: var(--color-timber-950); font-weight: 700; text-decoration: none; border: 0; padding: 12px 20px; border-radius: 10px; font-size: 15px; cursor: pointer; }
+  .cta-sm { padding: 8px 16px; font-size: 14px; }
+  .ghost { background: none; border: 1px solid var(--color-timber-700); color: var(--color-timber-300); border-radius: 8px; padding: 8px 14px; margin-top: 8px; cursor: pointer; }
+  .izgara { display: grid; grid-template-columns: 380px 1fr; gap: 24px; margin-top: 24px; }
+  .panel { background: var(--color-timber-900); border-radius: 14px; padding: 18px; }
+  .satir { display: flex; gap: 10px; }
+  label { display: block; font-size: 12px; color: var(--color-timber-300); flex: 1; }
+  input { width: 100%; background: var(--color-timber-800); color: var(--color-timber-50); border: 0; border-radius: 8px; padding: 9px 10px; font-size: 15px; margin-top: 4px; }
+  .parca { display: grid; grid-template-columns: 1.4fr .8fr .8fr .5fr 32px; gap: 6px; margin-bottom: 6px; align-items: center; }
+  .parca .sil { background: none; border: 0; color: var(--color-timber-500); font-size: 18px; cursor: pointer; }
+  .istatistik { font-size: 15px; font-weight: 600; color: var(--color-amber-400); min-height: 24px; margin-bottom: 12px; }
+  .soluk { color: var(--color-timber-500); font-weight: 400; font-size: 13px; }
+  #diyagram { width: 100%; border-radius: 10px; }
+  .uyari { margin-top: 10px; color: var(--color-red-500); font-size: 14px; }
+  .eylem { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .eylem a { color: var(--color-amber-400); }
+  dialog { background: var(--color-timber-900); color: var(--color-timber-200); border: 1px solid var(--color-timber-700); border-radius: 14px; padding: 24px; max-width: 380px; }
+  dialog::backdrop { background: rgb(0 0 0 / .6); }
+  dialog h3 { color: var(--color-timber-50); margin-bottom: 8px; }
+  dialog form { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+  @media (max-width: 860px) { .izgara { grid-template-columns: 1fr; } }
+</style>
+</body></html>

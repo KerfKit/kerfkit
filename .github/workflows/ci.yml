@@ -15,3 +15,9 @@ jobs:
         run: |
           node tools/gen-tokens.mjs
           git diff --exit-code apps/web/styles/tokens.css
+      # W-2: commit'li wasm motoru golden 001/002 ile bit-eşit mi? Motor değişip
+      # tools/build-wasm.sh koşulmadıysa burada kırmızıya düşer (bilinçli bekçi).
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Wasm motor paritesi (Node)
+        run: node --no-warnings tools/wasm-parite.mjs
