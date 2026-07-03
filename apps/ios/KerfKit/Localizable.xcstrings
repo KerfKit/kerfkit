@@ -133,6 +133,34 @@
         }
       }
     },
+    "%lld parts imported": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld part imported"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld parts imported"
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld parça içe aktarıldı"
+          }
+        }
+      }
+    },
     "%lld parts ready — calculate the plan.": {
       "localizations": {
         "en": {
@@ -167,6 +195,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yüzde %lld tamamlandı"
+          }
+        }
+      }
+    },
+    "%lld rows skipped": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld row skipped"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld rows skipped"
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld satır atlandı"
           }
         }
       }

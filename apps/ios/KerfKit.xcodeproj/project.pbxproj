@@ -18,6 +18,7 @@
 		4B530C9FA53B63953F718ADB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F7411E7B8EE374DE8AF2F9 /* OnboardingView.swift */; };
 		50B0B8A2554E27661FE050B2 /* ShareExports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47ED80955683CCE24FF266 /* ShareExports.swift */; };
 		6A7F52DE163FD0F28B15F835 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */; };
+		6BD00DF77B2271FDC1F76011 /* CSVImportUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A5BBA57433B3C2A79B890B /* CSVImportUITests.swift */; };
 		6EDCFC9E8FCD7906516AEC3C /* CutProj in Frameworks */ = {isa = PBXBuildFile; productRef = 1149728F6F25D8F98455569F /* CutProj */; };
 		79D5E2CEF61270BDCCD55B3E /* PlanComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */; };
 		7EAA1D7472D02168309B4AB9 /* PlanPDFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D84F49D149208ADDDFDF04 /* PlanPDFTests.swift */; };
@@ -60,6 +61,7 @@
 		3947A1970267BE3B58930826 /* kerfkit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerfkit; path = ../..; sourceTree = SOURCE_ROOT; };
 		417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		55A5BBA57433B3C2A79B890B /* CSVImportUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVImportUITests.swift; sourceTree = "<group>"; };
 		59F7411E7B8EE374DE8AF2F9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5B7BCED2AED2B0CAD77C0DEA /* PlanPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPDF.swift; sourceTree = "<group>"; };
 		5CEF468CC0D56AE47AA07FD7 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		D1A8BE7D452C396E8807D7CB /* KerfKitUITests */ = {
 			isa = PBXGroup;
 			children = (
+				55A5BBA57433B3C2A79B890B /* CSVImportUITests.swift */,
 				417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */,
 				6E4EC8307545892285B9608E /* OnboardingFlowTests.swift */,
 				9DA71B6EFA8661BA2364E6E1 /* QuickAddFlowTests.swift */,
@@ -311,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BD00DF77B2271FDC1F76011 /* CSVImportUITests.swift in Sources */,
 				DF5610C93DD15D31A7A4CBEA /* LocalizationTests.swift in Sources */,
 				FA92B1FDD39181146202A637 /* OnboardingFlowTests.swift in Sources */,
 				7F00E1FE372F23BCC804F381 /* QuickAddFlowTests.swift in Sources */,

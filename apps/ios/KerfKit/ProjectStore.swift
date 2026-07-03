@@ -71,6 +71,7 @@ final class ProjectStore {
     var partNames: [String: String] = [:]
     var errorMessage: String?
     var stale = false // E-4 bayat-sonuç bandı: girdiler plan sonrası değiştiyse
+    var importSummary: String? // K-12 içe aktarma özeti (bant metni)
 
     // M-5 Atölye Modu: adım = plan yerleşimi (deterministik sıra), id = "c<indeks>".
     var workshopOpen = false
@@ -171,6 +172,27 @@ final class ProjectStore {
 
     // K-13 paylaşımı: aktif projenin dokümanı (tembel .cutproj/PDF üretimi için).
     func exportableDoc() -> ProjectDoc { currentDoc() }
+
+    // — K-12 CSV köprüsü —
+
+    var csvRows: [CSVPartList.Row] {
+        parts.map { .init(name: $0.name, widthMM: $0.widthMM, heightMM: $0.heightMM,
+                          qty: $0.qty, rotationAllowed: $0.rotationAllowed, banding: $0.banding) }
+    }
+
+    // Panodan CSV/TSV: hatalı satırlar atlanır, özet bantta gösterilir (docs/03 E3-S3).
+    func importParts(fromCSV text: String) {
+        let (rows, issues) = CSVPartList.parse(text)
+        parts.append(contentsOf: rows.map {
+            PartInput(name: $0.name, widthMM: $0.widthMM, heightMM: $0.heightMM,
+                      qty: $0.qty, rotationAllowed: $0.rotationAllowed, banding: $0.banding)
+        })
+        let imported = String(localized: "\(rows.count) parts imported")
+        importSummary = issues.isEmpty
+            ? imported
+            : imported + " · " + String(localized: "\(issues.count) rows skipped")
+        if !rows.isEmpty { touch() }
+    }
 
     // M-8 Verilerim: her proje .cutproj olarak geçici dizine yazılır (ShareLink için).
     func exportAllProjects() -> [URL] {

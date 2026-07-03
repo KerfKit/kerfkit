@@ -31,6 +31,21 @@ struct CutprojExport: Transferable {
     }
 }
 
+// K-12: parça listesi CSV'si — Numbers/Excel/diğer uygulamalarla alışveriş.
+struct CSVExport: Transferable {
+    let name: String
+    let rows: [CSVPartList.Row]
+
+    static var transferRepresentation: some TransferRepresentation {
+        FileRepresentation(exportedContentType: .commaSeparatedText) { export in
+            let url = FileManager.default.temporaryDirectory
+                .appendingPathComponent("\(export.name.safeFileName).csv")
+            try Data(CSVPartList.export(export.rows).utf8).write(to: url)
+            return SentTransferredFile(url)
+        }
+    }
+}
+
 extension String {
     var safeFileName: String {
         replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "-")
