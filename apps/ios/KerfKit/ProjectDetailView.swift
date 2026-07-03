@@ -274,6 +274,18 @@ struct PlanTabView: View {
                     }
 
                     diagramPager(result)
+
+                    // M-4 alt eylem: Atölye Modu (docs/13) — kesime tezgâh başında rehberlik.
+                    Button {
+                        store.workshopOpen = true
+                    } label: {
+                        Label("Atölye Modu", systemImage: "hammer.fill")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, minHeight: 56)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(DesignTokens.colorTimber950)
+                    .disabled(store.stale)
                 } else {
                     emptyPlan
                 }
@@ -283,6 +295,9 @@ struct PlanTabView: View {
                 }
             }
             .padding(.horizontal)
+        }
+        .fullScreenCover(isPresented: $store.workshopOpen) {
+            WorkshopView().environment(store)
         }
     }
 

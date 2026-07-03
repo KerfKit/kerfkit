@@ -66,6 +66,11 @@ final class ProjectStore {
     var errorMessage: String?
     var stale = false // E-4 bayat-sonuç bandı: girdiler plan sonrası değiştiyse
 
+    // M-5 Atölye Modu: adım = plan yerleşimi (deterministik sıra), id = "c<indeks>".
+    var workshopOpen = false
+    var benchMode = false // Tezgâh Modu (docs/12 §7) — oturumluk, M-8'de kalıcı ayara taşınır
+    var completedCutIds: Set<String> = []
+
     private var projectId = UUID().uuidString
     private var createdAt = ProjectStore.nowISO()
     // Aktif proje listeden silindiyse touch/flush onu geri yazmasın (diriltme yasağı).
@@ -79,6 +84,26 @@ final class ProjectStore {
     // M-4 bant stat kartı: projedeki toplam bant kenarı uzunluğu (yerleşimden bağımsız).
     var bandLengthText: String {
         String(format: "%.1fm", Double(parts.reduce(0) { $0 + $1.bandLengthMM }) / 1000)
+    }
+
+    // — M-5 atölye adımları —
+
+    var workshopSteps: [Placement] { result?.placements ?? [] }
+    var currentStepIndex: Int? {
+        workshopSteps.indices.first { !completedCutIds.contains("c\($0)") }
+    }
+
+    func markCut(_ index: Int) {
+        completedCutIds.insert("c\(index)")
+        touch(markStale: false)
+    }
+
+    func undoLastCut() {
+        // Geri al: tamamlanan en büyük indeksli adım geri açılır.
+        if let last = completedCutIds.compactMap({ Int($0.dropFirst()) }).max() {
+            completedCutIds.remove("c\(last)")
+            touch(markStale: false)
+        }
     }
 
     // inMemory: snapshot/birim testleri kalıcı mağazayı kirletmesin.
@@ -147,6 +172,7 @@ final class ProjectStore {
         createdAt = ProjectStore.nowISO()
         activeDeleted = false
         result = nil; lastRequest = nil; errorMessage = nil; stale = false
+        completedCutIds = []; workshopOpen = false
         sheetWidthMM = Defaults.sheetWidthMM; sheetHeightMM = Defaults.sheetHeightMM
         sheetQty = Defaults.sheetQty; kerfMM = Defaults.kerfMM; trimMM = Defaults.trimMM
         objective = Defaults.objective
@@ -208,7 +234,9 @@ final class ProjectStore {
         if let result, let lastRequest {
             doc.plans = [PlanDoc(id: "plan-son", createdAt: ProjectStore.nowISO(),
                                  engineVersion: result.engineVersion,
-                                 request: lastRequest, result: result, stale: stale)]
+                                 request: lastRequest, result: result, stale: stale,
+                                 workshopProgress: completedCutIds.isEmpty ? nil
+                                     : WorkshopProgressDoc(completedCutIds: completedCutIds.sorted()))]
         }
         return doc
     }
@@ -235,11 +263,13 @@ final class ProjectStore {
             result = plan.result
             lastRequest = plan.request
             stale = plan.stale
+            completedCutIds = Set(plan.workshopProgress?.completedCutIds ?? [])
             var names: [String: String] = [:]
             for p in plan.request.parts { names[p.id] = p.name }
             partNames = names
         } else {
             result = nil; lastRequest = nil; stale = false
+            completedCutIds = []
         }
         errorMessage = nil
     }
@@ -283,6 +313,7 @@ final class ProjectStore {
             partNames = names
             errorMessage = nil
             stale = false
+            completedCutIds = [] // plan değişti — atölye ilerlemesi eski plana aitti
         } catch let error as PlacementError {
             // Son geçerli plan korunur (bayat kalır) — nil'lemek diske de plansız yazardı.
             if case .partExceedsStock(let pid) = error {
