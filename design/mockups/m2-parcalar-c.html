@@ -1,0 +1,33 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>M-2 C form-odaklı</title>
+<link rel="stylesheet" href="../../apps/web/styles/tokens.css">
+<style>
+* { box-sizing:border-box; margin:0; font-family:-apple-system,"SF Pro Text",sans-serif; }
+body { background:var(--color-timber-950); color:var(--color-timber-200); width:390px; margin:0 auto; min-height:844px; padding-bottom:32px; }
+.nav { display:flex; justify-content:space-between; align-items:center; padding:16px; font-weight:700; color:var(--color-timber-50); }
+.nav .baslik { font-size:20px; }
+.sekme { display:flex; gap:4px; padding:0 16px 12px; }
+.sekme span { flex:1; text-align:center; padding:8px; border-radius:8px; font-size:14px; color:var(--color-timber-300); background:var(--color-timber-900); }
+.sekme .aktif { background:var(--color-amber-500); color:var(--color-timber-950); font-weight:700; }
+
+.form { background:var(--color-timber-900); margin:0 16px 12px; border-radius:16px; padding:18px; border:1px solid var(--color-timber-700); }
+.form label { font-size:11px; color:var(--color-timber-500); display:block; margin:10px 0 4px; letter-spacing:.06em; }
+.form input { width:100%; background:var(--color-timber-800); border:0; border-radius:10px; color:var(--color-timber-50); padding:14px; font-size:20px; font-variant-numeric:tabular-nums; }
+.form .yanyana { display:flex; gap:10px; }
+.form .akis { margin-top:14px; font-size:12px; color:var(--color-amber-400); }
+.mini { display:grid; grid-template-columns:1.6fr 1.2fr .5fr .4fr; padding:10px 16px; border-bottom:1px solid var(--color-timber-800); font-size:14px; color:var(--color-timber-300); }
+.mini span:first-child { color:var(--color-timber-50); font-weight:600; }
+.baslikk { font-size:12px; color:var(--color-timber-500); padding:10px 16px 4px; letter-spacing:.08em; }
+
+</style></head><body>
+<div class="nav"><span>‹ Projeler</span><span class="baslik">Mutfak Dolabı</span><span>⋯</span></div>
+<div class="sekme"><span class="aktif">Parçalar</span><span>Stok</span><span>Plan</span></div>
+<div class="form">
+<label>PARÇA ADI</label><input value="Çekmece yanı">
+<div class="yanyana"><div style="flex:1"><label>GENİŞLİK</label><input value="396"></div>
+<div style="flex:1"><label>YÜKSEKLİK</label><input value="150"></div>
+<div style="width:84px"><label>ADET</label><input value="4"></div></div>
+<div class="akis">⏎ Return: kaydet + yeni parça · alanlar arası Tab</div></div>
+<div class="baslikk">LİSTE (4 parça · 11 adet)</div><div class="mini"><span>Yan</span><span>720 × 580</span><span>×2</span><span>🔒</span></div><div class="mini"><span>Raf</span><span>764 × 560</span><span>×2</span><span>↻</span></div><div class="mini"><span>Kapak</span><span>396 × 716</span><span>×1</span><span>🔒</span></div><div class="mini"><span>Çekmece önü</span><span>396 × 180</span><span>×6</span><span>↻</span></div>
+</body></html>

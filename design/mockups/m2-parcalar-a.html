@@ -1,0 +1,33 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>M-2 A tablo-yoğun</title>
+<link rel="stylesheet" href="../../apps/web/styles/tokens.css">
+<style>
+* { box-sizing:border-box; margin:0; font-family:-apple-system,"SF Pro Text",sans-serif; }
+body { background:var(--color-timber-950); color:var(--color-timber-200); width:390px; margin:0 auto; min-height:844px; padding-bottom:32px; }
+.nav { display:flex; justify-content:space-between; align-items:center; padding:16px; font-weight:700; color:var(--color-timber-50); }
+.nav .baslik { font-size:20px; }
+.sekme { display:flex; gap:4px; padding:0 16px 12px; }
+.sekme span { flex:1; text-align:center; padding:8px; border-radius:8px; font-size:14px; color:var(--color-timber-300); background:var(--color-timber-900); }
+.sekme .aktif { background:var(--color-amber-500); color:var(--color-timber-950); font-weight:700; }
+
+.hizli { display:flex; gap:6px; padding:12px 16px; background:var(--color-timber-900); border-bottom:2px solid var(--color-amber-500); position:sticky; top:0; }
+.hizli input { background:var(--color-timber-800); border:0; border-radius:8px; color:var(--color-timber-50); padding:10px 8px; font-size:15px; min-width:0; }
+.hizli .ad { flex:2; } .hizli .b { flex:1.2; text-align:right; } .hizli .q { width:44px; text-align:center; }
+.hizli .git { background:var(--color-amber-500); color:var(--color-timber-950); font-weight:800; border-radius:8px; width:44px; border:0; font-size:18px; }
+.ipucu { font-size:11px; color:var(--color-timber-500); padding:6px 16px; }
+.satir { display:grid; grid-template-columns: 1.6fr 1.2fr .5fr .4fr .9fr; align-items:center; gap:6px; padding:13px 16px; border-bottom:1px solid var(--color-timber-800); font-size:15px; }
+.satir .ad { color:var(--color-timber-50); font-weight:600; } .satir .boyut { font-variant-numeric:tabular-nums; }
+.satir .kilit { text-align:center; } .satir .bant { font-size:12px; color:var(--color-timber-300); }
+
+</style></head><body>
+<div class="nav"><span>‹ Projeler</span><span class="baslik">Mutfak Dolabı</span><span>⋯</span></div>
+<div class="sekme"><span class="aktif">Parçalar</span><span>Stok</span><span>Plan</span></div>
+<div class="hizli"><input class="ad" placeholder="Parça adı"><input class="b" value="600 × 400"><input class="q" value="1"><button class="git">⏎</button></div>
+<div class="ipucu">Return → satır eklenir, imleç yeni ada geçer · panodan TSV yapıştırılabilir</div>
+<div class="satir"><span class="ad">Yan</span><span class="boyut">720 × 580</span>
+<span class="adet">×2</span><span class="kilit">🔒</span><span class="bant">üç kenar</span></div><div class="satir"><span class="ad">Raf</span><span class="boyut">764 × 560</span>
+<span class="adet">×2</span><span class="kilit">↻</span><span class="bant">ön kenar</span></div><div class="satir"><span class="ad">Kapak</span><span class="boyut">396 × 716</span>
+<span class="adet">×1</span><span class="kilit">🔒</span><span class="bant">dört kenar</span></div><div class="satir"><span class="ad">Çekmece önü</span><span class="boyut">396 × 180</span>
+<span class="adet">×6</span><span class="kilit">↻</span><span class="bant">—</span></div>
+</body></html>
