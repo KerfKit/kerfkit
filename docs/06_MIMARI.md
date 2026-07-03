@@ -58,14 +58,15 @@ cutwise/
 - **iOS:** StoreKit 2 — lifetime non-consumable + yıllık auto-renew + 72-saat non-renewing geçiş;
   StoreKitTest ile otomasyon. ABD harici-link durumu oynak (%0 şimdilik, mahkeme süreci) —
   ekonomi %0 varsayımına KURULMAZ; v1 IAP-yalnız.
-- **Web (founding dönemi):** Stripe Payment Link → e-posta makbuz + "launch'ta kod" akışı;
-  launch sonrası web satışı v2'ye kadar durdurulur (lisans altyapısı gelene dek karışıklık yok).
+- **Web: SATIŞ YOK (karar: Ahmet, Tem 2026 — Stripe kaldırıldı).** Ödeme yalnız mağaza içi:
+  App Store (StoreKit 2) + Google Play Billing. Landing e-posta listesi toplar ve mağaza
+  rozetlerine yönlendirir; founding fiyat mağaza-içi launch teklifi olarak uygulanır.
 - **Android (v1.2):** Play Billing (30 Haz 2026 düzeni: %10 ilk $1M + %5 Play-billing ücreti;
   alternatif faturalama serbest ama MVP'de Play Billing yeter).
 - **Lifetime'ın üç platformda dürüst yönetimi:** v1'de platform-başına satın alma (her mağaza
-  kendi restore'u; sayfada açıkça yazılır). v2'de Supabase lisans anahtarı: web/Stripe alımı
-  anahtar üretir, mobil anahtar girişiyle açılır (offline grace 30 gün); mağaza-içi alımlar da
-  isteğe bağlı e-postaya bağlanır → "bir kez al, her yerde" ancak backend'le dürüst verilir.
+  kendi restore'u; sayfada açıkça yazılır). v2'de çok-platform lisans yeniden değerlendirilir:
+  mağaza-içi alımlar isteğe bağlı e-postaya bağlanır (Supabase licenses) → "bir kez al, her
+  yerde" ancak backend'le dürüst verilir; web satışı bu karar değişmedikçe YOK.
 
 ## 6. Analitik ve gizlilik
 

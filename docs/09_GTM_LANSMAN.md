@@ -10,7 +10,8 @@
 - Başlık: "Stop paying monthly to cut plywood. One-time $49, yours forever."
   Alt: "Founding price — first 300 seats (real counter), then $99.99. No subscription. Ever."
 - AB uyumu: sayaç gerçek; sahte geri sayım yok; $99.99 "gelecek fiyat"; KDV dahil; 14 gün iade;
-  dijital içerik cayma feragati açık onaylı. Stripe Payment Link.
+  ödeme YALNIZ mağaza içi (App Store/Play) — web'de kart formu/harici ödeme yok;
+  landing e-posta listesi + mağaza rozetleri.
 
 **H−8→0 — Topluluk varlığı (değer-önce; kural: link yok, hikâye+ekran görüntüsü, link yorumda):**
 - Reddit: r/BeginnerWoodWorking (müsamahakâr) · r/woodworking (YALNIZ mod ön-izniyle, modmail at)

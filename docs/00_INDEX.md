@@ -22,7 +22,7 @@ dosyayı/bölümü ver, tamamını değil ("curse of instructions"tan kaçın).
 | 05 | VERI_MODELI.md | Varlıklar, .cutproj JSON şeması, değişmezler | Motor + veri oturumlarında |
 | 06 | MIMARI.md | Platform kararı, repo yapısı, senkron, ödeme mimarisi | Kurulum + platform oturumlarında |
 | 07 | UI_UX.md | Ekranlar, akışlar, boş durumlar, atölye modu | UI oturumlarında (ekran başına bölüm) |
-| 08 | MONETIZASYON.md | Fiyat, katmanlar, StoreKit2/Play/Stripe, şeffaf fatura | Paywall + ödeme oturumlarında |
+| 08 | MONETIZASYON.md | Fiyat, katmanlar, StoreKit2/Play (yalnız mağaza içi ödeme), şeffaf fatura | Paywall + ödeme oturumlarında |
 | 09 | GTM_LANSMAN.md | Hafta −8→+90 playbook, ASO, kanallar, şablon metinler | Pazarlama görevlerinde |
 | 10 | YOL_HARITASI_VE_FABLE5.md | 12 haftalık plan, CLAUDE.md şablonu, prompt desenleri, kapılar | Her Pazartesi planlama oturumunda |
 | 11 | MARKA_KIMLIGI.md | İsim (UYARI: CutWise→Kerf), kişilik, ton, logo/ikon brief'i, renk sahipliği | Marka/ikon oturumlarında |
