@@ -31,3 +31,23 @@ targets:
       base:
         SWIFT_VERSION: "6.0"
         INFOPLIST_KEY_UIUserInterfaceStyle: Dark
+  KerfKitUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [KerfKitUITests]
+    dependencies:
+      - target: KerfKit
+    settings:
+      base:
+        SWIFT_VERSION: "6.0"
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  KerfKit:
+    build:
+      targets:
+        KerfKit: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets: [KerfKitUITests]

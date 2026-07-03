@@ -78,6 +78,7 @@ struct PartsTabView: View {
     private var quickAddBar: some View {
         HStack(spacing: 6) {
             TextField("Parça adı", text: $name)
+                .autocorrectionDisabled()
                 .focused($focus, equals: .name)
                 .onSubmit { focus = .width }
             TextField("En", value: $widthMM, format: .number)
