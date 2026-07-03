@@ -29,6 +29,11 @@ const { Content } = await render(g);
 </header>
 
 <main>
+  <!-- W-3: kalıcı uygulama şeridi (docs/18 §6) -->
+  <div class="serit">
+    kerfkit app: unlimited projects, offline, one-time price —
+    <a href="/lite">try the free calculator</a> · <a href="/#founding">get launch access</a>
+  </div>
   <article>
     <h1>{g.data.title}</h1>
     <Content />
@@ -56,6 +61,10 @@ const { Content } = await render(g);
   article :global(a) { color: var(--color-amber-400); }
   article :global(li) { margin: 8px 0 8px 20px; }
   article :global(strong) { color: var(--color-timber-50); }
+  .serit { background: var(--color-timber-900); border-left: 3px solid var(--color-amber-500);
+           border-radius: 10px; padding: 10px 14px; font-size: 14px; margin-top: 16px;
+           color: var(--color-timber-300); }
+  .serit a { color: var(--color-amber-400); }
   article :global(table) { border-collapse: collapse; margin: 16px 0; width: 100%; }
   article :global(th), article :global(td) { border: 1px solid var(--color-timber-700);
     padding: 8px 12px; text-align: left; font-size: 15px; }

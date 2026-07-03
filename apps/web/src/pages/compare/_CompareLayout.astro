@@ -1,0 +1,76 @@
+---
+// P-6 (E7-S5) — dürüst karşılaştırma şablonu (docs/02 §3 kuralı: her hücre kanıtlı,
+// kendi zaaflarımız da yazılır; abartı sıfır). Veriler docs/02 matrisinden (2-3 Tem 2026).
+import '../../../styles/tokens.css';
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+</head>
+<body>
+
+<header class="kabuk">
+  <a class="marka" href="/">
+    <svg viewBox="0 0 1024 1024" width="28" height="28" aria-hidden="true"><rect width="1024" height="1024" fill="var(--color-timber-900)" rx="230"/><g fill="var(--color-amber-500)" transform="rotate(-45 512 512)"><rect x="-300" y="342" width="788" height="340"/><rect x="536" y="342" width="788" height="340"/></g></svg>
+    <span>kerfkit</span>
+  </a>
+  <a class="cta cta-sm" href="/lite">Free cut calculator</a>
+</header>
+
+<main>
+  <slot />
+  <section class="kapanis">
+    <h2>Try kerfkit yourself</h2>
+    <p>The free browser calculator runs the exact engine from the app — no signup, fully offline.</p>
+    <p><a class="cta" href="/lite">Open the free calculator</a></p>
+    <p class="soluk">Full app: one-time purchase, unlimited projects, Workshop Mode.
+      <a href="/#founding">Join the founding list →</a></p>
+  </section>
+  <p class="soluk dip">Comparison data checked July 2026 from public pages and store listings.
+    Spotted something outdated? <a href="mailto:hello@kerfkit.app">Tell us</a> — we fix it.</p>
+</main>
+
+<footer class="kabuk alt">
+  <span>© 2026 kerfkit · <a href="/">home</a> · <a href="/lite">calculator</a> ·
+    <a href="/compare/cutlist-optimizer">vs CutList Optimizer</a> ·
+    <a href="/compare/cutplan">vs CutPlan</a> ·
+    <a href="/compare/opticutter">vs OptiCutter</a></span>
+</footer>
+
+<style is:global>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--color-timber-950); color: var(--color-timber-200);
+         font: 17px/1.65 -apple-system, "SF Pro Text", "Segoe UI", sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 16px 24px 64px; }
+  h1 { color: var(--color-timber-50); font-size: 32px; line-height: 1.2; margin: 20px 0 10px; }
+  h2 { color: var(--color-timber-50); font-size: 22px; margin: 36px 0 12px; }
+  p { margin: 12px 0; }
+  a { color: var(--color-amber-400); }
+  .kabuk { display: flex; justify-content: space-between; align-items: center;
+           padding: 16px 24px; max-width: 1080px; margin: 0 auto; }
+  .marka { display: flex; align-items: center; gap: 10px; font-weight: 700;
+           font-size: 22px; color: var(--color-timber-50); text-decoration: none; }
+  .cta { display: inline-block; background: var(--color-amber-500); color: var(--color-timber-950);
+         font-weight: 700; text-decoration: none; padding: 12px 22px; border-radius: 10px; }
+  .cta-sm { padding: 8px 16px; font-size: 14px; }
+  .tablo-sar { overflow-x: auto; margin: 20px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { border: 1px solid var(--color-timber-700); padding: 10px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--color-timber-900); color: var(--color-timber-50); }
+  td.iyi { color: var(--color-green-500); font-weight: 600; }
+  td.notr { color: var(--color-timber-300); }
+  td.zayif { color: var(--color-red-500); }
+  .durust { background: var(--color-timber-900); border-left: 3px solid var(--color-amber-500);
+            border-radius: 10px; padding: 12px 16px; font-size: 15px; }
+  .kapanis { margin-top: 40px; padding: 24px; background: var(--color-timber-900); border-radius: 14px; }
+  .soluk { color: var(--color-timber-500); font-size: 14px; }
+  .dip { margin-top: 24px; }
+  footer.alt { color: var(--color-timber-500); font-size: 13px; }
+  footer.alt a { color: var(--color-timber-300); }
+</style>
+</body></html>
