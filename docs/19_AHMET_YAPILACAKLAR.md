@@ -2,7 +2,7 @@
 
 > İnsan içindir. Fable 5 geliştirmeyi bitirdikçe burada yalnız SENİN yapabileceğin
 > adımlar kalır. Tamamlananlar tarihle işaretlenir, yenileri eklenir.
-> Son güncelleme: 3 Tem 2026 gece.
+> Son güncelleme: 3 Tem 2026 gece (TR onayı işlendi).
 
 ## 🔴 Bloklayanlar (geliştirme bunlara dayanınca durur)
 
@@ -19,8 +19,6 @@
 
 - [ ] **Buttondown hesabı** (kullanıcı adı: kerfkit; gönderen: hello@kerfkit.app) —
   açılınca söyle: landing + lite'taki e-posta formlarını embed-subscribe'a bağlayacağım.
-- [ ] **TR çeviri onayı (L-1 sonrası):** uygulamanın Türkçe metinlerini son kez sen oku —
-  üslup kuralı docs/18 §5: günlük, doğal dil; kalıp/arkaik kelime yok.
 - [ ] **T1 dilleri için anadil gözden geçirme kanalı kararı** (DE FR ES IT): freelance mi
   (Upwork/ProZ, sayfa başı küçük iş) topluluk mu? Onay gelmeden çeviriler "reviewed"
   işaretlenmez, yayınlanmaz.
@@ -37,4 +35,4 @@
 
 ## ✅ Tamamlananlar
 
-- (henüz yok — tamamladıkça tarihle buraya taşınır)
+- [x] **TR çeviri onayı** — 3 Tem 2026 (Ahmet; String Catalog TR seti onaylı — docs/18 §5 üslup kuralına göre)
