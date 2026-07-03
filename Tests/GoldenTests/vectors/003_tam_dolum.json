@@ -1,0 +1,10 @@
+{
+  "name": "003 tek parca levhayi tam doldurur (kesimsiz)",
+  "pending": false,
+  "request": {
+    "unitMode": "metric_mm", "kerf": 0, "trim": 0, "objective": "sheets", "seed": 1,
+    "stocks": [{ "id": "s1", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "isOffcut": false }],
+    "parts": [{ "id": "p1", "name": "tam", "materialId": "m1", "w": 244000, "h": 122000, "qty": 1, "rotation": "fixed" }]
+  },
+  "expected": { "sheetCount": 1, "wasteBps": 0, "cutCount": 0, "placementsHash": "a45e5502add2ab52" }
+}
