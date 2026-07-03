@@ -1,0 +1,65 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=1220, initial-scale=1">
+<title>M-6 C zemin-diyagram (3 ekran)</title>
+<link rel="stylesheet" href="../../apps/web/styles/tokens.css">
+<style>
+* { box-sizing:border-box; margin:0; font-family:-apple-system,"SF Pro Text",sans-serif; }
+body { background:#333; display:flex; gap:16px; justify-content:center; padding:16px; }
+.tel { width:390px; min-height:844px; background:var(--color-timber-950); color:var(--color-timber-200);
+       padding:16px 24px 40px; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+.zemin { position:absolute; inset:0; opacity:.18; }
+.zemin .parca { position:absolute; background:var(--color-amber-500); border-radius:4px; }
+.atla { text-align:right; font-size:15px; color:var(--color-timber-500); position:relative; }
+.esnek { flex:1; }
+.cumle { font-size:36px; font-weight:800; line-height:1.2; color:var(--color-timber-50); position:relative; }
+.detay { margin-top:14px; font-size:16px; color:var(--color-timber-300); position:relative; }
+.nokta { display:flex; gap:8px; justify-content:center; margin:28px 0 20px; position:relative; }
+.nokta span { width:8px; height:8px; border-radius:50%; background:var(--color-timber-700); }
+.nokta .aktif { background:var(--color-amber-500); width:24px; border-radius:4px; }
+.cta { height:56px; border:0; border-radius:14px; font-size:18px; font-weight:800;
+       background:var(--color-amber-500); color:var(--color-timber-950); position:relative; }
+.gizli { visibility:hidden; height:56px; }
+</style></head><body>
+
+<div class="tel">
+  <div class="zemin">
+    <div class="parca" style="left:-20px;top:80px;width:180px;height:220px"></div>
+    <div class="parca" style="left:180px;top:40px;width:240px;height:150px"></div>
+    <div class="parca" style="left:170px;top:210px;width:160px;height:260px"></div>
+    <div class="parca" style="left:-30px;top:320px;width:180px;height:200px"></div>
+  </div>
+  <div class="atla">Atla</div>
+  <div class="esnek"></div>
+  <div class="cumle">Levhayı gir, parçaları yaz, planı al.</div>
+  <div class="detay">Kesim planı saniyeler içinde.</div>
+  <div class="nokta"><span class="aktif"></span><span></span><span></span></div>
+  <div class="gizli"></div>
+</div>
+
+<div class="tel">
+  <div class="zemin">
+    <div class="parca" style="left:40px;top:100px;width:300px;height:180px"></div>
+    <div class="parca" style="left:60px;top:300px;width:180px;height:240px"></div>
+  </div>
+  <div class="atla">Atla</div>
+  <div class="esnek"></div>
+  <div class="cumle">Kerf, damar, kenar bandı — pro detaylar hazır.</div>
+  <div class="detay">Testere payı, damar kilidi, bant metresi.</div>
+  <div class="nokta"><span></span><span class="aktif"></span><span></span></div>
+  <div class="gizli"></div>
+</div>
+
+<div class="tel">
+  <div class="zemin">
+    <div class="parca" style="left:-10px;top:60px;width:200px;height:240px"></div>
+    <div class="parca" style="left:200px;top:120px;width:220px;height:300px"></div>
+  </div>
+  <div class="atla">Atla</div>
+  <div class="esnek"></div>
+  <div class="cumle">Tek seferlik satın al. Abonelik yok.</div>
+  <div class="detay">Önce dene: örnek projeyle ilk planını gör.</div>
+  <div class="nokta"><span></span><span></span><span class="aktif"></span></div>
+  <button class="cta">Örnek projeyle dene</button>
+</div>
+
+</body></html>

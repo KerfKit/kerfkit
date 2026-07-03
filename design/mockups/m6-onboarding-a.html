@@ -1,0 +1,74 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=1220, initial-scale=1">
+<title>M-6 A görsel-üst (3 ekran)</title>
+<link rel="stylesheet" href="../../apps/web/styles/tokens.css">
+<style>
+* { box-sizing:border-box; margin:0; font-family:-apple-system,"SF Pro Text",sans-serif; }
+body { background:#333; display:flex; gap:16px; justify-content:center; padding:16px; }
+.tel { width:390px; min-height:844px; background:var(--color-timber-950); color:var(--color-timber-200);
+       padding:16px 24px 40px; display:flex; flex-direction:column; }
+.atla { text-align:right; font-size:15px; color:var(--color-timber-500); }
+.gorsel { margin-top:48px; height:300px; border-radius:16px; background:var(--color-timber-900);
+          position:relative; overflow:hidden; }
+.levha { position:absolute; inset:24px; background:var(--color-timber-800); border-radius:8px; }
+.parca { position:absolute; background:var(--color-amber-500); border-radius:3px; }
+.cumle { margin-top:40px; font-size:28px; font-weight:800; line-height:1.25; color:var(--color-timber-50); }
+.detay { margin-top:12px; font-size:15px; color:var(--color-timber-300); }
+.esnek { flex:1; }
+.nokta { display:flex; gap:8px; justify-content:center; margin-bottom:20px; }
+.nokta span { width:8px; height:8px; border-radius:50%; background:var(--color-timber-700); }
+.nokta .aktif { background:var(--color-amber-500); width:24px; border-radius:4px; }
+.cta { height:56px; border:0; border-radius:14px; font-size:18px; font-weight:800;
+       background:var(--color-amber-500); color:var(--color-timber-950); }
+.hayalet { height:48px; background:none; border:0; color:var(--color-timber-500); font-size:15px; margin-top:6px; }
+.statlar { position:absolute; inset:24px; display:flex; gap:8px; align-items:center; padding:0 12px; }
+.statlar div { flex:1; background:var(--color-timber-800); border-radius:12px; text-align:center; padding:16px 0; }
+.statlar b { display:block; font-size:26px; color:var(--color-amber-500); }
+.statlar span { font-size:11px; color:var(--color-timber-300); }
+.rozet { position:absolute; font-size:20px; }
+</style></head><body>
+
+<div class="tel">
+  <div class="atla">Atla</div>
+  <div class="gorsel"><div class="levha">
+    <div class="parca" style="left:8px;top:8px;width:90px;height:100px"></div>
+    <div class="parca" style="left:104px;top:8px;width:120px;height:70px"></div>
+    <div class="parca" style="left:104px;top:84px;width:120px;height:60px"></div>
+    <div class="parca" style="left:230px;top:8px;width:60px;height:136px"></div>
+  </div></div>
+  <div class="cumle">Levhayı gir, parçaları yaz, planı al.</div>
+  <div class="detay">Kesim planı saniyeler içinde — deterministik, her seferinde aynı.</div>
+  <div class="esnek"></div>
+  <div class="nokta"><span class="aktif"></span><span></span><span></span></div>
+  <button class="hayalet" style="visibility:hidden">-</button>
+</div>
+
+<div class="tel">
+  <div class="atla">Atla</div>
+  <div class="gorsel"><div class="levha">
+    <div class="parca" style="left:8px;top:8px;width:140px;height:130px"></div>
+    <div class="rozet" style="left:60px;top:56px">🔒</div>
+    <div class="parca" style="left:156px;top:8px;width:100px;height:80px"></div>
+    <div class="rozet" style="left:190px;top:30px">⤾</div>
+    <div class="parca" style="left:156px;top:96px;width:100px;height:42px"></div>
+  </div></div>
+  <div class="cumle">Kerf, damar, kenar bandı — pro detaylar hazır.</div>
+  <div class="detay">Testere payı hesapta, damar kilidi tek dokunuş, bant metresi görünür.</div>
+  <div class="esnek"></div>
+  <div class="nokta"><span></span><span class="aktif"></span><span></span></div>
+  <button class="hayalet" style="visibility:hidden">-</button>
+</div>
+
+<div class="tel">
+  <div class="atla">Atla</div>
+  <div class="gorsel"><div class="statlar">
+    <div><b>1</b><span>levha</span></div><div><b>%19,3</b><span>fire</span></div><div><b>20</b><span>kesim</span></div>
+  </div></div>
+  <div class="cumle">Tek seferlik satın al. Abonelik yok.</div>
+  <div class="detay">Önce dene: örnek projeyle ilk planını hemen gör.</div>
+  <div class="esnek"></div>
+  <div class="nokta"><span></span><span></span><span class="aktif"></span></div>
+  <button class="cta">Örnek projeyle dene</button>
+</div>
+
+</body></html>
