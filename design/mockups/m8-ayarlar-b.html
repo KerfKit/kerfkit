@@ -1,0 +1,37 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>M-8 B varsayılan-odaklı (editörler üstte açık)</title>
+<link rel="stylesheet" href="../../apps/web/styles/tokens.css">
+<style>
+* { box-sizing:border-box; margin:0; font-family:-apple-system,"SF Pro Text",sans-serif; }
+body { background:var(--color-timber-950); color:var(--color-timber-200); width:390px; margin:0 auto; min-height:844px; padding:16px 16px 32px; }
+.nav { display:flex; justify-content:space-between; padding-bottom:16px; font-weight:700; color:var(--color-timber-50); }
+.kart { background:var(--color-timber-900); border-radius:14px; padding:16px; margin-top:14px; }
+.kart h3 { font-size:15px; color:var(--color-timber-50); padding-bottom:12px; }
+.alan { display:flex; gap:8px; }
+.alan div { flex:1; background:var(--color-timber-800); border-radius:10px; padding:10px; text-align:center; }
+.alan b { display:block; font-size:20px; color:var(--color-amber-500); }
+.alan span { font-size:11px; color:var(--color-timber-300); }
+.seg { display:flex; background:var(--color-timber-800); border-radius:9px; padding:3px; margin-top:10px; }
+.seg span { flex:1; text-align:center; font-size:13px; padding:7px; border-radius:7px; }
+.seg .aktif { background:var(--color-amber-500); color:var(--color-timber-950); font-weight:700; }
+.liste { margin-top:18px; background:var(--color-timber-900); border-radius:12px; }
+.satir { display:flex; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--color-timber-800); font-size:15px; }
+.satir:last-child { border-bottom:0; }
+.soluk { color:var(--color-timber-500); }
+</style></head><body>
+<div class="nav"><span>‹ kerfkit</span><span>Ayarlar</span><span> </span></div>
+
+<div class="kart"><h3>Yeni proje varsayılanları</h3>
+<div class="alan"><div><b>3</b><span>kerf mm</span></div><div><b>0</b><span>trim mm</span></div><div><b>mm</b><span>birim</span></div></div>
+<div class="seg"><span class="aktif">Az levha</span><span>Az fire</span><span>Az kesim</span></div></div>
+
+<div class="liste">
+<div class="satir"><span>Tema</span><span class="soluk">Koyu</span></div>
+<div class="satir"><span>Tümünü dışa aktar</span><span>↑</span></div>
+<div class="satir"><span>Gizlilik</span><span class="soluk">veri toplanmaz ✓</span></div>
+<div class="satir"><span>Destek</span><span class="soluk">&lt;24s</span></div>
+<div class="satir"><span>Hakkında</span><span class="soluk">1.0</span></div>
+</div>
+
+</body></html>

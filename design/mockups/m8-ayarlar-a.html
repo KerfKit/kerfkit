@@ -1,0 +1,49 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>M-8 A klasik gruplu form</title>
+<link rel="stylesheet" href="../../apps/web/styles/tokens.css">
+<style>
+* { box-sizing:border-box; margin:0; font-family:-apple-system,"SF Pro Text",sans-serif; }
+body { background:var(--color-timber-950); color:var(--color-timber-200); width:390px; margin:0 auto; min-height:844px; padding:16px 16px 32px; }
+.nav { display:flex; justify-content:space-between; padding-bottom:16px; font-weight:700; color:var(--color-timber-50); }
+.grup { margin-top:18px; }
+.grup h4 { font-size:13px; color:var(--color-timber-500); text-transform:uppercase; letter-spacing:1px; padding:0 4px 6px; }
+.kutu { background:var(--color-timber-900); border-radius:12px; }
+.satir { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-bottom:1px solid var(--color-timber-800); font-size:16px; min-height:48px; }
+.satir:last-child { border-bottom:0; }
+.deger { color:var(--color-timber-300); }
+.deger .seg { background:var(--color-timber-800); border-radius:8px; padding:6px 10px; margin-left:4px; }
+.deger .aktif { background:var(--color-amber-500); color:var(--color-timber-950); font-weight:700; }
+.dipnot { font-size:12px; color:var(--color-timber-500); padding:6px 4px 0; }
+.link { color:var(--color-amber-500); font-weight:600; }
+</style></head><body>
+<div class="nav"><span>‹ kerfkit</span><span>Ayarlar</span><span> </span></div>
+
+<div class="grup"><h4>Birimler</h4><div class="kutu">
+<div class="satir"><span>Birim</span><span class="deger">mm</span></div></div>
+<div class="dipnot">Kesirli inç, kesir pad'iyle birlikte gelecek.</div></div>
+
+<div class="grup"><h4>Varsayılanlar — yeni projeler</h4><div class="kutu">
+<div class="satir"><span>Testere payı (kerf)</span><span class="deger">3 mm</span></div>
+<div class="satir"><span>Kenar tıraşı (trim)</span><span class="deger">0 mm</span></div>
+<div class="satir"><span>Hedef</span><span class="deger"><span class="seg aktif">Az levha</span><span class="seg">Az fire</span><span class="seg">Az kesim</span></span></div>
+</div></div>
+
+<div class="grup"><h4>Görünüm</h4><div class="kutu">
+<div class="satir"><span>Tema</span><span class="deger">Koyu</span></div></div>
+<div class="dipnot">Açık tema türetildiğinde seçilebilir olacak; PDF her zaman açık.</div></div>
+
+<div class="grup"><h4>Verilerim</h4><div class="kutu">
+<div class="satir"><span class="link">Tümünü dışa aktar (.cutproj)</span><span>↑</span></div></div>
+<div class="dipnot">Verin senindir — hesap yok, bulut yok, istediğin an dışarı al.</div></div>
+
+<div class="grup"><h4>Gizlilik</h4><div class="kutu">
+<div class="satir"><span>kerfkit hiçbir veri toplamaz</span><span>✓</span></div></div></div>
+
+<div class="grup"><h4>Destek</h4><div class="kutu">
+<div class="satir"><span class="link">hello@kerfkit.app</span><span class="deger">&lt;24s yanıt</span></div></div></div>
+
+<div class="grup"><h4>Hakkında</h4><div class="kutu">
+<div class="satir"><span>Sürüm</span><span class="deger">1.0 (motor 0.2.0)</span></div></div></div>
+
+</body></html>
