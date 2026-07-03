@@ -16,8 +16,8 @@
   imperial projelerde 1 birim = 1/6400″ olacak şekilde proje-birim-modu ile saklanır;
   karışık birim tek projede YASAK — doğrulama hatası).
 - Atık yüzdesi çıktısı "baz puan" (Int, 1/100 %) olarak raporlanır.
-- **Motor sınırları (taşma güvenliği):** her boyut (parça/stok w,h) ≤ 10⁸ birim (metrik ~1 km,
-  imperial ~397 m); toplam stok alanı Σ(w·h·qty) ≤ 5×10¹⁴ birim². Gerekçe: wasteBps = alan×10⁴
+- **Motor sınırları (taşma güvenliği):** her boyut (parça/stok w,h) ve kerf/trim ≤ 10⁸ birim
+  (metrik ~1 km, imperial ~397 m); toplam stok alanı Σ(w·h·qty) ≤ 5×10¹⁴ birim². Gerekçe: wasteBps = alan×10⁴
   aritmetiğinin Int64 tavanı 9,22×10¹⁴ birim²; bu iki sınır motordaki tüm ara çarpımları Int64
   içinde tutar. Aşan girdi doğrulama hatasıdır (dimensionTooLarge / totalStockAreaTooLarge).
 - RNG: kendi PCG32 implementasyonu, seed proje dosyasında; platform `random()` YASAK.
