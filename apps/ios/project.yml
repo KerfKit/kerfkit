@@ -17,6 +17,10 @@ targets:
         product: CutCore
       - package: kerf
         product: CutModels
+      - package: kerf
+        product: CutProj
+      - package: kerf
+        product: CutPersist
     info:
       path: Kerf/Info.plist
       properties:

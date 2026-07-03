@@ -30,9 +30,10 @@ struct ContentView: View {
                     ForEach($store.parts) { $part in
                         PartRow(part: $part)
                     }
-                    .onDelete { store.parts.remove(atOffsets: $0) }
+                    .onDelete { store.parts.remove(atOffsets: $0); store.touch() }
                     Button {
                         store.parts.append(.init(name: "", widthMM: 400, heightMM: 300, qty: 1, rotationAllowed: true))
+                        store.touch()
                     } label: {
                         Label("Parça ekle", systemImage: "plus")
                     }
