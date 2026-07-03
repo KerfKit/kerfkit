@@ -9,6 +9,14 @@ import SnapshotTesting
 @MainActor
 final class SnapshotTests: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+        // M-8 varsayılan anahtarları determinist kalsın (UI testleri değiştirmiş olabilir).
+        for key in ["defaultKerfMM", "defaultTrimMM", "defaultObjective"] {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+    }
+
     private func host(_ view: some View, sizeCategory: UIContentSizeCategory,
                       configure: (ProjectStore) -> Void = { _ in }) -> UIViewController {
         let store = ProjectStore(inMemory: true)
@@ -68,5 +76,10 @@ final class SnapshotTests: XCTestCase {
         assertSnapshot(of: host(OnboardingView(initialPage: 2, onFinish: { _ in }),
                                 sizeCategory: .medium),
                        as: .image(on: .iPhone13), named: "onboarding-3")
+    }
+
+    func testSettings_darkMedium() {
+        assertSnapshot(of: host(SettingsView(), sizeCategory: .medium),
+                       as: .image(on: .iPhone13), named: "ayarlar-M")
     }
 }
