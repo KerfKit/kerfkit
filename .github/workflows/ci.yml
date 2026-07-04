@@ -54,9 +54,11 @@ jobs:
         run: swift test
       - name: xcodegen
         run: brew install xcodegen && cd apps/ios && xcodegen generate
-      # UI smoke (docs/17 K-17): proje aç → parça gir → optimize (QuickAdd)
-      # + dışa aktarım ucu (kilitli karo → paywall). Snapshot testleri BİLEREK
-      # dışarıda: runner simülatör render'ı yerel referanslarla birebir değil.
+      # UI smoke (docs/17 K-17): proje aç → parça gir (44pt testi tek parça girer)
+      # + dışa aktarım ucu (-autoOptimize: örnek proje + optimize + kilitli karo →
+      # paywall). 60sn klavye BENCHMARK'ı BİLEREK dışarıda: yerel donanım AC'sidir;
+      # paylaşımlı runner'da typeText tuş düşürüyor (6. tur bulgusu — K-9 emsali).
+      # Snapshot testleri de dışarıda: runner render'ı yerel referanslarla birebir değil.
       # Skip 1.9 eklentisi Xcode 26 SwiftPM'i ister; runner varsayılanı 16.4'te
       # build-plan aşamasında düşüyor (ilk matris koşusu bulgusu).
       - name: En yeni Xcode'u seç
@@ -72,7 +74,7 @@ jobs:
           xcodebuild test -project KerfKit.xcodeproj -scheme KerfKit \
             -skipPackagePluginValidation -skipMacroValidation \
             -destination 'platform=iOS Simulator,name=iPhone 16' \
-            -only-testing:KerfKitUITests/QuickAddFlowTests \
+            -only-testing:KerfKitUITests/QuickAddFlowTests/testTouchTargetsAtLeast44pt \
             -only-testing:KerfKitUITests/PaywallGateUITests/testExportLockedTilesOpenPaywall
 
   matris-android:
