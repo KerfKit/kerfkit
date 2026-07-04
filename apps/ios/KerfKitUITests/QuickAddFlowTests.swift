@@ -33,10 +33,19 @@ final class QuickAddFlowTests: XCTestCase {
         // Liste tembel — son satır ekran dışında kalabilir; önce kaydır.
         app.swipeUp()
         app.swipeUp()
-        XCTAssertTrue(app.staticTexts["Parca10"].waitForExistence(timeout: 5),
+        XCTAssertTrue(app.staticTexts["Parca10"].waitForExistence(timeout: ciKosusu ? 15 : 5),
                       "10. parça listede görünmedi")
-        XCTAssertTrue(app.staticTexts["310 × 210"].exists, "10. parçanın ölçüsü yanlış")
-        XCTAssertLessThan(elapsed, 60, "10 parça klavye akışı 60 saniyeyi aştı: \(elapsed)sn")
+        XCTAssertTrue(app.staticTexts["310 × 210"].waitForExistence(timeout: ciKosusu ? 10 : 2),
+                      "10. parçanın ölçüsü yanlış")
+        // K-9 dersi: sert AC eşiği YEREL donanıma; paylaşımlı CI runner'ına gevşek
+        // regresyon bekçisi (matris 4. tur bulgusu: runner'da 63.5sn).
+        XCTAssertLessThan(elapsed, ciKosusu ? 150 : 60,
+                          "10 parça klavye akışı eşiği aştı: \(elapsed)sn")
+    }
+
+    // ci.yml TEST_RUNNER_CI=1 geçirir (TEST_RUNNER_ öneki test sürecine aktarılır).
+    private var ciKosusu: Bool {
+        ProcessInfo.processInfo.environment["CI"] != nil
     }
 
     // docs/17 K-UI şablonu: 44pt dokunma hedefi assert'i (HIG asgarisi — mağaza reddi riski).
