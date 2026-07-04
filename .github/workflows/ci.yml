@@ -2,6 +2,9 @@ name: CI
 on:
   push: { branches: [main] }
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1" # haftalık matris (Pzt 05:00 UTC) — macOS ayakları
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -34,3 +37,47 @@ jobs:
         run: |
           npm --prefix apps/web ci
           npm --prefix apps/web run build
+
+  # K-17 (E6-S1) — matris ayakları. Repo PRIVATE: macOS dakikaları 10× faturalı,
+  # bu yüzden PR'da DEĞİL yalnız main push + haftalık + elle tetikte koşar.
+  # PR bekçisi ubuntu 'test' job'ıdır (branch protection onu zorunlu kılar).
+  matris-macos:
+    if: github.event_name != 'pull_request'
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Golden vektörler (macOS, saf XCTest)
+        run: swift test
+      - name: xcodegen
+        run: brew install xcodegen && cd apps/ios && xcodegen generate
+      # UI smoke (docs/17 K-17): proje aç → parça gir → optimize (QuickAdd)
+      # + dışa aktarım ucu (kilitli karo → paywall). Snapshot testleri BİLEREK
+      # dışarıda: runner simülatör render'ı yerel referanslarla birebir değil.
+      - name: iOS smoke (simülatör)
+        run: |
+          cd apps/ios
+          xcodebuild test -project KerfKit.xcodeproj -scheme KerfKit \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -only-testing:KerfKitUITests/QuickAddFlowTests \
+            -only-testing:KerfKitUITests/PaywallGateUITests/testExportLockedTilesOpenPaywall
+
+  matris-android:
+    if: github.event_name != 'pull_request'
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip + Swift Android SDK
+        run: |
+          brew install skiptools/skip/skip gradle
+          skip android sdk install
+      # Derleme bekçisi: motor + UI native Android'e çapraz derleniyor mu?
+      # Emülatörlü parite (tools/android-parite.sh) yerel araç olarak kalır —
+      # runner'da emülatör hızlandırması güvenilmez (K-17 bilinçli sınır).
+      - name: Android APK derleme
+        env:
+          ANDROID_HOME: /Users/runner/Library/Android/sdk
+        run: |
+          cd apps/android/Android
+          gradle assembleDebug --console=plain
