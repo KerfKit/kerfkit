@@ -89,7 +89,7 @@ struct PaywallView: View {
 
                 Text("Prices are charged through the App Store. Yearly renews unless cancelled before the period ends; the Weekend Pass is one-time and never renews.")
                     .font(.caption2)
-                    .foregroundStyle(DesignTokens.colorTimber500)
+                    .foregroundStyle(DesignTokens.colorTimber300) // K-18: 4.5:1
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 10)
@@ -141,7 +141,7 @@ struct PaywallView: View {
                 }
                 Text(detailKey(for: product.id))
                     .font(.caption)
-                    .foregroundStyle(DesignTokens.colorTimber500)
+                    .foregroundStyle(DesignTokens.colorTimber300) // K-18: 4.5:1
                 // K-16 (docs/08 §2): founding penceresi — yalnız GERÇEK sayaç verisi;
                 // $99.99 "gelecekteki fiyat" diye etiketlenir, "indirim" DENMEZ (AB Omnibus).
                 if headline && founding.config.active {
@@ -154,7 +154,7 @@ struct PaywallView: View {
                     if let future = founding.config.futurePrice {
                         Text("Regular price later: \(future)")
                             .font(.caption)
-                            .foregroundStyle(DesignTokens.colorTimber500)
+                            .foregroundStyle(DesignTokens.colorTimber300) // K-18: 4.5:1
                     }
                 }
             }

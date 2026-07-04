@@ -65,7 +65,7 @@ struct PartsTabView: View {
             HStack(spacing: 8) {
                 Text("Return adds the part and jumps back to Name")
                     .font(.caption2)
-                    .foregroundStyle(DesignTokens.colorTimber500)
+                    .foregroundStyle(DesignTokens.colorTimber300) // K-18: 4.5:1
                 Spacer()
                 // K-12: pano içe aktarma — PasteButton izin uyarısı çıkarmaz (M-2 bandının
                 // gizlilik-dostu hali; sistem kendi dilinde "Yapıştır" yazar).
@@ -200,7 +200,7 @@ struct PartsTabView: View {
                 .lineLimit(1).minimumScaleFactor(0.6)
                 .frame(width: 64, height: 44)
                 .background(DesignTokens.colorTimber800, in: RoundedRectangle(cornerRadius: 8))
-                .foregroundStyle(value == 0 ? DesignTokens.colorTimber500 : DesignTokens.colorTimber50)
+                .foregroundStyle(value == 0 ? DesignTokens.colorTimber300 : DesignTokens.colorTimber50) // K-18
         }
         .accessibilityIdentifier(id)
     }
@@ -551,7 +551,7 @@ struct PlanTabView: View {
             if result.stats.sheetCount > 1 {
                 Text("swipe for sheets")
                     .font(.caption2)
-                    .foregroundStyle(DesignTokens.colorTimber500)
+                    .foregroundStyle(DesignTokens.colorTimber300) // K-18: 4.5:1
             }
         }
     }

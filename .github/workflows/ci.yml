@@ -29,6 +29,9 @@ jobs:
         run: python3 tools/i18n-bekci.py
       - name: Katalog senkron bekçisi (iOS↔Android — docs/18 §5.2c)
         run: python3 tools/katalog-senkron-bekci.py
+      # K-18: metin 4.5:1 / UI-dekor 3:1 (docs/12 §8) — kullanılan çift listesi.
+      - name: Kontrast bekçisi
+        run: python3 tools/kontrast-bekci.py
       # L-4: mağaza metni karakter limitleri (name/subtitle/keywords/short/full + 6 başlık).
       - name: ASO limit bekcisi
         run: python3 tools/aso-limit-bekci.py

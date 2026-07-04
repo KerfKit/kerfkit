@@ -14,6 +14,13 @@ final class PaywallSnapshotTests: XCTestCase {
         assertSnapshot(of: vc, as: .image(on: .iPhone13), named: "paywall-M")
     }
 
+    // K-18 (docs/12 §8): Dynamic Type XXL taşma kanıtı.
+    func testPaywall_darkXXL() async throws {
+        let vc = try await host(founding: .closed)
+        assertSnapshot(of: vc, as: .image(on: .iPhone13, traits: .init(
+            preferredContentSizeCategory: .accessibilityExtraLarge)), named: "paywall-XXL")
+    }
+
     // K-16: founding penceresi açık — rozet + gerçek sayaç + "gelecekteki fiyat" satırı.
     func testPaywall_foundingActive() async throws {
         var config = FoundingConfig(active: true)

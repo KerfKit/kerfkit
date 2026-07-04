@@ -76,5 +76,23 @@ struct SheetDiagram: View {
         }
         .aspectRatio(CGFloat(sheetW) / CGFloat(sheetH), contentMode: .fit)
         .accessibilityLabel(String(localized: "Cut diagram: \(placements.count) parts placed"))
+        // K-18 (docs/12 §8): VoiceOver diyagramı OKUR — parça listesi değer olarak.
+        .accessibilityValue(Text(verbatim: sesliOzet))
+    }
+
+    // Parça dökümü: "Raf 600×400, Yan 400×720 döndürülmüş, …" (ilk 12; kalanı sayı).
+    private var sesliOzet: String {
+        let parcalar = placements.prefix(12).map { p -> String in
+            let ad = names[p.partId] ?? p.partId
+            let boyut = "\(p.w / 100)×\(p.h / 100)"
+            return p.rotated
+                ? ad + " " + boyut + ", " + String(localized: "rotated")
+                : ad + " " + boyut
+        }
+        var metin = parcalar.joined(separator: "; ")
+        if placements.count > 12 {
+            metin += "; " + String(localized: "and \(placements.count - 12) more parts")
+        }
+        return metin
     }
 }
