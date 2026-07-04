@@ -24,6 +24,11 @@
 
 ## 🟡 Yakında gerekecek
 
+- [ ] **GitHub branch protection için plan** — repo private + Free plan'da koruma
+  kuralı yok (K-17'de 403). Seçenek: GitHub Pro/Team'e geç YA DA repo'yu public yap
+  (motor açık kaynak stratejisi ayrı karar). O zamana dek kural süreçte: CI 'pass'
+  okunmadan merge yok (hafıza + CLAUDE.md).
+
 - [ ] **Buttondown hesabı** (kullanıcı adı: kerfkit; gönderen: hello@kerfkit.app) —
   açılınca söyle: landing + lite'taki e-posta formlarını embed-subscribe'a bağlayacağım.
 - [ ] **Sosyal @kerfkit rezervasyonları:** X, Instagram, YouTube, TikTok, Pinterest,
