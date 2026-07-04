@@ -433,6 +433,7 @@ struct PlanTabView: View {
             HStack(spacing: 8) {
                 lockedTile("PDF")
                 lockedTile("CSV")
+                lockedTile("DXF")
                 lockedTile(".cutproj")
             }
             .sheet(isPresented: $exportPaywallOpen) { PaywallView().preferredColorScheme(.dark) }
@@ -452,6 +453,21 @@ struct PlanTabView: View {
             ShareLink(item: CSVExport(name: store.projectName, rows: store.csvRows, unit: store.unitMode),
                       preview: SharePreview("\(store.projectName).csv")) {
                 shareTile("CSV", icon: "tablecells")
+            }
+            if let request = store.lastRequest, let stock = request.stocks.first {
+                // E9-S4: levha başına DXF (CNC işi levha bazlı; çoklu levhada dosya listesi)
+                ShareLink(items: (0..<result.stats.sheetCount).map { i in
+                    DXFExport(id: i,
+                              fileName: PlanDXF.fileName(projectName: store.projectName,
+                                                         sheetIndex: i,
+                                                         sheetCount: result.stats.sheetCount),
+                              input: PlanDXF.Input(sheetW: stock.w, sheetH: stock.h,
+                                                   unit: store.unitMode,
+                                                   placements: result.placements,
+                                                   names: store.partNames))
+                }, preview: { SharePreview($0.fileName) }) {
+                    shareTile("DXF", icon: "scissors")
+                }
             }
             ShareLink(item: CutprojExport(doc: store.exportableDoc()),
                       preview: SharePreview("\(store.projectName).cutproj")) {

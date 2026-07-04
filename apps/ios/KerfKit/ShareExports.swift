@@ -53,3 +53,19 @@ extension String {
         replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "-")
     }
 }
+
+// E9-S4: levha başına DXF R12 — CNC/nesting akışları (PlanDXF, CutProj katmanı).
+struct DXFExport: Transferable, Identifiable {
+    let id: Int            // sheetIndex
+    let fileName: String
+    let input: PlanDXF.Input
+
+    static var transferRepresentation: some TransferRepresentation {
+        FileRepresentation(exportedContentType: UTType(filenameExtension: "dxf") ?? .data) { export in
+            let url = FileManager.default.temporaryDirectory
+                .appendingPathComponent(export.fileName.safeFileName) // ad .dxf içerir
+            try Data(PlanDXF.generate(export.input, sheetIndex: export.id).utf8).write(to: url)
+            return SentTransferredFile(url)
+        }
+    }
+}
