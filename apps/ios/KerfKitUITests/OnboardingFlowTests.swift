@@ -7,7 +7,7 @@ final class OnboardingFlowTests: XCTestCase {
     @MainActor
     func testOnboardingToFirstPlan() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-resetOnboarding"]
+        app.launchArguments = ["-resetOnboarding", "-freshStore", "-proFree"]
         app.launch()
 
         XCTAssertTrue(app.staticTexts["Enter the sheet, type your parts, get the plan."]
@@ -18,7 +18,7 @@ final class OnboardingFlowTests: XCTestCase {
             .waitForExistence(timeout: 3))
 
         app.swipeLeft()
-        let cta = app.buttons["Try the sample project"]
+        let cta = app.buttons["onboarding.sampleCTA"]
         XCTAssertTrue(cta.waitForExistence(timeout: 3))
         XCTAssertTrue(app.staticTexts["Buy once. No subscription."].exists)
         cta.tap()
@@ -31,7 +31,7 @@ final class OnboardingFlowTests: XCTestCase {
     @MainActor
     func testOnboardingShowsOnceAfterSkip() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-resetOnboarding"]
+        app.launchArguments = ["-resetOnboarding", "-freshStore", "-proFree"]
         app.launch()
         XCTAssertTrue(app.staticTexts["Enter the sheet, type your parts, get the plan."]
             .waitForExistence(timeout: 5))

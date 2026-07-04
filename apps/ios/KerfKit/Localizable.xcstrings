@@ -105,6 +105,40 @@
         }
       }
     },
+    "%@ — unlock with Pro": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — mit Pro freischalten"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — se desbloquea con Pro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — à débloquer avec Pro"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — si sblocca con Pro"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — Pro ile açılır"
+          }
+        }
+      }
+    },
     "%@%@": {
       "localizations": {
         "de": {
@@ -135,6 +169,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@%@"
+          }
+        }
+      }
+    },
+    "%@/yr": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/Jahr"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/año"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/an"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/anno"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/yıl"
           }
         }
       }
@@ -236,6 +304,106 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld kenar"
+          }
+        }
+      }
+    },
+    "%lld more parts need Pro": {
+      "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld weiteres Teil braucht Pro"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld weitere Teile brauchen Pro"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld more part needs Pro"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld more parts need Pro"
+                }
+              }
+            }
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld pieza más pide Pro"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld piezas más piden Pro"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld pièce de plus demande Pro"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld pièces de plus demandent Pro"
+                }
+              }
+            }
+          }
+        },
+        "it": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld pezzo in più richiede Pro"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld pezzi in più richiedono Pro"
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld parça daha Pro ister"
           }
         }
       }
@@ -1030,6 +1198,40 @@
         }
       }
     },
+    "72 hours of everything. DOES NOT auto-renew — it just ends.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "72 Stunden alles offen. VERLÄNGERT SICH NICHT — läuft einfach aus."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "72 horas con todo. NO SE RENUEVA SOLO — se acaba y ya está."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "72 heures avec tout. NE SE RENOUVELLE PAS — ça s'arrête, c'est tout."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "72 ore con tutto. NON SI RINNOVA DA SOLO — finisce e basta."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "72 saat her şey açık. OTOMATİK YENİLENMEZ — biter, o kadar."
+          }
+        }
+      }
+    },
     "A light theme will be selectable once it’s ready; PDFs always print light.": {
       "localizations": {
         "de": {
@@ -1757,6 +1959,108 @@
         }
       }
     },
+    "Calculations stay free and unlimited": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechnungen bleiben gratis und unbegrenzt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los cálculos siguen gratis y sin límite"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les calculs restent gratuits et illimités"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I calcoli restano gratis e senza limiti"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hesaplama ücretsiz ve sınırsız kalır"
+          }
+        }
+      }
+    },
+    "Calculations stay unlimited — the third saved project needs Pro. You can also delete an old project from the list.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechnungen bleiben unbegrenzt — das dritte gespeicherte Projekt braucht Pro. Du kannst auch ein altes Projekt aus der Liste löschen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los cálculos siguen sin límite — el tercer proyecto guardado pide Pro. También puedes borrar un proyecto viejo de la lista."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les calculs restent illimités — le troisième projet enregistré demande Pro. Tu peux aussi supprimer un ancien projet de la liste."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I calcoli restano illimitati — il terzo progetto salvato richiede Pro. Puoi anche cancellare un vecchio progetto dalla lista."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hesaplama sınırsız kalıyor — üçüncü kayıtlı proje Pro ister. İstersen listeden eski bir projeyi silebilirsin."
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiudi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapat"
+          }
+        }
+      }
+    },
     "Couldn’t calculate the plan": {
       "extractionState": "stale",
       "localizations": {
@@ -2415,6 +2719,40 @@
         }
       }
     },
+    "Everything included. Renews yearly — cancel anytime in Settings.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles drin. Verlängert sich jährlich — jederzeit in den Einstellungen kündbar."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo incluido. Se renueva cada año — cancelas cuando quieras en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout inclus. Renouvellement annuel — annulable à tout moment dans Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutto incluso. Si rinnova ogni anno — disdici quando vuoi dalle Impostazioni."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her şey dahil. Yılda bir yenilenir — Ayarlar'dan istediğin an iptal."
+          }
+        }
+      }
+    },
     "Export everything (.cutproj)": {
       "extractionState": "stale",
       "localizations": {
@@ -2549,6 +2887,244 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kesirli inç, kesir tuş takımıyla birlikte gelecek."
+          }
+        }
+      }
+    },
+    "Free plan": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gratis-Plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan gratis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan gratuit"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piano gratis"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücretsiz plan"
+          }
+        }
+      }
+    },
+    "Free plan holds 2 saved projects": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Gratis-Plan speichert 2 Projekte"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El plan gratis guarda 2 proyectos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le plan gratuit garde 2 projets"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il piano gratis salva 2 progetti"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücretsiz planda 2 kayıtlı proje var"
+          }
+        }
+      }
+    },
+    "Free plan holds 20 parts per project": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Gratis-Plan fasst 20 Teile pro Projekt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El plan gratis admite 20 piezas por proyecto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le plan gratuit tient 20 pièces par projet"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il piano gratis tiene 20 pezzi per progetto"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücretsiz planda proje başına 20 parça var"
+          }
+        }
+      }
+    },
+    "Get Lifetime": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifetime holen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llevarme Lifetime"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendre Lifetime"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendi Lifetime"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ömür boyu al"
+          }
+        }
+      }
+    },
+    "Get Lifetime — %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifetime holen — %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llevarme Lifetime — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendre Lifetime — %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendi Lifetime — %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ömür boyu al — %@"
+          }
+        }
+      }
+    },
+    "Get Weekend Pass — %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wochenend-Pass holen — %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llevarme el Pase Finde — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendre le Pass Week-end — %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendi il Pass Weekend — %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hafta sonu geçişi al — %@"
+          }
+        }
+      }
+    },
+    "Get Yearly — %@/yr": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jahresabo holen — %@/Jahr"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llevarme el anual — %@/año"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendre l'annuel — %@/an"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendi l'annuale — %@/anno"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıllık al — %@/yıl"
           }
         }
       }
@@ -2935,6 +3511,40 @@
         }
       }
     },
+    "MOST POPULAR": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AM BELIEBTESTEN"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EL MÁS ELEGIDO"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LE PLUS CHOISI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IL PIÙ SCELTO"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EN POPÜLER"
+          }
+        }
+      }
+    },
     "Metric defaults below apply to mm projects; inch projects start at 1/8″ kerf.": {
       "localizations": {
         "de": {
@@ -3141,6 +3751,40 @@
         }
       }
     },
+    "Not now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jetzt nicht"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora no"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas maintenant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non ora"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şimdi değil"
+          }
+        }
+      }
+    },
     "Objective": {
       "extractionState": "stale",
       "localizations": {
@@ -3172,6 +3816,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hedef"
+          }
+        }
+      }
+    },
+    "One payment. No subscription, no renewals — like a tool: buy once, use forever.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Zahlung. Kein Abo, keine Verlängerung — wie Werkzeug: einmal kaufen, immer nutzen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un solo pago. Sin suscripción, sin renovaciones — como una herramienta: la compras una vez y es tuya."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un seul paiement. Pas d'abonnement, pas de renouvellement — comme un outil : on l'achète une fois, on le garde."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un solo pagamento. Niente abbonamenti, niente rinnovi — come un attrezzo: lo compri una volta, è tuo."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tek ödeme. Abonelik yok, yenileme yok — alet gibi: bir kez al, hep kullan."
           }
         }
       }
@@ -3241,6 +3919,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "PARÇA"
+          }
+        }
+      }
+    },
+    "PDF · CSV · .cutproj export": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PDF-, CSV- & .cutproj-Export"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportación PDF · CSV · .cutproj"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export PDF · CSV · .cutproj"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export PDF · CSV · .cutproj"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PDF · CSV · .cutproj dışa aktarım"
           }
         }
       }
@@ -3350,6 +4062,40 @@
         }
       }
     },
+    "Part 21 needs Pro — or split the project into two.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teil 21 braucht Pro — oder teil das Projekt in zwei."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pieza 21 pide Pro — o divide el proyecto en dos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pièce 21 demande Pro — ou coupe le projet en deux."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pezzo 21 richiede Pro — oppure dividi il progetto in due."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "21. parça Pro ister — ya da projeyi ikiye böl."
+          }
+        }
+      }
+    },
     "Part name": {
       "extractionState": "stale",
       "localizations": {
@@ -3421,7 +4167,6 @@
       }
     },
     "Plan": {
-      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -3438,7 +4183,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Plan"
+            "value": "Offre"
           }
         },
         "it": {
@@ -3451,6 +4196,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plan"
+          }
+        }
+      }
+    },
+    "Prices are charged through the App Store. Yearly renews unless cancelled before the period ends; the Weekend Pass is one-time and never renews.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Abrechnung läuft über den App Store. Das Jahresabo verlängert sich, wenn es nicht vor Ablauf gekündigt wird; der Wochenend-Pass ist einmalig und verlängert sich nie."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los precios se cobran a través del App Store. El plan anual se renueva salvo que lo canceles antes de que termine; el Pase de Fin de Semana es único y nunca se renueva."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les prix sont facturés via l'App Store. L'abonnement annuel se renouvelle sauf annulation avant l'échéance ; le Pass Week-end est unique et ne se renouvelle jamais."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I prezzi vengono addebitati tramite App Store. L'abbonamento annuale si rinnova se non disdetto prima della scadenza; il Pass Weekend è una tantum e non si rinnova mai."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiyatlar App Store üzerinden tahsil edilir. Yıllık plan, dönem bitmeden iptal edilmezse yenilenir; Hafta Sonu Geçişi tek seferliktir ve asla yenilenmez."
           }
         }
       }
@@ -3489,6 +4268,74 @@
         }
       }
     },
+    "Pro until %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro bis %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro hasta %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro jusqu'au %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro fino al %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tarihine kadar Pro"
+          }
+        }
+      }
+    },
+    "Pro — Lifetime": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro — Lifetime"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro — Lifetime"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro — Lifetime"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro — Lifetime"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro — Ömür boyu"
+          }
+        }
+      }
+    },
     "Project name": {
       "extractionState": "stale",
       "localizations": {
@@ -3520,6 +4367,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Proje adı"
+          }
+        }
+      }
+    },
+    "Purchases": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Käufe"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achats"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acquisti"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satın alımlar"
           }
         }
       }
@@ -3664,6 +4545,74 @@
         }
       }
     },
+    "Refund policy": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erstattungen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reembolsos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remboursements"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimborsi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İade politikası"
+          }
+        }
+      }
+    },
+    "Restore Purchases": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Käufe wiederherstellen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar compras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer les achats"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina acquisti"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satın alımları geri yükle"
+          }
+        }
+      }
+    },
     "Return adds the part and jumps back to Name": {
       "localizations": {
         "de": {
@@ -3764,6 +4713,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Döndürme serbest"
+          }
+        }
+      }
+    },
+    "See Pro options": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro-Optionen ansehen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver opciones Pro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir les options Pro"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vedi le opzioni Pro"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro seçeneklerini gör"
           }
         }
       }
@@ -4393,6 +5376,74 @@
         }
       }
     },
+    "Unlimited projects + PDF + Workshop Mode": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unbegrenzte Projekte + PDF + Werkstatt-Modus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyectos ilimitados + PDF + Modo Taller"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projets illimités + PDF + Mode Atelier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progetti illimitati + PDF + Modalità Officina"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sınırsız proje + PDF + Atölye Modu"
+          }
+        }
+      }
+    },
+    "Unlimited saved projects and parts": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unbegrenzt Projekte und Teile speichern"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyectos y piezas guardados sin límite"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projets et pièces enregistrés illimités"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progetti e pezzi salvati senza limiti"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sınırsız kayıtlı proje ve parça"
+          }
+        }
+      }
+    },
     "Version": {
       "extractionState": "stale",
       "localizations": {
@@ -4533,6 +5584,40 @@
         }
       }
     },
+    "Weekend Pass until %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wochenend-Pass bis %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pase Finde hasta %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pass Week-end jusqu'au %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pass Weekend fino al %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ değin Hafta Sonu Geçişi"
+          }
+        }
+      }
+    },
     "Width": {
       "extractionState": "stale",
       "localizations": {
@@ -4634,6 +5719,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atölye Modu"
+          }
+        }
+      }
+    },
+    "Workshop Mode at the saw": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Werkstatt-Modus an der Säge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo Taller junto a la sierra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode Atelier à la scie"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modalità Officina alla sega"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Testere başında Atölye Modu"
           }
         }
       }
