@@ -2,7 +2,7 @@
 
 > İnsan içindir. Fable 5 geliştirmeyi bitirdikçe burada yalnız SENİN yapabileceğin
 > adımlar kalır. Tamamlananlar tarihle işaretlenir, yenileri eklenir.
-> Son güncelleme: 3 Tem 2026 gece (TR onayı işlendi).
+> Son güncelleme: 4 Tem 2026 akşam (K-17 matris yeşil; mağaza-dışı kuyruk bitti).
 
 > **Sıra kararı (Ahmet, 4 Tem 2026):** mağaza kayıtları EN SONA alındı — mağaza-bağımlı
 > işler (K-19/K-20, huni gerçek rozetleri, ASO yayını) o zamana park; geri kalan her şey sürer.
@@ -24,11 +24,9 @@
 
 ## 🟡 Yakında gerekecek
 
-- [ ] **GitHub branch protection için plan** — repo private + Free plan'da koruma
-  kuralı yok (K-17'de 403). Seçenek: GitHub Pro/Team'e geç YA DA repo'yu public yap
-  (motor açık kaynak stratejisi ayrı karar). O zamana dek kural süreçte: CI 'pass'
-  okunmadan merge yok (hafıza + CLAUDE.md).
-
+- [ ] **LICENSE kararı** — repo 4 Tem'de PUBLIC oldu ve LICENSE dosyası yok =
+  "tüm hakları saklı" (ticari ürün için savunulabilir varsayılan). Karar senin:
+  böyle mi kalsın, yoksa motor (CutCore) ayrı lisansla mı açılsın? Söyle, uygularım.
 - [ ] **Buttondown hesabı** (kullanıcı adı: kerfkit; gönderen: hello@kerfkit.app) —
   açılınca söyle: landing + lite'taki e-posta formlarını embed-subscribe'a bağlayacağım.
 - [ ] **Sosyal @kerfkit rezervasyonları:** X, Instagram, YouTube, TikTok, Pinterest,
@@ -49,6 +47,10 @@
 - [ ] (Opsiyonel, launch sonrası) USPTO/EUIPO sınıf-9 "KerfKit" başvurusu.
 
 ## ✅ Tamamlananlar
+
+- [x] **Repo org'a taşındı + PUBLIC yapıldı** — 4 Tem 2026 (KerfKit/kerfkit; branch
+  protection AKTİF: test check zorunlu, admin dahil — GitHub plan maddesi kapandı)
+- [x] **Paywall A varyantı seçimi** — 4 Tem 2026 (Ahmet; K-15 bu seçimle yayında)
 
 - [x] **T1 anadil onayı (DE FR ES IT)** — 4 Tem 2026 (Ahmet; katalog "translated" damgalı)
 - [x] **TR çeviri onayı** — 3 Tem 2026 (Ahmet; String Catalog TR seti onaylı — docs/18 §5 üslup kuralına göre)
