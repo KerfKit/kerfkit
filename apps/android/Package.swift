@@ -18,6 +18,7 @@ let package = Package(
     targets: [
         .target(name: "KerfKit", dependencies: [
             .product(name: "SkipFuseUI", package: "skip-fuse-ui"),
+            .product(name: "SkipSQL", package: "skip-sql"),
             .product(name: "SkipSQLPlus", package: "skip-sql"),
             .product(name: "CutCore", package: "kerfkit"),
             .product(name: "CutModels", package: "kerfkit")
