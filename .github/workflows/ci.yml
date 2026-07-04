@@ -65,11 +65,12 @@ jobs:
           if [ -z "$XC" ]; then XC=$(ls -d /Applications/Xcode*.app | sort -V | tail -1); fi
           echo "Seçilen: $XC" && sudo xcode-select -s "$XC"
       - name: iOS smoke (simülatör)
+        env:
+          TEST_RUNNER_CI: "1" # TEST_RUNNER_ öneki ORTAM değişkeni olmalı — arg build-setting sayılır (5. tur bulgusu)
         run: |
           cd apps/ios
           xcodebuild test -project KerfKit.xcodeproj -scheme KerfKit \
             -skipPackagePluginValidation -skipMacroValidation \
-            TEST_RUNNER_CI=1 \
             -destination 'platform=iOS Simulator,name=iPhone 16' \
             -only-testing:KerfKitUITests/QuickAddFlowTests \
             -only-testing:KerfKitUITests/PaywallGateUITests/testExportLockedTilesOpenPaywall
