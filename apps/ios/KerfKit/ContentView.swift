@@ -4,8 +4,11 @@ import CutModels
 // M-1 Projeler Listesi (docs/07 E-1) — kartlar + boş durumda "Örnek projeyi dene".
 struct ContentView: View {
     @Environment(ProjectStore.self) private var store
+    @Environment(ProStore.self) private var pro
     @State private var autoOptimizeRan = false
     @State private var settingsOpen = false
+    @State private var projectGateOpen = false
+    @State private var paywallOpen = false
 
     var body: some View {
         @Bindable var store = store
@@ -30,7 +33,12 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        store.createProject(sample: false)
+                        // K-15 kapısı (docs/08 §1): ücretsizde 2 kayıtlı proje; hesaplama sınırsız.
+                        if !pro.status.isPro && store.summaries.count >= 2 {
+                            projectGateOpen = true
+                        } else {
+                            store.createProject(sample: false)
+                        }
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -41,7 +49,17 @@ struct ContentView: View {
             .sheet(isPresented: $settingsOpen) {
                 NavigationStack { SettingsView() }
                     .environment(store)
+                    .environment(pro)
                     .preferredColorScheme(.dark)
+            }
+            .sheet(isPresented: $paywallOpen) {
+                PaywallView().preferredColorScheme(.dark)
+            }
+            .alert(Text("Free plan holds 2 saved projects"), isPresented: $projectGateOpen) {
+                Button(String(localized: "See Pro options")) { paywallOpen = true }
+                Button(String(localized: "Not now"), role: .cancel) {}
+            } message: {
+                Text("Calculations stay unlimited — the third saved project needs Pro. You can also delete an old project from the list.")
             }
             .navigationDestination(isPresented: $store.detailOpen) {
                 ProjectDetailView()

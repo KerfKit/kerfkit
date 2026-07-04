@@ -55,6 +55,7 @@ struct OnboardingView: View {
             .buttonStyle(.borderedProminent)
             .tint(DesignTokens.colorAmber500)
             .foregroundStyle(DesignTokens.colorTimber950)
+            .accessibilityIdentifier("onboarding.sampleCTA")
             .opacity(page == 2 ? 1 : 0)
             .animation(.easeInOut(duration: 0.2), value: page)
             .disabled(page != 2)

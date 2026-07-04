@@ -6,6 +6,7 @@ import CutCore
 // Sahte kontrol yok: inç kesir pad'iyle, tema açık-palet türetilince seçilebilir olur.
 struct SettingsView: View {
     @Environment(ProjectStore.self) private var store
+    @Environment(ProStore.self) private var pro
     @Environment(\.dismiss) private var dismiss
 
     @AppStorage("defaultKerfMM") private var defaultKerfMM = 3
@@ -76,6 +77,14 @@ struct SettingsView: View {
                 Text("No analytics, no accounts, works fully offline.")
             }
 
+            Section {
+                LabeledContent("Plan", value: planText)
+                Button("Restore Purchases") { Task { await pro.restore() } }
+                    .accessibilityIdentifier("settings.restore")
+            } header: {
+                Text("Purchases")
+            }
+
             Section("Support") {
                 if let mail = URL(string: "mailto:hello@kerfkit.app") {
                     Link(destination: mail) {
@@ -103,6 +112,15 @@ struct SettingsView: View {
         .scrollContentBackground(.hidden)
         .background(DesignTokens.colorTimber950)
         .task { exportURLs = store.exportAllProjects() }
+    }
+
+    private var planText: String {
+        switch pro.status {
+        case .free: String(localized: "Free plan")
+        case .lifetime: String(localized: "Pro — Lifetime")
+        case .yearly(let expiry): String(localized: "Pro until \(expiry.formatted(date: .abbreviated, time: .omitted))")
+        case .pass(let expiry): String(localized: "Weekend Pass until \(expiry.formatted(date: .abbreviated, time: .shortened))")
+        }
     }
 
     private var appVersion: String {

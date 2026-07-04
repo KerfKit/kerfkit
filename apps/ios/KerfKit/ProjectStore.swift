@@ -197,16 +197,19 @@ final class ProjectStore {
     }
 
     // Panodan CSV/TSV: hatalı satırlar atlanır, özet bantta gösterilir (docs/03 E3-S3).
-    func importParts(fromCSV text: String) {
-        let (rows, issues) = CSVPartList.parse(text)
+    // K-15: ücretsiz katmanda `limit` aşan satırlar Pro'ya bırakılır (docs/08 §1).
+    func importParts(fromCSV text: String, limit: Int? = nil) {
+        let (allRows, issues) = CSVPartList.parse(text)
+        let rows = limit.map { Array(allRows.prefix($0)) } ?? allRows
+        let held = allRows.count - rows.count
         parts.append(contentsOf: rows.map {
             PartInput(name: $0.name, width: $0.width, height: $0.height,
                       qty: $0.qty, rotationAllowed: $0.rotationAllowed, banding: $0.banding)
         })
-        let imported = String(localized: "\(rows.count) parts imported")
-        importSummary = issues.isEmpty
-            ? imported
-            : imported + " · " + String(localized: "\(issues.count) rows skipped")
+        var summary = String(localized: "\(rows.count) parts imported")
+        if !issues.isEmpty { summary += " · " + String(localized: "\(issues.count) rows skipped") }
+        if held > 0 { summary += " · " + String(localized: "\(held) more parts need Pro") }
+        importSummary = summary
         if !rows.isEmpty { touch() }
     }
 

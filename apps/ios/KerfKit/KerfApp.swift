@@ -4,7 +4,8 @@ import SwiftUI
 // -skipOnboarding/-autoOptimize test kancaları atlar, -resetOnboarding yeniden gösterir.
 @main
 struct KerfApp: App {
-    @State private var store = ProjectStore()
+    @State private var store: ProjectStore
+    @State private var proStore: ProStore
     @State private var onboardingShown: Bool
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("onboardingSeen") private var onboardingSeen = false
@@ -19,6 +20,18 @@ struct KerfApp: App {
                 UserDefaults.standard.removeObject(forKey: key)
             }
         }
+        if args.contains("-freshStore") { // K-15 kapı testleri: temiz mağaza
+            if let dir = try? FileManager.default.url(for: .applicationSupportDirectory,
+                                                      in: .userDomainMask, appropriateFor: nil, create: true) {
+                for suffix in ["", "-wal", "-shm"] {
+                    try? FileManager.default.removeItem(at: dir.appendingPathComponent("kerfkit.sqlite\(suffix)"))
+                }
+            }
+        }
+        _store = State(initialValue: ProjectStore())
+        // K-15 testleri: yerel StoreKit ortamında eski test alımları kalabiliyor;
+        // -proFree dinleyiciyi kapatır, durum .free sabitlenir (kapılar determinist).
+        _proStore = State(initialValue: ProStore(autoStart: !args.contains("-proFree")))
         let seen = UserDefaults.standard.bool(forKey: "onboardingSeen")
         let skip = args.contains("-skipOnboarding") || args.contains("-autoOptimize")
         _onboardingShown = State(initialValue: !seen && !skip)
@@ -28,6 +41,7 @@ struct KerfApp: App {
         WindowGroup {
             ContentView()
                 .environment(store)
+                .environment(proStore)
                 .preferredColorScheme(.dark) // koyu-öncelikli marka (docs/11 §3)
                 .tint(DesignTokens.colorAmber500)
                 .fullScreenCover(isPresented: $onboardingShown) {

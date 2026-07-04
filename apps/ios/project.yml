@@ -73,6 +73,7 @@ schemes:
         KerfKit: all
     run:
       config: Debug
+      storeKitConfiguration: KerfKit/Products.storekit
     test:
       config: Debug
       targets: [KerfKitTests, KerfKitUITests]

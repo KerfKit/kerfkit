@@ -25,6 +25,7 @@ final class SnapshotTests: XCTestCase {
         configure(store)
         let vc = UIHostingController(rootView: NavigationStack { view }
             .environment(store)
+            .environment(ProStore(autoStart: false)) // K-15: ücretsiz durum görseli
             .tint(DesignTokens.colorAmber500))
         vc.overrideUserInterfaceStyle = .dark
         vc.traitOverrides.preferredContentSizeCategory = sizeCategory

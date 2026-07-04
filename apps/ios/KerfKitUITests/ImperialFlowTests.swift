@@ -7,7 +7,7 @@ final class ImperialFlowTests: XCTestCase {
     @MainActor
     func testImperialProjectWithFractionPad() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-resetDefaults"]
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-freshStore", "-proFree"]
         app.launch()
 
         // Varsayılan birimi İnç yap

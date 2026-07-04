@@ -42,6 +42,9 @@ struct ProjectDetailView: View {
 // Hedef akış: ad ⏎ en ⏎ boy ⏎ adet ⏎ → satır eklenir, imleç yeni ada döner (<60sn/10 parça).
 struct PartsTabView: View {
     @Environment(ProjectStore.self) private var store
+    @Environment(ProStore.self) private var pro
+    @State private var partGateOpen = false
+    @State private var paywallOpen = false
 
     @State private var name = ""
     @State private var widthMM: Int?
@@ -66,9 +69,12 @@ struct PartsTabView: View {
                 Spacer()
                 // K-12: pano içe aktarma — PasteButton izin uyarısı çıkarmaz (M-2 bandının
                 // gizlilik-dostu hali; sistem kendi dilinde "Yapıştır" yazar).
-                PasteButton(payloadType: String.self) { items in
+                PasteButton(payloadType: String.self) { [isPro = pro.status.isPro] items in
                     Task { @MainActor in
-                        if let text = items.first { store.importParts(fromCSV: text) }
+                        if let text = items.first {
+                            store.importParts(fromCSV: text,
+                                              limit: isPro ? nil : max(0, 20 - store.parts.count))
+                        }
                     }
                 }
                 .labelStyle(.titleOnly)
@@ -77,6 +83,14 @@ struct PartsTabView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 6)
+            // Kapı uyarısı gerçek bir görünüme asılmalı — EmptyView modifier'ları sunulmaz.
+            .alert(Text("Free plan holds 20 parts per project"), isPresented: $partGateOpen) {
+                Button(String(localized: "See Pro options")) { paywallOpen = true }
+                Button(String(localized: "Not now"), role: .cancel) {}
+            } message: {
+                Text("Part 21 needs Pro — or split the project into two.")
+            }
+            .sheet(isPresented: $paywallOpen) { PaywallView().preferredColorScheme(.dark) }
 
             if let summary = store.importSummary {
                 Text(summary)
@@ -154,6 +168,11 @@ struct PartsTabView: View {
     }
 
     private func addPart() {
+        // K-15 kapısı (docs/08 §1): ücretsizde proje başına 20 parça.
+        if !pro.status.isPro && store.parts.count >= 20 {
+            partGateOpen = true
+            return
+        }
         let w: Int, h: Int
         if store.unitMode == .imperialFrac64 {
             w = w64; h = h64
@@ -336,6 +355,8 @@ struct StockTabView: View {
 // M-4 varyant A (D-2 ÖNERİ): stat kartları üstte, hedef seçici, bayat bandı, diyagram.
 struct PlanTabView: View {
     @Environment(ProjectStore.self) private var store
+    @Environment(ProStore.self) private var pro
+    @State private var exportPaywallOpen = false
 
     var body: some View {
         @Bindable var store = store
@@ -405,8 +426,17 @@ struct PlanTabView: View {
         }
     }
 
-    // K-13 paylaşım satırı (M-4A mockup'ındaki üçlüden ikisi gerçek; CSV K-12'de gelir).
+    // K-13 paylaşım satırı — K-15: dışa aktarım Pro kilidi (docs/08 §1).
     private func shareRow(_ result: OptimizeResult) -> some View {
+        Group {
+        if !pro.status.isPro {
+            HStack(spacing: 8) {
+                lockedTile("PDF")
+                lockedTile("CSV")
+                lockedTile(".cutproj")
+            }
+            .sheet(isPresented: $exportPaywallOpen) { PaywallView().preferredColorScheme(.dark) }
+        } else {
         HStack(spacing: 8) {
             if let request = store.lastRequest {
                 ShareLink(item: PlanPDFExport(input: PlanPDF.Input(
@@ -428,6 +458,22 @@ struct PlanTabView: View {
                 shareTile(".cutproj", icon: "square.and.arrow.up")
             }
         }
+        }
+        }
+    }
+
+    private func lockedTile(_ title: String) -> some View {
+        Button {
+            exportPaywallOpen = true
+        } label: {
+            Label { Text(verbatim: title) } icon: { Image(systemName: "lock.fill") }
+                .font(.subheadline.weight(.semibold))
+                .frame(maxWidth: .infinity, minHeight: 48)
+                .background(DesignTokens.colorTimber900, in: RoundedRectangle(cornerRadius: 10))
+                .foregroundStyle(DesignTokens.colorTimber300)
+        }
+        .accessibilityLabel(String(localized: "\(title) — unlock with Pro"))
+        .accessibilityIdentifier("plan.locked.\(title)")
     }
 
     private func shareTile(_ title: String, icon: String) -> some View {

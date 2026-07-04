@@ -17,6 +17,12 @@ final class ProStoreTests: XCTestCase {
         session.clearTransactions()
     }
 
+    override func tearDown() async throws {
+        // Yerel test ortamı simülatörde KALICI — temizlenmezse UI testleri Pro görür.
+        session.clearTransactions()
+        session.resetToDefaultState()
+    }
+
     private func makeStore() -> ProStore { ProStore(autoStart: false) }
 
     // SKTestSession işlemleri currentEntitlements'a asenkron düşer — yoklamalı bekle.
