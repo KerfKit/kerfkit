@@ -36,8 +36,10 @@
 
 ## 🟢 Launch penceresinde
 
-- [ ] P-4 Privacy/Terms taslağını ONAYLA (ben yazacağım; hukuki-tavsiye-değildir notuyla
-  sana gelecek — launch-blocker).
+- [ ] **P-4 Privacy/Terms taslağını ONAYLA — TASLAK HAZIR: docs/20** (4 Tem; Privacy +
+  Terms EN + App Store "Data Not Collected" etiket tablosu; hukuki-tavsiye-değildir.
+  İki boşluk senin: yürürlük tarihi + Terms §7 yargı bölgesi. Onay sonrası web
+  sayfaları + Ayarlar linklerini ben eklerim — launch-blocker).
 - [ ] Founding fiyat/koltuk sayısı son onayı (docs/08-09: $49 → $99.99, 300 koltuk).
 - [ ] **Founding penceresini AÇ (K-16 hazır):** kerfkit.app yayına girince
   `founding.json`'da `"active": true` + `futurePrice` yaz; `claimed` sayacını mağaza
