@@ -93,7 +93,9 @@ Skip Fuse, String Catalog'u Android'de `res/values-*/strings.xml`e DEĞİL,
 anahtarları çalışma zamanında oradan çözülür. Tek katalog iki platformu besler;
 apps/android modülü iOS kataloğunun kopyasını taşır (K-31'de 6 dil APK içinde
 doğrulandı). Senkron: iOS kataloğuna anahtar eklenince apps/android kopyasına da
-işle (E9-S2'de bekçi scripti planlı).
+işle — tools/katalog-senkron-bekci.py CI'da zorlar (E9-S2 ✓). DİKKAT: kopyaya
+'en' stringUnit girdisi TAŞIMA — Skip en.lproj/.strings tablosu üretir ve tüm
+anahtar çözümü bozulur (çalışma zamanı çökmesi; E9-S2'de yaşandı, bekçi engeller).
 
 ## 6. Web → mobil huni (Ahmet kararı: web belli aşamadan sonra mobile yönlendirir)
 

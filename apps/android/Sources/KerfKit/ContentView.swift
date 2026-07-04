@@ -6,10 +6,26 @@ import CutModels
 // parite; Compose'da kırılan bileşenler docs/13 Android-notlarına işlenir.
 struct ContentView: View {
     @State var vm = ProjectVM()
+    @State var path: [UUID] = []
+    @AppStorage("onboardingSeen") var onboardingSeen = false
 
     var body: some View {
-        NavigationStack {
-            ProjectListView()
+        Group {
+            if onboardingSeen {
+                NavigationStack(path: $path) {
+                    ProjectListView()
+                }
+            } else {
+                // M-6: ilk açılışta bir kez; CTA → örnek proje + ilk optimizasyon + Plan inişi.
+                OnboardingView { startSample in
+                    onboardingSeen = true
+                    if startSample, let sample = vm.projects.first {
+                        vm.optimize(projectID: sample.id)
+                        vm.pendingPlanJump = sample.id
+                        path.append(sample.id)
+                    }
+                }
+            }
         }
         .environment(vm)
     }
@@ -50,6 +66,14 @@ struct ProjectListView: View {
                 }
                 .accessibilityLabel(Text("New Project"))
             }
+            ToolbarItem(placement: .primaryAction) {
+                NavigationLink {
+                    SettingsView()
+                } label: {
+                    Image(systemName: "gearshape")
+                }
+                .accessibilityLabel(Text("Settings"))
+            }
         }
     }
 }
@@ -87,6 +111,12 @@ struct ProjectDetailView: View {
             }
         }
         .navigationTitle(Text(project?.name ?? ""))
+        .onAppear {
+            if vm.pendingPlanJump == projectID {
+                tab = 1
+                vm.pendingPlanJump = nil
+            }
+        }
     }
 
     // — M-2: hızlı ekleme satırı + parça listesi —
@@ -174,6 +204,15 @@ struct ProjectDetailView: View {
                             .font(.caption)
                             .foregroundStyle(.orange)
                     }
+                    NavigationLink {
+                        WorkshopView(plan: plan, names: vm.partNames)
+                    } label: {
+                        Text("Workshop Mode")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, minHeight: 48)
+                    }
+                    .buttonStyle(.bordered)
+
                     ForEach(0..<plan.stats.sheetCount, id: \.self) { sheet in
                         SheetDiagram(placements: plan.placements.filter { $0.sheetIndex == sheet },
                                      sheetW: vm.sheetW, sheetH: vm.sheetH)
