@@ -6,6 +6,7 @@ import CutCore
 // Görseller GERÇEK diyagram render'ı: örnek proje motorla bir kez optimize edilir.
 // Paywall burada GÖSTERİLMEZ; CTA örnek projeyle ilk optimizasyonu yaşatır (aha-anı).
 struct OnboardingView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let onFinish: (_ startSample: Bool) -> Void
     @State private var page: Int
 
@@ -22,7 +23,7 @@ struct OnboardingView: View {
                 Spacer()
                 Button("Skip") { onFinish(false) }
                     .font(.subheadline)
-                    .foregroundStyle(DesignTokens.colorTimber500)
+                    .foregroundStyle(DesignTokens.colorTimber300) // K-18: 4.5:1 (500 = 3.9)
                     .frame(minWidth: 44, minHeight: 44)
                     .accessibilityLabel(String(localized: "Skip intro"))
             }
@@ -57,7 +58,7 @@ struct OnboardingView: View {
             .foregroundStyle(DesignTokens.colorTimber950)
             .accessibilityIdentifier("onboarding.sampleCTA")
             .opacity(page == 2 ? 1 : 0)
-            .animation(.easeInOut(duration: 0.2), value: page)
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.2), value: page) // K-18
             .disabled(page != 2)
             .padding(.bottom, 16)
         }

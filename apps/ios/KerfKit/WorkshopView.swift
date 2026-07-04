@@ -39,6 +39,7 @@ struct WorkshopView: View {
             } label: {
                 Label(String(localized: "Plan"), systemImage: "chevron.left")
                     .font(.body.weight(.bold))
+                    .lineLimit(1).minimumScaleFactor(0.6) // K-18: XXL'de harf kırılması
                     .frame(minWidth: 56, minHeight: 56, alignment: .leading)
             }
             .foregroundStyle(fg)
@@ -51,10 +52,11 @@ struct WorkshopView: View {
             Toggle(isOn: Binding(get: { store.benchMode }, set: { store.benchMode = $0 })) {
                 Label(String(localized: "Bench"), systemImage: "sun.max.fill")
                     .font(.footnote.weight(.bold))
+                    .lineLimit(1).minimumScaleFactor(0.6) // K-18: XXL'de harf kırılması
             }
             .toggleStyle(.button)
             .buttonStyle(.bordered)
-            .tint(bench ? DesignTokens.colorAmber600 : DesignTokens.colorTimber500)
+            .tint(bench ? DesignTokens.colorAmber600 : DesignTokens.colorTimber300) // K-18: metinli buton 4.5:1
             .frame(minHeight: 56)
             .accessibilityLabel(String(localized: "Bench Mode"))
         }

@@ -83,4 +83,15 @@ final class SnapshotTests: XCTestCase {
         assertSnapshot(of: host(SettingsView(), sizeCategory: .medium),
                        as: .image(on: .iPhone13), named: "ayarlar-M")
     }
+
+    // K-18 (docs/12 §8): Dynamic Type XXL taşma kanıtı — ayarlar + atölye.
+    func testSettings_darkXXL() {
+        assertSnapshot(of: host(SettingsView(), sizeCategory: .accessibilityExtraLarge),
+                       as: .image(on: .iPhone13), named: "ayarlar-XXL")
+    }
+
+    func testWorkshop_darkXXL() {
+        assertSnapshot(of: host(WorkshopView(), sizeCategory: .accessibilityExtraLarge),
+                       as: .image(on: .iPhone13), named: "atolye-XXL")
+    }
 }
