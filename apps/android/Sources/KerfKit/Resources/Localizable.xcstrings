@@ -36,6 +36,40 @@
         }
       }
     },
+    "%@ of %@ founding seats left" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%2$@ kurucu koltuğundan %1$@ kaldı"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch %1$@ von %2$@ Gründerplätzen frei"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il reste %1$@ places fondateur sur %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quedan %1$@ de %2$@ plazas de fundador"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restano %1$@ posti fondatore su %2$@"
+          }
+        }
+      }
+    },
     "%@ parts cut — nice work!" : {
       "localizations" : {
         "de" : {

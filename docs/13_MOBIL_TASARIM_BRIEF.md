@@ -78,3 +78,11 @@ SwiftUI→Compose köprüsünde (Skip Fuse 1.9.4) iOS kodundan sapmalar:
   platformu besler (6 dil APK'da doğrulandı); ASO/store metinleri bundan bağımsız.
 - İç Kotlin paketi `kerf.kit` (Skip, modül adından türetir — değiştirilemez);
   mağaza kimliği `applicationId = app.kerfkit` (Skip.env ANDROID_APPLICATION_ID).
+- **'en' stringUnit tuzağı (E9-S2'de yaşandı):** Android katalog kopyasına 'en'
+  stringUnit girdisi taşınırsa Skip `en.lproj/Localizable.strings` üretir ve
+  diğer anahtarların çözümü bozulup `MissingFormatArgumentException` çökmesine
+  yol açar. Kural: kopyada 'en' yalnız plural variations olarak bulunabilir —
+  tools/katalog-senkron-bekci.py bunu CI'da zorlar.
+- Ekran-uyanık tutma (idle timer) Compose'a köprülenmiyor — Atölye'de E9-S3'te
+  yerli çözüm (FLAG_KEEP_SCREEN_ON) gerekecek; atölye 'Sheet %lld' ikincil metni
+  koyu zeminde fazla silik (polish).
