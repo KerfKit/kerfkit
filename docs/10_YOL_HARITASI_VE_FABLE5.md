@@ -91,6 +91,7 @@ anlatabiliyorum · non-goal dışına dosya değişmedi.
 | Skip/Wasm toolchain sürprizi | E7-S2 veya v1.2'de derleme duvarı | Motor TS-portu (golden vektörler sayesinde sınırlı iş — 06 §1 sigortası) |
 | Tek kişi hastalık/tatil | — | Haftalık kapanış notları + spec-ground-truth zaten kaldığı yerden devralmayı garantiler |
 | App Review reddi (4.3 benzerlik) | Review notu | "Meaningfully different" kanıt paketi hazır: atölye modu + 1D+2D + offline + golden doğruluk |
+| Skip Fuse mod çelişkisi (YAŞANDI, K-31 4 Tem: native app transpile motoru göremez) | Android derlemesi "unknown package" | ÇÖZÜLDÜ: motor skip.yml `mode: native` (docs/06 §1 zaten native der); K-30 Kotlin-transpile harness'i kaldırıldı, parite native emülatör koşusuyla kanıtlandı (2267bps/13 kesim mac=Android). Kalıntı risk: skipstone yerel-paket aynalama yolu "/kerfkit" son ekine bağlı — repo klasörü yeniden adlandırılamaz |
 
 ## 6. Launch-günü kontrol listesi
 
