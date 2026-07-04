@@ -7,6 +7,7 @@ import StoreKit
 // sahte kıtlık yok. Fiyatlar Product.displayPrice'tan — hardcode YOK.
 struct PaywallView: View {
     @Environment(ProStore.self) private var pro
+    @Environment(FoundingStore.self) private var founding
     @Environment(\.dismiss) private var dismiss
     @State private var selectedID = "lifetime.unlock"
     @State private var purchasing = false
@@ -141,6 +142,21 @@ struct PaywallView: View {
                 Text(detailKey(for: product.id))
                     .font(.caption)
                     .foregroundStyle(DesignTokens.colorTimber500)
+                // K-16 (docs/08 §2): founding penceresi — yalnız GERÇEK sayaç verisi;
+                // $99.99 "gelecekteki fiyat" diye etiketlenir, "indirim" DENMEZ (AB Omnibus).
+                if headline && founding.config.active {
+                    if let left = founding.config.seatsLeft, let seats = founding.config.seats {
+                        Text("\(left) of \(seats) founding seats left")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(DesignTokens.colorAmber400)
+                            .accessibilityIdentifier("paywall.founding.seats")
+                    }
+                    if let future = founding.config.futurePrice {
+                        Text("Regular price later: \(future)")
+                            .font(.caption)
+                            .foregroundStyle(DesignTokens.colorTimber500)
+                    }
+                }
             }
             .padding(14)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -153,7 +169,7 @@ struct PaywallView: View {
             }
             .overlay(alignment: .topTrailing) {
                 if headline {
-                    Text("MOST POPULAR")
+                    Text(founding.config.active ? "FOUNDING PRICE" : "MOST POPULAR")
                         .font(.system(size: 10, weight: .heavy))
                         .padding(.horizontal, 8).padding(.vertical, 3)
                         .background(DesignTokens.colorAmber500, in: Capsule())

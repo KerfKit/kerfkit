@@ -25,6 +25,7 @@
 		6A7F52DE163FD0F28B15F835 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9198B9F7F8F6BB33062B0D7B /* ProjectDetailView.swift */; };
 		6BD00DF77B2271FDC1F76011 /* CSVImportUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A5BBA57433B3C2A79B890B /* CSVImportUITests.swift */; };
 		6EDCFC9E8FCD7906516AEC3C /* CutProj in Frameworks */ = {isa = PBXBuildFile; productRef = 1149728F6F25D8F98455569F /* CutProj */; };
+		72D0715B0D1660DA447745E5 /* FoundingStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562F72C4082C96F2EBC620F /* FoundingStoreTests.swift */; };
 		77AA0E76932CE41F5537BB07 /* PaywallSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583C29C0EA9693BC8CE96C1 /* PaywallSnapshotTests.swift */; };
 		79D5E2CEF61270BDCCD55B3E /* PlanComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD85BBF4BF1A71E3BD0DFF /* PlanComponents.swift */; };
 		7D93E83A9E4BB913FE8BD83F /* ProStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7C5437C461B28A5020FD /* ProStoreTests.swift */; };
@@ -33,6 +34,7 @@
 		855157E3F1EA528FFEF384A7 /* UnitFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84BE0318A84A841719DDFC3 /* UnitFormat.swift */; };
 		9E127FCBCE7DA8A428B39538 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D3CE43968A65EBEF9F743 /* PaywallView.swift */; };
 		9E4606EC72EC72E7E49BDBA4 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 51554182C074F7EAEE7630D5 /* InfoPlist.xcstrings */; };
+		A286E2F65276F79AC540868E /* FoundingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046ADE7C941F24C5239FCD06 /* FoundingStore.swift */; };
 		A39CBA086FBE5C848599B0A9 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */; };
 		A4BE5DDE6822AAC61F9C1A55 /* SettingsFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26893ED8ABFF9E6A7E4CBA8B /* SettingsFlowTests.swift */; };
 		A705EFE66CECE57A7D6FFE91 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF468CC0D56AE47AA07FD7 /* SnapshotTests.swift */; };
@@ -65,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		046ADE7C941F24C5239FCD06 /* FoundingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundingStore.swift; sourceTree = "<group>"; };
 		0542E974336B5C254ED63F9D /* KerfKitTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KerfKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F47ED80955683CCE24FF266 /* ShareExports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareExports.swift; sourceTree = "<group>"; };
 		18ADEB6938947B1BC5AC96DC /* WorkshopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkshopView.swift; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		3947A1970267BE3B58930826 /* kerfkit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kerfkit; path = ../..; sourceTree = SOURCE_ROOT; };
 		417DD6F38C0A0513B61D8066 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		419D3CE43968A65EBEF9F743 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		4562F72C4082C96F2EBC620F /* FoundingStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundingStoreTests.swift; sourceTree = "<group>"; };
 		4DDD162D36EAEAA8B5481C8E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		51554182C074F7EAEE7630D5 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		5222DE5A70BA678CC4860582 /* PaywallGateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallGateUITests.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			children = (
 				FB5382DB13ECAADA9A08A6DD /* Assets.xcassets */,
 				F09EA5D64444B73147FEECBF /* ContentView.swift */,
+				046ADE7C941F24C5239FCD06 /* FoundingStore.swift */,
 				6D516A972487F03930C64651 /* FractionPad.swift */,
 				ADD3D46FC9C1AAB9D2219A95 /* Info.plist */,
 				51554182C074F7EAEE7630D5 /* InfoPlist.xcstrings */,
@@ -194,6 +199,7 @@
 		C39B8A6008A02193E585B3C1 /* KerfKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				4562F72C4082C96F2EBC620F /* FoundingStoreTests.swift */,
 				9583C29C0EA9693BC8CE96C1 /* PaywallSnapshotTests.swift */,
 				C3D84F49D149208ADDDFDF04 /* PlanPDFTests.swift */,
 				1E4A7C5437C461B28A5020FD /* ProStoreTests.swift */,
@@ -354,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D0715B0D1660DA447745E5 /* FoundingStoreTests.swift in Sources */,
 				77AA0E76932CE41F5537BB07 /* PaywallSnapshotTests.swift in Sources */,
 				7EAA1D7472D02168309B4AB9 /* PlanPDFTests.swift in Sources */,
 				7D93E83A9E4BB913FE8BD83F /* ProStoreTests.swift in Sources */,
@@ -383,6 +390,7 @@
 			files = (
 				1401DF423D8E49F68FA98BEA /* ContentView.swift in Sources */,
 				22CCDC3C2E798DC0C35F7791 /* DesignTokens.swift in Sources */,
+				A286E2F65276F79AC540868E /* FoundingStore.swift in Sources */,
 				4D3873FFE6C73D0E348917B1 /* FractionPad.swift in Sources */,
 				3F44E8FFD4B237EEE39B1D68 /* KerfApp.swift in Sources */,
 				4B530C9FA53B63953F718ADB /* OnboardingView.swift in Sources */,

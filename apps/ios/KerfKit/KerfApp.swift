@@ -6,6 +6,7 @@ import SwiftUI
 struct KerfApp: App {
     @State private var store: ProjectStore
     @State private var proStore: ProStore
+    @State private var foundingStore = FoundingStore()
     @State private var onboardingShown: Bool
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("onboardingSeen") private var onboardingSeen = false
@@ -42,8 +43,10 @@ struct KerfApp: App {
             ContentView()
                 .environment(store)
                 .environment(proStore)
+                .environment(foundingStore)
                 .preferredColorScheme(.dark) // koyu-öncelikli marka (docs/11 §3)
                 .tint(DesignTokens.colorAmber500)
+                .task { await foundingStore.refresh() } // K-16: açılışta bayrağı tazele
                 .fullScreenCover(isPresented: $onboardingShown) {
                     OnboardingView { startSample in
                         onboardingSeen = true
