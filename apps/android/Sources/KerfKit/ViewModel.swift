@@ -42,6 +42,7 @@ struct AndroidProject: Identifiable, Hashable {
     var planError: String?
     var pendingPlanJump: UUID?     // M-6 CTA → detay Plan sekmesine iniş
     var partNames: [String: String] = [:]
+    private var db: ProjectDB?     // açılamazsa bellek-içi sürer (E9-S2b)
 
     // Varsayılan levha 2440×1220 + kerf 3mm (docs/04 örnek standardı; Units = Int64).
     let sheetW: Units = 244_000
@@ -49,7 +50,24 @@ struct AndroidProject: Identifiable, Hashable {
     let kerf: Units = 300
 
     init() {
-        projects = [Self.sampleProject()]
+        db = try? ProjectDB()
+        if db == nil {
+            logger.warning("kerfkit: veritabanı açılamadı — bellek-içi mod")
+        }
+        if let loaded = try? db?.load(), !loaded.isEmpty {
+            projects = loaded
+        } else {
+            projects = [Self.sampleProject()]
+            persist()
+        }
+    }
+
+    private func persist() {
+        do {
+            try db?.save(projects)
+        } catch {
+            logger.warning("kerfkit: kayıt yazılamadı: \(error)")
+        }
     }
 
     static func sampleProject() -> AndroidProject {
@@ -64,21 +82,25 @@ struct AndroidProject: Identifiable, Hashable {
     func addProject(named name: String) -> AndroidProject {
         let project = AndroidProject(name: name)
         projects.append(project)
+        persist()
         return project
     }
 
     func deleteProject(_ id: UUID) {
         projects.removeAll { $0.id == id }
+        persist()
     }
 
     func addPart(to projectID: UUID, _ part: PartRow) {
         guard let i = projects.firstIndex(where: { $0.id == projectID }) else { return }
         projects[i].parts.append(part)
+        persist()
     }
 
     func removePart(from projectID: UUID, partID: UUID) {
         guard let i = projects.firstIndex(where: { $0.id == projectID }) else { return }
         projects[i].parts.removeAll { $0.id == partID }
+        persist()
     }
 
     func parts(of projectID: UUID) -> [PartRow] {
@@ -122,6 +144,23 @@ struct AndroidProject: Identifiable, Hashable {
             plan = nil
             planError = "\(error)"
         }
+    }
+
+    // Parite feneri (E9-S2b): açılışta logcat'e düşer; tools/android-parite.sh
+    // mac'teki PariteProbe çıktısıyla birebir karşılaştırır. SABİT parametreler —
+    // kullanıcı varsayılanlarına bağlanmaz.
+    static func pariteBeacon() -> String {
+        let rows = sampleProject().parts
+        let req = OptimizeRequest(
+            unitMode: .metricMM, kerf: 300, trim: 0, objective: .sheets, seed: 1,
+            stocks: [.init(id: "s1", materialId: "m1", w: 244_000, h: 122_000, qty: 99)],
+            parts: rows.enumerated().map { i, r in
+                .init(id: "p\(i)", name: r.name, materialId: "m1",
+                      w: Units(r.widthMM) * 100, h: Units(r.heightMM) * 100, qty: r.qty)
+            })
+        guard let res = try? CutCore.optimize(req) else { return "KERFKIT-PARITE HATA" }
+        return "KERFKIT-PARITE sheets=\(res.stats.sheetCount) wasteBps=\(res.stats.wasteBps) "
+             + "cuts=\(res.stats.cutCount) hash=\(placementsHash(res.placements))"
     }
 
     // M-6 görseli: örnek projenin GERÇEK motor çıktısı (UI durumunu bozmaz).

@@ -12,13 +12,20 @@ let package = Package(
     dependencies: [
         .package(url: "https://source.skip.tools/skip.git", from: "1.9.4"),
         .package(url: "https://source.skip.tools/skip-fuse-ui.git", from: "1.0.0"),
+        .package(url: "https://source.skip.tools/skip-sql.git", from: "0.9.0"),
         .package(path: "../../../kerfkit")
     ],
     targets: [
         .target(name: "KerfKit", dependencies: [
             .product(name: "SkipFuseUI", package: "skip-fuse-ui"),
+            .product(name: "SkipSQLPlus", package: "skip-sql"),
             .product(name: "CutCore", package: "kerfkit"),
             .product(name: "CutModels", package: "kerfkit")
         ], resources: [.process("Resources")], plugins: [.plugin(name: "skipstone", package: "skip")]),
+        // E9-S2b: parite feneri mac karşılığı (tools/android-parite.sh) — Skip'e girmez.
+        .executableTarget(name: "PariteProbe", dependencies: [
+            .product(name: "CutCore", package: "kerfkit"),
+            .product(name: "CutModels", package: "kerfkit")
+        ]),
     ]
 )

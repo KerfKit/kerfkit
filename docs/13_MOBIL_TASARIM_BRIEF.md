@@ -70,9 +70,12 @@ SwiftUI→Compose köprüsünde (Skip Fuse 1.9.4) iOS kodundan sapmalar:
   `LocalizedStringKey` yoluyla (Text/TextField literal anahtarları). Veri-değerleri
   (örn. varsayılan proje adı) şimdilik EN düz metin; E9-S2'de çözülecek.
 - `.monospacedDigit()` yok — düz font kullan.
-- `GeometryReader`+`aspectRatio` kombinasyonu iOS'la birebir ölçeklemiyor: M-4
-  diyagramında parçalar levha kutusundan taşabiliyor (iskelette bilinen kusur;
-  E9-S2'de Canvas köprüsü ya da manuel frame hesabıyla yeniden yapılacak).
+- `GeometryReader`+`aspectRatio` kombinasyonu iOS'la birebir ölçeklemiyor —
+  ÇÖZÜLDÜ (E9-S2b): iç kutuya açık `.frame(width:height:)` + `.clipped()`;
+  dış aspectRatio yalnız yer ayırma için.
+- Kalıcılık: SkipSQL **Plus** şart (`configuration: .plus`) — Android'de sistem
+  SQLite C-kütüphanesi Skip'e açık değil; `.platform` çalışma zamanında
+  fatalError verir (E9-S2b'de yaşandı). DB açılamazsa uygulama bellek-içi sürer.
 - Yerelleştirme paketi Android'de `res/values-*/strings.xml` DEĞİL, Skip'in
   `assets/**/*.lproj/Localizable.strings` mekanizması — tek String Catalog iki
   platformu besler (6 dil APK'da doğrulandı); ASO/store metinleri bundan bağımsız.

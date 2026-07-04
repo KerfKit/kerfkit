@@ -249,6 +249,8 @@ struct SheetDiagram: View {
     var body: some View {
         GeometryReader { geo in
             let scale = geo.size.width / CGFloat(sheetW)
+            // Taşma düzeltmesi (E9-S2b): dış aspectRatio köprüde birebir ölçeklemiyordu;
+            // iç kutuya AÇIK frame verilir, parçalar bu kutuya kırpılır.
             ZStack(alignment: .topLeading) {
                 Rectangle()
                     .fill(Color.gray.opacity(0.15))
@@ -262,6 +264,8 @@ struct SheetDiagram: View {
                         .offset(x: CGFloat(p.x) * scale, y: CGFloat(p.y) * scale)
                 }
             }
+            .frame(width: geo.size.width, height: CGFloat(sheetH) * scale, alignment: .topLeading)
+            .clipped()
         }
         .aspectRatio(CGFloat(sheetW) / CGFloat(sheetH), contentMode: .fit)
     }
