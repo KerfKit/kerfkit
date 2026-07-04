@@ -57,6 +57,13 @@ jobs:
       # UI smoke (docs/17 K-17): proje aç → parça gir → optimize (QuickAdd)
       # + dışa aktarım ucu (kilitli karo → paywall). Snapshot testleri BİLEREK
       # dışarıda: runner simülatör render'ı yerel referanslarla birebir değil.
+      # Skip 1.9 eklentisi Xcode 26 SwiftPM'i ister; runner varsayılanı 16.4'te
+      # build-plan aşamasında düşüyor (ilk matris koşusu bulgusu).
+      - name: En yeni Xcode'u seç
+        run: |
+          XC=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+          if [ -z "$XC" ]; then XC=$(ls -d /Applications/Xcode*.app | sort -V | tail -1); fi
+          echo "Seçilen: $XC" && sudo xcode-select -s "$XC"
       - name: iOS smoke (simülatör)
         run: |
           cd apps/ios
