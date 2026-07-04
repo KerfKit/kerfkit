@@ -9,7 +9,7 @@ final class QuickAddFlowTests: XCTestCase {
     @MainActor
     func testOnPartsWithKeyboardUnder60Seconds() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-freshStore", "-proFree"]
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-defaultUnitMode", "metric_mm", "-freshStore", "-proFree"]
         app.launch()
 
         // Yeni boş proje — detay Parçalar sekmesinde açılır.
@@ -43,7 +43,7 @@ final class QuickAddFlowTests: XCTestCase {
     @MainActor
     func testTouchTargetsAtLeast44pt() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-freshStore", "-proFree"]
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-defaultUnitMode", "metric_mm", "-freshStore", "-proFree"]
         app.launch()
         app.buttons["nav.newProject"].tap()
         let name = app.textFields["Part name"]

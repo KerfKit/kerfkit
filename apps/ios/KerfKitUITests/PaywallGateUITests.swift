@@ -6,7 +6,7 @@ final class PaywallGateUITests: XCTestCase {
 
     private func launch() -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-freshStore", "-proFree"]
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-defaultUnitMode", "metric_mm", "-freshStore", "-proFree"]
         app.launch()
         return app
     }
@@ -84,7 +84,7 @@ final class PaywallGateUITests: XCTestCase {
     @MainActor
     func testExportLockedTilesOpenPaywall() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-autoOptimize", "-resetDefaults", "-freshStore", "-proFree"] // örnek proje + plan
+        app.launchArguments = ["-autoOptimize", "-resetDefaults", "-defaultUnitMode", "metric_mm", "-freshStore", "-proFree"] // örnek proje + plan
         app.launch()
         let locked = app.buttons["plan.locked.PDF"]
         XCTAssertTrue(locked.waitForExistence(timeout: 8),

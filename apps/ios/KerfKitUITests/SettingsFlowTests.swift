@@ -6,7 +6,7 @@ final class SettingsFlowTests: XCTestCase {
     @MainActor
     func testDefaultKerfAppliesToNewProject() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-freshStore", "-proFree"]
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-defaultUnitMode", "metric_mm", "-freshStore", "-proFree"]
         app.launch()
 
         app.buttons["nav.settings"].tap()

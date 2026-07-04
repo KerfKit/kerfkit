@@ -7,7 +7,7 @@ final class LocalizationTests: XCTestCase {
     @MainActor
     func testTurkishLocaleShowsTurkishUI() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-freshStore", "-proFree", "-AppleLanguages", "(tr)",
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-defaultUnitMode", "metric_mm", "-freshStore", "-proFree", "-AppleLanguages", "(tr)",
                                "-AppleLocale", "tr_TR"]
         app.launch()
 
@@ -25,7 +25,7 @@ final class LocalizationTests: XCTestCase {
     @MainActor
     func testGermanLocaleShowsGermanUI() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-freshStore", "-proFree", "-AppleLanguages", "(de)",
+        app.launchArguments = ["-skipOnboarding", "-resetDefaults", "-defaultUnitMode", "metric_mm", "-freshStore", "-proFree", "-AppleLanguages", "(de)",
                                "-AppleLocale", "de_DE"]
         app.launch()
         app.buttons["nav.newProject"].tap()
