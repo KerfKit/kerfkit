@@ -1,0 +1,77 @@
+{
+  "identifier" : "F0E1D2C3-0001-4A4A-9B9B-KERFKIT00001",
+  "nonRenewingSubscriptions" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "F0E1D2C3-0002-4A4A-9B9B-KERFKIT00002",
+      "localizations" : [
+        {
+          "description" : "Everything unlocked for 72 hours. Does not renew.",
+          "displayName" : "Weekend Pass",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "pass.weekend",
+      "referenceName" : "Weekend Pass",
+      "type" : "NonRenewingSubscription"
+    }
+  ],
+  "products" : [
+    {
+      "displayPrice" : "99.99",
+      "familyShareable" : false,
+      "internalID" : "F0E1D2C3-0003-4A4A-9B9B-KERFKIT00003",
+      "localizations" : [
+        {
+          "description" : "Everything, forever, one payment.",
+          "displayName" : "Lifetime",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "lifetime.unlock",
+      "referenceName" : "Lifetime",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [ ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "F0E1D2C3-0004-4A4A-9B9B-KERFKIT00004",
+      "localizations" : [ ],
+      "name" : "Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [ ],
+          "codeOffers" : [ ],
+          "displayPrice" : "39.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "F0E1D2C3-0005-4A4A-9B9B-KERFKIT00005",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Everything, billed yearly. Cancel anytime.",
+              "displayName" : "Pro Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "pro.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Pro Yearly",
+          "subscriptionGroupID" : "F0E1D2C3-0004-4A4A-9B9B-KERFKIT00004",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

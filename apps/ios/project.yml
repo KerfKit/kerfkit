@@ -55,6 +55,9 @@ targets:
       # __Snapshots__ referansları pakete kopyalanmaz — SnapshotTesting diskten okur.
       - path: KerfKitTests
         excludes: ["**/__Snapshots__/**"]
+      # K-14: SKTestSession config'i test paketinde arar.
+      - path: KerfKit/Products.storekit
+        buildPhase: resources
     dependencies:
       - target: KerfKit
       - package: SnapshotTesting
