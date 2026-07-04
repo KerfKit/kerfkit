@@ -61,3 +61,20 @@
 ## App Store ekran şablonu (6 görsel — 09 §2 hikâyesiyle)
 Koyu cihaz çerçevesi, amber başlık şeridi, gerçek veri; sıra: giriş hızı → sonuç → pro detaylar →
 atölye modu → export → "One-time. No subscription."
+
+
+## Android notları (K-31 iskelet bulguları — 4 Tem 2026)
+
+SwiftUI→Compose köprüsünde (Skip Fuse 1.9.4) iOS kodundan sapmalar:
+- `Text(_:bundle:)` ve `String(localized:)` köprülenmiyor — yerelleştirme yalnız
+  `LocalizedStringKey` yoluyla (Text/TextField literal anahtarları). Veri-değerleri
+  (örn. varsayılan proje adı) şimdilik EN düz metin; E9-S2'de çözülecek.
+- `.monospacedDigit()` yok — düz font kullan.
+- `GeometryReader`+`aspectRatio` kombinasyonu iOS'la birebir ölçeklemiyor: M-4
+  diyagramında parçalar levha kutusundan taşabiliyor (iskelette bilinen kusur;
+  E9-S2'de Canvas köprüsü ya da manuel frame hesabıyla yeniden yapılacak).
+- Yerelleştirme paketi Android'de `res/values-*/strings.xml` DEĞİL, Skip'in
+  `assets/**/*.lproj/Localizable.strings` mekanizması — tek String Catalog iki
+  platformu besler (6 dil APK'da doğrulandı); ASO/store metinleri bundan bağımsız.
+- İç Kotlin paketi `kerf.kit` (Skip, modül adından türetir — değiştirilemez);
+  mağaza kimliği `applicationId = app.kerfkit` (Skip.env ANDROID_APPLICATION_ID).

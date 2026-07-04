@@ -1,2 +1,5 @@
-# Skip transpilasyon konfigürasyonu (K-30 Android paritesi)
+# Skip konfigürasyonu — K-31: Fuse app motoru NATIVE tüketir (docs/06 §1);
+# K-30 transpile paritesi yerini native derleme paritesine bırakır (golden
+# vektörler Android'de native Swift'le koşar — E9 test hattı).
 skip:
+  mode: 'native'

@@ -86,6 +86,15 @@ Hedefimiz launch'ta 6, 90 günde 12, yıl 1'de 20+ — ama **her locale'de tam k
 4. RTL (AR/HE/FA) ayrı iş kalemidir; T3 öncesi taahhüt verilmez.
 5. Desteklenmeyen dilde gelen mağaza yorumuna 48s içinde o dilde şablon yanıt.
 
+### 5.2c Android (Skip) yerelleştirme mekanizması (K-31 bulgusu, 4 Tem)
+
+Skip Fuse, String Catalog'u Android'de `res/values-*/strings.xml`e DEĞİL,
+`assets/**/*.lproj/Localizable.strings(dict)` paketine çevirir — SwiftUI Text
+anahtarları çalışma zamanında oradan çözülür. Tek katalog iki platformu besler;
+apps/android modülü iOS kataloğunun kopyasını taşır (K-31'de 6 dil APK içinde
+doğrulandı). Senkron: iOS kataloğuna anahtar eklenince apps/android kopyasına da
+işle (E9-S2'de bekçi scripti planlı).
+
 ## 6. Web → mobil huni (Ahmet kararı: web belli aşamadan sonra mobile yönlendirir)
 
 Lite'ın rolü: parite kanıtı + lead-gen + mağaza yönlendirme. Kapılar:

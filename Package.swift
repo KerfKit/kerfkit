@@ -2,8 +2,10 @@
 import PackageDescription
 import Foundation
 
-// K-30 (Android paritesi): skipstone eklentisi motor kaynaklarını Kotlin'e çevirir;
-// motor kodu değişmez (saf Swift, stdlib-only kuralı aynen geçerli).
+// K-30→K-31 (Android): motor modülleri Skip Fuse ile NATIVE derlenir (skip.yml
+// mode: native — docs/06 §1); K-30'un Kotlin transpile harness'i K-31'de kaldırıldı,
+// parite kanıtı native emülatör koşusuna taşındı. Motor kodu değişmez (saf Swift,
+// stdlib-only kuralı aynen geçerli).
 // K-10/K-11: CutProj (.cutproj şeması) + CutPersist (GRDB) uygulama katmanıdır — motor değil;
 // skipstone'a dahil edilmez (Android karşılığı K-31'de SkipSQL ile). GRDB Linux'ta
 // desteklenmediğinden CutPersist yalnız Apple platformlarında derlenir (CI ubuntu → atlar;
@@ -41,12 +43,11 @@ var packageTargets: [Target] = wasmBuild ? [
     .testTarget(name: "CutCoreUnitTests", dependencies: ["CutCore"]),
     .testTarget(name: "CutProjTests", dependencies: ["CutProj"],
                 resources: [.copy("fixtures")]),
+    // K-31: golden vektörler mac'te saf XCTest; Android paritesi native hatta
+    // (Fuse — docs/06 §1). K-30 transpile harness'i kaldırıldı (native modla çelişir).
     .testTarget(name: "CutCoreTests",
-                dependencies: ["CutCore",
-                               .product(name: "SkipTest", package: "skip"),
-                               .product(name: "SkipFoundation", package: "skip-foundation")],
-                resources: [.copy("vectors")],
-                plugins: [.plugin(name: "skipstone", package: "skip")]),
+                dependencies: ["CutCore"],
+                resources: [.copy("vectors")]),
 ]
 
 #if !os(Linux)
