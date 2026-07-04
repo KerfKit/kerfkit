@@ -55,3 +55,4 @@ Bu paket 4 öğrenme ajanının çıktısından sentezlendi: PO/spec-driven meto
 Anthropic best practices, Addy Osmani, Simon Willison), 8-rakip teardown (~15 kaynak), algoritma/mimari
 araştırması (Jylänki RectangleBinPack, Skip/SwiftWasm resmî durumu), GTM playbook (forum/kanal doğrulamalı).
 Kaynak URL'leri ilgili dosyaların sonunda.
+- 20 — Privacy/Terms taslağı (P-4; onay Ahmet'te)
