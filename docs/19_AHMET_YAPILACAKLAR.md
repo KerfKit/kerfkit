@@ -34,6 +34,10 @@
 - [ ] P-4 Privacy/Terms taslağını ONAYLA (ben yazacağım; hukuki-tavsiye-değildir notuyla
   sana gelecek — launch-blocker).
 - [ ] Founding fiyat/koltuk sayısı son onayı (docs/08-09: $49 → $99.99, 300 koltuk).
+- [ ] **Founding penceresini AÇ (K-16 hazır):** kerfkit.app yayına girince
+  `founding.json`'da `"active": true` + `futurePrice` yaz; `claimed` sayacını mağaza
+  satış verisinden güncelle (sahte kıtlık yasak — docs/08 §4). Kapatmak = `active: false`;
+  uygulama her açılışta çeker, kalıcı fiyat görünümüne kendiliğinden döner.
 - [ ] TestFlight beta davetlileri (20-30 marangoz; forum/tanıdık) — K-20'de liste lazım.
 - [ ] (Opsiyonel, launch sonrası) USPTO/EUIPO sınıf-9 "KerfKit" başvurusu.
 
